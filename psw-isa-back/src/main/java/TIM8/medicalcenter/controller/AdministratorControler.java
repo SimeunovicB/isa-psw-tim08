@@ -31,6 +31,7 @@ public class AdministratorControler {
         for(Person p : patientList){
             if(p.getStatus().equalsIgnoreCase("PENDING")){
                 patients.add(new PatientDTO((Patient) p));
+
             }
 
         }
