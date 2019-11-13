@@ -21,8 +21,6 @@ public class ClinicController {
         Clinic c = clinicService.findOneById((long)1);
         ClinicDTO clinicDTO = new ClinicDTO(c);
         return new ResponseEntity<>(clinicDTO,HttpStatus.OK);
-
-
     }
 
 

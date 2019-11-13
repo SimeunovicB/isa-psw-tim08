@@ -43,15 +43,12 @@ public class PersonDTO {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     public String getAddress() {
         return address;
     }
@@ -71,9 +68,7 @@ public class PersonDTO {
     public String getEmail() {
         return email;
     }
-
-    public void setEmail(String email) {
+     public void setEmail(String email) {
         this.email = email;
     }
-
 }
