@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "api/medicalStaff")
 public class MedicalStaffController {
