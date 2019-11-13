@@ -22,6 +22,9 @@ public class PersonService {
     public Person findOneById(Long id){
         return personRepository.findOneById(id);
     }
+    public Person save(Person person) {
+        return personRepository.save(person);
+    }
     public List<Person> findByType(String type) { return personRepository.findByDiscriminatorValue(type);}
     public int updatePersonStatus(String status,Long id) {return personRepository.updateUserStatus(status,id);}
 }
