@@ -12,11 +12,13 @@ import { RegisterComponent } from './register/register.component';
 import { UserService } from './services/user.service';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'ngx-cookie-service';
+import { PendingUsersComponent } from './pending-users/pending-users.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'pending', component: PendingUsersComponent }
 ];
 
 @NgModule({
@@ -24,18 +26,18 @@ const appRoutes: Routes = [
     AppComponent,
     ProfileComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PendingUsersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    CookieService,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

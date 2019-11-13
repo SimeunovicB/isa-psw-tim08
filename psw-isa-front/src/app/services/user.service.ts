@@ -31,4 +31,17 @@ export class UserService {
       })
     )
   }
+
+  getPending() {
+    return this.http.get("http://localhost:9090/api/patient")
+    .pipe(
+      map((response: Response) => {
+        const data = response.json();
+        return data;
+      }),
+      catchError((err: Response) => {
+        return throwError(JSON.parse(err.text()));
+      })
+    );
+  }
 }
