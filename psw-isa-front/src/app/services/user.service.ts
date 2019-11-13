@@ -44,4 +44,34 @@ export class UserService {
       })
     );
   }
+
+  acceptUser(id) {
+    return this.http.put("http://localhost:9090/api/administrator/approveRegistration/"+id, {
+      id: id,
+    })
+    .pipe(
+      map((response: Response) => {
+        const data = response.json();
+        return data;
+      }),
+      catchError((err: Response) => {
+        return throwError(JSON.parse(err.text()));
+      })
+    );
+  }
+
+  denyUser(id) {
+    return this.http.put("http://localhost:9090/api/administrator/rejectRegistration/"+id, {
+      id: id,
+    })
+    .pipe(
+      map((response: Response) => {
+        const data = response.json();
+        return data;
+      }),
+      catchError((err: Response) => {
+        return throwError(JSON.parse(err.text()));
+      })
+    );
+  }
 }
