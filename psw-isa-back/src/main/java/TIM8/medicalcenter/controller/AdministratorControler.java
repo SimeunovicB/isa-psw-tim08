@@ -24,19 +24,7 @@ public class AdministratorControler {
     @Autowired
     PersonService personService;
 
-    @GetMapping
-    public ResponseEntity<List<PatientDTO>> getClinics() {
-        List<Person> patientList = personService.findByType("P");
-        List<PatientDTO> patients = new ArrayList<>();
-        for(Person p : patientList){
-            if(p.getStatus().equalsIgnoreCase("PENDING")){
-                patients.add(new PatientDTO((Patient) p));
 
-            }
-
-        }
-        return new ResponseEntity<>(patients,HttpStatus.OK);
-    }
     @PutMapping(consumes = "application/json",value ="/approveRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusApproved(@PathVariable Long id) {
 

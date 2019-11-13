@@ -27,4 +27,5 @@ public class PersonService {
     }
     public List<Person> findByType(String type) { return personRepository.findByDiscriminatorValue(type);}
     public int updatePersonStatus(String status,Long id) {return personRepository.updateUserStatus(status,id);}
+    public int updatePassword(String password,Long id) {return personRepository.updatePassword(password,id);}
 }
