@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
+@CrossOrigin
 @RequestMapping(value = "api/patient")
 public class PatientController {
 
@@ -39,9 +41,9 @@ public class PatientController {
     public ResponseEntity<Patient> Register(@RequestBody Patient patient) {
         if(personService.findOneByEmail(patient.getEmail())!=null)
             return null;
+
         patient.setStatus("PENDING");
         personService.save(patient);
-
         return new ResponseEntity<>(patient, HttpStatus.OK);
 
     }

@@ -17,9 +17,8 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(
+  constructor(private http: Http,
     private router: Router,
-    private cookieService: CookieService,
     private userService: UserService) { }
 
   ngOnInit() {
@@ -29,7 +28,6 @@ export class LoginComponent implements OnInit {
     this.userService.postUser(this.email, this.password)
     .subscribe(
       (user: any) => {
-        this.cookieService.set('loggedUser', JSON.stringify(user));
         this.router.navigate(['/']);
       }, (error) => alert(error.text)
     );
