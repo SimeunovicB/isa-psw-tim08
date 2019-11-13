@@ -13,6 +13,9 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
 
     Person findOneById(Long id);
 
+
+    List<Person> findByFirstName(String firstName);
+
     @Query("select s from Person s where s.email = ?1")
     Person findOneByEmail(String mail);
-}
+
