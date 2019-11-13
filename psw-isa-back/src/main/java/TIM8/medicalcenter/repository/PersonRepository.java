@@ -34,5 +34,10 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
     @Transactional
     @Query("update Person p set p.password = :password where p.id = :id")
     int updatePassword(@Param("password") String password,@Param("id") Long id);
+
+    @Modifying
+    @Transactional
+    @Query("update Person p set p.firstName = :firstName , p.lastName = :lastName,p.address = :address where p.id = :id")
+    int updateUser(@Param("firstName") String firstName,@Param("lastName") String lastName,@Param("address") String address,@Param("id") Long id);
 }
 
