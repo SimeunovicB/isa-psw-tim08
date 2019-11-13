@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "api/person")
 public class PersonController {
 

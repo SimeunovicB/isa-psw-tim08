@@ -31,6 +31,33 @@ export class UserService {
       })
     )
   }
+  RegUser( 
+    firstname:string,
+    lastname : string,
+    address :string,
+    jmbg : string,
+    email:string,
+    password : string) {
+    return this.http.post("http://localhost:9090/api/patient/register", {
+      firstName:firstname,
+      lastName:lastname,
+      address:address,
+      jmbg:jmbg,
+      email: email,
+      password: password
+    })
+    .pipe(
+      map((response: Response) => {
+        //console.log(response);
+        //this.cookieService.set('loggedUser', JSON.stringify(response.json()));
+        const data = response.json();
+        return data;
+      }),
+      catchError((err: Response) => {
+        return throwError(JSON.parse(err.text()));
+      })
+    )
+  }
 
   getPending() {
     return this.http.get("http://localhost:9090/api/patient")
