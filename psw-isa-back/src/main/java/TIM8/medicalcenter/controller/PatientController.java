@@ -25,7 +25,7 @@ public class PatientController {
     public ResponseEntity<Patient> Register(@RequestBody Patient patient) {
         if(personService.findOneByEmail(patient.getEmail())!=null)
             return null;
-        patient.setStatus("Pending");
+        patient.setStatus("PENDING");
         personService.save(patient);
 
         return new ResponseEntity<>(patient, HttpStatus.OK);
