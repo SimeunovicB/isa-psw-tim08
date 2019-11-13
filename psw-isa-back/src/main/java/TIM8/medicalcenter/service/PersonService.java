@@ -15,6 +15,9 @@ public class PersonService {
     public List<Person> findAll() {
         return personRepository.findAll();
     }
+    public Person findOneByEmail(String email) {
+        return personRepository.findOneByEmail(email);
+    }
     public Person findOneById(Long id){
         return personRepository.findOneById(id);
     }
