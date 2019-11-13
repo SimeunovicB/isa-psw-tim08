@@ -25,10 +25,5 @@ public class PersonService {
     public Person save(Person person) {
         return personRepository.save(person);
     }
-    public void savePatient(Patient person) {
-       personRepository.savePatient(person.getAddress(),person.getFirstName(),person.getLastName(),person.getEmail(),person.getJmbg()
-        ,person.getPassword());
-    }
-
     public List<Person> findByType(String type) { return personRepository.findByDiscriminatorValue(type);}
 }
