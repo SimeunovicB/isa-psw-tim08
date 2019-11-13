@@ -34,6 +34,11 @@ public abstract class Person {
     @Column(name= "status",nullable = false)
     private String status;
 
+    @Transient
+    public String getDecriminatorValue() {
+        return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+    }
+
     public Long getId() {
         return id;
     }

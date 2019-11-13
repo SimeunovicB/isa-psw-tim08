@@ -1,5 +1,6 @@
 package TIM8.medicalcenter.service;
 
+import TIM8.medicalcenter.model.Patient;
 import TIM8.medicalcenter.model.Person;
 import TIM8.medicalcenter.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +22,5 @@ public class PersonService {
     public Person findOneById(Long id){
         return personRepository.findOneById(id);
     }
+    public List<Person> findByType(String type) { return personRepository.findByDiscriminatorValue(type);}
 }
