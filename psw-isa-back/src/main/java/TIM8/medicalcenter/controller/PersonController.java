@@ -39,9 +39,20 @@ public class PersonController {
         Person person = personService.findOneById(id);
         if(person != null){
             personService.updatePassword(personDTO.getPassword(),person.getId());
+            person = personService.findOneById(id);
             return new ResponseEntity<>(new PersonDTO(person),HttpStatus.OK);
         }else{
             return new ResponseEntity<>(new PersonDTO(), HttpStatus.NO_CONTENT);
         }
+    }
+    @PutMapping(consumes = "application/json", value = "/update")
+    public ResponseEntity<PersonDTO> updateMedicalStaff(@RequestBody PersonDTO person){
+        Person person1 = personService.findOneById(person.getId());
+        if(person1.getId() != null){
+            personService.updateUser(person.getFirstName(),person.getLastName(),person.getAddress(),person.getId());
+            person1 = personService.findOneById(person.getId());
+            return new ResponseEntity<>(new PersonDTO(person1),HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(new PersonDTO(),HttpStatus.BAD_REQUEST);
     }
 }
