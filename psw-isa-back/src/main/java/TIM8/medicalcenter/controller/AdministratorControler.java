@@ -29,7 +29,7 @@ public class AdministratorControler {
         List<Person> patientList = personService.findByType("P");
         List<PatientDTO> patients = new ArrayList<>();
         for(Person p : patientList){
-            if(p.getStatus().equalsIgnoreCase("ACTIVE")){
+            if(p.getStatus().equalsIgnoreCase("PENDING")){
                 patients.add(new PatientDTO((Patient) p));
             }
 
