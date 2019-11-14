@@ -58,39 +58,63 @@ export class UserService {
       })
     )
   }
+  UpdateUserPassword( 
+    password :string,
+    id:number) {
+    return this.http.post("http://localhost:9090/api/person/changePassword", {
+      password:password,
+      id:id
+    })
+    .pipe(
+      map((response: Response) => {
+        const data = response.json();
+        return data;
+      }),
+      catchError((err: Response) => {
+        return throwError(JSON.parse(err.text()));
+      })
+    )
+  }
+  UpdateUser( 
+    firstname:string,
+    lastname : string,
+    address :string,
+    id:number) {
+    return this.http.put("http://localhost:9090/api/person/update", {
+      firstName:firstname,
+      lastName:lastname,
+      address:address,
+      id:id
+    })
+    .pipe(
+      map((response: Response) => {
+        const data = response.json();
+        return data;
+      }),
+      catchError((err: Response) => {
+        return throwError(JSON.parse(err.text()));
+      })
+    )
+  }
+
+  changePassword( 
+    password:string) {
+    return this.http.put("http://localhost:9090/api/person/changePassword", {
+      password:password
+    })
+    .pipe(
+      map((response: Response) => {
+        const data = response.json();
+        return data;
+      }),
+      catchError((err: Response) => {
+        return throwError(JSON.parse(err.text()));
+      })
+    )
+  }
 
   getPending() {
     return this.http.get("http://localhost:9090/api/patient")
-    .pipe(
-      map((response: Response) => {
-        const data = response.json();
-        return data;
-      }),
-      catchError((err: Response) => {
-        return throwError(JSON.parse(err.text()));
-      })
-    );
-  }
-
-  acceptUser(id) {
-    return this.http.put("http://localhost:9090/api/administrator/approveRegistration/"+id, {
-      id: id,
-    })
-    .pipe(
-      map((response: Response) => {
-        const data = response.json();
-        return data;
-      }),
-      catchError((err: Response) => {
-        return throwError(JSON.parse(err.text()));
-      })
-    );
-  }
-
-  denyUser(id) {
-    return this.http.put("http://localhost:9090/api/administrator/rejectRegistration/"+id, {
-      id: id,
-    })
     .pipe(
       map((response: Response) => {
         const data = response.json();
