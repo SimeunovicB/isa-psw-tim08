@@ -16,12 +16,17 @@ import { UserService } from './services/user.service';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'ngx-cookie-service';
 import { PendingUsersComponent } from './pending-users/pending-users.component';
+import { HomeComponent } from './home/home.component';
+import { HomeNurseComponent } from './home/home-nurse/home-nurse.component';
+import { HeaderComponent } from './header/header.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'pending', component: PendingUsersComponent }
+  { path: 'pending', component: PendingUsersComponent },
+  { path: 'nurse',component : HomeNurseComponent}
 ];
 
 @NgModule({
@@ -30,7 +35,11 @@ const appRoutes: Routes = [
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
-    PendingUsersComponent
+    PendingUsersComponent,
+    HomeComponent,
+    HomeNurseComponent,
+    HeaderComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
