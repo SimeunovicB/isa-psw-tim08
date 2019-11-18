@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatTableModule} from '@angular/material';
+import { MatTableModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,11 +22,11 @@ import { HeaderComponent } from './header/header.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 const appRoutes: Routes = [
-  { path: '', component: ProfileComponent },
+  { path: '', component: HomeComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'pending', component: PendingUsersComponent },
-  { path: 'nurse',component : HomeNurseComponent}
+  { path: 'pending', component: PendingUsersComponent }
 ];
 
 @NgModule({
