@@ -29,9 +29,16 @@ public class PatientController {
         for(Person p : patientList){
             if(p.getStatus().equalsIgnoreCase("PENDING")){
                 patients.add(new PatientDTO((Patient) p));
-
             }
-
+        }
+        return new ResponseEntity<>(patients,HttpStatus.OK);
+    }
+    @GetMapping(value = "/getAllPatients")
+    public ResponseEntity<List<PatientDTO>> getAllPatients() {
+        List<Person> patientList = personService.findByType("P");
+        List<PatientDTO> patients = new ArrayList<>();
+        for(Person p : patientList){
+            patients.add(new PatientDTO((Patient) p));
         }
         return new ResponseEntity<>(patients,HttpStatus.OK);
     }
