@@ -12,6 +12,9 @@ import { UserService } from '../services/user.service';
 })
 export class FirstLoginComponent implements OnInit {
   password: string;
+  password2: string;
+  loggedUser: any;
+  id: number;
 
   constructor(private http: Http,
     private router: Router,
@@ -20,16 +23,21 @@ export class FirstLoginComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-
+    this.loggedUser = JSON.parse(this.cookieService.get('loggedUser'));
+    this.id = this.loggedUser.id;
   }
 
   promeni() {
-    this.userService.changePassword(this.password)
-    .subscribe(
-      (user: any) => {
-        this.router.navigate(['/']);
-      }, (error) => alert(error.text)
-    );
+    if(this.password === this.password2){
+      this.userService.UpdateUserPassword(this.password, this.id)
+      .subscribe(
+        (user: any) => {
+          this.router.navigate(['/']);
+        }, (error) => alert(error.text)
+      );
+    } else {
+      alert('Morate uneti istu lozinku dva puta!');
+    }
   }
 
 
