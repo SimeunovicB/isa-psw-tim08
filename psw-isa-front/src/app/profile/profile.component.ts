@@ -34,12 +34,12 @@ export class ProfileComponent implements OnInit {
     this.firstName=this.l.firstName;
     this.lastName=this.l.lastName;
     this.address=this.l.address;
-    if(this.l.status === "pending"){
+    if(this.l.password === ""){
       const modal = this.modalService.open(FirstLoginComponent);
     }
   }
+
   onSubmit(form: NgForm) {
-   
     this.userService.UpdateUser(this.firstName,this.lastName,this.address,this.l.id)
     .subscribe(
       (user: any) => {
@@ -47,6 +47,7 @@ export class ProfileComponent implements OnInit {
       }, (error) => alert(error.text)
     );
   }
+  
   onSubmitPassword(form: NgForm) {
    
     this.userService.UpdateUserPassword(this.password,this.l.id)
