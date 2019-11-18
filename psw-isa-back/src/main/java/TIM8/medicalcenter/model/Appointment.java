@@ -17,6 +17,9 @@ public class Appointment {
     @Column(name = "date",nullable = false)
     private Date date;
 
+    @Column(name = "duration",nullable = false)
+    private int duration;
+
     @Column(name = "price",nullable = false)
     private double price;
 
@@ -28,6 +31,9 @@ public class Appointment {
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Room room;
+
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Doctor doctor;
 
     public Long getId() {
         return id;
@@ -85,6 +91,13 @@ public class Appointment {
         this.room = room;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
     @Override
     public int hashCode() {

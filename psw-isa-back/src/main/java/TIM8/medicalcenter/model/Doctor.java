@@ -1,6 +1,8 @@
 package TIM8.medicalcenter.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @DiscriminatorValue("D")
@@ -13,6 +15,9 @@ public class Doctor extends Person {
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Clinic clinic;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    Set<Appointment> appointments = new HashSet<>();
 
     public String getWorktimeStart() {
         return worktimeStart;
