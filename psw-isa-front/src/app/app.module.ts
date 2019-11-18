@@ -18,6 +18,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { PendingUsersComponent } from './pending-users/pending-users.component';
 import { HomeComponent } from './home/home.component';
 import { HomeNurseComponent } from './home/home-nurse/home-nurse.component';
+import { HeaderComponent } from './header/header.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProfileComponent },
@@ -35,7 +37,9 @@ const appRoutes: Routes = [
     RegisterComponent,
     PendingUsersComponent,
     HomeComponent,
-    HomeNurseComponent
+    HomeNurseComponent,
+    HeaderComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
