@@ -17,7 +17,6 @@ export class PendingUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getPendingUsers();
-    
   }
 
   getPendingUsers() {
@@ -28,6 +27,24 @@ export class PendingUsersComponent implements OnInit {
           this.pendingUsers = data;
         }
       )
+  }
+
+  prihvati(id) {
+    this.userService.acceptUser(id)
+      .subscribe(
+        () => {
+          
+        }
+      )
+  }
+
+  odbij(id) {
+    this.userService.denyUser(id)
+    .subscribe(
+      () => {
+        
+      }
+    )
   }
 
 }

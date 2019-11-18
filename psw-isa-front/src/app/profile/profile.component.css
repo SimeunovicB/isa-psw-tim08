@@ -9,7 +9,7 @@
 
 div.main{
     background: #0264d6; /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ / / Chrome,Safari4+ */
+background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ */ /* Chrome,Safari4+ */
 background: -webkit-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Chrome10+,Safari5.1+ */
 background: -o-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Opera 12+ */
 background: -ms-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* IE10+ */
@@ -61,7 +61,6 @@ body {
     /*background: url(https://subtlepatterns.com/patterns/crossed_stripes.png) repeat;*/
     background-image: -webkit-linear-gradient(left top, transparent 0%, transparent 25%, #555 25%, #555 50%, transparent 50%, transparent 75%, #555 75%);
     background-size: 4px 4px;
-    
     -webkit-text-fill-color: transparent;
     z-index: -5;
     display: block;

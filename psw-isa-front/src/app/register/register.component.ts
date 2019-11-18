@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NgForm, FormsModule, EmailValidator } from '@angular/forms';
+import { Http } from '@angular/http';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  firstName:string;
+  lastName : string;
+  email:string;
+  password : string; 
+  address :string;
+  jmbg : string;
+
+  constructor(private http: Http,
+    private router: Router,
+    private userService: UserService) { }
 
   ngOnInit() {
+  }
+  onSubmit(form: NgForm) {
+    console.log(this.firstName)
+    this.userService.RegUser(this.firstName,this.lastName,this.address,this.jmbg, this.email, this.password)
+    .subscribe(
+      (user: any) => {
+        this.router.navigate(['/']);
+      }, (error) => alert(error.text)
+    );
   }
 
 }

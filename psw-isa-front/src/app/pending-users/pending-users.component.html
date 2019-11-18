@@ -1,0 +1,45 @@
+<tr *ngFor="let user of pendingUsers;">
+    <td>{{user.email}}</td>
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
+    <td>{{user.jmbg}}</td>
+    <td><button (click)="prihvati(user.id)">Prihvati</button></td>
+    <td><button (click)="odbij(user.id)">Odbij</button></td>
+</tr>
+
+<!--<table mat-table [dataSource]="pendingUsers">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let user">{{user.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>E-mail</th>
+        <td mat-cell *matCellDef="let user">{{user.email}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef>First Name</th>
+        <td mat-cell *matCellDef="let user">{{user.firstName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef>Last Name</th>
+        <td mat-cell *matCellDef="let user">{{user.lastName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="jmbg">
+        <th mat-header-cell *matHeaderCellDef>JMBG</th>
+        <td mat-cell *matCellDef="let user">{{user.jmbg}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="accept">
+        <th mat-header-cell *matHeaderCellDef>Accept</th>
+        <td mat-cell *matCellDef="let user"><button (click)="prihvati(user.id)">Prihvati</button></td>
+    </ng-container>
+
+    <ng-container matColumnDef="deny">
+        <th mat-header-cell *matHeaderCellDef>Deny</th>
+        <td mat-cell *matCellDef="let user"><button (click)="odbij(user.id)">Odbij</button></td>
+    </ng-container>
+</table> -->
