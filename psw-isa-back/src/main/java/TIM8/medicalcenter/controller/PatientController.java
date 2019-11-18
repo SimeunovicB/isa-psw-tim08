@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin
+
 @RestController
-@CrossOrigin
 @RequestMapping(value = "api/patient")
 public class PatientController {
 
