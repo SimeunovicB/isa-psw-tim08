@@ -97,10 +97,22 @@ export class UserService {
     )
   }
 
-  changePassword( 
-    password:string) {
-    return this.http.put("http://localhost:9090/api/person/changePassword", {
-      password:password
+  getPending() {
+    return this.http.get("http://localhost:9090/api/patient")
+    .pipe(
+      map((response: Response) => {
+        const data = response.json();
+        return data;
+      }),
+      catchError((err: Response) => {
+        return throwError(JSON.parse(err.text()));
+      })
+    );
+  }
+
+  acceptUser(id) {
+    return this.http.put("http://localhost:9090/api/administrator/approveRegistration/"+id, {
+      id: id,
     })
     .pipe(
       map((response: Response) => {
@@ -110,11 +122,13 @@ export class UserService {
       catchError((err: Response) => {
         return throwError(JSON.parse(err.text()));
       })
-    )
+    );
   }
 
-  getPending() {
-    return this.http.get("http://localhost:9090/api/patient")
+  denyUser(id) {
+    return this.http.put("http://localhost:9090/api/administrator/rejectRegistration/"+id, {
+      id: id,
+    })
     .pipe(
       map((response: Response) => {
         const data = response.json();
