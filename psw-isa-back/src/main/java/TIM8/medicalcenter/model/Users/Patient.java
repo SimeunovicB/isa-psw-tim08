@@ -1,4 +1,7 @@
-package TIM8.medicalcenter.model;
+package TIM8.medicalcenter.model.Users;
+
+import TIM8.medicalcenter.model.Clinic;
+import TIM8.medicalcenter.model.Users.Person;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -32,5 +35,6 @@ public class Patient extends Person {
     public void setClinics(Set<Clinic> clinics) {
         this.clinics = clinics;
     }
+
 
 }

@@ -1,6 +1,6 @@
 package TIM8.medicalcenter.repository;
 
-import TIM8.medicalcenter.model.Person;
+import TIM8.medicalcenter.model.Users.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,12 +15,9 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
     List<Person> findAll();
 
     Person findOneById(Long id);
-
+    Person findOneByUsername(String username);
 
     List<Person> findByFirstName(String firstName);
-
-    @Query("select s from Person s where s.email = ?1")
-    Person findOneByEmail(String mail);
 
     @Query("SELECT p FROM Person p where p.class=?1")
     List<Person> findByDiscriminatorValue(String discriminatorValue);

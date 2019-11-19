@@ -1,5 +1,7 @@
 package TIM8.medicalcenter.model;
 
+import TIM8.medicalcenter.model.Users.Doctor;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;

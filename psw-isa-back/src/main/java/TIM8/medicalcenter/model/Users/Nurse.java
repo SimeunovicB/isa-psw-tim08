@@ -1,10 +1,13 @@
-package TIM8.medicalcenter.model;
+package TIM8.medicalcenter.model.Users;
+
+import TIM8.medicalcenter.model.Clinic;
+import TIM8.medicalcenter.model.Users.Person;
 
 import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("N")
-public class Nurse extends Person{
+public class Nurse extends Person {
     @Column(name = "worktime_start")
     private String worktimeStart;
 
@@ -37,4 +40,6 @@ public class Nurse extends Person{
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
     }
+
+
 }
