@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   lastName : string;
   email:string;
   password : string; 
+  password2 : string; 
   address :string;
   jmbg : string;
 
@@ -23,6 +24,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
   }
+  
   onSubmit(form: NgForm) {
     console.log(this.firstName)
     this.userService.RegUser(this.firstName,this.lastName,this.address,this.jmbg, this.email, this.password)
