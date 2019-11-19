@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatTableModule} from '@angular/material';
+import { MatTableModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { HomeNurseComponent } from './home/home-nurse/home-nurse.component';
 import { HeaderComponent } from './header/header.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { HomeDoctorComponent } from './home/home-doctor/home-doctor.component';
+import { HomePatientComponent } from './home/home-patient/home-patient.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,7 +41,7 @@ const appRoutes: Routes = [
     HomeNurseComponent,
     HeaderComponent,
     WelcomeComponent,
-    HomeDoctorComponent
+    HomePatientComponent
   ],
   imports: [
     BrowserModule,
