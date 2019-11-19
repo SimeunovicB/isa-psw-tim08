@@ -15,8 +15,8 @@ export class UserService {
     private cookieService: CookieService) { }
 
   postUser(email: string, password: string) {
-    return this.http.post("http://localhost:9090/api/person/login", {
-      email: email,
+    return this.http.post("http://localhost:9090/auth/login", {
+      username: email,
       password: password
     })
     .pipe(
