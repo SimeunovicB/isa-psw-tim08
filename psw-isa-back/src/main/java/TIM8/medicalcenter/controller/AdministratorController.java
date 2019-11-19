@@ -1,10 +1,7 @@
 package TIM8.medicalcenter.controller;
 
-import TIM8.medicalcenter.dto.ClinicDTO;
-import TIM8.medicalcenter.dto.PatientDTO;
 import TIM8.medicalcenter.dto.PersonDTO;
-import TIM8.medicalcenter.model.Patient;
-import TIM8.medicalcenter.model.Person;
+import TIM8.medicalcenter.model.Users.Person;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
@@ -13,16 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Null;
-import javax.xml.ws.RequestWrapper;
-import javax.xml.ws.Response;
-import java.util.ArrayList;
-import java.util.List;
-
 
 @RestController
 @RequestMapping(value = "api/administrator")
-public class AdministratorControler {
+public class AdministratorController {
 
     @Autowired
     PersonService personService;

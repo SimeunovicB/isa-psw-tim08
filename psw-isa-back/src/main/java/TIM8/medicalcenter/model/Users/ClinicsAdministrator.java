@@ -1,4 +1,7 @@
-package TIM8.medicalcenter.model;
+package TIM8.medicalcenter.model.Users;
+
+import TIM8.medicalcenter.model.Clinic;
+import TIM8.medicalcenter.model.Users.Person;
 
 import javax.persistence.*;
 
@@ -15,5 +18,6 @@ public class ClinicsAdministrator extends Person {
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
     }
+
 
 }

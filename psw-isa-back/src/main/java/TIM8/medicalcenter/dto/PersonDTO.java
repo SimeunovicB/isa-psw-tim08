@@ -1,7 +1,6 @@
 package TIM8.medicalcenter.dto;
 
-import TIM8.medicalcenter.model.Clinic;
-import TIM8.medicalcenter.model.Person;
+import TIM8.medicalcenter.model.Users.Person;
 
 public class PersonDTO {
 
@@ -10,22 +9,22 @@ public class PersonDTO {
     private String lastName;
     private String address;
     private String password;
-    private String email;
+    private String username;
 
     public PersonDTO() {
 
     }
 
-    public PersonDTO(Long id, String firstName, String lastName, String address, String password, String email) {
+    public PersonDTO(Long id, String firstName, String lastName, String address, String password, String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.password = password;
-        this.email = email;
+        this.username = username;
     }
     public PersonDTO(Person p){
-        this(p.getId(),p.getFirstName(),p.getLastName(),p.getAddress(),p.getPassword(),p.getEmail());
+        this(p.getId(),p.getFirstName(),p.getLastName(),p.getAddress(),p.getPassword(),p.getUsername());
     }
 
     public Long getId() {
@@ -65,10 +64,10 @@ public class PersonDTO {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
-     public void setEmail(String email) {
-        this.email = email;
+     public void setEmail(String username) {
+        this.username = username;
     }
 }

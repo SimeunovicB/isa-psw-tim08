@@ -1,8 +1,8 @@
 package TIM8.medicalcenter.dto;
 
 
-import TIM8.medicalcenter.model.Patient;
-import TIM8.medicalcenter.model.Person;
+import TIM8.medicalcenter.model.Users.Patient;
+import TIM8.medicalcenter.model.Users.Person;
 
 public class PatientDTO extends PersonDTO {
     private String jmbg;

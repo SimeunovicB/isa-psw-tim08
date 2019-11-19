@@ -1,7 +1,11 @@
 package TIM8.medicalcenter.model;
 
+import TIM8.medicalcenter.model.Users.Administrator;
+import TIM8.medicalcenter.model.Users.Doctor;
+import TIM8.medicalcenter.model.Users.Nurse;
+import TIM8.medicalcenter.model.Users.Patient;
+
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
