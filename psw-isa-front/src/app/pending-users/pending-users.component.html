@@ -11,10 +11,10 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First name</th>
-            <th scope="col">Last name</th>
-            <th scope="col">Accept</th>
-            <th scope="col">Reject</th>
+            <th scope="col">Ime</th>
+            <th scope="col">Prezime</th>
+            <th scope="col">Prihvati</th>
+            <th scope="col">Odbij</th>
         </tr>
     </thead>
     <tbody>
@@ -22,8 +22,8 @@
                 <th scope="row">{{i+1}}</th>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
-                <td><button type="button" class="btn btn-success" (click)="prihvati(user.id)">Accept</button></td>
-                <td><button type="button" class="btn btn-danger" (click)="odbij(user.id)">Reject</button></td>
+                <td><button type="button" class="btn btn-success" (click)="prihvati(user.id)">Prihvati</button></td>
+                <td><button type="button" class="btn btn-danger" (click)="odbij(user.id)">Odbij</button></td>
         </ng-container>
     </tbody>
 </table>
