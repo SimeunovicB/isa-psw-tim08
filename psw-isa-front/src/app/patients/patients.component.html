@@ -10,10 +10,10 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let user of patients; let i = index">
-        <th scope="row">{{i+1}}</th>
+        <tr><th scope="row">{{i+1}}</th>
         <td>{{user.firstName}}</td>
         <td>{{user.lastName}}</td>
-        <td>{{user.jmbg}}</td>
+        <td>{{user.jmbg}}</td></tr>
       </ng-container>
     </tbody>
   </table>
