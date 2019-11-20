@@ -3,8 +3,6 @@ package TIM8.medicalcenter.controller;
 import TIM8.medicalcenter.dto.ClinicDTO;
 import TIM8.medicalcenter.dto.PatientDTO;
 import TIM8.medicalcenter.model.Clinic;
-import TIM8.medicalcenter.model.Patient;
-import TIM8.medicalcenter.model.Person;
 import TIM8.medicalcenter.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

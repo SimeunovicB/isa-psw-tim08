@@ -1,3 +1,15 @@
 <app-header></app-header>
 <app-welcome></app-welcome>
-<app-home-nurse></app-home-nurse>
+<div *ngIf="userPatient">
+    <app-home-patient></app-home-patient>
+</div>
+<div *ngIf="userNurse">
+    <app-home-nurse></app-home-nurse>
+</div>
+<div *ngIf="userDoctor">
+    <app-home-doctor></app-home-doctor>
+</div>
+<div *ngIf="userAdmin">
+    <app-home-admin></app-home-admin>
+</div>
+

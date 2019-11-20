@@ -11,9 +11,9 @@ import { PatientService } from 'src/app/services/patient.service';
 export class HomeDoctorComponent implements OnInit {
   displayedColumns: string[] = ['ime', 'prezime', 'jmbg'];
   patients = [];
-  dataSource = new MatTableDataSource<Pacijent>(this.patients);
+  //dataSource = new MatTableDataSource<Pacijent>(this.patients);
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  //@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private patientService: PatientService) { }
 

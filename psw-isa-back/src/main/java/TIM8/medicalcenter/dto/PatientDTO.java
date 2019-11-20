@@ -10,8 +10,8 @@ public class PatientDTO extends PersonDTO {
     public PatientDTO() {
         super();
     }
-    public PatientDTO(Long id, String firstName, String lastName, String address, String password, String email,String jmbg){
-        super(id,firstName,lastName,address,password,email);
+    public PatientDTO(Long id, String firstName, String lastName, String address, String password, String email,String jmbg,String status){
+        super(id,firstName,lastName,address,password,email,status);
         this.jmbg = jmbg;
     }
     public PatientDTO(Patient p){

@@ -50,7 +50,6 @@ public class AuthenticationController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
         throws AuthenticationException, IOException {
-        System.out.println(authenticationRequest.getPassword() + " "  +authenticationRequest.getUsername());
         final Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername()
                         ,authenticationRequest.getPassword()));
@@ -58,7 +57,8 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         Person person = (Person) authentication.getPrincipal();
-        String jwt =tokenUtils.generateToken(person.getUsername());
+        System.out.println(person);
+        String jwt =tokenUtils.generateToken(person);
         int expiresIn = tokenUtils.getExpiredIn();
         return ResponseEntity.ok(new UserTokenState(jwt,expiresIn));
     }
@@ -69,6 +69,7 @@ public class AuthenticationController {
         if(person != null){
             throw new ResourceConflictException(person.getId(), "Username already exists");
         }
+        System.out.println(patient);
         Person person1 = personService.save(patient);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/user/{userId}").buildAndExpand(person1.getId()).toUri());
