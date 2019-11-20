@@ -1,11 +1,32 @@
-<tr *ngFor="let user of pendingUsers;">
+<!--<tr *ngFor="let user of pendingUsers;">
     <td>{{user.email}}</td>
     <td>{{user.firstName}}</td>
     <td>{{user.lastName}}</td>
     <td>{{user.jmbg}}</td>
     <td><button (click)="prihvati(user.id)">Prihvati</button></td>
     <td><button (click)="odbij(user.id)">Odbij</button></td>
-</tr>
+</tr> -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Accept</th>
+            <th scope="col">Reject</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let user of pendingUsers; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td><button type="button" class="btn btn-success" (click)="prihvati(user.id)">Accept</button></td>
+                <td><button type="button" class="btn btn-danger" (click)="odbij(user.id)">Reject</button></td>
+        </ng-container>
+    </tbody>
+</table>
 
 <!--<table mat-table [dataSource]="pendingUsers">
     <ng-container matColumnDef="id">

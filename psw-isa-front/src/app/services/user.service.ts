@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { CookieService } from 'ngx-cookie-service';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt'
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import { throwError } from 'rxjs';
 export class UserService {
 
   constructor(private http: Http,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+) { }
 
   postUser(email: string, password: string) {
     return this.http.post("http://localhost:9090/auth/login", {
@@ -23,6 +25,9 @@ export class UserService {
       map((response: Response) => {
         //console.log(response);
         //this.cookieService.set('loggedUser', JSON.stringify(response.json()));
+        const helper = new JwtHelperService();
+        const token = JSON.stringify(response);
+        this.cookieService.set('token', token);
         const data = response.json();
         return data;
       }),
@@ -38,12 +43,12 @@ export class UserService {
     jmbg : string,
     email:string,
     password : string) {
-    return this.http.post("http://localhost:9090/api/patient/register", {
+    return this.http.post("http://localhost:9090/auth/register", {
       firstName:firstname,
       lastName:lastname,
       address:address,
       jmbg:jmbg,
-      email: email,
+      username: email,
       password: password
     })
     .pipe(
@@ -100,6 +105,21 @@ export class UserService {
   getPending() {
     return this.http.get("http://localhost:9090/api/patient")
     .pipe(
+      map((response: Response) => {
+        const data = response.json();
+        return data;
+      }),
+      catchError((err: Response) => {
+        return throwError(JSON.parse(err.text()));
+      })
+    );
+  }
+
+  getUserByMail(email : string) {
+    return this.http.post("http://localhost:9090/api/person/getByEmail",{
+      username : email
+    })
+    .pipe(  
       map((response: Response) => {
         const data = response.json();
         return data;

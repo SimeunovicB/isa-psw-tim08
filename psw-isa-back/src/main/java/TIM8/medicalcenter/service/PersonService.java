@@ -54,6 +54,7 @@ public class PersonService implements UserDetailsService {
     public Person save(Person person) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
         person.setEnabled(true);
+        person.setStatus("PENDING");
         List<Authority> auth =authorityService.findByname("ROLE_PATIENT");
         person.setAuthorities(auth);
 

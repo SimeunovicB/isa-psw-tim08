@@ -24,7 +24,7 @@ export class PendingUsersComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
-          this.pendingUsers = data;
+          this.pendingUsers = Object.assign([], (data));
         }
       )
   }
@@ -33,7 +33,7 @@ export class PendingUsersComponent implements OnInit {
     this.userService.acceptUser(id)
       .subscribe(
         () => {
-          
+          this.getPendingUsers();
         }
       )
   }
@@ -42,7 +42,7 @@ export class PendingUsersComponent implements OnInit {
     this.userService.denyUser(id)
     .subscribe(
       () => {
-        
+        this.getPendingUsers();
       }
     )
   }

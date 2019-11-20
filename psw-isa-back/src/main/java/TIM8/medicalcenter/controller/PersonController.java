@@ -23,7 +23,16 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @RequestMapping(consumes = "application/json",value = "/login",method = RequestMethod.POST)
+
+    @RequestMapping(consumes = "application/json",value="/getByEmail",method = RequestMethod.POST)
+    public ResponseEntity<?> getByEmail(@RequestBody PersonDTO person){
+        Person personRet = personService.findOneByUsername(person.getUsername());
+        if(personRet==null)
+            return null;
+        return new ResponseEntity<>(new PersonDTO(personRet),HttpStatus.OK);
+
+    }
+    /*@RequestMapping(consumes = "application/json",value = "/login",method = RequestMethod.POST)
     public ResponseEntity<PersonDTO> Login(@RequestBody PersonDTO person) {
         Person person1 = personService.findOneByUsername(person.getUsername());
         if(person1==null)
@@ -33,8 +42,8 @@ public class PersonController {
             return new ResponseEntity<>(p, HttpStatus.OK);
         }
             return  null;
-    }
-    @PutMapping(consumes = "application/json",value ="/changePassword")
+    }*/
+    /*@PutMapping(consumes = "application/json",value ="/changePassword")
     public ResponseEntity<PersonDTO> updatePassword(@RequestBody PersonDTO personDTO) {
         long id = personDTO.getId();
         Person person = personService.findOneById(id);
@@ -45,7 +54,7 @@ public class PersonController {
         }else{
             return new ResponseEntity<>(new PersonDTO(), HttpStatus.NO_CONTENT);
         }
-    }
+    }*/
     @PutMapping(consumes = "application/json", value = "/update")
     public ResponseEntity<PersonDTO> updateMedicalStaff(@RequestBody PersonDTO person){
         Person person1 = personService.findOneById(person.getId());
@@ -56,7 +65,7 @@ public class PersonController {
         }
         return new ResponseEntity<>(new PersonDTO(),HttpStatus.BAD_REQUEST);
     }
-    @PostMapping(consumes = "application/json",value = "/register")
+    /*@PostMapping(consumes = "application/json",value = "/register")
     public ResponseEntity<Patient> Register(@RequestBody Patient patient) {
         if(personService.findOneByUsername(patient.getUsername())!=null)
             return null;
@@ -65,5 +74,5 @@ public class PersonController {
         personService.save(patient);
         return new ResponseEntity<>(patient, HttpStatus.OK);
 
-    }
+    }*/
 }

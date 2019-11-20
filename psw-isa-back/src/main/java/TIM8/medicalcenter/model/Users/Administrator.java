@@ -19,5 +19,4 @@ public class Administrator extends Person {
         this.clinic = clinic;
     }
 
-
 }
