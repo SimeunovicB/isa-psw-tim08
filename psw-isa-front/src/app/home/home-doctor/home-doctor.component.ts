@@ -9,7 +9,7 @@ import { PatientService } from 'src/app/services/patient.service';
   styleUrls: ['./home-doctor.component.css']
 })
 export class HomeDoctorComponent implements OnInit {
-  displayedColumns: string[] = ['ime', 'prezime', 'jmbg'];
+  //displayedColumns: string[] = ['ime', 'prezime', 'jmbg'];
   patients = [];
   //dataSource = new MatTableDataSource<Pacijent>(this.patients);
 
@@ -18,7 +18,7 @@ export class HomeDoctorComponent implements OnInit {
   constructor(private patientService: PatientService) { }
 
   ngOnInit() {
-
+    this.ucitajPacijente();
   }
 
   ucitajPacijente() {
@@ -35,10 +35,4 @@ export class HomeDoctorComponent implements OnInit {
 
   }
 
-}
-
-export interface Pacijent {
-  ime: string;
-  prezime: string;
-  jmbg: string;
 }

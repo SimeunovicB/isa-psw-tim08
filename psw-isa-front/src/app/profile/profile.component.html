@@ -1,52 +1,20 @@
-<head>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-    
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    </head>
-<body>
-    <app-header></app-header>
-
-    <div id="login">
-    
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-
-          <fieldset class="clearfix">
-
-            
-            <p ><span class="fa fa-user"></span><input type="text"  Placeholder="Ime" id="firstName" [(ngModel)]="firstName" name="firstName" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            <p ><span class="fa fa-user"></span><input type="text"  Placeholder="Prezime" id="lastName" [(ngModel)]="lastName" name="lastName" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            <p ><span class="fa fa-user"></span><input type="text"  Placeholder="Adresa" id="address" [(ngModel)]="address" name="address" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            
-            <div>
-                 <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Potvrdi izmenu"></span>
-            </div>
-
-            
-
-          </fieldset>
-<div class="clearfix"></div>
-        </form>
-        <form (ngSubmit)="onSubmitPassword(f)" #f="ngForm">
-
-          <fieldset class="clearfix">
-        <p ><span class="fa fa-user"></span><input type="text"  Placeholder="Nova lozinka" id="password" [(ngModel)]="password" name="password" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            
-            <div>
-                 <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Potvrdi izmenu"></span>
-            </div>
-          </fieldset>
-          <div class="clearfix"></div>
-                  </form>
-
-        <div class="clearfix"></div>
-
-      </div> <!-- end login -->
-
-</body>
+<app-header></app-header>
+<div *ngIf="loggedUser">
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>Ime</td>
+        <td><input type="text" [(ngModel)]="ime"></td>
+      </tr>
+      <tr>
+        <td>Prezime</td>
+        <td><input type="text" [(ngModel)]="prezime"></td>
+      </tr>
+      <tr>
+        <td>Adresa</td>
+        <td><input type="text" [(ngModel)]="adresa"></td>
+      </tr>
+      <button (click)="onSubmit()">Sacuvaj izmene</button>
+    </tbody>
+  </table>
+</div>
