@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientService } from '../services/patient.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-patients',
@@ -8,10 +11,16 @@ import { PatientService } from '../services/patient.service';
 })
 export class PatientsComponent implements OnInit {
   patients = [];
+  helper: any;
 
-  constructor(private patientService: PatientService) { }
+  constructor(private router: Router,
+    private patientService: PatientService,
+    private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.helper = new JwtHelperService()
+    if(this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.ucitajPacijente();
   }
 

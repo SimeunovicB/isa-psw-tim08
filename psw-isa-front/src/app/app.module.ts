@@ -24,6 +24,7 @@ import { HomePatientComponent } from './home/home-patient/home-patient.component
 import { HomeDoctorComponent } from './home/home-doctor/home-doctor.component';
 import { HomeAdminComponent } from './home/home-admin/home-admin.component';
 import { PatientsComponent } from './patients/patients.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'pending', component: PendingUsersComponent },
-  { path: 'patients', component: PatientsComponent }
+  { path: 'patients', component: PatientsComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -48,7 +50,8 @@ const appRoutes: Routes = [
     WelcomeComponent,
     HomePatientComponent,
     HomeAdminComponent,
-    PatientsComponent
+    PatientsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
