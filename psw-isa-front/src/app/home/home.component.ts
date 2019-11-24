@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FirstLoginComponent } from '../first-login/first-login.component';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -24,13 +25,17 @@ export class HomeComponent implements OnInit {
 
   constructor(private cookieService: CookieService,
     private modalService: NgbModal,
-    private userService: UserService) { }
+    private userService: UserService,
+    private router : Router) { }
 
   ngOnInit() {
-    this.getUser();
     this.helper = new JwtHelperService()
+    if(this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.userType = this.helper.decodeToken(this.cookieService.get('token')).type;
     this.userMail = this.helper.decodeToken(this.cookieService.get('token')).sub;
+    console.log(this.userMail);
+    this.getUser();
     if (this.userType === "P")
       this.userPatient = true;
     if (this.userType === "D")
