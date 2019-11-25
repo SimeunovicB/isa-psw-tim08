@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt'
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,8 @@ export class UserService {
 
   constructor(private http: Http,
     private cookieService: CookieService,
+    private router: Router
+    
 ) { }
 
   postUser(email: string, password: string) {
@@ -27,11 +30,15 @@ export class UserService {
         //this.cookieService.set('loggedUser', JSON.stringify(response.json()));
         const helper = new JwtHelperService();
         const token = JSON.stringify(response);
+        console.log(token)
         this.cookieService.set('token', token);
+        
+
         const data = response.json();
         return data;
       }),
       catchError((err: Response) => {
+        console.log(err)
         return throwError(JSON.parse(err.text()));
       })
     )

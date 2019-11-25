@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../services/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt'
 
 
 @Component({
@@ -16,6 +17,7 @@ import { UserService } from '../services/user.service';
 export class LoginComponent implements OnInit {
   email: string;
   password: string;
+  helper : any;
 
   constructor(private http: Http,
     private router: Router,
@@ -29,8 +31,20 @@ export class LoginComponent implements OnInit {
     this.userService.postUser(this.email, this.password)
     .subscribe(
       (user: any) => {
+        this.helper = new JwtHelperService();
         this.cookieService.set('loggedUser', JSON.stringify(user));
-        this.router.navigate(['/']);
+       
+
+        let status = this.helper.decodeToken(this.cookieService.get('token')).status;
+        let userType = this.helper.decodeToken(this.cookieService.get('token')).type;
+        console.log(status + userType)
+        if(userType === "P" && status !== "ACTIVE"){
+          console.log('dosao da rerutiram')
+          this.router.navigate(['/login']);
+        }else{
+          this.router.navigate(['/']);
+        }
+        
       }, (error) => alert(error.text)
     );
   }
