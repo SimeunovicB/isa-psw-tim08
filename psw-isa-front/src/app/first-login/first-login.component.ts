@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule, Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt'
 
 @Component({
   selector: 'app-first-login',
@@ -15,6 +16,8 @@ export class FirstLoginComponent implements OnInit {
   password2: string;
   loggedUser: any;
   id: number;
+  userMail : any;
+  helper : any;
 
   constructor(private http: Http,
     private router: Router,
@@ -23,8 +26,9 @@ export class FirstLoginComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-    this.loggedUser = JSON.parse(this.cookieService.get('loggedUser'));
-    this.id = this.loggedUser.id;
+    this.helper = new JwtHelperService();
+    this.userMail = this.helper.decodeToken(this.cookieService.get('token')).sub;
+    this.getUser();
   }
 
   promeni() {
@@ -38,6 +42,17 @@ export class FirstLoginComponent implements OnInit {
     } else {
       alert('Morate uneti istu lozinku dva puta!');
     }
+  }
+  getUser() {
+    this.userService.getUserByMail(this.userMail)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.loggedUser = Object.assign([], (data));
+          this.id = this.loggedUser.id;
+          
+        }
+      )
   }
 
 

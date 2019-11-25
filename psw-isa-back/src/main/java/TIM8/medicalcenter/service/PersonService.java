@@ -42,6 +42,7 @@ public class PersonService implements UserDetailsService {
     public int updatePassword(String password,Long id) {return personRepository.updatePassword(password,id);}
     public int updateUser(String firstName,String lastName,String address,long id) { return personRepository.updateUser(firstName,lastName,address,id); }
     // Funkcija koja na osnovu username-a iz baze vraca objekat User-a
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Person person = personRepository.findOneByUsername(username);
@@ -51,11 +52,14 @@ public class PersonService implements UserDetailsService {
             return person;
         }
     }
-    public Person save(Person person) {
+    public Person save(Person person,String status,String role) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
         person.setEnabled(true);
-        person.setStatus("PENDING");
-        List<Authority> auth =authorityService.findByname("ROLE_PATIENT");
+
+        if(status != null){
+            person.setStatus(status);
+        }
+        List<Authority> auth =authorityService.findByname(role);
         person.setAuthorities(auth);
 
         return personRepository.save(person);
@@ -64,6 +68,8 @@ public class PersonService implements UserDetailsService {
     public void changePassword(String oldPassword, String newPassword) {
 
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(currentUser.getName());
+        //ovde ispisuje da je current user null iako sam ga set-ovao prilikom login-a
         String username = currentUser.getName();
 
         if (authenticationManager != null) {

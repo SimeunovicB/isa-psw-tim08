@@ -43,6 +43,7 @@ public class TokenUtils {
                 .setIssuer(APP_NAME)
                 .setSubject(person.getUsername())
                 .claim("type",person.getDecriminatorValue())
+                .claim("status",person.getStatus())
                 .setAudience(generateAudience())
                 .setIssuedAt(timeProvider.now())
                 .setExpiration(generateExpirationDate())
