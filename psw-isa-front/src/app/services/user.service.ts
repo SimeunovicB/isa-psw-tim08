@@ -32,7 +32,7 @@ export class UserService {
         const helper = new JwtHelperService();
         const token = JSON.stringify(res.json().accessToken);
         console.log('token: ' + token)
-        this.cookieService.set('token', token);
+        this.cookieService.set('token', token);  
         
 
         const data = res.json();
@@ -93,7 +93,7 @@ export class UserService {
     lastname : string,
     address :string,
     id:number) {
-    return this.http.put("http://localhost:9090/api/person/update", {
+    return this.http.post("http://localhost:9090/api/person/update", {
       firstName:firstname,
       lastName:lastname,
       address:address,
