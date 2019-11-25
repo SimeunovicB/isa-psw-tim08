@@ -58,7 +58,8 @@ public class AuthenticationController {
 
         Person person = (Person) authentication.getPrincipal();
         System.out.println(person);
-        String jwt =tokenUtils.generateToken(person);
+        String jwt;
+        jwt =tokenUtils.generateToken(person);
         int expiresIn = tokenUtils.getExpiredIn();
         return ResponseEntity.ok(new UserTokenState(jwt,expiresIn));
     }
@@ -69,8 +70,8 @@ public class AuthenticationController {
         if(person != null){
             throw new ResourceConflictException(person.getId(), "Username already exists");
         }
-        System.out.println(patient);
-        Person person1 = personService.save(patient);
+        //System.out.println(patient);
+        Person person1 = personService.save(patient,"PENDING","ROLE_USER");
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/user/{userId}").buildAndExpand(person1.getId()).toUri());
         return new ResponseEntity<Person>(person1, HttpStatus.CREATED);
@@ -93,7 +94,6 @@ public class AuthenticationController {
         }
     }
     @RequestMapping(value = "/change-password", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> changePassword(@RequestBody PasswordChanger passwordChanger) {
         personService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);
 

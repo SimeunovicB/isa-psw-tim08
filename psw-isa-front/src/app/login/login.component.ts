@@ -39,9 +39,12 @@ export class LoginComponent implements OnInit {
         let userType = this.helper.decodeToken(this.cookieService.get('token')).type;
         console.log(status + userType)
         if(userType === "P" && status !== "ACTIVE"){
-          console.log('dosao da rerutiram')
           this.router.navigate(['/login']);
-        }else{
+        }else if((userType === "D" || userType === "N") && status === 'PENDING'){
+          console.log('dosao da rerutujem doktore i sestre')
+          this.router.navigate(['/firstLogin']);
+        }
+        else{
           this.router.navigate(['/']);
         }
         

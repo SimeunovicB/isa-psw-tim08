@@ -18,7 +18,7 @@ public class AdministratorController {
     @Autowired
     PersonService personService;
 
-    @CrossOrigin
+
     @Order(Ordered.HIGHEST_PRECEDENCE)
     @PutMapping(consumes = "application/json",value ="/approveRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusApproved(@PathVariable Long id) {
@@ -33,7 +33,7 @@ public class AdministratorController {
         }
     }
 
-    @CrossOrigin
+
     @Order(Ordered.HIGHEST_PRECEDENCE)
     @PutMapping(consumes = "application/json",value = "/rejectRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusRejected(@PathVariable Long id){
