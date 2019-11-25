@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { HttpModule } from '@angular/http';
+import {HttpHeaders} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -25,16 +26,16 @@ export class UserService {
       password: password
     })
     .pipe(
-      map((response: Response) => {
+      map((res : Response) => {
         //console.log(response);
         //this.cookieService.set('loggedUser', JSON.stringify(response.json()));
         const helper = new JwtHelperService();
-        const token = JSON.stringify(response);
-        console.log(token)
+        const token = JSON.stringify(res.json().accessToken);
+        console.log('token: ' + token)
         this.cookieService.set('token', token);
         
 
-        const data = response.json();
+        const data = res.json();
         return data;
       }),
       catchError((err: Response) => {
@@ -71,11 +72,11 @@ export class UserService {
     )
   }
   UpdateUserPassword( 
-    password :string,
-    id:number) {
+    newPassword :string,
+    oldPassword : string) {
     return this.http.post("http://localhost:9090/api/person/changePassword", {
-      password:password,
-      id:id
+      newPassword:newPassword,
+      oldPassword:oldPassword
     })
     .pipe(
       map((response: Response) => {

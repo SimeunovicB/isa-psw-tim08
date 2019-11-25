@@ -14,6 +14,7 @@ import { JwtHelperService } from '@auth0/angular-jwt'
 export class FirstLoginComponent implements OnInit {
   password: string;
   password2: string;
+  oldPassword: string;
   loggedUser: any;
   id: number;
   userMail : any;
@@ -33,7 +34,7 @@ export class FirstLoginComponent implements OnInit {
 
   promeni() {
     if(this.password === this.password2){
-      this.userService.UpdateUserPassword(this.password, this.id)
+      this.userService.UpdateUserPassword(this.password, this.oldPassword)
       .subscribe(
         (user: any) => {
           this.router.navigate(['/']);

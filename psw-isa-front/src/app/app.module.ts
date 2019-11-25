@@ -26,6 +26,8 @@ import { HomeAdminComponent } from './home/home-admin/home-admin.component';
 import { PatientsComponent } from './patients/patients.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FirstLoginComponent } from './first-login/first-login.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptor} from '../Interceptors/TokenInterceptor';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -66,7 +68,12 @@ const appRoutes: Routes = [
     MatTableModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [CookieService],
+
+  providers: [CookieService,{
+    provide : HTTP_INTERCEPTORS,
+    useClass : TokenInterceptor,
+    multi :true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

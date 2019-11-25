@@ -55,6 +55,7 @@ public class AuthenticationController {
                         ,authenticationRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        System.out.println("login request: username:" + authentication.getName());
 
         Person person = (Person) authentication.getPrincipal();
         System.out.println(person);
@@ -93,7 +94,7 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body(userTokenState);
         }
     }
-    @RequestMapping(value = "/change-password", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/change-password", method = RequestMethod.POST)
     public ResponseEntity<?> changePassword(@RequestBody PasswordChanger passwordChanger) {
         personService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);
 
@@ -105,7 +106,7 @@ public class AuthenticationController {
     static class PasswordChanger {
         public String oldPassword;
         public String newPassword;
-    }
+    }*/
 
 
 }
