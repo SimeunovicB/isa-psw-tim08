@@ -55,7 +55,7 @@ public class PersonController {
         return ResponseEntity.accepted().body(result);
     }
 
-    @PutMapping(consumes = "application/json", value = "/update")
+    @PostMapping(consumes = "application/json", value = "/update")
     public ResponseEntity<PersonDTO> updateMedicalStaff(@RequestBody PersonDTO person){
         Person person1 = personService.findOneById(person.getId());
         if(person1.getId() != null){
