@@ -32,7 +32,8 @@ public class PersonService implements UserDetailsService {
     @Autowired
     private AuthorityService authorityService;
 
-    @Autowired AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     public List<Person> findAll() { return personRepository.findAll(); }
     public Person findOneByUsername(String username) { return personRepository.findOneByUsername(username); }
@@ -68,15 +69,22 @@ public class PersonService implements UserDetailsService {
     public void changePassword(String oldPassword, String newPassword) {
 
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(currentUser.getName());
+
         //ovde ispisuje da je current user null iako sam ga set-ovao prilikom login-a
+
         String username = currentUser.getName();
+        System.out.println("change password: username:" + username);
+
+
 
         if (authenticationManager != null) {
             LOGGER.debug("Re-authenticating user '" + username + "' for password change request.");
 
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, oldPassword));
+            final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,oldPassword));
+            System.out.println("USAO U JEBENI IF");
+
         } else {
+            System.out.println("NISAM USAO U JEBENI IF");
             LOGGER.debug("No authentication manager set. can't change Password!");
 
             return;
@@ -90,6 +98,9 @@ public class PersonService implements UserDetailsService {
         // ne zelimo da u bazi cuvamo lozinke u plain text formatu
         user.setPassword(passwordEncoder.encode(newPassword));
         personRepository.save(user);
+        System.out.println("Posle save user-a");
+
+
 
     }
 

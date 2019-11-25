@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -44,18 +46,15 @@ public class PersonController {
             return  null;
     }*/
     @RequestMapping(consumes = "application/json",value ="/changePassword",method = RequestMethod.POST)
-    public ResponseEntity<PersonDTO> updatePassword(@RequestBody PersonDTO personDTO) {
-        long id = personDTO.getId();
-        Person person = personService.findOneById(id);
-        if(person != null){
-            personService.changePassword(person.getPassword(),personDTO.getPassword());
-            person = personService.findOneById(id);
-            person = personService.save(person,"ACTIVE","ROLE_USER");
-            return new ResponseEntity<>(new PersonDTO(person),HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(new PersonDTO(), HttpStatus.NO_CONTENT);
-        }
+    public ResponseEntity<?> updatePassword(@RequestBody PasswordChanger passwordChanger) {
+        System.out.println("U change password request: stari:" + passwordChanger.oldPassword + " novi: " +passwordChanger.newPassword);
+        personService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);
+
+        Map<String, String> result = new HashMap<>();
+        result.put("result", "success");
+        return ResponseEntity.accepted().body(result);
     }
+
     @PutMapping(consumes = "application/json", value = "/update")
     public ResponseEntity<PersonDTO> updateMedicalStaff(@RequestBody PersonDTO person){
         Person person1 = personService.findOneById(person.getId());
@@ -65,6 +64,10 @@ public class PersonController {
             return new ResponseEntity<>(new PersonDTO(person1),HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(new PersonDTO(),HttpStatus.BAD_REQUEST);
+    }
+    static class PasswordChanger {
+        public String oldPassword;
+        public String newPassword;
     }
     /*@PostMapping(consumes = "application/json",value = "/register")
     public ResponseEntity<Patient> Register(@RequestBody Patient patient) {

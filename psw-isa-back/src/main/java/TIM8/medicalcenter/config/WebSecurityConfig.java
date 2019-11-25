@@ -52,14 +52,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // komunikacija izmedju klijenta i servera je stateless
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
-                // za neautorizovane zahteve posalji 401 gresku
-                //.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
+                //za neautorizovane zahteve posalji 401 gresku
+                .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 
                 // svim korisnicima dopusti da pristupe putanjama /auth/**, /h2-console/** i /api/foo
-                //.authorizeRequests().antMatchers("/auth/**").permitAll().antMatchers("/h2-console/**").permitAll().antMatchers("/api/foo").permitAll()
+                .authorizeRequests().antMatchers("/auth/**").permitAll().antMatchers("/api/**").permitAll()
 
                 // svaki zahtev mora biti autorizovan
-                //.anyRequest().authenticated().and()
+                .anyRequest().authenticated().and()
 
                 .cors().and()
 
@@ -74,8 +74,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // TokenAuthenticationFilter ce ignorisati sve ispod navedene putanje
-        web.ignoring().antMatchers(HttpMethod.POST, "/**");
-        web.ignoring().antMatchers(HttpMethod.PUT, "/**");
+        //web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
+        //web.ignoring().antMatchers(HttpMethod.POST, "/auth/register");
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js");
     }
