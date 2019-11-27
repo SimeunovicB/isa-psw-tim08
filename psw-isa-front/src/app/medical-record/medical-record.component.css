@@ -1,0 +1,16 @@
+.prvi {
+    display:flex;
+    padding-top: 15px;
+}
+
+.slika {
+    width:40%;
+}
+
+img {
+    margin-left: 30%;
+}
+
+.podaci {
+    padding-top: 30px;
+}

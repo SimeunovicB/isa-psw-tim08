@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="prvi">
+    <div class="slika">
+        <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png" height="150"
+            width="150">
+    </div>
+    <div class="podaci">
+        Ime: {{ime}}<br>Prezime: {{prezime}}<br>JMBG: {{jmbg}}
+    </div>
+</div>
+<hr>
+<div class="drugi">
+    <table>
+        <tr><td>Visina:</td><td><input type="text" [(ngModel)]="visina" [disabled]="disabledp"></td></tr>
+        <tr><td>Tezina:</td><td><input type="text" [(ngModel)]="tezina" [disabled]="disabledp"></td></tr>
+        <tr><td>Alergije:</td><td><input type="text" [(ngModel)]="alergije" [disabled]="disabledp"></td></tr>
+        <tr><td><button (click)="izmeni()">Izmeni</button></td>
+        <td><button (click)="sacuvaj()">Sacuvaj izmene</button></td></tr>
+    </table>
+</div>
+<hr>
+<div class="treci">
+    Izvestaji o pregledima:
+</div>
