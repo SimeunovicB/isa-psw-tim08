@@ -2,8 +2,11 @@ package TIM8.medicalcenter.model.Users;
 
 import TIM8.medicalcenter.model.Clinic;
 import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.Vacation;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @DiscriminatorValue("N")
@@ -16,6 +19,9 @@ public class Nurse extends Person {
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Clinic clinic;
+
+    @OneToMany(mappedBy = "staff",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    Set<Vacation> vacations = new HashSet<>();
 
     public String getWorktimeStart() {
         return worktimeStart;
