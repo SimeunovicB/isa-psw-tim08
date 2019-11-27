@@ -12,6 +12,7 @@ import java.util.Set;
 
 @Entity
 public class Clinic {
+    //region column definitions
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,7 +47,9 @@ public class Clinic {
             inverseJoinColumns = @JoinColumn(name = "patient_id",referencedColumnName = "id")
     )
     private Set<Patient> patients = new HashSet<Patient>();
+    //endregion
 
+    //region getters and setters
     public Long getId() {
         return id;
     }
@@ -118,6 +121,8 @@ public class Clinic {
     public void setPatients(Set<Patient> patients) {
         this.patients = patients;
     }
+    //endregion
+
 
     public Clinic() {
     }

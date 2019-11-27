@@ -6,13 +6,16 @@ import java.util.Objects;
 @Entity
 public class Diagnosis {
 
+    //region column definitions
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name",unique = true,nullable = false)
     private String name;
+    //endregion
 
+    //region geters and setters
     public Long getId() {
         return id;
     }
@@ -28,6 +31,7 @@ public class Diagnosis {
     public void setName(String name) {
         this.name = name;
     }
+    //endregion
 
     public Diagnosis() {
     }

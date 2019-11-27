@@ -6,13 +6,16 @@ import java.util.Objects;
 @Entity
 public class Medicine {
 
+    //region column definitions
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name",nullable = false,unique = true)
     private String name;
+    //endregion
 
+    //region geters and setters
     public Long getId() {
         return id;
     }
@@ -28,6 +31,7 @@ public class Medicine {
     public void setName(String name) {
         this.name = name;
     }
+    //endregion
 
     public Medicine() {
     }
