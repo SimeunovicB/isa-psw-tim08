@@ -28,7 +28,8 @@
     "ngx-bootstrap": "^5.2.0",
     "ngx-cookie": "^4.1.2",
     "ngx-cookie-service": "^2.2.0",
-    "rxjs": "~6.4.0",
+    "rxjs": "~6.3.3",
+    "rxjs-compat": "^6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

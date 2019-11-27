@@ -3,6 +3,7 @@ package TIM8.medicalcenter.model.Users;
 import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.Clinic;
 import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.Vacation;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -22,6 +23,9 @@ public class Doctor extends Person {
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     Set<Appointment> appointments = new HashSet<>();
+
+    @OneToMany(mappedBy = "staff",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    Set<Vacation> vacations = new HashSet<>();
 
     public String getWorktimeStart() {
         return worktimeStart;
@@ -46,6 +50,8 @@ public class Doctor extends Person {
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
     }
+
+
 
 
 }

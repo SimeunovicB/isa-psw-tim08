@@ -12,7 +12,17 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 
+
+
+
 export class UserService {
+  
+  headers = new HttpHeaders({
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${this.cookieService.get('token')}`
+  });
+
 
   constructor(private http: Http,
     private cookieService: CookieService,
