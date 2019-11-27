@@ -28,6 +28,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FirstLoginComponent } from './first-login/first-login.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../Interceptors/TokenInterceptor';
+import { PendingVacationsComponent } from './pending-vacations/pending-vacations.component';
+import { MedicalRecordComponent } from './medical-record/medical-record.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,8 +39,9 @@ const appRoutes: Routes = [
   { path: 'pending', component: PendingUsersComponent },
   { path: 'patients', component: PatientsComponent },
   { path: 'firstLogin',component : FirstLoginComponent},
-  { path: '**', component: PageNotFoundComponent },
-  
+  { path: 'vacationrequest',component : PendingVacationsComponent},
+  { path: 'medicalrecord',component : MedicalRecordComponent},
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -57,7 +60,9 @@ const appRoutes: Routes = [
     HomeAdminComponent,
     PatientsComponent,
     PageNotFoundComponent,
-    FirstLoginComponent
+    FirstLoginComponent,
+    PendingVacationsComponent,
+    MedicalRecordComponent
   ],
   imports: [
     BrowserModule,

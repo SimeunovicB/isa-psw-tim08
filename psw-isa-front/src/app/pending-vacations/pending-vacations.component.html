@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ime</th>
+            <th scope="col">Prezime</th>
+            <th scope="col">Pocetak</th>
+            <th scope="col">Kraj</th>
+            <th scope="col">Prihvati</th>
+            <th scope="col">Odbij</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let request of pendingRequests; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{request.firstName}}</td>
+                <td>{{request.lastName}}</td>
+                <td>{{request.startDate}}</td>
+                <td>{{request.endDate}}</td>
+                <td><button type="button" class="btn btn-success" (click)="prihvati(request.id)">Prihvati</button></td>
+                <td><button type="button" class="btn btn-danger" (click)="odbij(request.id)">Odbij</button></td>
+        </ng-container>
+    </tbody>
+</table>
