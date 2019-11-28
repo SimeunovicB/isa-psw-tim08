@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormsModule, EmailValidator } from '@angular/forms';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 @Component({
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   address :string;
   jmbg : string;
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private router: Router,
     private userService: UserService) { }
 

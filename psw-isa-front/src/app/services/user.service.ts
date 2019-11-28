@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { HttpModule } from '@angular/http';
 import {HttpHeaders} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
@@ -7,6 +7,7 @@ import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt'
 import {Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class UserService {
   });
 
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private cookieService: CookieService,
     private router: Router
     
@@ -36,16 +37,16 @@ export class UserService {
       password: password
     })
     .pipe(
-      map((res : Response) => {
+      map((res : any) => {
         //console.log(response);
         //this.cookieService.set('loggedUser', JSON.stringify(response.json()));
         const helper = new JwtHelperService();
-        const token = JSON.stringify(res.json().accessToken);
+        const token = res.accessToken;
         console.log('token: ' + token)
         this.cookieService.set('token', token);  
         
 
-        const data = res.json();
+        const data = res;
         return data;
       }),
       catchError((err: Response) => {

@@ -30,10 +30,11 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../Interceptors/TokenInterceptor';
 import { PendingVacationsComponent } from './pending-vacations/pending-vacations.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
+import { PatientProfileComponent } from './patient-profile/patient-profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: PatientProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'pending', component: PendingUsersComponent },
@@ -62,23 +63,26 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     FirstLoginComponent,
     PendingVacationsComponent,
-    MedicalRecordComponent
+    MedicalRecordComponent,
+    PatientProfileComponent,
   ],
   imports: [
+    
     BrowserModule,
-    AppRoutingModule,
-    HttpModule,
-    FormsModule,
     HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
     MatTableModule,
     RouterModule.forRoot(appRoutes)
   ],
 
-  providers: [CookieService,{
+  providers: [
+    {
     provide : HTTP_INTERCEPTORS,
     useClass : TokenInterceptor,
     multi :true
-  }],
+  },
+  CookieService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpModule, Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt'
@@ -20,7 +20,7 @@ export class FirstLoginComponent implements OnInit {
   userMail : any;
   helper : any;
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private router: Router,
     private cookieService: CookieService,
     private modalService: NgbModal,
