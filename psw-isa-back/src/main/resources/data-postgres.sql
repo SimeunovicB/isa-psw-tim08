@@ -16,6 +16,11 @@ values('A','Dragan','Draganovic','dragan.draganovic@gmail.com','$2y$10$6/ExZPzok
 
 insert into clinic_patient(clinic_id,patient_id) values (1,1);
 
+insert into medical_record(height,weight,diopter,alergies,blood_type,patient_id) values (176,77,3.2,'polen mleko','O',1);
+
+insert into vacation(start_date,end_date,status,staff_id) values ('2020-06-01','2020-06-10','PENDING',2);
+insert into vacation(start_date,end_date,status,staff_id) values ('2020-07-01','2020-07-10','PENDING',3);
+
 INSERT INTO authority (name) VALUES ('ROLE_USER');
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
 

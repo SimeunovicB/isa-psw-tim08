@@ -17,7 +17,7 @@ public class Authority implements GrantedAuthority {
     @Column(name="name")
     String name;
 
-    
+    //region Getters and setters
     public String getAuthority() {
         return name;
     }
@@ -39,5 +39,6 @@ public class Authority implements GrantedAuthority {
     public void setId(Long id) {
         this.id = id;
     }
+    //endregion
 
 }

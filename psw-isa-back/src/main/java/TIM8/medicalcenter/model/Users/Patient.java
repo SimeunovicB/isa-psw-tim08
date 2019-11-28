@@ -1,12 +1,10 @@
 package TIM8.medicalcenter.model.Users;
 
 import TIM8.medicalcenter.model.Clinic;
+import TIM8.medicalcenter.model.MedicalRecord;
 import TIM8.medicalcenter.model.Users.Person;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +17,9 @@ public class Patient extends Person {
 
     @ManyToMany(mappedBy = "patients")
     Set<Clinic> clinics = new HashSet<Clinic>();
+
+    @OneToOne(mappedBy = "patient")
+    private MedicalRecord medicalRecord;
 
     public String getJmbg() {
         return jmbg;
@@ -36,5 +37,11 @@ public class Patient extends Person {
         this.clinics = clinics;
     }
 
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
 
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
+        this.medicalRecord = medicalRecord;
+    }
 }

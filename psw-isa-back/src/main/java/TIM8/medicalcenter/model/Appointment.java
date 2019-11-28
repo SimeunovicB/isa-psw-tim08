@@ -9,6 +9,7 @@ import java.util.Objects;
 @Entity
 public class Appointment {
 
+    //region column definitions
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +37,9 @@ public class Appointment {
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Doctor doctor;
+    //endregion
 
+    //region geters and setters
     public Long getId() {
         return id;
     }
@@ -120,4 +123,5 @@ public class Appointment {
         }
         return Objects.equals(id, a.id);
     }
+    //endregion
 }

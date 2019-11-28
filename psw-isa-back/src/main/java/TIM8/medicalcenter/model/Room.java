@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Entity
 public class Room {
+    //region column definitions
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +20,9 @@ public class Room {
 
     @OneToMany(mappedBy = "room",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Appointment> appointments = new HashSet<Appointment>();
+    //endregion
 
+    //region getters and setters
     public Long getId() {
         return id;
     }
@@ -43,6 +46,7 @@ public class Room {
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
     }
+    //endregion
 
     public Set<Appointment> getAppointments() {
         return appointments;

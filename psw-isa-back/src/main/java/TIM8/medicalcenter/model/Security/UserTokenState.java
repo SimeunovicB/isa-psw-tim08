@@ -4,6 +4,7 @@ public class UserTokenState {
     private String accessToken;
     private Long expiresIn;
 
+
     public UserTokenState() {
         this.accessToken = null;
         this.expiresIn = null;
@@ -13,7 +14,7 @@ public class UserTokenState {
         this.accessToken = accessToken;
         this.expiresIn = expiresIn;
     }
-
+    //region getters and setters
     public String getAccessToken() {
         return accessToken;
     }
@@ -29,4 +30,5 @@ public class UserTokenState {
     public void setExpiresIn(Long expiresIn) {
         this.expiresIn = expiresIn;
     }
+    //endregion
 }
