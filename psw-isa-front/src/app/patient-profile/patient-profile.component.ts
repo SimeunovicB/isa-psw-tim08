@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Inject} from '@angular/core';
 
 import { Router } from '@angular/router';
@@ -20,7 +20,7 @@ export class PatientProfileComponent implements OnInit {
   prezime: string;
   adresa: string;
   password: string;
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private router: Router,
     private cookieService: CookieService,
     private modalService: NgbModal,
