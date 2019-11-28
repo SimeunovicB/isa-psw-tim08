@@ -73,7 +73,6 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     MatTableModule,
-    HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
 
