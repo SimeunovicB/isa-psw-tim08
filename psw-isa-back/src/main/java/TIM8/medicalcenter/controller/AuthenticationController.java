@@ -75,7 +75,7 @@ public class AuthenticationController {
         Person person1 = personService.save(patient,"PENDING","ROLE_USER");
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/user/{userId}").buildAndExpand(person1.getId()).toUri());
-        return new ResponseEntity<Person>(person1, HttpStatus.CREATED);
+        return new ResponseEntity<>(new PersonDTO(person1), HttpStatus.CREATED);
     }
     @RequestMapping(value = "/refresh", method = RequestMethod.POST)
     public ResponseEntity<?> refreshAuthenticationToken(HttpServletRequest request) {

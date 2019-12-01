@@ -16,5 +16,5 @@ public class VacationService {
     private VacationRepository vacationRepository;
 
     //public List<Vacation> findByStatus(String status) { return vacationRepository.findByStatus(status); }
-    public List<VacationRequestsDTO> findByStatusWithDoctorInfo(String status) { return vacationRepository.findByStatusWithDoctorInfo(status);}
+    //public List<VacationRequestsDTO> findByStatusWithDoctorInfo(String status) { return vacationRepository.findByStatusWithDoctorInfo(status);}
 }

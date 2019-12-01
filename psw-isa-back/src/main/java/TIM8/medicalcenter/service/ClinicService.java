@@ -19,4 +19,6 @@ public class ClinicService {
     public Clinic findOneById(Long id){
         return clinicRepository.findOneById(id);
     }
+    public Clinic findOneByName(String name){return clinicRepository.findOneByName(name); }
+    public Clinic save(Clinic c) {return clinicRepository.save(c);}
 }
