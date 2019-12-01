@@ -13,7 +13,6 @@ values('N','Stefan','Stefanovic','stefan.stefanovic@gmail.com','$2y$10$6/ExZPzok
 insert into person(type,first_name,last_name,username,password,address,status,enabled)
 values('A','Dragan','Draganovic','dragan.draganovic@gmail.com','$2y$10$6/ExZPzokaxKh91XVMiSNOm/gsVJe8YkkXL.Kj3jivRJpGzagVnia','dr ribara 1','ACTIVE',true);
 
-
 insert into clinic_patient(clinic_id,patient_id) values (1,1);
 
 insert into medical_record(height,weight,diopter,alergies,blood_type,patient_id) values (176,77,3.2,'polen mleko','O',1);
@@ -21,13 +20,9 @@ insert into medical_record(height,weight,diopter,alergies,blood_type,patient_id)
 insert into vacation(start_date,end_date,status,staff_id) values ('2020-06-01','2020-06-10','PENDING',2);
 insert into vacation(start_date,end_date,status,staff_id) values ('2020-07-01','2020-07-10','PENDING',3);
 
-insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id)
- values ('2020-06-01',0,0,0,'','Hirurg',2,null );
- insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id)
- values ('2020-07-01',0,0,0,'','Hirurg',2,null );
- insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id)
- values ('2020-07-01',0,0,0,'','Pedijatar',2,null );
-
+insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id) values ('2020-06-01',0,0,0,'','Hirurg',2,null );
+insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id) values ('2020-07-01',0,0,0,'','Hirurg',2,null );
+insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id) values ('2020-07-01',0,0,0,'','Pedijatar',2,null );
 
 INSERT INTO authority (name) VALUES ('ROLE_USER');
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');

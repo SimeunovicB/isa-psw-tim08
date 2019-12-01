@@ -1,16 +1,15 @@
 package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.ClinicDTO;
-import TIM8.medicalcenter.dto.PatientDTO;
+import TIM8.medicalcenter.exception.ResourceConflictException;
 import TIM8.medicalcenter.model.Clinic;
+import TIM8.medicalcenter.model.Users.Patient;
 import TIM8.medicalcenter.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,15 @@ public class ClinicController {
             allClinics.add(new ClinicDTO(c));
         }
         return new ResponseEntity<>(allClinics,HttpStatus.OK);
+    }
+    @RequestMapping(value="/addClinic",consumes = "application/json",method = RequestMethod.POST)
+    public ResponseEntity<?> addClinic(@RequestBody Clinic clinic){
+        Clinic clinic1 = clinicService.findOneByName(clinic.getName());
+        if(clinic1 != null){
+            throw new ResourceConflictException(clinic1.getId(), "Clinic already exists");
+        }
+        clinicService.save(clinic);
+        return new ResponseEntity<>(new ClinicDTO(clinic), HttpStatus.CREATED);
     }
 
 }
