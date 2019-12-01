@@ -1,6 +1,7 @@
 package TIM8.medicalcenter.service;
 
 import TIM8.medicalcenter.model.Security.Authority;
+import TIM8.medicalcenter.model.Users.Patient;
 import TIM8.medicalcenter.model.Users.Person;
 import TIM8.medicalcenter.repository.PersonRepository;
 import org.apache.commons.logging.Log;
@@ -37,8 +38,11 @@ public class PersonService implements UserDetailsService {
 
     public List<Person> findAll() { return personRepository.findAll(); }
     public Person findOneByUsername(String username) { return personRepository.findOneByUsername(username); }
+
     public Person findOneById(Long id){ return personRepository.findOneById(id);}
     public List<Person> findByType(String type) { return personRepository.findByDiscriminatorValue(type);}
+    public List<Patient> findPatients() { return personRepository.findPatients();}
+
     public int updatePersonStatus(String status,Long id) {return personRepository.updateUserStatus(status,id);}
     public int updatePassword(String password,Long id) {return personRepository.updatePassword(password,id);}
     public int updateUser(String firstName,String lastName,String address,long id) { return personRepository.updateUser(firstName,lastName,address,id); }

@@ -20,6 +20,8 @@ public class PatientController {
     @Autowired
     private PersonService personService;
 
+
+   
     @GetMapping
     public ResponseEntity<List<PatientDTO>> getPatients() {
         List<Person> patientList = personService.findByType("P");

@@ -21,6 +21,14 @@ insert into medical_record(height,weight,diopter,alergies,blood_type,patient_id)
 insert into vacation(start_date,end_date,status,staff_id) values ('2020-06-01','2020-06-10','PENDING',2);
 insert into vacation(start_date,end_date,status,staff_id) values ('2020-07-01','2020-07-10','PENDING',3);
 
+insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id)
+ values ('2020-06-01',0,0,0,'','Hirurg',2,null );
+ insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id)
+ values ('2020-07-01',0,0,0,'','Hirurg',2,null );
+ insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id)
+ values ('2020-07-01',0,0,0,'','Pedijatar',2,null );
+
+
 INSERT INTO authority (name) VALUES ('ROLE_USER');
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
 
