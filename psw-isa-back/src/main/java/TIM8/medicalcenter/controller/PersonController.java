@@ -31,7 +31,7 @@ public class PersonController {
         Person personRet = personService.findOneByUsername(person.getUsername());
         if(personRet==null)
             return null;
-        return new ResponseEntity<>(new PersonDTO(personRet),HttpStatus.OK);
+        return new ResponseEntity<PersonDTO>(new PersonDTO(personRet),HttpStatus.OK);
 
     }
     /*@RequestMapping(consumes = "application/json",value = "/login",method = RequestMethod.POST)
