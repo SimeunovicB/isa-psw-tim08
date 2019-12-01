@@ -18,12 +18,7 @@ public class VacationController {
     @Autowired
     private VacationService vacationService;
 
-    @RequestMapping(consumes = "application/json",value = "/pendingVacations",method = RequestMethod.GET)
-    public ResponseEntity<?> getPending(){
-        //List<VacationRequestsDTO> vacationList = vacationService.findByStatusWithDoctorInfo("PENDING");
-        ArrayList<Person> personList
-        return new ResponseEntity<>(vacationList, HttpStatus.OK);
-    }
+
 
 
 

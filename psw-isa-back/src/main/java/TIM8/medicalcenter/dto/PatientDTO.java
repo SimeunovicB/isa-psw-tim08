@@ -8,12 +8,40 @@ public class PatientDTO extends PersonDTO {
     private String jmbg;
 
     public PatientDTO() {
-        super();
     }
-    public PatientDTO(Long id, String firstName, String lastName, String address, String password, String email,String jmbg,String status){
-        super(id,firstName,lastName,address,password,email,status);
+
+    public PatientDTO(String jmbg, String name, String lastname) {
         this.jmbg = jmbg;
+        this.name = name;
+        this.lastname = lastname;
     }
+
+    public PatientDTO(Long id, String firstName, String lastName, String address, String password, String username, String status, String jmbg, String name, String lastname) {
+        super(id, firstName, lastName, address, password, username, status);
+        this.jmbg = jmbg;
+        this.name = name;
+        this.lastname = lastname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    private String name;
+    private String lastname;
+
     public PatientDTO(Patient p){
         super((Person) p);
         this.jmbg = p.getJmbg();

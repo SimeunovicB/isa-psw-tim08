@@ -35,6 +35,10 @@ public class Appointment {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Room room;
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Doctor doctor;
     //endregion
