@@ -23,7 +23,7 @@ public class PatientController {
 
    
     @GetMapping
-    public ResponseEntity<List<PatientDTO>> getPatients() {
+    public ResponseEntity<List<PatientDTO>> getPendingPatients() {
         List<Person> patientList = personService.findByType("P");
         List<PatientDTO> patients = new ArrayList<>();
         for(Person p : patientList){

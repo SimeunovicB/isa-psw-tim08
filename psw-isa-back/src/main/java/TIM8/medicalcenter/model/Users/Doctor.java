@@ -50,8 +50,4 @@ public class Doctor extends Person {
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
     }
-
-
-
-
 }

@@ -44,7 +44,6 @@ public class PersonController {
     }*/
     @RequestMapping(consumes = "application/json",value ="/changePassword",method = RequestMethod.POST)
     public ResponseEntity<?> updatePassword(@RequestBody PasswordChanger passwordChanger) {
-        System.out.println("U change password request: stari:" + passwordChanger.oldPassword + " novi: " +passwordChanger.newPassword);
         personService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);
 
         Map<String, String> result = new HashMap<>();
