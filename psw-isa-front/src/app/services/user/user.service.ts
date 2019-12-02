@@ -20,7 +20,6 @@ export class UserService {
   constructor(private http: HttpClient,
     private cookieService: CookieService,
     private router: Router
-
   ) { }
 
   postUser(email: string, password: string) {
