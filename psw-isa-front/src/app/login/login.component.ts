@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/changePassword']);
         }
         else{
+          
           this.router.navigate(['/']);
         }
         
