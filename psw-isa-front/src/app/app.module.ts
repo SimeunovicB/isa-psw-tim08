@@ -34,6 +34,8 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 import { HomeClinicCenterAdminComponent } from './home/home-clinic-center-admin/home-clinic-center-admin.component';
 import { AddClinicComponent } from './add-clinic/add-clinic.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
+import { RegisterClinicCentreAdminComponent } from './register-clinic-centre-admin/register-clinic-centre-admin.component';
+import { CodebookComponent } from './codebook/codebook.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -47,6 +49,8 @@ const appRoutes: Routes = [
   { path: 'medicalrecord',component : MedicalRecordComponent},
   { path: 'dodajKliniku',component : AddClinicComponent},
   { path: 'dodajAdministratoraKlinike',component : RegisterAdminComponent},
+  { path: 'dodajAdministratoraKlinickogCentra', component : RegisterClinicCentreAdminComponent},
+  { path : 'dodavanjeUSifarnik',component : CodebookComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -73,6 +77,8 @@ const appRoutes: Routes = [
     HomeClinicCenterAdminComponent,
     AddClinicComponent,
     RegisterAdminComponent,
+    RegisterClinicCentreAdminComponent,
+    CodebookComponent,
   ],
   imports: [
     

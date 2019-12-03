@@ -141,7 +141,7 @@ export class UserService {
   }
 
   acceptUser(id) {
-    return this.http.put("http://localhost:9090/api/administrator/approveRegistration/" + id, {
+    return this.http.post("http://localhost:9090/api/administrator/approveRegistration/" + id, {
       id: id,
     })
       .pipe(
@@ -150,13 +150,13 @@ export class UserService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err.text);
         })
       );
   }
 
   denyUser(id) {
-    return this.http.put("http://localhost:9090/api/administrator/rejectRegistration/" + id, {
+    return this.http.post("http://localhost:9090/api/administrator/rejectRegistration/" + id, {
       id: id,
     })
       .pipe(
@@ -165,7 +165,7 @@ export class UserService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err.text);
         })
       );
   }

@@ -40,4 +40,26 @@ export class AdminService {
         })
       )
   }
+  registerClinicCentreAdmin(
+    firstname: string,
+    lastname: string,
+    address: string,
+    username: string,
+    ) {
+    return this.http.post("http://localhost:9090/api/administrator/registerClinicCentreAdmin", {
+      firstName: firstname,
+      lastName: lastname,
+      address: address,
+      username: username,
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      )
+  }
 }
