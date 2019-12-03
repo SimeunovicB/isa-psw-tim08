@@ -1,3 +1,7 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
+-- noinspection SqlDialectInspectionForFile
+
 insert into clinic(name,address,description) values('clinic1','dr klinike 1','very clininac clinic hoho');
 
 --passwordi su 123
@@ -10,8 +14,8 @@ values('D','Marko','Markovic','marko.markovic@gmail.com','$2y$10$6/ExZPzokaxKh91
 insert into person(type,first_name,last_name,username,password,address,status,worktime_start,worktime_end,clinic_id,enabled)
 values('N','Stefan','Stefanovic','stefan.stefanovic@gmail.com','$2y$10$6/ExZPzokaxKh91XVMiSNOm/gsVJe8YkkXL.Kj3jivRJpGzagVnia','dr ribara 1','ACTIVE','8am','4pm',1,true);
 
-insert into person(type,first_name,last_name,username,password,address,status,enabled)
-values('A','Dragan','Draganovic','dragan.draganovic@gmail.com','$2y$10$6/ExZPzokaxKh91XVMiSNOm/gsVJe8YkkXL.Kj3jivRJpGzagVnia','dr ribara 1','ACTIVE',true);
+insert into person(type,first_name,last_name,username,password,address,status,enabled,clinic_id)
+values('A','Dragan','Draganovic','dragan.draganovic@gmail.com','$2y$10$6/ExZPzokaxKh91XVMiSNOm/gsVJe8YkkXL.Kj3jivRJpGzagVnia','dr ribara 1','ACTIVE',true,1);
 
 insert into person(type,first_name,last_name,username,password,address,status,enabled)
 values('CCA','Nikola','Nikolic','nikola.nikolic@gmail.com','$2y$10$6/ExZPzokaxKh91XVMiSNOm/gsVJe8YkkXL.Kj3jivRJpGzagVnia','dr ribara 1','ACTIVE',true);

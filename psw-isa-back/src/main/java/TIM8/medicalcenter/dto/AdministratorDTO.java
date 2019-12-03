@@ -1,6 +1,7 @@
 package TIM8.medicalcenter.dto;
 
 import TIM8.medicalcenter.model.Users.Administrator;
+import TIM8.medicalcenter.model.Users.ClinicsAdministrator;
 
 public class AdministratorDTO {
     private Long id;
@@ -26,6 +27,9 @@ public class AdministratorDTO {
         this.clinic_id = clinic_id;
     }
     public AdministratorDTO(Administrator a){
+        this(a.getId(),a.getFirstName(),a.getLastName(),a.getAddress(),a.getPassword(),a.getUsername(),a.getStatus(),a.getId());
+    }
+    public AdministratorDTO(ClinicsAdministrator a){
         this(a.getId(),a.getFirstName(),a.getLastName(),a.getAddress(),a.getPassword(),a.getUsername(),a.getStatus(),a.getId());
     }
 

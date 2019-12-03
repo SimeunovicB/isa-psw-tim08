@@ -3,15 +3,12 @@ package TIM8.medicalcenter.controller;
 
 
 import TIM8.medicalcenter.dto.PersonDTO;
-
-import TIM8.medicalcenter.model.Users.Patient;
 import TIM8.medicalcenter.model.Users.Person;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -78,4 +75,6 @@ public class PersonController {
         return new ResponseEntity<>(patient, HttpStatus.OK);
 
     }*/
+
+
 }
