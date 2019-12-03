@@ -4,6 +4,7 @@ import TIM8.medicalcenter.dto.AdministratorDTO;
 import TIM8.medicalcenter.dto.PersonDTO;
 import TIM8.medicalcenter.exception.ResourceConflictException;
 import TIM8.medicalcenter.model.Users.Administrator;
+import TIM8.medicalcenter.model.Users.ClinicsAdministrator;
 import TIM8.medicalcenter.model.Users.Person;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,17 @@ public class AdministratorController {
         return new ResponseEntity<>(new AdministratorDTO(person1), HttpStatus.CREATED);
 
     }
+    @RequestMapping(consumes = "application/json",value = "/registerClinicCentreAdmin",method = RequestMethod.POST)
+    public ResponseEntity<?> registerClinicCentreAdmin(@RequestBody AdministratorDTO administratorDTO){
+        Person person= personService.findOneByUsername(administratorDTO.getUsername());
+        if(person != null){
+            throw new ResourceConflictException(administratorDTO.getId(), "Username already exists");
+        }
+        ClinicsAdministrator person1 = (ClinicsAdministrator) personService.saveClinicCentreAdministrator(administratorDTO,"PENDING","ROLE_ADMIN");
+        return new ResponseEntity<>(new AdministratorDTO(person1), HttpStatus.CREATED);
+
+    }
+
 
 
 

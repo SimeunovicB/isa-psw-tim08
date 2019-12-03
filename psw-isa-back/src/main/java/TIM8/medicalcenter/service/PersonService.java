@@ -3,6 +3,7 @@ package TIM8.medicalcenter.service;
 import TIM8.medicalcenter.dto.AdministratorDTO;
 import TIM8.medicalcenter.model.Security.Authority;
 import TIM8.medicalcenter.model.Users.Administrator;
+import TIM8.medicalcenter.model.Users.ClinicsAdministrator;
 import TIM8.medicalcenter.model.Users.Patient;
 import TIM8.medicalcenter.model.Users.Person;
 import TIM8.medicalcenter.repository.ClinicRepository;
@@ -77,7 +78,7 @@ public class PersonService implements UserDetailsService {
         return personRepository.save(person);
 
     }
-    public Person saveAdministrator(AdministratorDTO a,String status,String role){
+    public Person saveAdministrator(AdministratorDTO a, String status, String role){
         Administrator admin = new Administrator();
         admin.setFirstName(a.getFirstName());
         admin.setLastName(a.getLastName());
@@ -85,6 +86,21 @@ public class PersonService implements UserDetailsService {
         admin.setPassword(passwordEncoder.encode("123"));
         admin.setAddress(a.getAddress());
         admin.setClinic(clinicService.findOneById(a.getClinic_id()));
+        admin.setStatus(status);
+        List<Authority> auth =authorityService.findByname(role);
+        admin.setAuthorities(auth);
+        admin.setEnabled(true);
+
+        return personRepository.save(admin);
+
+    }
+    public Person saveClinicCentreAdministrator(AdministratorDTO a,String status,String role){
+        ClinicsAdministrator admin = new ClinicsAdministrator();
+        admin.setFirstName(a.getFirstName());
+        admin.setLastName(a.getLastName());
+        admin.setUsername(a.getUsername());
+        admin.setPassword(passwordEncoder.encode("123"));
+        admin.setAddress(a.getAddress());
         admin.setStatus(status);
         List<Authority> auth =authorityService.findByname(role);
         admin.setAuthorities(auth);
