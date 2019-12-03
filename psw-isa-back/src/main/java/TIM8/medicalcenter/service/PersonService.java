@@ -34,7 +34,6 @@ public class PersonService implements UserDetailsService {
     @Autowired
     private ClinicService clinicService;
 
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 

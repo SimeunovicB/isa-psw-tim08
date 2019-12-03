@@ -24,12 +24,12 @@ public class AdministratorController {
     @Autowired
     PersonService personService;
 
-    @PutMapping(consumes = "application/json",value ="/approveRegistration/{id}")
+    @PostMapping(consumes = "application/json",value ="/approveRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusApproved(@PathVariable Long id) {
 
         Person person = personService.findOneById(id);
         if(person != null && person.getDecriminatorValue().equals("P") && person.getStatus().equalsIgnoreCase("PENDING")){
-            personService.updatePersonStatus("Active",person.getId());
+            personService.updatePersonStatus("ACTIVE",person.getId());
             //TODO: slanje maila korisniku
             return new ResponseEntity<>(new PersonDTO(person),HttpStatus.OK);
         }else{
@@ -39,11 +39,11 @@ public class AdministratorController {
 
 
 
-    @PutMapping(consumes = "application/json",value = "/rejectRegistration/{id}")
+    @PostMapping(consumes = "application/json",value = "/rejectRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusRejected(@PathVariable Long id){
         Person person = personService.findOneById(id);
         if(person != null && person.getDecriminatorValue().equals("P") && person.getStatus().equalsIgnoreCase("PENDING")){
-            personService.updatePersonStatus("Rejected",person.getId());
+            personService.updatePersonStatus("REJECTED",person.getId());
             return new ResponseEntity<>(new PersonDTO(person),HttpStatus.OK);
         }else{
             return new ResponseEntity<>(new PersonDTO(),HttpStatus.NO_CONTENT);
