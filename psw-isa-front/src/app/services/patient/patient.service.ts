@@ -23,4 +23,17 @@ export class PatientService {
       })
     )
   }
+
+  searchPatients(ime:string,prezime:string,jmbg:string) {
+    return this.http.get("http://localhost:9090/api/patient/findPatients?name="+ime+"&lastname="+prezime+"&jmbg="+jmbg)
+    .pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )
+  }
 }
