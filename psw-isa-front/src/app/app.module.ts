@@ -7,6 +7,7 @@ import { MatTableModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -37,6 +38,7 @@ import { RegisterAdminComponent } from './register-admin/register-admin.componen
 import { RegisterClinicCentreAdminComponent } from './register-clinic-centre-admin/register-clinic-centre-admin.component';
 import { CodebookComponent } from './codebook/codebook.component';
 import { SearchPatientsComponent } from './search-patients/search-patients.component';
+import { SearchClinicsComponent } from './search-clinics/search-clinics.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -45,14 +47,15 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'pending', component: PendingUsersComponent },
   { path: 'patients', component: PatientsComponent },
-  { path: 'changePassword',component : ChangePassword},
-  { path: 'vacationrequest',component : PendingVacationsComponent},
-  { path: 'medicalrecord',component : MedicalRecordComponent},
-  { path: 'searchpatients',component : SearchPatientsComponent},
-  { path: 'dodajKliniku',component : AddClinicComponent},
-  { path: 'dodajAdministratoraKlinike',component : RegisterAdminComponent},
-  { path: 'dodajAdministratoraKlinickogCentra', component : RegisterClinicCentreAdminComponent},
-  { path: 'dodavanjeUSifarnik',component : CodebookComponent},
+  { path: 'changePassword', component: ChangePassword},
+  { path: 'vacationrequest', component: PendingVacationsComponent},
+  { path: 'medicalrecord', component: MedicalRecordComponent},
+  { path: 'searchpatients', component: SearchPatientsComponent},
+  { path: 'searchclinics', component: SearchClinicsComponent},
+  { path: 'dodajKliniku', component: AddClinicComponent},
+  { path: 'dodajAdministratoraKlinike', component: RegisterAdminComponent},
+  { path: 'dodajAdministratoraKlinickogCentra', component: RegisterClinicCentreAdminComponent},
+  { path: 'dodavanjeUSifarnik', component: CodebookComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -81,15 +84,16 @@ const appRoutes: Routes = [
     RegisterAdminComponent,
     RegisterClinicCentreAdminComponent,
     CodebookComponent,
-    SearchPatientsComponent
+    SearchPatientsComponent,
+    SearchClinicsComponent
   ],
-  imports: [
-    
+  imports: [ 
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
     MatTableModule,
+    NgbModule,
     RouterModule.forRoot(appRoutes)
   ],
 
