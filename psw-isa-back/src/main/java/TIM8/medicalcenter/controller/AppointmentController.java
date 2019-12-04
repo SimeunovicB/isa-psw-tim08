@@ -3,6 +3,7 @@ package TIM8.medicalcenter.controller;
 import TIM8.medicalcenter.dto.AppointmentDTO;
 import TIM8.medicalcenter.dto.ClinicDTO;
 import TIM8.medicalcenter.dto.PatientDTO;
+import TIM8.medicalcenter.dto.PersonDTO;
 import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.Clinic;
 import TIM8.medicalcenter.model.Users.Patient;
@@ -26,7 +27,7 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @RequestMapping(consumes = "application/json",value="/findClinic",method = RequestMethod.GET)
-    public ResponseEntity<?> findPatient(@RequestParam String date, @RequestParam String type){
+    public ResponseEntity<?> findClinics(@RequestParam String date, @RequestParam String type){
         System.out.println(date+" "+type);
         SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date1=new Date();
@@ -51,5 +52,30 @@ public class AppointmentController {
         }
 
         return new ResponseEntity<>(clinics, HttpStatus.OK);
+    }
+    @RequestMapping(consumes = "application/json",value="/findClinic/doctors",method = RequestMethod.GET)
+    public ResponseEntity<?> findDoctors(@RequestParam String clinicName,@RequestParam String date, @RequestParam String type){
+        System.out.println(date+" "+type);
+        SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date1=new Date();
+        try {
+            date1 = formatter6.parse(date);
+        }
+        catch(Exception e) {
+            new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
+        List<Appointment> appointments = appointmentService.findAppointments(date1,type);
+        List<AppointmentDTO> apps = new ArrayList<>();
+        List<PersonDTO> doctors = new ArrayList<>();
+        for (Appointment a:appointments) {
+            apps.add(new AppointmentDTO(a));
+        }
+        for (AppointmentDTO a:apps) {
+            if(doctors.contains(a.getDoctor().getClinic()) || !a.getDoctor().getClinic().getName().equals(clinicName))
+                continue;
+            doctors.add(new PersonDTO(a.getDoctor()));
+        }
+
+        return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
 }
