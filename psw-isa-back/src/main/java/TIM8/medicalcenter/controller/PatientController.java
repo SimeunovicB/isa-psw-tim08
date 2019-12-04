@@ -47,7 +47,6 @@ public class PatientController {
     public ResponseEntity<?> findPatient(@RequestParam String name, @RequestParam String lastname,@RequestParam String jmbg){
         List<Patient> patientList = personService.findPatients();
         List<PatientDTO> patients = new ArrayList<>();
-        System.out.println(name);
         for(Patient p : patientList){
             if(!p.getJmbg().equals(jmbg)&&!jmbg.equals(""))continue;
             if(!p.getLastName().equals(lastname)&&!lastname.equals(""))continue;
