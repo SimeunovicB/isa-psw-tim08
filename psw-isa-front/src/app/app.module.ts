@@ -81,7 +81,7 @@ const appRoutes: Routes = [
     RegisterAdminComponent,
     RegisterClinicCentreAdminComponent,
     CodebookComponent,
-    SearchPatientsComponent,
+    SearchPatientsComponent
   ],
   imports: [
     

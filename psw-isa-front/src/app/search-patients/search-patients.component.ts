@@ -20,18 +20,14 @@ export class SearchPatientsComponent implements OnInit {
     private patientService: PatientService) { }
 
   ngOnInit() {
-    /*this.activeRoute.queryParams.subscribe(queryParams => {
-      if (this.router.url.includes('searchp')) {
-        this.activeRoute.queryParams.pipe(
-          filter(params => params.name)
-          .subscribe(params => {
-            console.log(params); // {order: "popular"}
-
-            this.order = params.order;
-            console.log(this.order); // popular
-          }));
-      }
-    });*/
+    this.patientService.searchPatients("", "", "")
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.patients = Object.assign([], (data));
+        }
+      )
+  
   }
 
   onSubmit(form: NgForm) {

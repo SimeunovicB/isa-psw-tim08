@@ -8,6 +8,7 @@ import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.Clinic;
 import TIM8.medicalcenter.model.Users.Patient;
 import TIM8.medicalcenter.service.AppointmentService;
+import TIM8.medicalcenter.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,22 +26,27 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
+    @Autowired
+    private ClinicService clinicService;
 
-    @RequestMapping(consumes = "application/json",value="/findClinic",method = RequestMethod.GET)
+    @GetMapping(value="/findClinic")
     public ResponseEntity<?> findClinics(@RequestParam String date, @RequestParam String type){
-        System.out.println(date+" "+type);
+        List<ClinicDTO> clinics = new ArrayList<>();
+        if(date.equals("")&&type.equals("")){
+            List<Clinic> clinic = clinicService.findAll();
+            return new ResponseEntity<>(clinic, HttpStatus.OK);
+        }
         SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date1=new Date();
         try {
             date1 = formatter6.parse(date);
         }
         catch(Exception e) {
-            System.out.println('a');
+            return null;
         }
         List<Appointment> appointments = appointmentService.findAppointments(date1,type);
         System.out.println(appointments);
         List<AppointmentDTO> apps = new ArrayList<>();
-        List<ClinicDTO> clinics = new ArrayList<>();
         for (Appointment a:appointments) {
             apps.add(new AppointmentDTO(a));
 
