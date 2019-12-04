@@ -34,8 +34,12 @@ public class AppointmentController {
         List<ClinicDTO> clinics = new ArrayList<>();
         if(date.equals("")&&type.equals("")){
             List<Clinic> clinic = clinicService.findAll();
-            return new ResponseEntity<>(clinic, HttpStatus.OK);
+            for (Clinic c:clinic) {
+                clinics.add(new ClinicDTO(c));
+            }
+            return new ResponseEntity<>(clinics, HttpStatus.OK);
         }
+
         SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date1=new Date();
         try {
@@ -59,9 +63,9 @@ public class AppointmentController {
 
         return new ResponseEntity<>(clinics, HttpStatus.OK);
     }
-    @RequestMapping(consumes = "application/json",value="/findClinic/doctors",method = RequestMethod.GET)
+    @RequestMapping(value="/findClinic/doctors",method = RequestMethod.GET)
     public ResponseEntity<?> findDoctors(@RequestParam String clinicName,@RequestParam String date, @RequestParam String type){
-        System.out.println(date+" "+type);
+        System.out.println(clinicName);
         SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date1=new Date();
         try {
@@ -77,6 +81,7 @@ public class AppointmentController {
             apps.add(new AppointmentDTO(a));
         }
         for (AppointmentDTO a:apps) {
+            System.out.println(a.getDoctor().getClinic().getName());
             if(doctors.contains(a.getDoctor().getClinic()) || !a.getDoctor().getClinic().getName().equals(clinicName))
                 continue;
             doctors.add(new PersonDTO(a.getDoctor()));
