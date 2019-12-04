@@ -7,6 +7,7 @@ import { throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt'
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { SplitInterpolation } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,31 @@ export class ClinicService {
           return throwError(JSON.parse(err.text));
         })
       )
+  }
+
+  searchClinics(date:string,type:string) {
+    return this.http.get("http://localhost:9090/api/appointment/findClinic?date="+date+"&type="+type)
+    .pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )
+  }
+
+  getDoctors(clinicname:string, date:string, type:string) {
+    return this.http.get("http://localhost:9090/api/appointment/findClinic/doctors?clinicName="+clinicname+"&date="+date+"&type="+type)
+    .pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )
   }
 }

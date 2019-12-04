@@ -27,7 +27,7 @@ export class SearchPatientsComponent implements OnInit {
           this.patients = Object.assign([], (data));
         }
       )
-  
+
   }
 
   onSubmit(form: NgForm) {
