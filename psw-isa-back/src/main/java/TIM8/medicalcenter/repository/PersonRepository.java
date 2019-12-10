@@ -1,7 +1,7 @@
 package TIM8.medicalcenter.repository;
 
-import TIM8.medicalcenter.model.Users.Patient;
-import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.users.Patient;
+import TIM8.medicalcenter.model.users.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

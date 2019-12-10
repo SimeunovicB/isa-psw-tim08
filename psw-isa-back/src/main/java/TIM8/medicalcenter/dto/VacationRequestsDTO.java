@@ -1,10 +1,14 @@
 package TIM8.medicalcenter.dto;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
 
+@Getter
+@Setter
 public class VacationRequestsDTO {
     private Long id;
     private Date startDate;

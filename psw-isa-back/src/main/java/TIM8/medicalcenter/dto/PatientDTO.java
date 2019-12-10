@@ -1,11 +1,18 @@
 package TIM8.medicalcenter.dto;
 
 
-import TIM8.medicalcenter.model.Users.Patient;
-import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.users.Patient;
+import TIM8.medicalcenter.model.users.Person;
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Getter
+@Setter
 public class PatientDTO extends PersonDTO {
     private String jmbg;
+    private String name;
+    private String lastname;
 
     public PatientDTO() {
     }
@@ -23,34 +30,9 @@ public class PatientDTO extends PersonDTO {
         this.lastname = lastname;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    private String name;
-    private String lastname;
-
     public PatientDTO(Patient p){
         super((Person) p);
         this.jmbg = p.getJmbg();
     }
-    public String getJmbg() {
-        return jmbg;
-    }
 
-    public void setJmbg(String jmbg) {
-        this.jmbg = jmbg;
-    }
 }

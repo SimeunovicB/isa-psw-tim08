@@ -1,7 +1,11 @@
 package TIM8.medicalcenter.dto;
 
-import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.users.Person;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class PersonDTO {
 
     private Long id;
@@ -28,63 +32,6 @@ public class PersonDTO {
     public PersonDTO(Person p){
         this(p.getId(),p.getFirstName(),p.getLastName(),p.getAddress(),p.getPassword(),p.getUsername(),p.getStatus());
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-     public void setEmail(String username) {
-        this.username = username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return "PersonDTO{" +

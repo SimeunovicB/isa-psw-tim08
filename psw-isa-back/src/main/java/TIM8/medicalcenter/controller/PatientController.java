@@ -1,8 +1,8 @@
 package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.PatientDTO;
-import TIM8.medicalcenter.model.Users.Patient;
-import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.users.Patient;
+import TIM8.medicalcenter.model.users.Person;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +51,7 @@ public class PatientController {
             if(!p.getJmbg().equals(jmbg)&&!jmbg.equals(""))continue;
             if(!p.getLastName().equals(lastname)&&!lastname.equals(""))continue;
             if(!p.getFirstName().equals(name)&&!name.equals(""))continue;
-            patients.add(new PatientDTO(p.getJmbg(),p.getFirstName(),p.getLastName()));
+            patients.add(new PatientDTO(p));
         }
         return new ResponseEntity<>(patients,HttpStatus.OK);
     }

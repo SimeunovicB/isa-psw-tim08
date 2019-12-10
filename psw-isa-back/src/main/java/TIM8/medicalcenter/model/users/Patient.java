@@ -1,14 +1,17 @@
-package TIM8.medicalcenter.model.Users;
+package TIM8.medicalcenter.model.users;
 
 import TIM8.medicalcenter.model.Clinic;
 import TIM8.medicalcenter.model.MedicalRecord;
-import TIM8.medicalcenter.model.Users.Person;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @DiscriminatorValue("P")
 public class Patient extends Person {
 

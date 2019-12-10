@@ -14,7 +14,7 @@
                     aria-label="Search"></td>
         </tr>
         <tr>
-            <td><button class="btn btn-primary" type="submit">Pretraži</button></td>
+            <td><button class="btn btn-primary" type="submit" >Pretraži</button></td>
         </tr>
     </table>
 </form>
@@ -38,7 +38,7 @@
                 <td>{{user.name}}</td>
                 <td>{{user.lastname}}</td>
                 <td>{{user.jmbg}}</td>
-                <td><button type="button" class="btn btn-primary" (click)="profil(user.id)">Profil</button></td>
+                <td><button type="button" class="btn btn-primary" (click)="medicalRecord(user.id)">Zdravstveni karton</button></td>
             </tr>
         </ng-container>
     </tbody>

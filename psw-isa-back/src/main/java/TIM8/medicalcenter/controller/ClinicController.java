@@ -3,13 +3,11 @@ package TIM8.medicalcenter.controller;
 import TIM8.medicalcenter.dto.ClinicDTO;
 import TIM8.medicalcenter.exception.ResourceConflictException;
 import TIM8.medicalcenter.model.Clinic;
-import TIM8.medicalcenter.model.Users.Patient;
 import TIM8.medicalcenter.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,16 +1,16 @@
 package TIM8.medicalcenter.service;
 
 import TIM8.medicalcenter.dto.AdministratorDTO;
-import TIM8.medicalcenter.model.Security.Authority;
-import TIM8.medicalcenter.model.Users.Administrator;
-import TIM8.medicalcenter.model.Users.ClinicsAdministrator;
-import TIM8.medicalcenter.model.Users.Patient;
-import TIM8.medicalcenter.model.Users.Person;
-import TIM8.medicalcenter.repository.ClinicRepository;
+import TIM8.medicalcenter.model.security.Authority;
+import TIM8.medicalcenter.model.users.Administrator;
+import TIM8.medicalcenter.model.users.ClinicsAdministrator;
+import TIM8.medicalcenter.model.users.Patient;
+import TIM8.medicalcenter.model.users.Person;
 import TIM8.medicalcenter.repository.PersonRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -43,17 +43,23 @@ public class PersonService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+
+    @Cacheable("persons")
     public List<Person> findAll() { return personRepository.findAll(); }
+    @Cacheable("persons")
     public Person findOneByUsername(String username) { return personRepository.findOneByUsername(username); }
 
+    @Cacheable("persons")
     public Person findOneById(Long id){ return personRepository.findOneById(id);}
+    @Cacheable("persons")
     public List<Person> findByType(String type) { return personRepository.findByDiscriminatorValue(type);}
+    @Cacheable("persons")
     public List<Patient> findPatients() { return personRepository.findPatients();}
 
     public int updatePersonStatus(String status,Long id) {return personRepository.updateUserStatus(status,id);}
     public int updatePassword(String password,Long id) {return personRepository.updatePassword(password,id);}
     public int updateUser(String firstName,String lastName,String address,long id) { return personRepository.updateUser(firstName,lastName,address,id); }
-    // Funkcija koja na osnovu username-a iz baze vraca objekat User-a
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

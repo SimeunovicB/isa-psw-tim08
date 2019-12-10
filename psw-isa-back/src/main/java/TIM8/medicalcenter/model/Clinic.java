@@ -1,9 +1,11 @@
 package TIM8.medicalcenter.model;
 
-import TIM8.medicalcenter.model.Users.Administrator;
-import TIM8.medicalcenter.model.Users.Doctor;
-import TIM8.medicalcenter.model.Users.Nurse;
-import TIM8.medicalcenter.model.Users.Patient;
+import TIM8.medicalcenter.model.users.Administrator;
+import TIM8.medicalcenter.model.users.Doctor;
+import TIM8.medicalcenter.model.users.Nurse;
+import TIM8.medicalcenter.model.users.Patient;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,6 +13,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 public class Clinic {
     //region column definitions
     @Id
@@ -48,81 +52,6 @@ public class Clinic {
     )
     private Set<Patient> patients = new HashSet<Patient>();
     //endregion
-
-    //region getters and setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(Set<Doctor> doctors) {
-        this.doctors = doctors;
-    }
-
-    public Set<Nurse> getNurses() {
-        return nurses;
-    }
-
-    public void setNurses(Set<Nurse> nurses) {
-        this.nurses = nurses;
-    }
-
-    public Set<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(Set<Room> rooms) {
-        this.rooms = rooms;
-    }
-
-    public Set<Administrator> getAdministrators() {
-        return administrators;
-    }
-
-    public void setAdministrators(Set<Administrator> administrators) {
-        this.administrators = administrators;
-    }
-
-    public Set<Patient> getPatients() {
-        return patients;
-    }
-
-    public void setPatients(Set<Patient> patients) {
-        this.patients = patients;
-    }
-    //endregion
-
 
     public Clinic() {
     }

@@ -3,18 +3,14 @@ package TIM8.medicalcenter.controller;
 import TIM8.medicalcenter.dto.AdministratorDTO;
 import TIM8.medicalcenter.dto.PersonDTO;
 import TIM8.medicalcenter.exception.ResourceConflictException;
-import TIM8.medicalcenter.model.Users.Administrator;
-import TIM8.medicalcenter.model.Users.ClinicsAdministrator;
-import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.users.Administrator;
+import TIM8.medicalcenter.model.users.ClinicsAdministrator;
+import TIM8.medicalcenter.model.users.Person;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 
 @RestController

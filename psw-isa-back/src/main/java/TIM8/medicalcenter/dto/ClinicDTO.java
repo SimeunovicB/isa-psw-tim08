@@ -1,7 +1,11 @@
 package TIM8.medicalcenter.dto;
 
 import TIM8.medicalcenter.model.Clinic;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class ClinicDTO {
 
     private Long id;
@@ -20,21 +24,5 @@ public class ClinicDTO {
         this.name = name;
         this.address = address;
         this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getDescription() {
-        return description;
     }
 }

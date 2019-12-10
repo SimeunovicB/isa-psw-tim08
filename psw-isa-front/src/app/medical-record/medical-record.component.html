@@ -5,15 +5,17 @@
             width="150">
     </div>
     <div class="podaci">
-        Ime: {{ime}}<br>Prezime: {{prezime}}<br>JMBG: {{jmbg}}
+        Ime: {{firstName}}<br>Prezime: {{lastName}}<br>JMBG: {{jmbg}}
     </div>
 </div>
 <hr>
 <div class="drugi">
     <table>
-        <tr><td>Visina:</td><td><input type="text" [(ngModel)]="visina" [disabled]="disabledp"></td></tr>
-        <tr><td>Tezina:</td><td><input type="text" [(ngModel)]="tezina" [disabled]="disabledp"></td></tr>
-        <tr><td>Alergije:</td><td><input type="text" [(ngModel)]="alergije" [disabled]="disabledp"></td></tr>
+        <tr><td>Visina:</td><td><input type="text" [(ngModel)]="height" [disabled]="disabledp"></td></tr>
+        <tr><td>Tezina:</td><td><input type="text" [(ngModel)]="weight" [disabled]="disabledp"></td></tr>
+        <tr><td>Alergije:</td><td><input type="text" [(ngModel)]="alergies" [disabled]="disabledp"></td></tr>
+        <tr><td>Dioptrija:</td><td><input type="text" [(ngModel)]="diopter" [disabled]="disabledp"></td></tr>
+        <tr><td>Krvna grupa:</td><td><input type="text" [(ngModel)]="bloodType" [disabled]="disabledp"></td></tr>
         <tr><td><button (click)="izmeni()">Izmeni</button></td>
         <td><button (click)="sacuvaj()">Sacuvaj izmene</button></td></tr>
     </table>

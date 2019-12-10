@@ -1,37 +1,30 @@
 package TIM8.medicalcenter.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 public class Medicine {
 
-    //region column definitions
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name",nullable = false,unique = true)
     private String name;
-    //endregion
 
-    //region geters and setters
-    public Long getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "medicine",fetch = FetchType.LAZY)
+    private Set<MedicalExaminationReport> medicalExaminationReports = new HashSet<>();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    //endregion
 
     public Medicine() {
     }

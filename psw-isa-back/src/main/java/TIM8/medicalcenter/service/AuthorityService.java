@@ -1,6 +1,6 @@
 package TIM8.medicalcenter.service;
 
-import TIM8.medicalcenter.model.Security.Authority;
+import TIM8.medicalcenter.model.security.Authority;
 import TIM8.medicalcenter.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

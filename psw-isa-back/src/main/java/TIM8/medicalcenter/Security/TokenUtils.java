@@ -1,7 +1,7 @@
 package TIM8.medicalcenter.Security;
 
 import TIM8.medicalcenter.common.TimeProvider;
-import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.users.Person;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
