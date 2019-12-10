@@ -4,6 +4,7 @@ import TIM8.medicalcenter.dto.MedicalExaminationDTO;
 import TIM8.medicalcenter.model.MedicalExaminationReport;
 import TIM8.medicalcenter.model.MedicalRecord;
 import TIM8.medicalcenter.model.users.Doctor;
+import TIM8.medicalcenter.model.users.Patient;
 import TIM8.medicalcenter.repository.MedicalExaminationReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class MedicalExaminationReportService {
         medicalExaminationReport.setDoctor((Doctor) personService.findOneById(medicalExaminationDTO.getDoctor()));
         medicalExaminationReport.setDiagnosis(diagnosisService.findOneById(medicalExaminationDTO.getDiagnosis()));
         medicalExaminationReport.setMedicine(medicineService.findOneById(medicalExaminationDTO.getMedicine()));
+        medicalExaminationReport.setPatient((Patient)personService.findOneById(medicalExaminationDTO.getPatient()));
 
         return medicalExaminationReportRepository.save(medicalExaminationReport);
 

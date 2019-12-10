@@ -39,6 +39,7 @@ import { RegisterClinicCentreAdminComponent } from './register-clinic-centre-adm
 import { CodebookComponent } from './codebook/codebook.component';
 import { SearchPatientsComponent } from './search-patients/search-patients.component';
 import { SearchClinicsComponent } from './search-clinics/search-clinics.component';
+import { MedicalExaminationComponent } from './medical-examination/medical-examination.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
   { path: 'changePassword', component: ChangePassword},
   { path: 'vacationrequest', component: PendingVacationsComponent},
   { path: 'medicalrecord/:id', component: MedicalRecordComponent},
+  { path: 'medicalExamination/:id',component : MedicalExaminationComponent},
   { path: 'searchpatients', component: SearchPatientsComponent},
   { path: 'searchclinics', component: SearchClinicsComponent},
   { path: 'dodajKliniku', component: AddClinicComponent},
@@ -85,7 +87,8 @@ const appRoutes: Routes = [
     RegisterClinicCentreAdminComponent,
     CodebookComponent,
     SearchPatientsComponent,
-    SearchClinicsComponent
+    SearchClinicsComponent,
+    MedicalExaminationComponent
   ],
   imports: [ 
     BrowserModule,
