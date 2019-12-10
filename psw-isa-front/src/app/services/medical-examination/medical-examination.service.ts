@@ -33,6 +33,19 @@ export class MedicalExaminationService {
       })
     )
   }
+  getAllForOnePatient(patientId : any) {
+    return this.http.get(`${this.baseUrl}/getAll/` + patientId).pipe(
+      map(
+        (response : any) => {
+          return response;
+        },catchError((err : any) => {
+          return throwError(err.text);
+          
+        })
+      )
+    )
+
+  }
 
 
 }
