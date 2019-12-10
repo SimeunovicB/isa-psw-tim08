@@ -9,6 +9,8 @@ import TIM8.medicalcenter.repository.MedicalExaminationReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class MedicalExaminationReportService {
 
@@ -34,6 +36,10 @@ public class MedicalExaminationReportService {
 
         return medicalExaminationReportRepository.save(medicalExaminationReport);
 
+    }
+    public Set<MedicalExaminationReport> findByPatientId(Long id){
+         Set<MedicalExaminationReport> mer = medicalExaminationReportRepository.findAllPatients(id);
+         return mer;
     }
 
 

@@ -1,5 +1,6 @@
 package TIM8.medicalcenter.model.users;
 
+import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.Clinic;
 import TIM8.medicalcenter.model.MedicalExaminationReport;
 import TIM8.medicalcenter.model.MedicalRecord;
@@ -28,27 +29,6 @@ public class Patient extends Person {
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<MedicalExaminationReport> medicalExaminationReports = new HashSet<>();
 
-    public String getJmbg() {
-        return jmbg;
-    }
-
-    public void setJmbg(String jmbg) {
-        this.jmbg = jmbg;
-    }
-
-    public Set<Clinic> getClinics() {
-        return clinics;
-    }
-
-    public void setClinics(Set<Clinic> clinics) {
-        this.clinics = clinics;
-    }
-
-    public MedicalRecord getMedicalRecord() {
-        return medicalRecord;
-    }
-
-    public void setMedicalRecord(MedicalRecord medicalRecord) {
-        this.medicalRecord = medicalRecord;
-    }
+    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    Set<Appointment> appointments = new HashSet<>();
 }

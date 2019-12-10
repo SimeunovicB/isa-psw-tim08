@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user/user.service';
 import { MedicalRecordService } from '../services/medical-record/medical-record.service';
+import { MedicalExaminationService } from '../services/medical-examination/medical-examination.service';
 
 @Component({
   selector: 'app-medical-record',
@@ -20,14 +21,17 @@ export class MedicalRecordComponent implements OnInit {
   bloodType : string;
   diopter : number;
   disabledp=true;
+  medicalExaminations : any;
 
   constructor(private activatedRoute: ActivatedRoute,
     private userService : UserService,
-    private medicalRecordService : MedicalRecordService) { }
+    private medicalRecordService : MedicalRecordService,
+    private medicalExaminationService : MedicalExaminationService) { }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.url[1].path;
     this.getUser();
+    this.getMedicalExaminations();
   }
   getUser() {
     this.userService.getMedicalRecordInfo(this.id)
@@ -45,6 +49,13 @@ export class MedicalRecordComponent implements OnInit {
           this.medicalRecordId = data.id;
         }
       )
+  }
+  getMedicalExaminations() {
+    this.medicalExaminationService.getAllForOnePatient(this.id).subscribe(
+      (data) => {
+        this.medicalExaminations = data;
+      }
+    )
   }
 
   izmeni() {
