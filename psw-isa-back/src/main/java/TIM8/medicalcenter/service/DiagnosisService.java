@@ -15,6 +15,7 @@ public class DiagnosisService {
     private DiagnosisRepository diagnosisRepository;
 
     public Diagnosis findOneByName(String name) {return diagnosisRepository.findByName(name);}
+    public Diagnosis findOneById(Long id) {return diagnosisRepository.getOne(id);}
     public List<Diagnosis> findAll() { return diagnosisRepository.findAll();}
     public Diagnosis save(DiagnosisDTO diagnosisDTO) {
         Diagnosis d = new Diagnosis();

@@ -4,15 +4,14 @@ import TIM8.medicalcenter.Security.Auth.JwtAuthenticationRequest;
 import TIM8.medicalcenter.Security.TokenUtils;
 import TIM8.medicalcenter.dto.PersonDTO;
 import TIM8.medicalcenter.exception.ResourceConflictException;
-import TIM8.medicalcenter.model.Users.Patient;
-import TIM8.medicalcenter.model.Users.Person;
-import TIM8.medicalcenter.model.Security.UserTokenState;
+import TIM8.medicalcenter.model.users.Patient;
+import TIM8.medicalcenter.model.users.Person;
+import TIM8.medicalcenter.model.security.UserTokenState;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,8 +27,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @RestController

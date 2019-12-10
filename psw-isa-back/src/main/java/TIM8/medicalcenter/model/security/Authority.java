@@ -1,11 +1,16 @@
-package TIM8.medicalcenter.model.Security;
+package TIM8.medicalcenter.model.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 public class Authority implements GrantedAuthority {
     private static final long serialVersionUID = 1L;
 

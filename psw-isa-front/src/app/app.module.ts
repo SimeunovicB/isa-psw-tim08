@@ -49,7 +49,7 @@ const appRoutes: Routes = [
   { path: 'patients', component: PatientsComponent },
   { path: 'changePassword', component: ChangePassword},
   { path: 'vacationrequest', component: PendingVacationsComponent},
-  { path: 'medicalrecord', component: MedicalRecordComponent},
+  { path: 'medicalrecord/:id', component: MedicalRecordComponent},
   { path: 'searchpatients', component: SearchPatientsComponent},
   { path: 'searchclinics', component: SearchClinicsComponent},
   { path: 'dodajKliniku', component: AddClinicComponent},

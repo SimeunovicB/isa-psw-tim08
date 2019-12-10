@@ -3,7 +3,7 @@ package TIM8.medicalcenter.controller;
 
 
 import TIM8.medicalcenter.dto.PersonDTO;
-import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.users.Person;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,24 +24,13 @@ public class PersonController {
 
 
     @RequestMapping(consumes = "application/json",value="/getByEmail",method = RequestMethod.POST)
-    public ResponseEntity<?> getByEmail(@RequestBody PersonDTO person){
+    public ResponseEntity<?> getByEmail(@RequestBody PersonDTO person) {
         Person personRet = personService.findOneByUsername(person.getUsername());
-        if(personRet==null)
+        if (personRet == null)
             return null;
-        return new ResponseEntity<PersonDTO>(new PersonDTO(personRet),HttpStatus.OK);
+        return new ResponseEntity<>(new PersonDTO(personRet), HttpStatus.OK);
 
     }
-    /*@RequestMapping(consumes = "application/json",value = "/login",method = RequestMethod.POST)
-    public ResponseEntity<PersonDTO> Login(@RequestBody PersonDTO person) {
-        Person person1 = personService.findOneByUsername(person.getUsername());
-        if(person1==null)
-            return null;
-        if(person1.getPassword().equals(person.getPassword())){
-            PersonDTO p= new PersonDTO(person1);
-            return new ResponseEntity<>(p, HttpStatus.OK);
-        }
-            return  null;
-    }*/
     @RequestMapping(consumes = "application/json",value ="/changePassword",method = RequestMethod.POST)
     public ResponseEntity<?> updatePassword(@RequestBody PasswordChanger passwordChanger) {
         personService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);

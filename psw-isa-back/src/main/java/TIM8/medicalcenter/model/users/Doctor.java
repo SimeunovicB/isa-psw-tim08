@@ -1,15 +1,19 @@
-package TIM8.medicalcenter.model.Users;
+package TIM8.medicalcenter.model.users;
 
 import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.Clinic;
-import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.MedicalExaminationReport;
 import TIM8.medicalcenter.model.Vacation;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @DiscriminatorValue("D")
 public class Doctor extends Person {
     @Column(name = "worktime_start")
@@ -27,27 +31,6 @@ public class Doctor extends Person {
     @OneToMany(mappedBy = "staff",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Vacation> vacations = new HashSet<>();
 
-    public String getWorktimeStart() {
-        return worktimeStart;
-    }
-
-    public void setWorktimeStart(String worktimeStart) {
-        this.worktimeStart = worktimeStart;
-    }
-
-    public String getWorktimeEnd() {
-        return worktimeEnd;
-    }
-
-    public void setWorktimeEnd(String worktimeEnd) {
-        this.worktimeEnd = worktimeEnd;
-    }
-
-    public Clinic getClinic() {
-        return clinic;
-    }
-
-    public void setClinic(Clinic clinic) {
-        this.clinic = clinic;
-    }
+    @OneToMany(mappedBy = "doctor",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    Set<MedicalExaminationReport>  medicalExaminationReports = new HashSet<>();
 }

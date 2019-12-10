@@ -1,12 +1,15 @@
 package TIM8.medicalcenter.model;
 
-import TIM8.medicalcenter.model.Users.Doctor;
-import TIM8.medicalcenter.model.Users.Person;
+import TIM8.medicalcenter.model.users.Person;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 public class Vacation {
 
     @Id
@@ -24,46 +27,6 @@ public class Vacation {
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Person staff;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Person getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Person staff) {
-        this.staff = staff;
-    }
 
     public Vacation() {
     }

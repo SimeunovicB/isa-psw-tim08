@@ -14,9 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private cookieService: CookieService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let helper = new JwtHelperService();
-    console.log('dosao da dodajem kuki jos se ne zna sta radim')
     if (this.cookieService.get('token') !== null) {
-      console.log('dodajem kuki');
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${this.cookieService.get('token').substr(0,this.cookieService.get('token').length)}`

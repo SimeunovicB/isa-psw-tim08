@@ -1,7 +1,9 @@
-package TIM8.medicalcenter.model.Users;
+package TIM8.medicalcenter.model.users;
 
-import TIM8.medicalcenter.model.Security.Authority;
+import TIM8.medicalcenter.model.security.Authority;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import org.joda.time.DateTime;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

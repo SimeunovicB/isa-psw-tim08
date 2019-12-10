@@ -1,6 +1,6 @@
 package TIM8.medicalcenter.repository;
 
-import TIM8.medicalcenter.model.Security.Authority;
+import TIM8.medicalcenter.model.security.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

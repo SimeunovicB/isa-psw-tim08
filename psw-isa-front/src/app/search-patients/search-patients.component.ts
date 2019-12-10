@@ -44,4 +44,7 @@ export class SearchPatientsComponent implements OnInit {
         }
       )
   }
+  medicalRecord(id : any){
+    this.router.navigate(['/medicalrecord/' + id]);
+  }
 }

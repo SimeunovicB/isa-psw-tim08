@@ -29,8 +29,6 @@ export class UserService {
     })
       .pipe(
         map((res: any) => {
-          //console.log(response);
-          //this.cookieService.set('loggedUser', JSON.stringify(response.json()));
           const helper = new JwtHelperService();
           const token = res.accessToken;
           console.log('token: ' + token)
@@ -131,6 +129,19 @@ export class UserService {
     })
       .pipe(
         map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
+  }
+  getMedicalRecordInfo(id: Number) {
+    return this.http.get("http://localhost:9090/api/medicalRecord/getByPatientId?id=" + id)
+      .pipe(
+        map((response: any) => {
+          console.log(response)
           const data = response
           return data;
         }),
