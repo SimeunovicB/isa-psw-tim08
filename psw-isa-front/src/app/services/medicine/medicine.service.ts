@@ -27,4 +27,18 @@ export class MedicineService {
       })
     )
   }
+  getAll() {
+    return this.http.get(`${this.baseUrl}/getAll`).
+    pipe(
+      map((response : any) => {
+        
+        return response;
+      }),
+      catchError((err : any) => {
+        
+        return throwError(err.text);
+        
+      })
+    )
+  }
 }

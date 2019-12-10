@@ -47,4 +47,7 @@ export class SearchPatientsComponent implements OnInit {
   medicalRecord(id : any){
     this.router.navigate(['/medicalrecord/' + id]);
   }
+  startExamination(id : any){
+    this.router.navigate(['/medicalExamination/' + id]);
+  }
 }

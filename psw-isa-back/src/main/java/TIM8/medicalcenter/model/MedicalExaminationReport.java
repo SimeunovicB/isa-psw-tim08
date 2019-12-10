@@ -1,6 +1,7 @@
 package TIM8.medicalcenter.model;
 
 import TIM8.medicalcenter.model.users.Doctor;
+import TIM8.medicalcenter.model.users.Patient;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +27,9 @@ public class MedicalExaminationReport {
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Doctor doctor;
+
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Patient patient;
 
 
 

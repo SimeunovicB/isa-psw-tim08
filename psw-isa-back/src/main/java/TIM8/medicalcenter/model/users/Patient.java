@@ -1,6 +1,7 @@
 package TIM8.medicalcenter.model.users;
 
 import TIM8.medicalcenter.model.Clinic;
+import TIM8.medicalcenter.model.MedicalExaminationReport;
 import TIM8.medicalcenter.model.MedicalRecord;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,9 @@ public class Patient extends Person {
 
     @OneToOne(mappedBy = "patient")
     private MedicalRecord medicalRecord;
+
+    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    Set<MedicalExaminationReport> medicalExaminationReports = new HashSet<>();
 
     public String getJmbg() {
         return jmbg;

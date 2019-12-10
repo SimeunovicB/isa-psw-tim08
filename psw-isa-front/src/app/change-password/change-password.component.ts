@@ -22,7 +22,6 @@ export class ChangePassword implements OnInit {
 
   constructor(private router: Router,
     private cookieService: CookieService,
-    private modalService: NgbModal,
     private userService: UserService) { }
 
   ngOnInit() {

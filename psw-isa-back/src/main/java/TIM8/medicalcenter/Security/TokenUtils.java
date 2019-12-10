@@ -44,6 +44,7 @@ public class TokenUtils {
                 .setSubject(person.getUsername())
                 .claim("type",person.getDecriminatorValue())
                 .claim("status",person.getStatus())
+                .claim("id",person.getId())
                 .setAudience(generateAudience())
                 .setIssuedAt(timeProvider.now())
                 .setExpiration(generateExpirationDate())

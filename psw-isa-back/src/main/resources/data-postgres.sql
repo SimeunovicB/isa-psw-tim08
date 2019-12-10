@@ -44,3 +44,13 @@ INSERT INTO user_authority (user_id, authority_id) VALUES (4, 2);
 INSERT INTO user_authority (user_id, authority_id) VALUES (5, 2);
 
 
+insert into diagnosis (name) values ('prehlada');
+insert into diagnosis (name) values ('kasalj');
+insert into diagnosis (name) values ('viroza');
+insert into diagnosis (name) values ('izmorenost');
+
+insert into medicine (name) values ('penicilin');
+insert into medicine (name) values ('brufen');
+insert into medicine (name) values ('antibiotik');
+insert into medicine (name) values ('vinjak');
+

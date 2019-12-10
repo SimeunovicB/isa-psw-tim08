@@ -39,6 +39,7 @@
                 <td>{{user.lastname}}</td>
                 <td>{{user.jmbg}}</td>
                 <td><button type="button" class="btn btn-primary" (click)="medicalRecord(user.id)">Zdravstveni karton</button></td>
+                <td><button type="button" class="btn btn-primary" (click)="startExamination(user.id)">Zapocni pregled</button></td>
             </tr>
         </ng-container>
     </tbody>

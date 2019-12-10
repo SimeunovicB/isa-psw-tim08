@@ -6,15 +6,23 @@ import { throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DiagnosisService {
+export class MedicalExaminationService {
 
-  baseUrl = 'http://localhost:9090' + '/api/diagnosis'
+  baseUrl = 'http://localhost:9090' + '/api/medicalExamination'
 
   constructor(private http : HttpClient) { }
-  
-  addDiagnosis(diagnosis:String) {
-    return this.http.post(`${this.baseUrl}/addDiagnosis`,{
-      name: diagnosis
+
+  newExamination(patientId : any,
+    doctorId : any,
+    description : any,
+    medicine : any,
+    diagnosis : any) {
+    return this.http.post(`${this.baseUrl}/new`,{
+      patient : patientId,
+      doctor : doctorId,
+      diagnosis : diagnosis,
+      medicine : medicine,
+      description : description
     }).pipe(
       map((response: any) => {
         const data = response;
@@ -25,16 +33,6 @@ export class DiagnosisService {
       })
     )
   }
-  getAll() {
-    return this.http.get(`${this.baseUrl}/getAll`).
-    pipe(
-      map((response : any) => {
-        return response;
-      }),
-      catchError((err : any) => {
-        return throwError(err.text);
-        
-      })
-    )
-  }
+
+
 }
