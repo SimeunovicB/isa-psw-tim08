@@ -40,6 +40,7 @@ import { CodebookComponent } from './codebook/codebook.component';
 import { SearchPatientsComponent } from './search-patients/search-patients.component';
 import { SearchClinicsComponent } from './search-clinics/search-clinics.component';
 import { MedicalExaminationComponent } from './medical-examination/medical-examination.component';
+import { AppointmentReservationComponent } from './appointment-reservation/appointment-reservation.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
   { path: 'vacationrequest', component: PendingVacationsComponent},
   { path: 'medicalrecord/:id', component: MedicalRecordComponent},
   { path: 'medicalExamination/:id',component : MedicalExaminationComponent},
+  { path: 'appointmentReservation', component: AppointmentReservationComponent},
   { path: 'searchpatients', component: SearchPatientsComponent},
   { path: 'searchclinics', component: SearchClinicsComponent},
   { path: 'dodajKliniku', component: AddClinicComponent},
@@ -88,7 +90,8 @@ const appRoutes: Routes = [
     CodebookComponent,
     SearchPatientsComponent,
     SearchClinicsComponent,
-    MedicalExaminationComponent
+    MedicalExaminationComponent,
+    AppointmentReservationComponent
   ],
   imports: [ 
     BrowserModule,
