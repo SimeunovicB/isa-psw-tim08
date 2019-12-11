@@ -13,5 +13,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long>{
     @Query("SELECT a FROM Appointment a where a.date=?1 and a.type=?2")
     List<Appointment> findAppointments(Date date, String type);
 
+    List<Appointment> findAll();
 
 }
