@@ -6,6 +6,7 @@ import TIM8.medicalcenter.exception.ResourceConflictException;
 import TIM8.medicalcenter.model.users.Administrator;
 import TIM8.medicalcenter.model.users.ClinicsAdministrator;
 import TIM8.medicalcenter.model.users.Person;
+import TIM8.medicalcenter.service.EmailService;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,13 +21,20 @@ public class AdministratorController {
     @Autowired
     PersonService personService;
 
+    @Autowired
+    EmailService emailService;
+
     @PostMapping(consumes = "application/json",value ="/approveRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusApproved(@PathVariable Long id) {
 
         Person person = personService.findOneById(id);
         if(person != null && person.getDecriminatorValue().equals("P") && person.getStatus().equalsIgnoreCase("PENDING")){
-            personService.updatePersonStatus("ACTIVE",person.getId());
-            //TODO: slanje maila korisniku
+            personService.updatePersonStatus("ACCEPTED",person.getId());
+            try {
+                emailService.userAccepted(person);
+            }catch( Exception e ){
+
+            }
             return new ResponseEntity<>(new PersonDTO(person),HttpStatus.OK);
         }else{
             return new ResponseEntity<>(new PersonDTO(),HttpStatus.NO_CONTENT);
@@ -40,6 +48,11 @@ public class AdministratorController {
         Person person = personService.findOneById(id);
         if(person != null && person.getDecriminatorValue().equals("P") && person.getStatus().equalsIgnoreCase("PENDING")){
             personService.updatePersonStatus("REJECTED",person.getId());
+            try {
+                emailService.userDenied(person);
+            }catch( Exception e ){
+
+            }
             return new ResponseEntity<>(new PersonDTO(person),HttpStatus.OK);
         }else{
             return new ResponseEntity<>(new PersonDTO(),HttpStatus.NO_CONTENT);
