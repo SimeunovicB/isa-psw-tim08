@@ -13,5 +13,6 @@ public class AppointmentService  {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    public List<Appointment> findAll(){return appointmentRepository.findAll();}
     public List<Appointment> findAppointments(Date date, String type){return appointmentRepository.findAppointments(date,type);}
 }
