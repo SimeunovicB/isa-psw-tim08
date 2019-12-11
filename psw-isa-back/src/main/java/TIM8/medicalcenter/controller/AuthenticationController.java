@@ -18,14 +18,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.html.HTML;
 import java.io.IOException;
 
 
@@ -93,6 +91,30 @@ public class AuthenticationController {
             UserTokenState userTokenState = new UserTokenState();
             return ResponseEntity.badRequest().body(userTokenState);
         }
+    }
+    @RequestMapping(value = "/activateAccount/{id}",method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    public String activateAccount(@PathVariable Long id){
+        Person p = personService.findOneById(id);
+        if(p.getStatus().equalsIgnoreCase("ACCEPTED")){
+            personService.updatePersonStatus("ACTIVE",id);
+            return ("<html>\n" +
+                    "    <head></head>\n" +
+                    "    <body>\n" +
+                    "            <h4>Uspesno ste aktivirali vas nalog, mozete se ulogovati na liknu: <a href=\"http://localhost:4200/login\">LOGIN</a></h4>\n" +
+                    "    </body>\n" +
+                    "</html>");
+
+        }else{
+            return ("<html>\n" +
+                    "    <head></head>\n" +
+                    "    <body>\n" +
+                    "            <h4>Nije moguce aktivirati vas nalog ili je nalog vec aktivan</h4>\n" +
+                    "    </body>\n" +
+                    "</html>");
+
+        }
+
+
     }
 
 }
