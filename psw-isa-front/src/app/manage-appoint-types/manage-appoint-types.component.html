@@ -1,0 +1,18 @@
+<input type="text" [(ngModel)]="nazivnovog">      <button (click)="onSubmit()">Dodaj tip pregleda</button>
+ <hr>
+ <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ime</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let type of types; let i = index">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td><input type="text" value={{type.name}}></td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
