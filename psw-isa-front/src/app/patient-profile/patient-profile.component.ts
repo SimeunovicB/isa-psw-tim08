@@ -44,5 +44,14 @@ export class PatientProfileComponent implements OnInit {
         }
       )
   }
+
+  onSubmit() {
+    this.userService.UpdateUser(this.ime, this.prezime, this.adresa, this.loggedUser.id)
+      .subscribe(
+        (user: any) => {
+          this.router.navigate(['/profile']);
+        }, (error) => alert(error.text)
+      );
+  }
   
 }
