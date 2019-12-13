@@ -25,4 +25,5 @@ public class ClinicService {
     @Cacheable("clinics")
     public Clinic findOneByName(String name){return clinicRepository.findOneByName(name); }
     public Clinic save(Clinic c) {return clinicRepository.save(c);}
+    public int updateClinic(String name,String address,String description,long id) { return clinicRepository.updateClinic(name,address,description,id); }
 }

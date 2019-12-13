@@ -44,4 +44,15 @@ public class ClinicController {
         return new ResponseEntity<>(new ClinicDTO(clinic), HttpStatus.CREATED);
     }
 
+    @PostMapping(consumes = "application/json", value = "/update")
+    public ResponseEntity<ClinicDTO> updateClinic(@RequestBody ClinicDTO clinic){
+        Clinic clinic1 = clinicService.findOneById(clinic.getId());
+        if(clinic1.getId() != null){
+            clinicService.updateClinic(clinic.getName(),clinic.getAddress(),clinic.getDescription(),clinic.getId());
+            clinic1 = clinicService.findOneById(clinic.getId());
+            return new ResponseEntity<>(new ClinicDTO(clinic1),HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(new ClinicDTO(),HttpStatus.BAD_REQUEST);
+    }
+
 }
