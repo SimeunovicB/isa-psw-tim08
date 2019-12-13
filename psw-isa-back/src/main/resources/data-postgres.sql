@@ -40,6 +40,8 @@ insert into appointment(date,discount,duration,price,status,type,doctor_id,room_
 INSERT INTO authority (name) VALUES ('ROLE_USER');
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
 
+insert into appointment_type (name) VALUES ('Rutinski pregled');
+
 INSERT INTO user_authority (user_id, authority_id) VALUES (1, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (2, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (3, 1);

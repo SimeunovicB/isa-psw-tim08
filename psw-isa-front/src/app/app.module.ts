@@ -41,6 +41,8 @@ import { SearchPatientsComponent } from './search-patients/search-patients.compo
 import { SearchClinicsComponent } from './search-clinics/search-clinics.component';
 import { MedicalExaminationComponent } from './medical-examination/medical-examination.component';
 import { AppointmentReservationComponent } from './appointment-reservation/appointment-reservation.component';
+import { EditClinicComponent } from './edit-clinic/edit-clinic.component';
+import { ManageAppointTypesComponent } from './manage-appoint-types/manage-appoint-types.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -50,6 +52,8 @@ const appRoutes: Routes = [
   { path: 'pending', component: PendingUsersComponent },
   { path: 'patients', component: PatientsComponent },
   { path: 'changePassword', component: ChangePassword},
+  { path: 'editclinic', component: EditClinicComponent},
+  { path: 'managetypes', component: ManageAppointTypesComponent},
   { path: 'vacationrequest', component: PendingVacationsComponent},
   { path: 'medicalrecord/:id', component: MedicalRecordComponent},
   { path: 'medicalExamination/:id',component : MedicalExaminationComponent},
@@ -91,7 +95,9 @@ const appRoutes: Routes = [
     SearchPatientsComponent,
     SearchClinicsComponent,
     MedicalExaminationComponent,
-    AppointmentReservationComponent
+    AppointmentReservationComponent,
+    EditClinicComponent,
+    ManageAppointTypesComponent
   ],
   imports: [ 
     BrowserModule,

@@ -13,6 +13,9 @@ public class ClinicDTO {
     private String address;
     private String description;
 
+    public ClinicDTO() {
+    }
+
 
     public ClinicDTO(Clinic clinic) {
         this(clinic.getId(),clinic.getName(),clinic.getAddress(),clinic.getDescription());
