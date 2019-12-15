@@ -7,10 +7,7 @@ import TIM8.medicalcenter.service.AppointmentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,4 +39,14 @@ public class AppointmentTypeController {
         return new ResponseEntity<>(appointmentTypeDTOS,HttpStatus.OK);
     }
 
+    @PostMapping(consumes = "application/json", value = "/update")
+    public ResponseEntity<AppointmentTypeDTO> updateAppointmentType(@RequestBody AppointmentTypeDTO appType){
+        AppointmentType appointmentType = appointmentTypeService.findOneById(appType.getId());
+        if(appointmentType.getId() != null){
+            appointmentTypeService.updateAppointmentType(appType.getName(),appType.getId());
+            appointmentType = appointmentTypeService.findOneById(appType.getId());
+            return new ResponseEntity<>(new AppointmentTypeDTO(appointmentType),HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(new AppointmentTypeDTO(),HttpStatus.BAD_REQUEST);
+    }
 }

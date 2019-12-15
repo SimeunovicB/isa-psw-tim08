@@ -9,13 +9,13 @@ import { ClinicService } from '../services/clinic/clinic.service';
 export class EditClinicComponent implements OnInit {
   ime = "clinic1";
   adresa = "dr klinike 1";
-  opis = "very clininac clinic hoho";
+  opis = "clinic desc";
   clinic: any;
 
   constructor(private clinicService: ClinicService) { }
 
   ngOnInit() {
-
+    this.getClinics();
   }
 
   getClinic() {
@@ -24,6 +24,19 @@ export class EditClinicComponent implements OnInit {
         (data) => {
           console.log(data);
           this.clinic = data;
+        }
+      )
+  }
+
+  getClinics() {
+    this.clinicService.getClinics()
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.clinic = data[0];
+          this.ime = this.clinic.name;
+          this.adresa = this.clinic.address;
+          this.opis = this.clinic.description;
         }
       )
   }

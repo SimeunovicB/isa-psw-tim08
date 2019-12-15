@@ -14,7 +14,15 @@ public class VacationController {
     @Autowired
     private VacationService vacationService;
 
-
+    /*@GetMapping(value="/getClinics")
+    public ResponseEntity<List<VacationD>> getAllClinics() {
+        List<Vacation> vacations = vacationService.findAll();
+        List<ClinicDTO> allClinics = new ArrayList<>();
+        for(Clinic c : clinics){
+            allClinics.add(new ClinicDTO(c));
+        }
+        return new ResponseEntity<>(allClinics, HttpStatus.OK);
+    }*/
 
 
 

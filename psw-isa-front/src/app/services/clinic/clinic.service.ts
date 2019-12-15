@@ -78,6 +78,19 @@ export class ClinicService {
       );
   }
 
+  getClinics() {
+    return this.http.get("http://localhost:9090/api/clinic/getClinics")
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
+  }
+
   updateClinic(
     name: string,
     address: string,
