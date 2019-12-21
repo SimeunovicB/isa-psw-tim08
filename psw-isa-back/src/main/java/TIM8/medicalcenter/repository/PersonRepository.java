@@ -1,5 +1,6 @@
 package TIM8.medicalcenter.repository;
 
+import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
 import TIM8.medicalcenter.model.users.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,6 +26,8 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
 
     @Query("SELECT p FROM Person p where p.class='P'")
     List<Patient> findPatients();
+    @Query("SELECT p FROM Person p where p.class='D'")
+    List<Doctor> findDoctors();
 
 
     @Modifying

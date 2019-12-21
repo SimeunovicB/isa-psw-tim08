@@ -43,7 +43,7 @@ public class AppointmentTypeController {
     public ResponseEntity<AppointmentTypeDTO> updateAppointmentType(@RequestBody AppointmentTypeDTO appType){
         AppointmentType appointmentType = appointmentTypeService.findOneById(appType.getId());
         if(appointmentType.getId() != null){
-            appointmentTypeService.updateAppointmentType(appType.getName(),appType.getId());
+            //appointmentTypeService.updateAppointmentType(appType.getName(),appType.getId());
             appointmentType = appointmentTypeService.findOneById(appType.getId());
             return new ResponseEntity<>(new AppointmentTypeDTO(appointmentType),HttpStatus.ACCEPTED);
         }

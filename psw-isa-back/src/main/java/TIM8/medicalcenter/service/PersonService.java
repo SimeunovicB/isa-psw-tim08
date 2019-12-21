@@ -2,10 +2,7 @@ package TIM8.medicalcenter.service;
 
 import TIM8.medicalcenter.dto.AdministratorDTO;
 import TIM8.medicalcenter.model.security.Authority;
-import TIM8.medicalcenter.model.users.Administrator;
-import TIM8.medicalcenter.model.users.ClinicsAdministrator;
-import TIM8.medicalcenter.model.users.Patient;
-import TIM8.medicalcenter.model.users.Person;
+import TIM8.medicalcenter.model.users.*;
 import TIM8.medicalcenter.repository.PersonRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
 import java.util.List;
 
 @Service
@@ -55,6 +53,8 @@ public class PersonService implements UserDetailsService {
     public List<Person> findByType(String type) { return personRepository.findByDiscriminatorValue(type);}
     @Cacheable("persons")
     public List<Patient> findPatients() { return personRepository.findPatients();}
+
+    public List<Doctor> findDoctors() { return personRepository.findDoctors();}
 
     public int updatePersonStatus(String status,Long id) {return personRepository.updateUserStatus(status,id);}
     public int updatePassword(String password,Long id) {return personRepository.updatePassword(password,id);}

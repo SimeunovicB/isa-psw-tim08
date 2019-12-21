@@ -69,7 +69,6 @@ public class AppointmentController {
                 continue;
             AppointmentDTO ap = new AppointmentDTO(a);
             ap.setDoctor(null);
-            ap.setDoctorName(a.getDoctor().getFirstName());
             appDto.add(ap);
         }
         return new ResponseEntity<>(appDto, HttpStatus.OK);
