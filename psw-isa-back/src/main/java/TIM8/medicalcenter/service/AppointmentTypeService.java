@@ -23,5 +23,5 @@ public class AppointmentTypeService {
         m.setName(appointmentTypeDTO.getName());
         return appointmentTypeRepository.save(m);
     }
-    public int updateAppointmentType(String name, long id) { return appointmentTypeRepository.updateAppointmentType(name,id); }
+   // public int updateAppointmentType(String name, long id) { return appointmentTypeRepository.updateAppointmentType(name,id); }
 }

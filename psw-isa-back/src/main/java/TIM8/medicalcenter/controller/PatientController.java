@@ -1,14 +1,22 @@
 package TIM8.medicalcenter.controller;
 
+import TIM8.medicalcenter.dto.AppointmentDTO;
+import TIM8.medicalcenter.dto.DoctorDTO;
 import TIM8.medicalcenter.dto.PatientDTO;
+import TIM8.medicalcenter.model.Appointment;
+import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
 import TIM8.medicalcenter.model.users.Person;
+import TIM8.medicalcenter.service.AppointmentService;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +27,8 @@ public class PatientController {
 
     @Autowired
     private PersonService personService;
+    @Autowired
+    private AppointmentService appointmentService;
 
 
    
@@ -54,6 +64,27 @@ public class PatientController {
             patients.add(new PatientDTO(p));
         }
         return new ResponseEntity<>(patients,HttpStatus.OK);
+    }
+    @RequestMapping(value="/findDoctors",method = RequestMethod.GET)
+    public ResponseEntity<?> findDoctor(@RequestParam String name, @RequestParam String lastname,@RequestParam String ocena){
+        List<Doctor> doctorList = personService.findDoctors();
+        List<Appointment> apps = appointmentService.findAll();
+        List<DoctorDTO> doctors = new ArrayList<>();
+        for(Doctor p : doctorList){
+            if(!p.getLastName().equals(lastname)&&!lastname.equals(""))continue;
+            if(!p.getFirstName().equals(name)&&!name.equals(""))continue;
+            DoctorDTO newDoc = new DoctorDTO(p);
+            for (Appointment a:apps) {
+                System.out.println(newDoc.getFirstName()+" "+a.getDoctor().getFirstName());
+                if(a.getDoctor().getFirstName().equals(newDoc.getFirstName())){
+                    SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String strDate = formatter.format(a.getDate());
+                    newDoc.getDates().add(strDate);
+                }
+            }
+            doctors.add(newDoc);
+        }
+        return new ResponseEntity<>(doctors,HttpStatus.OK);
     }
 
 }
