@@ -48,6 +48,8 @@ INSERT INTO user_authority (user_id, authority_id) VALUES (3, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (4, 2);
 INSERT INTO user_authority (user_id, authority_id) VALUES (5, 2);
 
+insert into room (name, clinic_id) values ('Sala 1', 1)
+insert into room (name, clinic_id) values ('Sala 2', 1)
 
 insert into diagnosis (name) values ('prehlada');
 insert into diagnosis (name) values ('kasalj');
