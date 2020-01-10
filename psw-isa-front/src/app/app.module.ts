@@ -44,6 +44,10 @@ import { AppointmentReservationComponent } from './appointment-reservation/appoi
 import { EditClinicComponent } from './edit-clinic/edit-clinic.component';
 import { ManageAppointTypesComponent } from './manage-appoint-types/manage-appoint-types.component';
 import { SearchDoctorComponent } from './search-doctor/search-doctor.component';
+import { ManageRoomsComponent } from './manage-rooms/manage-rooms.component';
+import { ManageDoctorsComponent } from './manage-doctors/manage-doctors.component';
+import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
+import { BusinessReportComponent } from './business-report/business-report.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,20 +56,22 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'pending', component: PendingUsersComponent },
   { path: 'patients', component: PatientsComponent },
-  {path:'searchDoctors',component:SearchDoctorComponent},
-  { path: 'changePassword', component: ChangePassword},
-  { path: 'editclinic', component: EditClinicComponent},
-  { path: 'managetypes', component: ManageAppointTypesComponent},
-  { path: 'vacationrequest', component: PendingVacationsComponent},
-  { path: 'medicalrecord/:id', component: MedicalRecordComponent},
-  { path: 'medicalExamination/:id',component : MedicalExaminationComponent},
-  { path: 'appointmentReservation', component: AppointmentReservationComponent},
-  { path: 'searchpatients', component: SearchPatientsComponent},
-  { path: 'searchclinics', component: SearchClinicsComponent},
-  { path: 'dodajKliniku', component: AddClinicComponent},
-  { path: 'dodajAdministratoraKlinike', component: RegisterAdminComponent},
-  { path: 'dodajAdministratoraKlinickogCentra', component: RegisterClinicCentreAdminComponent},
-  { path: 'dodavanjeUSifarnik', component: CodebookComponent},
+  { path: 'searchDoctors', component:SearchDoctorComponent },
+  { path: 'changePassword', component: ChangePassword },
+  { path: 'editclinic', component: EditClinicComponent },
+  { path: 'managetypes', component: ManageAppointTypesComponent },
+  { path: 'managedoctors', component: ManageDoctorsComponent },
+  { path: 'managerooms', component: ManageRoomsComponent },
+  { path: 'vacationrequest', component: PendingVacationsComponent },
+  { path: 'medicalrecord/:id', component: MedicalRecordComponent },
+  { path: 'medicalExamination/:id',component : MedicalExaminationComponent },
+  { path: 'appointmentReservation', component: AppointmentReservationComponent },
+  { path: 'searchpatients', component: SearchPatientsComponent },
+  { path: 'searchclinics', component: SearchClinicsComponent },
+  { path: 'dodajKliniku', component: AddClinicComponent },
+  { path: 'dodajAdministratoraKlinike', component: RegisterAdminComponent },
+  { path: 'dodajAdministratoraKlinickogCentra', component: RegisterClinicCentreAdminComponent },
+  { path: 'dodavanjeUSifarnik', component: CodebookComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -100,7 +106,11 @@ const appRoutes: Routes = [
     AppointmentReservationComponent,
     EditClinicComponent,
     ManageAppointTypesComponent,
-    SearchDoctorComponent
+    SearchDoctorComponent,
+    ManageRoomsComponent,
+    ManageDoctorsComponent,
+    NewAppointmentComponent,
+    BusinessReportComponent
   ],
   imports: [ 
     BrowserModule,

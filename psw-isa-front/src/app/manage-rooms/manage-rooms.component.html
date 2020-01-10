@@ -1,0 +1,25 @@
+<app-header></app-header>
+<div class="inputt">
+    <input type="text" [(ngModel)]="nazivnove"> <button class="btn btn-success" (click)="onSubmit()">Dodaj tip
+        pregleda</button></div>
+<hr>
+<div class="tabela">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Naziv</th>
+                <th scope="col">Promeni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let type of types; let i = index">
+                <tr>
+                    <th scope="row">{{i+1}}</th>
+                    <td><input type="text" value={{type.name}}></td>
+                    <td><button type="button" class="btn btn-primary" (click)="izmeni(type.id)">Izmeni</button></td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
