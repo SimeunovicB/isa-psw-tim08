@@ -48,8 +48,8 @@ INSERT INTO user_authority (user_id, authority_id) VALUES (3, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (4, 2);
 INSERT INTO user_authority (user_id, authority_id) VALUES (5, 2);
 
-insert into room (name, clinic_id) values ('Sala 1', 1)
-insert into room (name, clinic_id) values ('Sala 2', 1)
+insert into room (name, clinic_id) values ('Sala 1', 1);
+insert into room (name, clinic_id) values ('Sala 2', 1);
 
 insert into diagnosis (name) values ('prehlada');
 insert into diagnosis (name) values ('kasalj');
@@ -60,4 +60,9 @@ insert into medicine (name) values ('penicilin');
 insert into medicine (name) values ('brufen');
 insert into medicine (name) values ('antibiotik');
 insert into medicine (name) values ('vinjak');
+
+insert into recipe(medicine,patient_id,nurse_id) values ('penicilin',1,5);
+insert into recipe(medicine,patient_id,nurse_id) values ('penicilin',1,5);
+insert into recipe(medicine,patient_id) values ('penicilin',1);
+insert into recipe(medicine,patient_id) values ('penicilin',1);
 

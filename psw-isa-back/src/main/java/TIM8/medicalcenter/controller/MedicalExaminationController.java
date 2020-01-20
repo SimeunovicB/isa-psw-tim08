@@ -3,7 +3,9 @@ package TIM8.medicalcenter.controller;
 import TIM8.medicalcenter.dto.MedicalExaminationDTO;
 import TIM8.medicalcenter.dto.response.MedicalExaminationResponseDTO;
 import TIM8.medicalcenter.model.MedicalExaminationReport;
+import TIM8.medicalcenter.model.Recipe;
 import TIM8.medicalcenter.service.MedicalExaminationReportService;
+import TIM8.medicalcenter.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +21,13 @@ public class MedicalExaminationController {
     @Autowired
     MedicalExaminationReportService medicalExaminationReportService;
 
+    @Autowired
+    RecipeService recipeService;
+
     @RequestMapping(value = "/new",consumes = "application/json" ,method = RequestMethod.POST)
     public ResponseEntity<?> addNewReport(@RequestBody MedicalExaminationDTO medicalExaminationDTO){
         MedicalExaminationReport medicalExaminationReport = medicalExaminationReportService.createNew(medicalExaminationDTO);
+        Recipe recipe = recipeService.createNew(medicalExaminationDTO);
         return new ResponseEntity<>(new MedicalExaminationDTO(medicalExaminationReport), HttpStatus.CREATED);
     }
     @RequestMapping(value = "/getAll/{id}",method = RequestMethod.GET)
