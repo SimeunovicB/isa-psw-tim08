@@ -48,6 +48,7 @@ import { ManageRoomsComponent } from './manage-rooms/manage-rooms.component';
 import { ManageDoctorsComponent } from './manage-doctors/manage-doctors.component';
 import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
 import { BusinessReportComponent } from './business-report/business-report.component';
+import { SearchRoomsComponent } from './search-rooms/search-rooms.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -110,7 +111,8 @@ const appRoutes: Routes = [
     ManageRoomsComponent,
     ManageDoctorsComponent,
     NewAppointmentComponent,
-    BusinessReportComponent
+    BusinessReportComponent,
+    SearchRoomsComponent
   ],
   imports: [ 
     BrowserModule,
