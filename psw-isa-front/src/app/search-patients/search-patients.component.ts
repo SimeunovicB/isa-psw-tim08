@@ -20,13 +20,15 @@ export class SearchPatientsComponent implements OnInit {
     private patientService: PatientService) { }
 
   ngOnInit() {
-    this.patientService.searchPatients("", "", "")
+    /*this.patientService.searchPatients("", "", "")
       .subscribe(
         (data) => {
           console.log(data);
           this.patients = Object.assign([], (data));
         }
-      )
+      )*/
+
+    this.findPatients("","","");
 
   }
 

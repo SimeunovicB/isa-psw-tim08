@@ -1,0 +1,5 @@
+<app-header></app-header>
+<form class="form-inline md-form mr-auto mb-4" (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <input class="form-control mr-sm-2" type="text" [(ngModel)]="ime" name="ime" placeholder="Ime" aria-label="Search">
+    <button class="btn btn-primary" type="submit">Pretraži</button>
+</form>

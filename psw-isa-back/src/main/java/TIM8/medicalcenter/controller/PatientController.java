@@ -1,6 +1,5 @@
 package TIM8.medicalcenter.controller;
 
-import TIM8.medicalcenter.dto.AppointmentDTO;
 import TIM8.medicalcenter.dto.DoctorDTO;
 import TIM8.medicalcenter.dto.PatientDTO;
 import TIM8.medicalcenter.model.Appointment;
@@ -14,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +40,7 @@ public class PatientController {
         }
         return new ResponseEntity<>(patients,HttpStatus.OK);
     }
+
     @GetMapping(value = "/getAllPatients")
     public ResponseEntity<List<PatientDTO>> getAllPatients() {
         List<Person> patientList = personService.findByType("P");
@@ -65,6 +63,7 @@ public class PatientController {
         }
         return new ResponseEntity<>(patients,HttpStatus.OK);
     }
+
     @RequestMapping(value="/findDoctors",method = RequestMethod.GET)
     public ResponseEntity<?> findDoctor(@RequestParam String name, @RequestParam String lastname,@RequestParam String ocena){
         List<Doctor> doctorList = personService.findDoctors();
