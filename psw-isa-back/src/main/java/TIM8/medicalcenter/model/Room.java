@@ -20,6 +20,9 @@ public class Room {
     @Column(name = "name",nullable = false)
     private String name;
 
+    @Column(name = "number",nullable = false)
+    private int number;
+
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Clinic clinic;
 

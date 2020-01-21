@@ -4,6 +4,7 @@ import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.users.Doctor;
 import lombok.Getter;
 import lombok.Setter;
+import org.joda.time.DateTime;
 
 import java.util.Date;
 

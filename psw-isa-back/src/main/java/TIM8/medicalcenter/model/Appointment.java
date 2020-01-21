@@ -4,6 +4,7 @@ import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
 import lombok.Getter;
 import lombok.Setter;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,8 +26,7 @@ public class Appointment {
     @Column(name = "date",nullable = false)
     private Date date;
 
-    @Column(name = "duration",nullable = false)
-    private int duration;
+
 
     @Column(name = "price",nullable = false)
     private double price;
@@ -66,5 +66,4 @@ public class Appointment {
         }
         return Objects.equals(id, a.id);
     }
-    //endregion
 }

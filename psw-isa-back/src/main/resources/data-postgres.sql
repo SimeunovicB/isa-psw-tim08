@@ -33,9 +33,16 @@ insert into medical_record(height,weight,diopter,alergies,blood_type,patient_id)
 insert into vacation(start_date,end_date,status,staff_id) values ('2020-06-01','2020-06-10','PENDING',2);
 insert into vacation(start_date,end_date,status,staff_id) values ('2020-07-01','2020-07-10','PENDING',3);
 
-insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id) values ('2020-06-01',0,0,0,'','Hirurg',2,null );
-insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id) values ('2020-07-01',0,0,0,'','Hirurg',2,null );
-insert into appointment(date,discount,duration,price,status,type,doctor_id,room_id) values ('2020-07-01',0,0,0,'','Pedijatar',2,null );
+insert into room (name,number, clinic_id) values ('Sala za pregled' ,1, 1);
+insert into room (name,number, clinic_id) values ('Sala za pregled', 2, 1);
+
+
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-06-01 12:00:00.000',1,0,'','Hirurg',2,1 );
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-07-01 13:00:00.000',5,0,'','Hirurg',2,1 );
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-07-01 14:00:00.000',12,0,'','Pedijatar',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-07-01 15:00:00.000',12,0,'','Pedijatar',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-07-01 16:00:00.000',12,0,'','Pedijatar',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-07-01 19:00:00.000',12,0,'','Pedijatar',2,1);
 
 INSERT INTO authority (name) VALUES ('ROLE_USER');
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
@@ -48,8 +55,6 @@ INSERT INTO user_authority (user_id, authority_id) VALUES (3, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (4, 2);
 INSERT INTO user_authority (user_id, authority_id) VALUES (5, 2);
 
-insert into room (name, clinic_id) values ('Sala 1', 1);
-insert into room (name, clinic_id) values ('Sala 2', 1);
 
 insert into diagnosis (name) values ('prehlada');
 insert into diagnosis (name) values ('kasalj');
