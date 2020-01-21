@@ -1,6 +1,7 @@
 package TIM8.medicalcenter.model.users;
 
 import TIM8.medicalcenter.model.Clinic;
+import TIM8.medicalcenter.model.Recipe;
 import TIM8.medicalcenter.model.Vacation;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,9 @@ public class Nurse extends Person {
 
     @OneToMany(mappedBy = "staff",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Vacation> vacations = new HashSet<>();
+
+    @OneToMany(mappedBy = "nurse",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    Set<Recipe> recipes = new HashSet<>();
 
 
 
