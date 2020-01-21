@@ -14,6 +14,7 @@ public class RoomService {
     private RoomRepository roomRepository;
 
     public Room findOneByName(String name) {return roomRepository.findByName(name);}
+    public List<Room> findByNameAndNumber(String name,int number) { return roomRepository.findByNameAndNumber(name,number);}
     public Room findOneById(Long id) {return roomRepository.findOneById(id);}
     public List<Room> findAll() {return roomRepository.findAll();}
     //public Room save()
