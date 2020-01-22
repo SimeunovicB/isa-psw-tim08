@@ -16,10 +16,10 @@ public class MedicalRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "height",nullable = false)
+    @Column(name = "height")
     private Double height;
 
-    @Column(name = "weight",nullable =false)
+    @Column(name = "weight")
     private Double weight;
 
     @Column(name = "diopter")
@@ -28,7 +28,7 @@ public class MedicalRecord {
     @Column(name = "alergies")
     private String alergies;
 
-    @Column(name = "blood_type",nullable = false)
+    @Column(name = "blood_type")
     private String bloodType;
 
     @OneToOne(cascade = CascadeType.ALL)
