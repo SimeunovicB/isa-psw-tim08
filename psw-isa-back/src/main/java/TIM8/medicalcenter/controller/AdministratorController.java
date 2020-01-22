@@ -1,17 +1,22 @@
 package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.AdministratorDTO;
+import TIM8.medicalcenter.dto.MakeAppointmentDTORequest;
 import TIM8.medicalcenter.dto.PersonDTO;
+import TIM8.medicalcenter.dto.response.AppointmentRequestDTOResponse;
 import TIM8.medicalcenter.exception.ResourceConflictException;
-import TIM8.medicalcenter.model.users.Administrator;
-import TIM8.medicalcenter.model.users.ClinicsAdministrator;
-import TIM8.medicalcenter.model.users.Person;
-import TIM8.medicalcenter.service.EmailService;
-import TIM8.medicalcenter.service.PersonService;
+import TIM8.medicalcenter.model.Appointment;
+import TIM8.medicalcenter.model.AppointmentRequest;
+import TIM8.medicalcenter.model.Room;
+import TIM8.medicalcenter.model.users.*;
+import TIM8.medicalcenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -23,6 +28,15 @@ public class AdministratorController {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    RoomService roomService;
+
+    @Autowired
+    AppointmentService appointmentService;
+
+    @Autowired
+    AppointmentRequestService appointmentRequestService;
 
     @PostMapping(consumes = "application/json",value ="/approveRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusApproved(@PathVariable Long id) {
@@ -81,6 +95,35 @@ public class AdministratorController {
         return new ResponseEntity<>(new AdministratorDTO(person1), HttpStatus.CREATED);
 
     }
+    @RequestMapping(consumes = "application/json",value ="/makeAppointment",method = RequestMethod.POST)
+    public ResponseEntity<?> makeAppoitment(@RequestBody MakeAppointmentDTORequest request){
+        Appointment a = new Appointment();
+        Doctor d = (Doctor) personService.findOneById(request.getDoctor());
+        Patient p = (Patient) personService.findOneById(request.getPatient());
+        Room r = roomService.findOneById(request.getRoom());
+        a.setPatient(p);
+        a.setDoctor(d);
+        a.setRoom(r);
+        a.setStatus("ACTIVE");
+        a.setType(request.getType());
+        a.setDate(request.getDate());
+        a.setDiscount(10);
+        a.setPrice(10000);
+        Appointment a1 = appointmentService.save(a);
+        return new ResponseEntity<>(a1,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getAppointmentRequests",method = RequestMethod.GET)
+    public ResponseEntity<?> getAppointmentRequests(){
+        List<AppointmentRequest> requests = appointmentRequestService.findAll();
+        List<AppointmentRequestDTOResponse> responses = new ArrayList<>();
+        for(AppointmentRequest a : requests){
+            responses.add(new AppointmentRequestDTOResponse(a.getDoctor_id(),a.getPatient_id(),a.getDate(),a.getAppointment_type()));
+        }
+
+        return null;
+    }
+
 
 
 

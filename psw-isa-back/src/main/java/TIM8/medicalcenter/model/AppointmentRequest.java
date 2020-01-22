@@ -28,7 +28,7 @@ public class AppointmentRequest {
     private Date date;
 
     @Column(name = "appointment_type",nullable = false)
-    private Long appointment_type;
+    private String appointment_type;
 
 
 }
