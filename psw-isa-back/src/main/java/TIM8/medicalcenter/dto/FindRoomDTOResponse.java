@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FindRoomDTOResponse {
+    Long id;
     String name;
     int number;
     ArrayList<Date> dates;

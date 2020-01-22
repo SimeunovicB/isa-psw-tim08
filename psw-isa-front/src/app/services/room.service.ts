@@ -10,8 +10,12 @@ export class RoomService {
 
   constructor(private http: HttpClient) { }
 
-  searchRooms(ime:string) {
-    return this.http.get("http://localhost:9090/api/room/findroom?name="+ime)
+  searchRooms(name:string, number:any, date:any) {
+    return this.http.post("http://localhost:9090/api/room/findRooms",{
+      name:name,
+      number:number,
+      date:date
+    })
     .pipe(
       map((response: any) => {
         const data = response;
