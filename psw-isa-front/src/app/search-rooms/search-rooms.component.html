@@ -1,5 +1,27 @@
 <app-header></app-header>
 <form class="form-inline md-form mr-auto mb-4" (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <input class="form-control mr-sm-2" type="text" [(ngModel)]="ime" name="ime" placeholder="Ime" aria-label="Search">
-    <button class="btn btn-primary" type="submit">Pretraži</button>
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" [(ngModel)]="ime" name="ime" placeholder="Naziv sale" aria-label="Search">
+            <input type="text" [(ngModel)]="broj" name="broj" placeholder="Broj sale" aria-label="Search">
+            <div class="datum">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" name="datum" [(ngModel)]="model"
+                    ngbDatepicker #d="ngbDatepicker" required>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><img
+                            src="https://image.flaticon.com/icons/png/512/42/42446.png"
+                            style="width: 1.2rem; height: 1.2rem; cursor: pointer;" /></button></div>
+            </div>
+            <button class="btn btn-primary" type="submit">Pretraži</button>
+        </div>
+    </div>
 </form>
+
+<div class="sobe" *ngFor="let room of rooms">
+    <div class="naziv"><strong><span class="nazivsale">{{room.name}}</span><span class="nazivsale">
+                {{room.number}}</span></strong></div>
+    <div class="datumi" *ngFor="let date of room.dates">
+        <span class="nazivsale">{{date | date:'short'}}</span>
+        <button class="btn btn-primary" (click)="zakazi()">Zakaži</button>
+    </div>
+</div>

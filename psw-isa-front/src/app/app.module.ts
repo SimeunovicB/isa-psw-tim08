@@ -70,6 +70,7 @@ const appRoutes: Routes = [
   { path: 'appointmentReservation', component: AppointmentReservationComponent },
   { path: 'searchpatients', component: SearchPatientsComponent },
   { path: 'searchclinics', component: SearchClinicsComponent },
+  { path: 'searchrooms', component: SearchRoomsComponent },
   { path: 'dodajKliniku', component: AddClinicComponent },
   { path: 'dodajAdministratoraKlinike', component: RegisterAdminComponent },
   { path: 'dodajAdministratoraKlinickogCentra', component: RegisterClinicCentreAdminComponent },
