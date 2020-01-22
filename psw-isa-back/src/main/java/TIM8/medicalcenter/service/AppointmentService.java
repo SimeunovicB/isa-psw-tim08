@@ -15,4 +15,5 @@ public class AppointmentService  {
 
     public List<Appointment> findAll(){return appointmentRepository.findAll();}
     public List<Appointment> findAppointments(Date date, String type){return appointmentRepository.findAppointments(date,type);}
+    public Appointment save(Appointment a) {  return appointmentRepository.save(a); }
 }
