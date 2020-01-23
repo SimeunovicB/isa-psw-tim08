@@ -5,6 +5,8 @@ import { DiagnosisService } from '../services/diagnosis/diagnosis.service';
 import { MedicalExaminationService } from '../services/medical-examination/medical-examination.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
+import { AppointmentTypeService } from '../services/appointment-type.service';
+import { AppointmentRequestService } from '../services/appointment-request.service';
 
 
 @Component({
@@ -22,11 +24,16 @@ export class MedicalExaminationComponent implements OnInit {
   helper : any;
   doctorId : any;
   description : any;
+  appointmentTypes = [];
+  model : any;
+  selectedType : any;
 
   constructor(private router: Router,
     private medicineService: MedicineService,
     private diagnosisService: DiagnosisService,
     private medicalExaminationService : MedicalExaminationService,
+    private appRequestService : AppointmentRequestService,
+    private appTypeService : AppointmentTypeService,
     private activatedRoute: ActivatedRoute,
     private cookieService : CookieService) { }
 
@@ -35,8 +42,17 @@ export class MedicalExaminationComponent implements OnInit {
     this.helper = new JwtHelperService();
     this.doctorId = this.helper.decodeToken(this.cookieService.get('token')).id;
     this.init();
-
+    this.getTypes();
   }
+
+  getTypes() {
+    this.appTypeService.getAll().subscribe(
+      (data: any) => {
+        this.appointmentTypes = data;
+      }, (error) => alert(error.text)
+    );
+  }
+
   init() {
     this.medicineService.getAll().subscribe(
       (data: any) => {
@@ -64,8 +80,25 @@ export class MedicalExaminationComponent implements OnInit {
   changeSelectedDiagnosis(filterVal: any) {
     this.diagnosis = filterVal;
   }
+
+  changeSelectedAppType(filterVal: any) {
+    this.selectedType = filterVal;
+    console.log(this.selectedType);
+  }
+
   promeni(){
     this.medicalExaminationService.newExamination(this.patientId,this.doctorId,this.description,this.medicine,this.diagnosis).subscribe(
+      (data : any) => {
+        console.log(data)
+      }, (error) => {
+        alert(error.text);
+      }
+    )  
+  }
+
+  zakazi() {
+    var dat = "" + this.model.year + "-" + this.model.month + "-" + this.model.day;
+    this.appRequestService.addRequest(this.doctorId, this.patientId, dat, this.selectedType).subscribe(
       (data : any) => {
         console.log(data)
       }, (error) => {

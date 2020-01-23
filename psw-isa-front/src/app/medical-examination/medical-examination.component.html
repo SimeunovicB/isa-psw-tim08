@@ -25,7 +25,7 @@
         <div class="form-group row">
             <label for="medicine" class="col-sm-2 col-form-label">Prepisan lek</label>
             <div class="col-sm-5">
-                <select name="repeatSelect" id="repeatSelect" (change)="changeSelectedMedicine($event.target.value)"
+                <select name="repeatSelect" id="repeatSelect2" (change)="changeSelectedMedicine($event.target.value)"
                     class="form-control">
                     <option value={{null}}></option>
                     <option *ngFor="let medicine1 of medicines" value="{{medicine1.id}}">
@@ -37,6 +37,30 @@
         <div class="form-group row">
             <div class="col-sm-2">
                 <button (click)="promeni()" class="btn btn-primary">Potvrdi</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="zakazi">
+    <form class="form-inline md-form mr-auto mb-4" (ngSubmit)="zakazi(f)" #f="ngForm">
+        <div class="form-group">
+            <div class="input-group">
+                <select name="repeatSelect" id="repeatSelect3" (change)="changeSelectedAppType($event.target.value)">
+                    <option value={{null}}></option>
+                    <option *ngFor="let appotype of appointmentTypes" value="{{appotype.name}}">
+                        {{appotype.name}}
+                    </option>
+                </select>
+                <div class="datum">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" name="datum" [(ngModel)]="model"
+                        ngbDatepicker #d="ngbDatepicker" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><img
+                                src="https://image.flaticon.com/icons/png/512/42/42446.png"
+                                style="width: 1.2rem; height: 1.2rem; cursor: pointer;" /></button></div>
+                </div>
+                <button class="btn btn-primary" type="submit">Zakaži</button>
             </div>
         </div>
     </form>
