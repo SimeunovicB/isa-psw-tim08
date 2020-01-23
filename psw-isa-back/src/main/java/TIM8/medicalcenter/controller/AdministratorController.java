@@ -101,6 +101,7 @@ public class AdministratorController {
         Doctor d = (Doctor) personService.findOneById(request.getDoctor());
         Patient p = (Patient) personService.findOneById(request.getPatient());
         Room r = roomService.findOneById(request.getRoom());
+        appointmentRequestService.delete(request.getAppointmentRequestId());
         a.setPatient(p);
         a.setDoctor(d);
         a.setRoom(r);
@@ -110,7 +111,7 @@ public class AdministratorController {
         a.setDiscount(10);
         a.setPrice(10000);
         Appointment a1 = appointmentService.save(a);
-        return new ResponseEntity<>(a1,HttpStatus.OK);
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getAppointmentRequests",method = RequestMethod.GET)
@@ -118,10 +119,10 @@ public class AdministratorController {
         List<AppointmentRequest> requests = appointmentRequestService.findAll();
         List<AppointmentRequestDTOResponse> responses = new ArrayList<>();
         for(AppointmentRequest a : requests){
-            responses.add(new AppointmentRequestDTOResponse(a.getDoctor_id(),a.getPatient_id(),a.getDate(),a.getAppointment_type()));
+            responses.add(new AppointmentRequestDTOResponse(a.getId(),a.getDoctor_id(),a.getPatient_id(),a.getDate(),a.getAppointment_type()));
         }
 
-        return null;
+        return new ResponseEntity<>(responses,HttpStatus.OK);
     }
 
 

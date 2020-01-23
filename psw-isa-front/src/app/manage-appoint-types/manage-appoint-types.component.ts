@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentTypeService } from '../services/appointment-type.service';
+import { AppointmentTypeService } from '../services/appointment-type/appointment-type.service';
 
 @Component({
   selector: 'app-manage-appoint-types',
