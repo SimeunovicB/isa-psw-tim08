@@ -14,5 +14,6 @@ public class AppointmentRequestService {
 
 
     public List<AppointmentRequest> findAll() { return appointmentRequestRepository.findAll();}
+    public void delete(Long id) { appointmentRequestRepository.deleteById(id);}
 
 }

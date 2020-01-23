@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
-import { HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt'
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { SplitInterpolation } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'

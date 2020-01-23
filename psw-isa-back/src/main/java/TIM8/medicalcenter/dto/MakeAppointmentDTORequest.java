@@ -20,6 +20,8 @@ public class MakeAppointmentDTORequest {
     private Long room;
     private Long doctor;
     private Long patient;
+    private Long appointmentRequestId;
+
 
 
 
