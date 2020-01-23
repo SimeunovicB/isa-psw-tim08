@@ -48,6 +48,7 @@ INSERT INTO authority (name) VALUES ('ROLE_USER');
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
 
 insert into appointment_type (name) VALUES ('Rutinski pregled');
+insert into appointment_type (name) VALUES ('Operacija');
 
 INSERT INTO user_authority (user_id, authority_id) VALUES (1, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (2, 1);
