@@ -13,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppointmentRequestDTOResponse {
+    private Long id;
     private Long doctor;
     private Long patient;
     private Date date;
