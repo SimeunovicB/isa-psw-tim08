@@ -3,6 +3,7 @@ package TIM8.medicalcenter.controller;
 import TIM8.medicalcenter.dto.AppointmentRequestDTORequest;
 import TIM8.medicalcenter.model.AppointmentRequest;
 import TIM8.medicalcenter.service.AppointmentRequestService;
+import TIM8.medicalcenter.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,9 @@ public class AppointmentRequestController {
     @Autowired
     private AppointmentRequestService appointmentRequestService;
 
+    @Autowired
+    private EmailService emailService;
+
     @RequestMapping(value = "/addAppointmentRequest",consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<?> addAppointmentType(@RequestBody AppointmentRequestDTORequest request){
         int year = Integer.parseInt(request.getDate().split("-")[0]);
@@ -35,6 +39,8 @@ public class AppointmentRequestController {
         d.setMinutes(0);
         d.setSeconds(0);
         AppointmentRequest a= appointmentRequestService.save(request.getDoctor(), request.getPatient(), d, request.getType());
+
+        //emailService.newRequest(a);
 
         return new ResponseEntity<>(a, HttpStatus.CREATED);
     }
