@@ -5,7 +5,7 @@ import { DiagnosisService } from '../services/diagnosis/diagnosis.service';
 import { MedicalExaminationService } from '../services/medical-examination/medical-examination.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
-import { AppointmentTypeService } from '../services/appointment-type.service';
+import { AppointmentTypeService } from '../services/appointment-type/appointment-type.service';
 import { AppointmentRequestService } from '../services/appointment-request.service';
 
 
