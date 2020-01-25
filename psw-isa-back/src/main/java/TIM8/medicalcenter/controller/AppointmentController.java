@@ -74,16 +74,6 @@ public class AppointmentController {
         return new ResponseEntity<>(appDto, HttpStatus.OK);
     }
 
-    @RequestMapping(consumes = "application/json",value="/reserveAppointments",method = RequestMethod.GET)
-    public ResponseEntity<?> reserveAppointment(@RequestParam String date, @RequestParam String type,@RequestParam String doctorName,
-                                                @RequestParam String patient){
-        List<Appointment> apps = appointmentService.findAll();
-        for (Appointment a:apps) {
-            if(a.getDate().equals(date)&& a.getType().equalsIgnoreCase(type)&&a.getDoctor().getFirstName().equalsIgnoreCase(doctorName))
-                a.setStatus(patient);
-        }
-        return new ResponseEntity<>(apps, HttpStatus.OK);
-    }
     @RequestMapping(value="/findClinic/doctors",method = RequestMethod.GET)
     public ResponseEntity<?> findDoctors(@RequestParam String clinicName,@RequestParam String date, @RequestParam String type){
         System.out.println(clinicName);
@@ -110,4 +100,6 @@ public class AppointmentController {
 
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
+
+
 }
