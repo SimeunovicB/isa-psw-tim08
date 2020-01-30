@@ -29,7 +29,4 @@ public class Nurse extends Person {
 
     @OneToMany(mappedBy = "nurse",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Recipe> recipes = new HashSet<>();
-
-
-
 }

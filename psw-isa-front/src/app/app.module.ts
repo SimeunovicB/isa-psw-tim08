@@ -52,6 +52,7 @@ import { NewAppointmentComponent } from './new-appointment/new-appointment.compo
 import { BusinessReportComponent } from './business-report/business-report.component';
 import { SearchRoomsComponent } from './search-rooms/search-rooms.component';
 import { OveravanjeReceptaComponent } from './overavanje-recepta/overavanje-recepta.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -118,7 +119,8 @@ const appRoutes: Routes = [
     NewAppointmentComponent,
     BusinessReportComponent,
     SearchRoomsComponent,
-    OveravanjeReceptaComponent
+    OveravanjeReceptaComponent,
+    CalendarComponent
   ],
   imports: [ 
     BrowserModule,
