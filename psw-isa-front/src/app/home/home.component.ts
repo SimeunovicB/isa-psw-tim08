@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
       this.userNurse = false;
       this.userDoctor = false;
     }
-}
+  }
 
   getUser() {
     this.userService.getUserByMail(this.userMail)
