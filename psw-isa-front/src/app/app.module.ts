@@ -53,6 +53,8 @@ import { BusinessReportComponent } from './business-report/business-report.compo
 import { SearchRoomsComponent } from './search-rooms/search-rooms.component';
 import { OveravanjeReceptaComponent } from './overavanje-recepta/overavanje-recepta.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -79,6 +81,7 @@ const appRoutes: Routes = [
   { path: 'dodajAdministratoraKlinickogCentra', component: RegisterClinicCentreAdminComponent },
   { path: 'dodavanjeUSifarnik', component: CodebookComponent },
   { path: 'overavanjeRecepta', component : OveravanjeReceptaComponent},
+  { path: 'radniKalendar', component: CalendarComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -132,7 +135,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatTableModule,
     NgbModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
 
   providers: [
