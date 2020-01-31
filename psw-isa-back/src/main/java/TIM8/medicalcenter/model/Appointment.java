@@ -2,6 +2,7 @@ package TIM8.medicalcenter.model;
 
 import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,12 +35,15 @@ public class Appointment {
     @Column(name = "status",nullable = false)
     private String status;
 
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Room room;
 
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Doctor doctor;
 
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Patient patient;
     //endregion

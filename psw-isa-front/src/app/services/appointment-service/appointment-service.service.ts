@@ -27,6 +27,19 @@ export class AppointmentServiceService {
       })
     )
   }
+  getByDoctorIdForCalendar(doctorId : string) {
+    console.log("http://localhost:9090/api/appointment/getAppointmentsForDoctor?doctorId=a" + doctorId)
+    return this.http.get("http://localhost:9090/api/appointment/getAppointmentsForDoctor?doctorId=a" + doctorId)
+    .pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )
+  }
 
   makeNewAppointment(
       appointmentRequestId : any,

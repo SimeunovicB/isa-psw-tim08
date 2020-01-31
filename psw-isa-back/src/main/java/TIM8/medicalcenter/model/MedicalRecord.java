@@ -1,6 +1,7 @@
 package TIM8.medicalcenter.model;
 
 import TIM8.medicalcenter.model.users.Patient;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,7 @@ public class MedicalRecord {
     @Column(name = "blood_type")
     private String bloodType;
 
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;

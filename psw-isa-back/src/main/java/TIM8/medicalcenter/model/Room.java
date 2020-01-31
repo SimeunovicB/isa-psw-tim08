@@ -1,5 +1,7 @@
 package TIM8.medicalcenter.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,9 +25,12 @@ public class Room {
     @Column(name = "number",nullable = false)
     private int number;
 
+
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Clinic clinic;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "room",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Appointment> appointments = new HashSet<Appointment>();
     //endregion

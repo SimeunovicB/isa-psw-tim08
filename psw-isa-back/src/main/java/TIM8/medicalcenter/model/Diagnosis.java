@@ -1,5 +1,6 @@
 package TIM8.medicalcenter.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,7 @@ public class Diagnosis {
     private String name;
     //endregion
 
+    @JsonBackReference
     @OneToMany(mappedBy = "diagnosis",fetch = FetchType.LAZY)
     private Set<MedicalExaminationReport> medicalExaminationReports = new HashSet<>();
 
