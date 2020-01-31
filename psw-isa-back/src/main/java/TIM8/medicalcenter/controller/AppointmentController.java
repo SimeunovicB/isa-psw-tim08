@@ -102,7 +102,8 @@ public class AppointmentController {
     }
 
     /**
-     * Metoda koja vraca sve preglede na kojima ima neki pacijent,odnosno one koji nisu predefinisani,za konkretnog doktora,koristi se za popunjavanje kalendara
+     * Metoda koja vraca sve preglede na kojima ima neki pacijent,odnosno one koji nisu predefinisani,
+     * za konkretnog doktora,koristi se za popunjavanje kalendara
      * @param doctorId
      * @return
      */
