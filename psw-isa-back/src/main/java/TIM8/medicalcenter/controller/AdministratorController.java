@@ -38,6 +38,12 @@ public class AdministratorController {
     @Autowired
     AppointmentRequestService appointmentRequestService;
 
+    /**
+     *
+     * Odobravanje registracije za nekog pacijenta,moze biti uradjeno samo od strane CCA
+     * @param id
+     * @return
+     */
     @PostMapping(consumes = "application/json",value ="/approveRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusApproved(@PathVariable Long id) {
 
@@ -56,7 +62,12 @@ public class AdministratorController {
     }
 
 
-
+    /**
+     *
+     * Odbijanje registracije nekog pacijenta moze biti uradjeno samo od strane CCA
+     * @param id
+     * @return
+     */
     @PostMapping(consumes = "application/json",value = "/rejectRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusRejected(@PathVariable Long id){
         Person person = personService.findOneById(id);
@@ -73,6 +84,13 @@ public class AdministratorController {
         }
 
     }
+
+    /**
+     *
+     * Funkcija za registrovanje Administratora klinike
+     * @param administratorDTO
+     * @return
+     */
     @RequestMapping(consumes = "application/json",value = "/registerAdmin",method = RequestMethod.POST)
     public ResponseEntity<?> registerAdmin(@RequestBody AdministratorDTO administratorDTO){
         Administrator administrator1 = (Administrator) personService.findOneByUsername(administratorDTO.getUsername());
@@ -85,6 +103,12 @@ public class AdministratorController {
         return new ResponseEntity<>(new AdministratorDTO(person1), HttpStatus.CREATED);
 
     }
+
+    /**
+     * Funkcija za registraovanje CCA
+     * @param administratorDTO
+     * @return
+     */
     @RequestMapping(consumes = "application/json",value = "/registerClinicCentreAdmin",method = RequestMethod.POST)
     public ResponseEntity<?> registerClinicCentreAdmin(@RequestBody AdministratorDTO administratorDTO){
         Person person= personService.findOneByUsername(administratorDTO.getUsername());
@@ -95,6 +119,13 @@ public class AdministratorController {
         return new ResponseEntity<>(new AdministratorDTO(person1), HttpStatus.CREATED);
 
     }
+
+    /**
+     *
+     * Funckija kojom administrator pravi novi pregled,birajuci neki od pregleda iz liste zahteva za pregled
+     * @param request
+     * @return
+     */
     @RequestMapping(consumes = "application/json",value ="/makeAppointment",method = RequestMethod.POST)
     public ResponseEntity<?> makeAppoitment(@RequestBody MakeAppointmentDTORequest request){
         Appointment a = new Appointment();
@@ -114,6 +145,11 @@ public class AdministratorController {
         return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
+    /**
+     *
+     * Funkcija koja adminu vraca sve zahteve za pregled ili operaciju koje je pre toga napravio doktor
+     * @return
+     */
     @RequestMapping(value = "/getAppointmentRequests",method = RequestMethod.GET)
     public ResponseEntity<?> getAppointmentRequests(){
         List<AppointmentRequest> requests = appointmentRequestService.findAll();

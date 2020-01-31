@@ -101,5 +101,26 @@ public class AppointmentController {
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
 
+    /**
+     * Metoda koja vraca sve preglede na kojima ima neki pacijent,odnosno one koji nisu predefinisani,za konkretnog doktora,koristi se za popunjavanje kalendara
+     * @param doctorId
+     * @return
+     */
+    @RequestMapping(value="/getAppointmentsForDoctor",method = RequestMethod.GET)
+    public ResponseEntity<?> getAppointmentsForDoctor(@RequestParam String doctorId){
+        Long id = Long.parseLong(doctorId.substring(1));
+        List<Appointment> apps = appointmentService.findAllByDoctorId(id);
+        List<AppointmentDTO> appDto = new ArrayList<>();
+        for (Appointment a:apps) {
+            if(!a.getStatus().equals("") || a.getPatient() == null)
+                continue;
+
+            AppointmentDTO ap = new AppointmentDTO(a);
+
+            appDto.add(ap);
+        }
+        return new ResponseEntity<>(appDto, HttpStatus.OK);
+    }
+
 
 }

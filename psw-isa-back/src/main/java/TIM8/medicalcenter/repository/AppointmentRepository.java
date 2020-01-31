@@ -2,6 +2,7 @@ package TIM8.medicalcenter.repository;
 
 import TIM8.medicalcenter.dto.AppointmentDTO;
 import TIM8.medicalcenter.model.Appointment;
+import TIM8.medicalcenter.model.users.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,5 +15,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long>{
     List<Appointment> findAppointments(Date date, String type);
 
     List<Appointment> findAll();
+    List<Appointment> findAllByDoctor(Doctor d);
 
 }

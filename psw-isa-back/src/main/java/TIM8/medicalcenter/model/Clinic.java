@@ -4,6 +4,7 @@ import TIM8.medicalcenter.model.users.Administrator;
 import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Nurse;
 import TIM8.medicalcenter.model.users.Patient;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,18 +31,23 @@ public class Clinic {
     @Column(name = "description")
     private String description;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "clinic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Doctor> doctors = new HashSet<Doctor>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "clinic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Nurse> nurses = new HashSet<Nurse>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "clinic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Room> rooms = new HashSet<Room>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "clinic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Administrator> administrators = new HashSet<Administrator>();
 
+    @JsonBackReference
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE

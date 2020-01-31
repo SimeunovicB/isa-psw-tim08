@@ -1,6 +1,7 @@
 package TIM8.medicalcenter.model;
 
 import TIM8.medicalcenter.model.users.Person;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +26,7 @@ public class Vacation {
     @Column(name = "status",nullable = false)
     private String status;
 
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Person staff;
 

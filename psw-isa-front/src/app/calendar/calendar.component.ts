@@ -23,6 +23,10 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { AppointmentServiceService } from '../services/appointment-service/appointment-service.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 const colors: any = {
   red: {
@@ -45,7 +49,42 @@ const colors: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
+
+  appointments: any
+  doctorId: any
+  helper: any
+  constructor(private modal: NgbModal,
+    private appointmentService: AppointmentServiceService,
+    private cookieService: CookieService,
+    private router : Router) { }
+
+  ngOnInit() {
+    this.helper = new JwtHelperService();
+    this.doctorId = this.helper.decodeToken(this.cookieService.get('token')).id;
+    this.appointmentService.getByDoctorIdForCalendar(this.doctorId).subscribe(
+      (data) => {
+        console.log(data);
+        this.appointments = Object.assign([], (data));
+        this.events = this.appointments.map(appointment => {
+          return {
+            start: new Date(appointment.date),
+            title: `${appointment.type} ${appointment.patientId}`,
+            color: colors.red,
+            action : this.actions,
+            
+            
+
+          }
+        })
+        
+
+       
+      })
+
+
+
+  }
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
@@ -66,6 +105,7 @@ export class CalendarComponent {
       a11yLabel: 'Edit',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.handleEvent('Edited', event);
+
       }
     },
     {
@@ -74,6 +114,7 @@ export class CalendarComponent {
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
+
       }
     }
   ];
@@ -81,10 +122,10 @@ export class CalendarComponent {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
+    /* {
+      start: subDays(startOfDay(new Date()), 0),
+      end: addDays(new Date(), 0),
+      title: 'A 1 day event',
       color: colors.red,
       actions: this.actions,
       allDay: true,
@@ -118,12 +159,12 @@ export class CalendarComponent {
         afterEnd: true
       },
       draggable: true
-    }
+    } */
   ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) { }
+
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -157,9 +198,11 @@ export class CalendarComponent {
     this.handleEvent('Dropped or resized', event);
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+  handleEvent(patient: string, event: CalendarEvent): void {
+    console.log(patient);
+    this.router.navigate([`/medicalExamination/${event.title.substring(event.title.length-1,event.title.length)}`]);
+
+
   }
 
   addEvent(): void {
