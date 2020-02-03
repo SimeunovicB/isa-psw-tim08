@@ -1,40 +1,20 @@
 package TIM8.medicalcenter.dto;
 
 import TIM8.medicalcenter.model.users.Doctor;
-import TIM8.medicalcenter.model.users.Patient;
 import TIM8.medicalcenter.model.users.Person;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class DoctorDTO extends PersonDTO {
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public List<String> getDates() {
-        return dates;
-    }
-
-    public void setDates(List<String> dates) {
-        this.dates = dates;
-    }
-
     private String name;
     private String lastname;
     private List<String> dates=new ArrayList<>();
+    private Long clinic;
 
     public DoctorDTO() {
     }
@@ -42,8 +22,9 @@ public class DoctorDTO extends PersonDTO {
     public DoctorDTO(Doctor p){
         super((Person) p);
     }
-    public DoctorDTO(String name, String lastname) {
+    public DoctorDTO(String name, String lastname, Long clinic) {
         this.name = name;
         this.lastname = lastname;
+        this.clinic = clinic;
     }
 }

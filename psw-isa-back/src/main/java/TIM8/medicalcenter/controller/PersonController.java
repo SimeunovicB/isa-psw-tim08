@@ -2,8 +2,13 @@ package TIM8.medicalcenter.controller;
 
 
 
+import TIM8.medicalcenter.dto.AdministratorDTO;
+import TIM8.medicalcenter.dto.DoctorDTO;
 import TIM8.medicalcenter.dto.PersonDTO;
+import TIM8.medicalcenter.model.users.Administrator;
+import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Person;
+import TIM8.medicalcenter.service.DoctorService;
 import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +27,9 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private DoctorService doctorService;
+
 
     @RequestMapping(consumes = "application/json",value="/getByEmail",method = RequestMethod.POST)
     public ResponseEntity<?> getByEmail(@RequestBody PersonDTO person) {
@@ -31,6 +39,25 @@ public class PersonController {
         return new ResponseEntity<>(new PersonDTO(personRet), HttpStatus.OK);
 
     }
+
+    @RequestMapping(value="/getAdminByEmail",method = RequestMethod.GET)
+    public ResponseEntity<?> getAdminByEmail(@RequestParam String mail) {
+        Administrator a = personService.findAdmin(mail).get(0);
+        if (a == null)
+            return null;
+        return new ResponseEntity<>(new AdministratorDTO(a), HttpStatus.OK);
+
+    }
+
+    @RequestMapping(consumes = "application/json",value="/getDocByEmail",method = RequestMethod.POST)
+    public ResponseEntity<?> getDocByEmail(@RequestBody PersonDTO person) {
+        Doctor personRet = doctorService.findOneByUsername(person.getUsername());
+        if (personRet == null)
+            return null;
+        return new ResponseEntity<>(new DoctorDTO(personRet.getFirstName(),personRet.getLastName(),personRet.getClinic().getId()), HttpStatus.OK);
+
+    }
+
     @RequestMapping(consumes = "application/json",value ="/changePassword",method = RequestMethod.POST)
     public ResponseEntity<?> updatePassword(@RequestBody PasswordChanger passwordChanger) {
         personService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);

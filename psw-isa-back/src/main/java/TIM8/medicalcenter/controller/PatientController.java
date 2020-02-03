@@ -42,10 +42,11 @@ public class PatientController {
     }
 
     @GetMapping(value = "/getAllPatients")
-    public ResponseEntity<List<PatientDTO>> getAllPatients() {
+    public ResponseEntity<List<PatientDTO>> getAllPatients(@RequestParam Long id) {
         List<Person> patientList = personService.findByType("P");
         List<PatientDTO> patients = new ArrayList<>();
         for(Person p : patientList){
+
             patients.add(new PatientDTO((Patient) p));
         }
         return new ResponseEntity<>(patients,HttpStatus.OK);

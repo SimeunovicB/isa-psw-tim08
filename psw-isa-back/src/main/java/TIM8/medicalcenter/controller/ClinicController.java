@@ -25,6 +25,7 @@ public class ClinicController {
         ClinicDTO clinicDTO = new ClinicDTO(c);
         return new ResponseEntity<>(clinicDTO,HttpStatus.OK);
     }
+
     @GetMapping(value="/getClinics")
     public ResponseEntity<List<ClinicDTO>> getAllClinics() {
         List<Clinic> clinics = clinicService.findAll();
@@ -34,6 +35,14 @@ public class ClinicController {
         }
         return new ResponseEntity<>(allClinics,HttpStatus.OK);
     }
+
+    @GetMapping(value="/getAdminsClinic")
+    public ResponseEntity<ClinicDTO> getAdminsClinic(@RequestParam Long id) {
+        Clinic c = clinicService.findOneById(id);
+
+        return new ResponseEntity<>(new ClinicDTO(c), HttpStatus.OK);
+    }
+
     @RequestMapping(value="/addClinic",consumes = "application/json",method = RequestMethod.POST)
     public ResponseEntity<?> addClinic(@RequestBody Clinic clinic){
         Clinic clinic1 = clinicService.findOneByName(clinic.getName());

@@ -13,7 +13,6 @@ import TIM8.medicalcenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -150,7 +149,7 @@ public class AdministratorController {
 
 
     //@Scheduled(cron="0 0 0 1/1 * ? *")
-    @Scheduled(fixedRate = 1000)
+    //@Scheduled(fixedRate = 1000)
     public void methodC() {
         List<AppointmentRequest> requests = appointmentRequestService.findAll();
         List<Room> rooms = roomService.findAll();
@@ -183,16 +182,16 @@ public class AdministratorController {
                             cal.getTime().getMonth() == appointment.getDate().getMonth() &&
                             cal.getTime().getYear() == appointment.getDate().getDay())
                     {
-                        for(int i=0;i<free_hours.size();i++){
+                        /*for(int i=0;i<free_hours.size();i++){
                             if(appointment.getDate().getHours() == free_hours.toArray()[i]){
 
                             }
-                        }
+                        }*/
                     }
 
                     a.setRoom(r);
 
-                    a.setDate(d1);
+                    //a.setDate(d1);
                     }
             }
             Appointment a1 = appointmentService.save(a);
