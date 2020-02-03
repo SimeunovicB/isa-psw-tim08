@@ -26,6 +26,10 @@ public class Medicine {
     @OneToMany(mappedBy = "medicine",fetch = FetchType.LAZY)
     private Set<MedicalExaminationReport> medicalExaminationReports = new HashSet<>();
 
+    @Version
+    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+    private int version;
+
 
 
     public Medicine() {

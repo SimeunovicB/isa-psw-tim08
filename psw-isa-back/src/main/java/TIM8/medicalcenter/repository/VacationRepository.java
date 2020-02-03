@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface VacationRepository extends JpaRepository<Vacation,Long> {
 
+
     Vacation findOneById(Long id);
 
     @Query("SELECT v FROM Vacation v where v.status='PENDING'")

@@ -21,6 +21,10 @@ public class Diagnosis {
 
     @Column(name = "name",unique = true,nullable = false)
     private String name;
+
+    @Version
+    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+    private int version;
     //endregion
 
     @JsonBackReference

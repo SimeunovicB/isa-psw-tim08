@@ -44,6 +44,9 @@ public class Authority implements GrantedAuthority {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Version
+    private Long version = 0L;
     //endregion
 
 }
