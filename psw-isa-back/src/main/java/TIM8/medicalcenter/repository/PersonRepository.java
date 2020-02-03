@@ -1,5 +1,6 @@
 package TIM8.medicalcenter.repository;
 
+import TIM8.medicalcenter.model.users.Administrator;
 import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
 import TIM8.medicalcenter.model.users.Person;
@@ -24,10 +25,15 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
     @Query("SELECT p FROM Person p where p.class=?1")
     List<Person> findByDiscriminatorValue(String discriminatorValue);
 
+    //@Query("SELECT p FROM Patient p,clinic_patient cp where p.id = cp.patient_id and cp.clinic_id =?1")
+    //List<Person> findAllFromSingleClinic(Long id);
+
     @Query("SELECT p FROM Person p where p.class='P'")
     List<Patient> findPatients();
     @Query("SELECT p FROM Person p where p.class='D'")
     List<Doctor> findDoctors();
+    @Query("SELECT p FROM Person p where p.class='A' and p.username=?1")
+    List<Administrator> findAdmin(String mail);
 
 
     @Modifying

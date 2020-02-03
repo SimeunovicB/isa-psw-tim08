@@ -137,6 +137,35 @@ export class UserService {
         })
       );
   }
+
+  getAdminByMail(email: string) {
+    return this.http.get("http://localhost:9090/api/person/getAdminByEmail?mail="+email)
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
+  }
+
+  getDocByMail(email: string) {
+    return this.http.post("http://localhost:9090/api/person/getDocByEmail", {
+      username: email
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
+  }
+
   getMedicalRecordInfo(id: Number) {
     return this.http.get("http://localhost:9090/api/medicalRecord/getByPatientId?id=" + id)
       .pipe(
