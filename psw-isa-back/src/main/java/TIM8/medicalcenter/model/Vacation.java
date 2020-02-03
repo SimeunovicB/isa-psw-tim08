@@ -33,4 +33,10 @@ public class Vacation {
     public Vacation() {
     }
 
+    public Vacation(Date startDate, Date endDate, String status, Person staff) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.staff = staff;
+    }
 }

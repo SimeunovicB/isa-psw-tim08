@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
   providedIn: 'root'
@@ -16,25 +17,42 @@ export class VacationService {
     private router: Router) { }
 
   getPending() {
-    return this.http.get("http://localhost:9090/api/patient")
+    return this.http.get("http://localhost:9090/api/vacation/getPending")
     .pipe(
       map((response: any) => {
-        const data = response.json();
+        const data = response;
         return data;
       }),
       catchError((err: any) => {
-        return throwError(JSON.parse(err.text()));
+        return throwError(err);
+      })
+    );
+  }
+
+  createRequest(startDate:any, endDate:any, id:any) {
+    return this.http.post("http://localhost:9090/api/vacation/create", {
+      startDate: startDate,
+      endDate: endDate,
+      id: id
+    })
+    .pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
       })
     );
   }
 
   acceptRequest(id) {
-    return this.http.put("http://localhost:9090/api/administrator/acceptRequest/"+id, {
+    return this.http.post("http://localhost:9090/api/vacation/approve", {
       id: id,
     })
     .pipe(
       map((response: any) => {
-        const data = response.json();
+        const data = response;
         return data;
       }),
       catchError((err: Response) => {
@@ -44,12 +62,12 @@ export class VacationService {
   }
 
   denyRequest(id) {
-    return this.http.put("http://localhost:9090/api/administrator/denyRequest/"+id, {
+    return this.http.post("http://localhost:9090/api/vacation/decline", {
       id: id,
     })
     .pipe(
       map((response: Response) => {
-        const data = response.json();
+        const data = response;
         return data;
       }),
       catchError((err: Response) => {
