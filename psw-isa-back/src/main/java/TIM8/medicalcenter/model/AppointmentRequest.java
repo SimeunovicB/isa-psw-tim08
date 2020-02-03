@@ -27,5 +27,9 @@ public class AppointmentRequest {
     @Column(name = "appointment_type",nullable = false)
     private String appointment_type;
 
+    @Version
+    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+    private int version;
+
 
 }

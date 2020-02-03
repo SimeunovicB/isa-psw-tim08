@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -59,7 +61,16 @@ public class PersonService implements UserDetailsService {
 
     public int updatePersonStatus(String status,Long id) {return personRepository.updateUserStatus(status,id);}
     public int updatePassword(String password,Long id) {return personRepository.updatePassword(password,id);}
-    public int updateUser(String firstName,String lastName,String address,long id) { return personRepository.updateUser(firstName,lastName,address,id); }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public int updateUser(String firstName,String lastName,String address,long id) {
+        Person p = personRepository.findOneById(id);
+        p.setFirstName(firstName);
+        p.setLastName(lastName);
+        p.setAddress(address);
+        personRepository.save(p);
+        return 1;
+    }
 
 
     @Override
@@ -141,6 +152,8 @@ public class PersonService implements UserDetailsService {
         personRepository.save(user);
 
     }
+    @Transactional(readOnly = false)
+    public Person saveForTest(Person p) {return personRepository.save(p);}
 
 
 

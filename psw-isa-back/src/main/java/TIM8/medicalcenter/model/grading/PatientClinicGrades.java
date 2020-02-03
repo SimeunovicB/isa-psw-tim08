@@ -31,6 +31,10 @@ public class PatientClinicGrades {
     private double grade;
 
 
+    @Version
+    private Long version = 0L;
+
+
     @Embeddable
     @Getter
     @Setter

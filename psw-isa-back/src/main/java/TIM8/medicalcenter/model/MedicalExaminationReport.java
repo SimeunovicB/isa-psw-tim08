@@ -20,6 +20,10 @@ public class MedicalExaminationReport {
     @Column(name = "description")
     private String description;
 
+    @Version
+    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+    private int version;
+
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Diagnosis diagnosis;

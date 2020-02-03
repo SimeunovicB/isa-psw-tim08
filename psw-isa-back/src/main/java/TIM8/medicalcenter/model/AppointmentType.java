@@ -1,9 +1,14 @@
 package TIM8.medicalcenter.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
 public class AppointmentType {
 
     //region column definitions
@@ -15,23 +20,10 @@ public class AppointmentType {
     private String name;
     //endregion
 
-    //region geters and setters
-    public Long getId() {
-        return id;
-    }
+    @Version
+    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+    private int version;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    //endregion
 
     public AppointmentType() {
     }
