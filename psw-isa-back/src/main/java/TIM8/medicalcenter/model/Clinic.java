@@ -33,6 +33,10 @@ public class Clinic {
     @Column(name = "description")
     private String description;
 
+    @Version
+    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+    private int version;
+
     @JsonBackReference
     @OneToMany(mappedBy = "clinic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Doctor> doctors = new HashSet<Doctor>();

@@ -32,6 +32,10 @@ public class MedicalRecord {
     @Column(name = "blood_type")
     private String bloodType;
 
+    @Version
+    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+    private int version;
+
     @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")

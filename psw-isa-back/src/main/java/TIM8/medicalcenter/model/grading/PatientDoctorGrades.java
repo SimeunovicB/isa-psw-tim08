@@ -31,6 +31,9 @@ public class PatientDoctorGrades {
     @Column(name = "grade")
     private double grade;
 
+    @Version
+    private Long version = 0L;
+
 
     @Embeddable
     @Getter

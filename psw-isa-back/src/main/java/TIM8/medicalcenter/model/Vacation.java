@@ -26,6 +26,10 @@ public class Vacation {
     @Column(name = "status",nullable = false)
     private String status;
 
+    @Version
+    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+    private int version;
+
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Person staff;

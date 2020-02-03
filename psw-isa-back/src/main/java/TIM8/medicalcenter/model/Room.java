@@ -25,6 +25,10 @@ public class Room {
     @Column(name = "number",nullable = false)
     private int number;
 
+    @Version
+    @Column(name="version",columnDefinition = "integer DEFAULT 0",nullable = false)
+    private int version;
+
 
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
