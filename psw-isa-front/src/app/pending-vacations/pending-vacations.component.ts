@@ -28,20 +28,20 @@ export class PendingVacationsComponent implements OnInit {
   }
 
   prihvati(id) {
-    /*this.vacationService.acceptRequest(id)
+    this.vacationService.acceptRequest(id)
       .subscribe(
         () => {
           this.getRequests();
         }
-      )*/
+      )
   }
 
   odbij(id) {
-    /*this.vacationService.denyRequest(id)
+    this.vacationService.denyRequest(id)
     .subscribe(
       () => {
         this.getRequests();
       }
-    )*/
+    )
   }
 }

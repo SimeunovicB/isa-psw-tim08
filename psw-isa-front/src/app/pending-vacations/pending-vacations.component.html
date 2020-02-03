@@ -1,3 +1,4 @@
+<app-header></app-header>
 <table class="table">
     <thead>
         <tr>
@@ -12,13 +13,15 @@
     </thead>
     <tbody>
         <ng-container *ngFor="let request of pendingRequests; let i = index">
+            <tr>
                 <th scope="row">{{i+1}}</th>
                 <td>{{request.firstName}}</td>
                 <td>{{request.lastName}}</td>
-                <td>{{request.startDate}}</td>
-                <td>{{request.endDate}}</td>
+                <td>{{request.startDate | date:'yyyy-MM-dd'}}</td>
+                <td>{{request.endDate | date:'yyyy-MM-dd'}}</td>
                 <td><button type="button" class="btn btn-success" (click)="prihvati(request.id)">Prihvati</button></td>
                 <td><button type="button" class="btn btn-danger" (click)="odbij(request.id)">Odbij</button></td>
+            </tr>
         </ng-container>
     </tbody>
 </table>
