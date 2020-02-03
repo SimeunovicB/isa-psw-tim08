@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface VacationRepository extends JpaRepository<Vacation,Long> {
 
-    @Query("SELECT v FROM vacation v where v.status=?1")
+    @Query("SELECT v FROM Vacation v where v.status=?1")
     List<Vacation> findByStatus(String status);
 
     @Modifying
