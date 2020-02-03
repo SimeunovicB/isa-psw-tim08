@@ -4,6 +4,7 @@ import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.Clinic;
 import TIM8.medicalcenter.model.MedicalExaminationReport;
 import TIM8.medicalcenter.model.Vacation;
+import TIM8.medicalcenter.model.grading.PatientDoctorGrades;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -39,4 +40,8 @@ public class Doctor extends Person {
     @JsonBackReference
     @OneToMany(mappedBy = "doctor",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<MedicalExaminationReport>  medicalExaminationReports = new HashSet<>();
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "doctor",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    Set<PatientDoctorGrades> grades = new HashSet<>();
 }

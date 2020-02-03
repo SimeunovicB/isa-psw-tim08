@@ -1,5 +1,7 @@
 package TIM8.medicalcenter.model;
 
+import TIM8.medicalcenter.model.grading.PatientClinicGrades;
+import TIM8.medicalcenter.model.grading.PatientDoctorGrades;
 import TIM8.medicalcenter.model.users.Administrator;
 import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Nurse;
@@ -46,6 +48,10 @@ public class Clinic {
     @JsonBackReference
     @OneToMany(mappedBy = "clinic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Administrator> administrators = new HashSet<Administrator>();
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "clinic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    Set<PatientClinicGrades> grades = new HashSet<>();
 
     @JsonBackReference
     @ManyToMany(cascade = {
