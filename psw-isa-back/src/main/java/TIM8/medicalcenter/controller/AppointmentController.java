@@ -2,6 +2,7 @@ package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.AppointmentDTO;
 import TIM8.medicalcenter.dto.ClinicDTO;
+import TIM8.medicalcenter.dto.CreatePredefDTO;
 import TIM8.medicalcenter.dto.PersonDTO;
 import TIM8.medicalcenter.dto.Request.PredefAppointmentDTORequest;
 import TIM8.medicalcenter.model.Appointment;
@@ -10,6 +11,7 @@ import TIM8.medicalcenter.service.AppointmentService;
 import TIM8.medicalcenter.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -142,6 +144,11 @@ public class AppointmentController {
         appointmentService.reserve(request);
         return new ResponseEntity<>(request,HttpStatus.ACCEPTED);
 
+    }
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE,value = "/createPredef",method = RequestMethod.POST)
+    public ResponseEntity<?> createPredef(@RequestBody CreatePredefDTO req){
+        appointmentService.createPredef(req);
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
 

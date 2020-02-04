@@ -64,7 +64,6 @@ export class MedicalExaminationComponent implements OnInit {
         this.diagnosises = data;
       }, (error) => alert(error.text)
     );
-
   }
   initialized() {
     if (this.medicines != undefined && this.diagnosises != undefined) {

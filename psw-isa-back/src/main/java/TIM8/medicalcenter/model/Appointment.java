@@ -32,7 +32,7 @@ public class Appointment {
     @Column(name = "discount")
     private int discount;
 
-    @Column(name = "status",nullable = false)
+    @Column(name = "status")
     private String status;
 
     @Version

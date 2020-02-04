@@ -209,4 +209,18 @@ export class UserService {
         })
       );
   }
+  findDoctors() {
+    return this.http.get("http://localhost:9090/api/person/getAllDoctors")
+      .pipe(
+        map((response: any) => {
+          console.log(response)
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
+  }
+
 }

@@ -95,4 +95,29 @@ export class AppointmentServiceService {
         })
       );
   }
+  createPredef(currentDoctor : any,
+    currentRoom : any,
+    currentType : any,
+    cena : any,
+    popust :any,
+    dat :any){
+    return this.http.post("http://localhost:9090/api/appointment/createPredef",{
+      doctorId :currentDoctor,
+      roomId : currentRoom,
+      typeId : currentType,
+      cena : cena,
+      popust : popust,
+      dat : dat 
+      
+    })
+    .pipe(
+      map((response: any) => {
+        const data = response
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
 }
