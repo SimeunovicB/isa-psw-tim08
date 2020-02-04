@@ -2,7 +2,7 @@
 
 -- noinspection SqlDialectInspectionForFile
 
-insert into clinic(name,address,description) values('clinic1','dr klinike 1','clinic desc');
+insert into clinic(name,address,description) values('clinic1','45.2471-19.8035','clinic desc');
 
 --passwordi su 123
 insert into person(type,first_name,last_name,username,password,address,status,jmbg,enabled,version)
