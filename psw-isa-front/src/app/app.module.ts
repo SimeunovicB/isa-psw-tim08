@@ -57,6 +57,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PredefAppointmentsComponent } from './predef-appointments/predef-appointments.component';
 import { VacationRequestComponent } from './vacation-request/vacation-request.component';
+import { CreatePredefAppointmentComponent } from './create-predef-appointment/create-predef-appointment.component';
 
 
 const appRoutes: Routes = [
@@ -87,7 +88,9 @@ const appRoutes: Routes = [
   { path: 'overavanjeRecepta', component : OveravanjeReceptaComponent},
   { path: 'radniKalendar', component: CalendarComponent},
   { path : 'predefAppointments',component : PredefAppointmentsComponent},
-  { path: '**', component: PageNotFoundComponent }
+  { path : 'createPredefAppointment',component : CreatePredefAppointmentComponent},
+  { path: '**', component: PageNotFoundComponent },
+
 ];
 
 @NgModule({
@@ -131,6 +134,7 @@ const appRoutes: Routes = [
     CalendarComponent,
     PredefAppointmentsComponent,
     VacationRequestComponent,
+    CreatePredefAppointmentComponent,
 
   ],
   imports: [ 

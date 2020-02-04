@@ -22,7 +22,19 @@ export class RoomService {
         return data;
       }),
       catchError((err: any) => {
-        return throwError(JSON.parse(err.text));
+        return throwError(err);
+      })
+    )
+  }
+  findAll() {
+    return this.http.get("http://localhost:9090/api/room/findAll")
+    .pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
       })
     )
   }
