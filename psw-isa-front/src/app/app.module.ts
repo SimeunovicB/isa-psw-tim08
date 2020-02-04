@@ -55,8 +55,10 @@ import { OveravanjeReceptaComponent } from './overavanje-recepta/overavanje-rece
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { PredefAppointmentsComponent } from './predef-appointments/predef-appointments.component';
 import { VacationRequestComponent } from './vacation-request/vacation-request.component';
 import { MapComponent } from './map/map.component';
+import { CreatePredefAppointmentComponent } from './create-predef-appointment/create-predef-appointment.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -86,7 +88,10 @@ const appRoutes: Routes = [
   { path: 'dodavanjeUSifarnik', component: CodebookComponent },
   { path: 'overavanjeRecepta', component : OveravanjeReceptaComponent},
   { path: 'radniKalendar', component: CalendarComponent},
-  { path: '**', component: PageNotFoundComponent }
+  { path : 'predefAppointments',component : PredefAppointmentsComponent},
+  { path : 'createPredefAppointment',component : CreatePredefAppointmentComponent},
+  { path: '**', component: PageNotFoundComponent },
+
 ];
 
 @NgModule({
@@ -129,7 +134,10 @@ const appRoutes: Routes = [
     OveravanjeReceptaComponent,
     CalendarComponent,
     VacationRequestComponent,
-    MapComponent
+    MapComponent,
+    PredefAppointmentsComponent,
+    VacationRequestComponent,
+    CreatePredefAppointmentComponent,
   ],
   imports: [ 
     BrowserModule,

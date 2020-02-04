@@ -16,7 +16,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -56,6 +58,16 @@ public class PersonController {
             return null;
         return new ResponseEntity<>(new DoctorDTO(personRet.getFirstName(),personRet.getLastName(),personRet.getClinic().getId()), HttpStatus.OK);
 
+    }
+
+    @RequestMapping(value = "/getAllDoctors",method = RequestMethod.GET)
+    public ResponseEntity<?> getAllDoctors() {
+        List<Doctor> doctors = personService.findDoctors();
+        List<PersonDTO> response = new ArrayList<>();
+        for(Doctor d : doctors){
+            response.add(new PersonDTO((Person) d));
+        }
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(consumes = "application/json",value ="/changePassword",method = RequestMethod.POST)

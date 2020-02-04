@@ -68,6 +68,15 @@ public class RoomController {
         return new ResponseEntity<>(res,HttpStatus.OK);
 
     }
+    @RequestMapping(value = "/findAll",method = RequestMethod.GET)
+    public ResponseEntity<?> findAllRooms() {
+        List<Room> rooms = roomService.findAll();
+        List<FindRoomDTOResponse> response = new ArrayList<>();
+        for(Room r : rooms){
+            response.add(new FindRoomDTOResponse(r.getId(),r.getName(),r.getNumber(),null));
+        }
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    }
 
 
 

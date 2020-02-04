@@ -1,0 +1,80 @@
+<app-header></app-header>
+<div class="forma" *ngIf="initialized()">
+    <form>
+        <h1 class="title">Definisanje predefinisanih pregleda</h1>
+        <div class="form-group row">
+            <label for="cena" class="col-sm-2 col-form-label">Cena</label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="cena" placeholder="cena" [(ngModel)]="cena"
+                    name="cena">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="popust" class="col-sm-2 col-form-label">Popust</label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="popust" placeholder="popust" [(ngModel)]="popust"
+                    name="popust">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="diagnosis" class="col-sm-2 col-form-label">Doktor</label>
+            <div class="col-sm-5">
+                <select name="repeatSelect" id="repeatSelect" (change)="changeSelectedDoctor($event.target.value)"
+                    class="form-control">
+                    <option value={{null}}></option>
+                    <option *ngFor="let doctor of doctors" value="{{doctor.id}}">
+                        {{doctor.firstName}}
+                    </option>
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="medicine" class="col-sm-2 col-form-label">Tip</label>
+            <div class="col-sm-5">
+                <select name="repeatSelect" id="repeatSelect2" (change)="changeSelectedType($event.target.value)"
+                    class="form-control">
+                    <option value={{null}}></option>
+                    <option *ngFor="let type of appointmentTypes" value="{{type.id}}">
+                        {{type.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="medicine" class="col-sm-2 col-form-label">Soba</label>
+            <div class="col-sm-5">
+                <select name="repeatSelect" id="repeatSelect2" (change)="changeSelectedRoom($event.target.value)"
+                    class="form-control">
+                    <option value={{null}}></option>
+                    <option *ngFor="let room of rooms" value="{{room.id}}">
+                        {{room.name}} {{room.number}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="time" class="col-sm-2 col-form-label">Datum</label>
+            <div class="datum col-sm-5">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" name="datum" [(ngModel)]="model"
+                    ngbDatepicker #d="ngbDatepicker" required>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><img
+                            src="https://image.flaticon.com/icons/png/512/42/42446.png"
+                            style="width: 1.2rem; height: 1.2rem; cursor: pointer;" /></button></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="time" class="col-sm-2 col-form-label">Vreme</label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="time" placeholder="time" [(ngModel)]="time"
+                    name="time">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-5">
+                <button (click)="napraviPregled()" class="btn btn-primary">Napravi</button>
+            </div>
+        </div>
+    </form>
+</div>
