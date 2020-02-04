@@ -2,3 +2,8 @@ table {
     margin-left: 20%;
     margin-top: 50px;
 }
+
+#map {
+    height: 500px;
+    width: 100%;
+}

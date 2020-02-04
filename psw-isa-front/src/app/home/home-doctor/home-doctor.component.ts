@@ -35,7 +35,6 @@ export class HomeDoctorComponent implements OnInit {
     this.helper = new JwtHelperService()
     if (this.helper.decodeToken(this.cookieService.get('token')) == null)
       this.router.navigate(['/login']);
-    //this.userType = this.helper.decodeToken(this.cookieService.get('token')).type;
     this.userMail = this.helper.decodeToken(this.cookieService.get('token')).sub;
     console.log(this.userMail);
     this.getUser();
