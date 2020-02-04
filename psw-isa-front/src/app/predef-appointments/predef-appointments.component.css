@@ -1,0 +1,6 @@
+.table{
+    margin: 5em auto;
+    max-width: 1000px;
+    border : 2px solid #333333;
+    box-shadow: 2px 2px 2px #444444;                            
+}                      
