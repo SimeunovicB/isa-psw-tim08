@@ -56,6 +56,8 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PredefAppointmentsComponent } from './predef-appointments/predef-appointments.component';
+import { VacationRequestComponent } from './vacation-request/vacation-request.component';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -70,7 +72,8 @@ const appRoutes: Routes = [
   { path: 'managetypes', component: ManageAppointTypesComponent },
   { path: 'managedoctors', component: ManageDoctorsComponent },
   { path: 'managerooms', component: ManageRoomsComponent },
-  { path: 'vacationrequest', component: PendingVacationsComponent },
+  { path: 'pendingvacationrequests', component: PendingVacationsComponent },
+  { path: 'vacationrequest', component: VacationRequestComponent },
   { path: 'medicalrecord/:id', component: MedicalRecordComponent },
   { path: 'medicalExamination/:id',component : MedicalExaminationComponent },
   { path: 'appointmentReservation', component: AppointmentReservationComponent },
@@ -126,7 +129,9 @@ const appRoutes: Routes = [
     SearchRoomsComponent,
     OveravanjeReceptaComponent,
     CalendarComponent,
-    PredefAppointmentsComponent
+    PredefAppointmentsComponent,
+    VacationRequestComponent,
+
   ],
   imports: [ 
     BrowserModule,

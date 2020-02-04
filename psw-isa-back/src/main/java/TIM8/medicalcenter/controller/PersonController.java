@@ -77,10 +77,12 @@ public class PersonController {
         }
         return new ResponseEntity<>(new PersonDTO(),HttpStatus.BAD_REQUEST);
     }
+
     static class PasswordChanger {
         public String oldPassword;
         public String newPassword;
     }
+
     /*@PostMapping(consumes = "application/json",value = "/register")
     public ResponseEntity<Patient> Register(@RequestBody Patient patient) {
         if(personService.findOneByUsername(patient.getUsername())!=null)
