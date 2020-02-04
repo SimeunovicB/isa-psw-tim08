@@ -55,6 +55,7 @@ import { OveravanjeReceptaComponent } from './overavanje-recepta/overavanje-rece
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { PredefAppointmentsComponent } from './predef-appointments/predef-appointments.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -82,6 +83,7 @@ const appRoutes: Routes = [
   { path: 'dodavanjeUSifarnik', component: CodebookComponent },
   { path: 'overavanjeRecepta', component : OveravanjeReceptaComponent},
   { path: 'radniKalendar', component: CalendarComponent},
+  { path : 'predefAppointments',component : PredefAppointmentsComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -123,7 +125,8 @@ const appRoutes: Routes = [
     BusinessReportComponent,
     SearchRoomsComponent,
     OveravanjeReceptaComponent,
-    CalendarComponent
+    CalendarComponent,
+    PredefAppointmentsComponent
   ],
   imports: [ 
     BrowserModule,
