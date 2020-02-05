@@ -22,14 +22,19 @@ export class SearchClinicsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    var dat = "" + this.model.year + "-" + this.model.month + "-" + this.model.day + " 00:00:00";
-    console.log(dat);
+    var dat =""
+    try {
+      dat = "" + this.model.year + "-" + this.model.month + "-" + this.model.day ;      
+    } catch (error) {
+      console.log(dat);      
+    }
     this.modelmem = this.model;
     this.tipmem = this.tip;
     this.findClinics(dat, this.tip);
   }
 
   findClinics(date:string, type:string) {
+    console.log(date,type);
     this.clinicService.searchClinics(date, type)
     .subscribe(
       (data) => {
@@ -40,7 +45,7 @@ export class SearchClinicsComponent implements OnInit {
   }
 
   doktori(clinicname:string) {
-    var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day + " 00:00:00";
+    var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day ;
     this.clinicService.getDoctors(clinicname, dat, this.tipmem)
     .subscribe(
       (data) => {
