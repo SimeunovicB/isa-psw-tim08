@@ -14,17 +14,8 @@ import { AppointmentServiceService } from '../services/appointment-service/appoi
 })
 export class CreatePredefAppointmentComponent implements OnInit {
 
-  patientId : any;
-  medicines: any;
-  diagnosises: any;
-  medicine: any;
-  diagnosis: any;
-  helper : any;
-  doctorId : any;
-  description : any;
+  
   model : any;
-  selectedType : any;
-
   rooms : any;
   doctors : any;
   appointmentTypes : any;

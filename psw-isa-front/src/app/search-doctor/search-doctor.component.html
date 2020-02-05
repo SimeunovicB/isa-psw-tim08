@@ -37,12 +37,12 @@
                 <th scope="row">{{i+1}}</th>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
-                <td><select name="date" >
+                <td><select name="date" (change)="changeSelectedAppointment($event.target.value)">
                     <ng-container *ngFor="let date of user.dates">
-                    <option>{{date}}</option>
+                    <option value="{{date.appointmentId}}">{{date.date}}</option>
                     </ng-container>
                  </select></td>
-                <td><button type="button" class="btn btn-primary">Zapocni pregled</button></td>
+                <td><button type="button" class="btn btn-primary" (click) = 'zakazi()'>Zapocni pregled</button></td>
             </tr>
         </ng-container>
     </tbody>

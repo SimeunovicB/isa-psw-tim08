@@ -2,6 +2,7 @@ package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.DoctorDTO;
 import TIM8.medicalcenter.dto.PatientDTO;
+import TIM8.medicalcenter.dto.SearchDoctorsAppointmentDTO;
 import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
@@ -76,10 +77,10 @@ public class PatientController {
             DoctorDTO newDoc = new DoctorDTO(p);
             for (Appointment a:apps) {
                 System.out.println(newDoc.getFirstName()+" "+a.getDoctor().getFirstName());
-                if(a.getDoctor().getFirstName().equals(newDoc.getFirstName())){
+                if(a.getDoctor().getFirstName().equals(newDoc.getFirstName()) && a.getPatient() == null){
                     SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String strDate = formatter.format(a.getDate());
-                    newDoc.getDates().add(strDate);
+                    newDoc.getDates().add(new SearchDoctorsAppointmentDTO(strDate,a.getId()));
                 }
             }
             doctors.add(newDoc);
