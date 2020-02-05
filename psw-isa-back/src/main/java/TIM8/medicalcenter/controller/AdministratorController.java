@@ -13,12 +13,10 @@ import TIM8.medicalcenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -146,61 +144,6 @@ public class AdministratorController {
         Appointment a1 = appointmentService.save(a);
         return new ResponseEntity<>(null,HttpStatus.OK);
     }
-
-
-    //@Scheduled(cron="0 0 0 1/1 * ? *")
-    //@Scheduled(fixedRate = 1000)
-    public void methodC() {
-        List<AppointmentRequest> requests = appointmentRequestService.findAll();
-        List<Room> rooms = roomService.findAll();
-        List<Appointment> appointments = appointmentService.findAll();
-
-        for(AppointmentRequest ar : requests) {
-            Date date = Calendar.getInstance().getTime();
-
-            Appointment a = new Appointment();
-            Doctor d = (Doctor) personService.findOneById(ar.getDoctor_id());
-            Patient p = (Patient) personService.findOneById(ar.getPatient_id());
-            a.setPatient(p);
-            a.setDoctor(d);
-            a.setStatus("ACTIVE");
-            a.setType(ar.getAppointment_type());
-            a.setDiscount(10);
-            a.setPrice(10000);
-
-            List<Integer> free_hours = new ArrayList<>();
-            for(int i=8;i<=17;i++){
-                free_hours.add(i);
-            }
-
-            for(Room r : rooms) {
-                for(Appointment appointment : r.getAppointments()) {
-                    Calendar cal = Calendar.getInstance();
-                    cal.set(date.getYear(),date.getMonth(),date.getDay(),0,0,0);
-
-                    if(cal.getTime().getYear() == appointment.getDate().getYear() &&
-                            cal.getTime().getMonth() == appointment.getDate().getMonth() &&
-                            cal.getTime().getYear() == appointment.getDate().getDay())
-                    {
-                        /*for(int i=0;i<free_hours.size();i++){
-                            if(appointment.getDate().getHours() == free_hours.toArray()[i]){
-
-                            }
-                        }*/
-                    }
-
-                    a.setRoom(r);
-
-                    //a.setDate(d1);
-                    }
-            }
-            Appointment a1 = appointmentService.save(a);
-
-            appointmentRequestService.delete(ar.getId());
-
-        }
-    }
-
     /**
      *
      * Funkcija koja adminu vraca sve zahteve za pregled ili operaciju koje je pre toga napravio doktor
@@ -216,9 +159,6 @@ public class AdministratorController {
 
         return new ResponseEntity<>(responses,HttpStatus.OK);
     }
-
-
-
 
 
 }

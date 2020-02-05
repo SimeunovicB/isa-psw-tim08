@@ -2,13 +2,16 @@ package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.AppointmentDTO;
 import TIM8.medicalcenter.dto.ClinicDTO;
+import TIM8.medicalcenter.dto.CreatePredefDTO;
 import TIM8.medicalcenter.dto.PersonDTO;
+import TIM8.medicalcenter.dto.Request.PredefAppointmentDTORequest;
 import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.Clinic;
 import TIM8.medicalcenter.service.AppointmentService;
 import TIM8.medicalcenter.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -128,6 +131,31 @@ public class AppointmentController {
             appDto.add(ap);
         }
         return new ResponseEntity<>(appDto, HttpStatus.OK);
+    }
+    /**
+     * funkcija koja preuzima sve predefinisane preglede,odnosno preglede na kojima nema pacijenta
+     */
+    @RequestMapping(value="/getPredefAppointment",method = RequestMethod.GET)
+    public ResponseEntity<?> getPredefAppointments(){
+        List<Appointment> apps =  appointmentService.findAll();
+        List<AppointmentDTO> response = new ArrayList<>();
+        for(Appointment a : apps){
+            if(a.getPatient() == null){
+                response.add(new AppointmentDTO(a.getId(),a.getDoctor(),a.getDate(),a.getType(),null,a.getPrice(),a.getDiscount(),a.getRoom().getName()));
+            }
+        }
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+    @PostMapping(consumes = "application/json",value = "/reservePredef")
+    public ResponseEntity<?> reservePredefApp(@RequestBody PredefAppointmentDTORequest request){
+        appointmentService.reserve(request);
+        return new ResponseEntity<>(request,HttpStatus.ACCEPTED);
+
+    }
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE,value = "/createPredef",method = RequestMethod.POST)
+    public ResponseEntity<?> createPredef(@RequestBody CreatePredefDTO req){
+        appointmentService.createPredef(req);
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
 

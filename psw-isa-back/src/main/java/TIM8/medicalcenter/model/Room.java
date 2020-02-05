@@ -35,7 +35,7 @@ public class Room {
     private Clinic clinic;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "room",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<Appointment> appointments = new HashSet<Appointment>();
     //endregion
 
