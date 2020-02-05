@@ -31,7 +31,7 @@ public class GenerateAppointments {
     private PersonService personService;
 
     //@Scheduled(cron="0 0 0 1/1 * ? *")
-    @Scheduled(fixedRate = 1000)
+    //@Scheduled(fixedRate = 1000)
     public void generateAppointments() {
         List<AppointmentRequest> requests = appointmentRequestService.findAll();
         List<Room> rooms = roomService.findAll();
