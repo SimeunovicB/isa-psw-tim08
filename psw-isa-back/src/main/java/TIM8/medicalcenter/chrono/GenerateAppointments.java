@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import javax.persistence.Entity;
 import java.util.*;
 
 
@@ -34,10 +35,11 @@ public class GenerateAppointments {
     //@Scheduled(fixedRate = 1000)
     public void generateAppointments() {
         List<AppointmentRequest> requests = appointmentRequestService.findAll();
-        List<Room> rooms = roomService.findAll();
-        List<Appointment> appointments = appointmentService.findAll();
+
 
         for(AppointmentRequest ar : requests) {
+            List<Room> rooms = roomService.findAll();
+            List<Appointment> appointments = appointmentService.findAll();
             int flag = 0;
             Date date = Calendar.getInstance().getTime();
 
@@ -63,10 +65,10 @@ public class GenerateAppointments {
                 Calendar cal = Calendar.getInstance();
                 for(Appointment appointment : r.getAppointments()) {
 
-                    cal.set(date.getYear(),date.getMonth(),date.getDay(),0,0,0);
 
-                    if(cal.getTime().getYear() == appointment.getDate().getYear() && cal.getTime().getMonth() == appointment.getDate().getMonth() && cal.getTime().getYear() == appointment.getDate().getDay()){
 
+                    if(date.getYear() == appointment.getDate().getYear() && date.getMonth() == date.getMonth() && date.getDay() == appointment.getDate().getDay()){
+                        //TODO: POREDJENJE NIJE DOBRO
                         free_hours.remove(appointment.getDate().getHours());
                     }
 
@@ -79,7 +81,12 @@ public class GenerateAppointments {
                     if(free_hours.contains(i)){
                         a.setRoom(r);
                         Calendar cal2 = Calendar.getInstance();
-                        cal.set(date.getYear(),date.getMonth(),date.getDay(),i,0,0);
+                        cal2.set(date.getYear(),date.getMonth(),date.getDay(),i,0,0);
+                        Date date2 = date;
+                        date2.setHours(i);
+                        date2.setMinutes(0);
+                        date2.setSeconds(0);
+                        a.setDate(date2);
                         flag = 1;
                         Appointment a1 = appointmentService.save(a);
 
@@ -96,10 +103,6 @@ public class GenerateAppointments {
 
         }
     }
-
-
-
-
 
 
 

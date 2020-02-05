@@ -153,13 +153,12 @@ public class AdministratorController {
     public ResponseEntity<?> getAppointmentRequests(){
         List<AppointmentRequest> requests = appointmentRequestService.findAll();
         List<AppointmentRequestDTOResponse> responses = new ArrayList<>();
-        for(AppointmentRequest a : requests){
-            responses.add(new AppointmentRequestDTOResponse(a.getId(),a.getDoctor_id(),a.getPatient_id(),a.getDate(),a.getAppointment_type()));
+        for(AppointmentRequest a : requests) {
+            responses.add(new AppointmentRequestDTOResponse(a.getId(), a.getDoctor_id(), a.getPatient_id(), a.getDate(), a.getAppointment_type()));
         }
 
         return new ResponseEntity<>(responses,HttpStatus.OK);
     }
-
 
 }
 
