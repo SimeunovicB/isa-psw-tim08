@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joda.time.DateTime;
 
+import javax.print.Doc;
 import java.util.Date;
 
 @Getter
@@ -28,6 +29,11 @@ public class AppointmentDTO {
     }
     public AppointmentDTO(Appointment a) {
         this(a.getId(),a.getDoctor(),a.getDate(),a.getType(),a.getPatient().getId(),a.getPrice(),a.getDiscount(),a.getRoom().getName());
+    }
+    public AppointmentDTO(Doctor doctor,Date date,String type) {
+        this.doctor = doctor;
+        this.date = date;
+        this.type = type;
     }
     public AppointmentDTO(Long appointmentId,Doctor doctor, Date date, String type,Long patientId,double price,long discount,String room) {
         this.appointmentId = appointmentId;
