@@ -62,34 +62,34 @@ import { CreatePredefAppointmentComponent } from './create-predef-appointment/cr
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'profile', component: PatientProfileComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'pending', component: PendingUsersComponent },
-  { path: 'patients', component: PatientsComponent },
-  { path: 'searchDoctors', component:SearchDoctorComponent },
-  { path: 'changePassword', component: ChangePassword },
-  { path: 'editclinic', component: EditClinicComponent },
-  { path: 'managetypes', component: ManageAppointTypesComponent },
-  { path: 'managedoctors', component: ManageDoctorsComponent },
-  { path: 'managerooms', component: ManageRoomsComponent },
-  { path: 'mapa', component: MapComponent },
-  { path: 'pendingvacationrequests', component: PendingVacationsComponent },
-  { path: 'vacationrequest', component: VacationRequestComponent },
-  { path: 'medicalrecord/:id', component: MedicalRecordComponent },
-  { path: 'medicalExamination/:id',component : MedicalExaminationComponent },
+  { path: 'profile', component: PatientProfileComponent }, //more
+  { path: 'login', component: LoginComponent }, //more
+  { path: 'register', component: RegisterComponent }, //more
+  { path: 'pending', component: PendingUsersComponent }, //more
+  { path: 'patients', component: PatientsComponent }, //more
+  { path: 'searchDoctors', component:SearchDoctorComponent }, //
+  { path: 'changePassword', component: ChangePassword }, //more
+  { path: 'editclinic', component: EditClinicComponent }, //
+  { path: 'managetypes', component: ManageAppointTypesComponent }, //
+  { path: 'managedoctors', component: ManageDoctorsComponent }, //
+  { path: 'managerooms', component: ManageRoomsComponent }, //
+  { path: 'mapa', component: MapComponent }, //
+  { path: 'pendingvacationrequests', component: PendingVacationsComponent }, //
+  { path: 'vacationrequest', component: VacationRequestComponent }, //
+  { path: 'medicalrecord/:id', component: MedicalRecordComponent }, //more
+  { path: 'medicalExamination/:id',component : MedicalExaminationComponent }, //more
   { path: 'appointmentReservation', component: AppointmentReservationComponent },
-  { path: 'searchpatients', component: SearchPatientsComponent },
-  { path: 'searchclinics', component: SearchClinicsComponent },
-  { path: 'searchrooms', component: SearchRoomsComponent },
-  { path: 'dodajKliniku', component: AddClinicComponent },
-  { path: 'dodajAdministratoraKlinike', component: RegisterAdminComponent },
-  { path: 'dodajAdministratoraKlinickogCentra', component: RegisterClinicCentreAdminComponent },
-  { path: 'dodavanjeUSifarnik', component: CodebookComponent },
-  { path: 'overavanjeRecepta', component : OveravanjeReceptaComponent},
-  { path: 'radniKalendar', component: CalendarComponent},
-  { path : 'predefAppointments',component : PredefAppointmentsComponent},
-  { path : 'createPredefAppointment',component : CreatePredefAppointmentComponent},
+  { path: 'searchpatients', component: SearchPatientsComponent }, //
+  { path: 'searchclinics', component: SearchClinicsComponent }, //pola
+  { path: 'searchrooms', component: SearchRoomsComponent }, //
+  { path: 'dodajKliniku', component: AddClinicComponent },  //more
+  { path: 'dodajAdministratoraKlinike', component: RegisterAdminComponent }, //more
+  { path: 'dodajAdministratoraKlinickogCentra', component: RegisterClinicCentreAdminComponent }, //more
+  { path: 'dodavanjeUSifarnik', component: CodebookComponent }, //more
+  { path: 'overavanjeRecepta', component : OveravanjeReceptaComponent}, //ne treba
+  { path: 'radniKalendar', component: CalendarComponent}, //more
+  { path : 'predefAppointments',component : PredefAppointmentsComponent}, //more
+  { path : 'createPredefAppointment',component : CreatePredefAppointmentComponent},//more
   { path: '**', component: PageNotFoundComponent },
 
 ];
