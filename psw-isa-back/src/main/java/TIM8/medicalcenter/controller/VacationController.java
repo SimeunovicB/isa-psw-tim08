@@ -3,6 +3,7 @@ package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.VacationRequestsDTO;
 import TIM8.medicalcenter.model.Vacation;
+import TIM8.medicalcenter.service.EmailService;
 import TIM8.medicalcenter.service.PersonService;
 import TIM8.medicalcenter.service.VacationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class VacationController {
 
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping(value="/getPending")
     public ResponseEntity<?> getAllClinics() {
@@ -49,14 +53,25 @@ public class VacationController {
     }
 
     @PostMapping(consumes = "application/json", value = "/decline")
-    public ResponseEntity<?> declineRequest(@RequestBody Id id) {
+    public ResponseEntity<?> declineRequest(@RequestBody Odbijanje id) {
         Vacation v = vacationService.findOneById(id.id);
         if(v.getId() != null) {
             vacationService.updateVacationStatus("DECLINED", id.id);
             v = vacationService.findOneById(id.id);
+            String razlog = id.razlog;
+            try {
+                emailService.declineVacationRequest(v.getStaff(), razlog);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             return new ResponseEntity<>(new VacationRequestsDTO(v), HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(new VacationRequestsDTO(), HttpStatus.BAD_REQUEST);
+    }
+
+    static class Odbijanje {
+        public Long id;
+        public String razlog;
     }
 
     @PostMapping(consumes = "application/json", value = "/create")

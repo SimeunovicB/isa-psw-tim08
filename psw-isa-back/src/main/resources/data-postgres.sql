@@ -27,6 +27,8 @@ insert into person(type,first_name,last_name,username,password,address,status,en
 values('CCA','Nikola','Nikolic','nikola.nikolic@gmail.com','$2y$10$6/ExZPzokaxKh91XVMiSNOm/gsVJe8YkkXL.Kj3jivRJpGzagVnia','dr ribara 1','ACTIVE',true);
 
 insert into clinic_patient(clinic_id,patient_id) values (1,1);
+insert into clinic_patient(clinic_id,patient_id) values (1,3);
+insert into clinic_patient(clinic_id,patient_id) values (1,4);
 
 insert into medical_record(height,weight,diopter,alergies,blood_type,patient_id) values (176,77,3.2,'polen mleko','O',1);
 

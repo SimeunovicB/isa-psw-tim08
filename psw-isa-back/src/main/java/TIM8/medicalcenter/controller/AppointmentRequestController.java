@@ -38,9 +38,13 @@ public class AppointmentRequestController {
         d.setHours(0);
         d.setMinutes(0);
         d.setSeconds(0);
-        AppointmentRequest a= appointmentRequestService.save(request.getDoctor(), request.getPatient(), d, request.getType());
+        AppointmentRequest a = appointmentRequestService.save(request.getDoctor(), request.getPatient(), d, request.getType());
 
-        //emailService.newRequest(a);
+        try{
+            emailService.newRequest(a);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         return new ResponseEntity<>(a, HttpStatus.CREATED);
     }

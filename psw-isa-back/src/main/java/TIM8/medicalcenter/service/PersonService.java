@@ -56,10 +56,12 @@ public class PersonService implements UserDetailsService {
     @Cacheable("persons")
     public List<Patient> findPatients() { return personRepository.findPatients();}
 
+    public Doctor findDoctor(Long id) {return personRepository.findDoctor(id);}
     public List<Doctor> findDoctors() { return personRepository.findDoctors();}
     public List<Doctor> findAdminsDoctors(Long id) { return personRepository.findAdminsDoctors(id);}
 
     public List<Administrator> findAdmin(String mail) {return personRepository.findAdmin(mail);}
+    public List<Administrator> findAdmins(Long id) {return personRepository.findAdmins(id);}
 
     public int updatePersonStatus(String status,Long id) {return personRepository.updateUserStatus(status,id);}
     public int updatePassword(String password,Long id) {return personRepository.updatePassword(password,id);}
