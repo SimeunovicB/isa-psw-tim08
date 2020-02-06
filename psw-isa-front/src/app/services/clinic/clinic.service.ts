@@ -47,7 +47,78 @@ export class ClinicService {
       })
     )
   }
-
+  makeGradeClinic(clinicName:String,value:any,patientId:any){
+    return this.http.post("http://localhost:9090/api/appointment/makeGradeClinic", {
+      clinicName:clinicName,
+      value:value,
+      patientId:patientId
+  }).pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )  
+  }
+  makeGradeDoctor(doctorId:any,value:any,patientId:any){
+    return this.http.post("http://localhost:9090/api/appointment/makeGradeDoctor", {
+      doctorId:doctorId,
+      value:value,
+      patientId:patientId
+  }).pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )  
+  }
+  doctorGrade(patientId:any){
+    return this.http.post("http://localhost:9090/api/appointment/doctorGrade", {
+      patientId:patientId
+  }).pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )  
+  }
+  clinicGrade(patientId:any){
+    return this.http.post("http://localhost:9090/api/appointment/clinicGrade", {
+      patientId:patientId
+  }).pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )  
+  }
+  makeApp(id:any, date:string, type:string,patientId:any) {
+    return this.http.post("http://localhost:9090/api/appointment/makeApp", {
+      id: id,
+      date: date,
+      type: type,
+      patientId:patientId
+  }).pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )  
+}
   getDoctors(clinicname:string, date:string, type:string) {
     return this.http.get("http://localhost:9090/api/appointment/findClinic/doctors?clinicName="+clinicname+"&date="+date+"&type="+type)
     .pipe(

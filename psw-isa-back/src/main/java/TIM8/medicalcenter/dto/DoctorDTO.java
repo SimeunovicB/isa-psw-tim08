@@ -13,7 +13,8 @@ import java.util.List;
 public class DoctorDTO extends PersonDTO {
     private String name;
     private String lastname;
-    private List<String> dates=new ArrayList<>();
+    private Long id;
+    private List<SearchDoctorsAppointmentDTO> dates=new ArrayList<>();
     private Long clinic;
 
     public DoctorDTO() {
@@ -27,4 +28,11 @@ public class DoctorDTO extends PersonDTO {
         this.lastname = lastname;
         this.clinic = clinic;
     }
+    public DoctorDTO(String name, String lastname, Long id,Long clinic) {
+        this.name = name;
+        this.lastname = lastname;
+        this.clinic = clinic;
+        this.id = id;
+    }
+
 }

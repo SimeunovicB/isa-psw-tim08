@@ -11,14 +11,13 @@ import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment,Long>{
 
-    @Query("SELECT a FROM Appointment a where a.date=?1 and a.type=?2")
-    List<Appointment> findAppointments(Date date, String type);
+    @Query("SELECT a FROM Appointment a where a.type=?1")
+    List<Appointment> findAppointments( String type);
 
     @Query("SELECT a FROM Appointment a where a.doctor.clinic.id=:id")
     List<Appointment> findAdminAppointments(@Param("id") Long id);
 
     Appointment findOneById(Long id);
-
     List<Appointment> findAll();
     List<Appointment> findAllByDoctor(Doctor d);
 

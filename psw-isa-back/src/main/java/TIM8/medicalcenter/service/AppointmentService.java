@@ -36,7 +36,7 @@ public class AppointmentService  {
 
     public List<Appointment> findAll(){return appointmentRepository.findAll();}
     public List<Appointment> findAdminAppointments(Long id) {return appointmentRepository.findAdminAppointments(id);}
-    public List<Appointment> findAppointments(Date date, String type){return appointmentRepository.findAppointments(date,type);}
+    public List<Appointment> findAppointments(String type){return appointmentRepository.findAppointments(type);}
     public Appointment save(Appointment a) {  return appointmentRepository.save(a); }
     public List<Appointment> findAllByDoctorId(Long id){
         Doctor d = (Doctor) personRepository.findOneById(id);
