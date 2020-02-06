@@ -3,7 +3,6 @@ package TIM8.medicalcenter.service;
 import TIM8.medicalcenter.dto.CreatePredefDTO;
 import TIM8.medicalcenter.dto.Request.PredefAppointmentDTORequest;
 import TIM8.medicalcenter.model.Appointment;
-import TIM8.medicalcenter.model.AppointmentType;
 import TIM8.medicalcenter.model.Room;
 import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.print.Doc;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +35,7 @@ public class AppointmentService  {
 
 
     public List<Appointment> findAll(){return appointmentRepository.findAll();}
+    public List<Appointment> findAdminAppointments(Long id) {return appointmentRepository.findAdminAppointments(id);}
     public List<Appointment> findAppointments(String type){return appointmentRepository.findAppointments(type);}
     public Appointment save(Appointment a) {  return appointmentRepository.save(a); }
     public List<Appointment> findAllByDoctorId(Long id){

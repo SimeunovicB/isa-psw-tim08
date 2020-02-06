@@ -65,4 +65,14 @@ export class ManageDoctorsComponent implements OnInit {
         }
       )
   }
+
+  obrisi(id:any) {
+    this.adminService.deleteDoctor(id)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.getDoctors();
+        }
+      )
+  }
 }

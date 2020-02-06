@@ -62,7 +62,8 @@ import { CreatePredefAppointmentComponent } from './create-predef-appointment/cr
 import { GradesComponent } from './grades/grades.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent }, //more
+  { path: 'businessreport', component: BusinessReportComponent }, //
   { path: 'profile', component: PatientProfileComponent }, //more
   { path: 'login', component: LoginComponent }, //more
   { path: 'register', component: RegisterComponent }, //more
@@ -91,7 +92,7 @@ const appRoutes: Routes = [
   { path: 'radniKalendar', component: CalendarComponent}, //more
   { path : 'predefAppointments',component : PredefAppointmentsComponent}, //more
   { path : 'createPredefAppointment',component : CreatePredefAppointmentComponent},//more
-  {path : 'makeGrades',component:GradesComponent},
+  { path : 'makeGrades',component: GradesComponent},
   { path: '**', component: PageNotFoundComponent },
 
 ];
