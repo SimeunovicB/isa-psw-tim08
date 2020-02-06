@@ -15,8 +15,8 @@ public interface AppointmentTypeRepository extends JpaRepository<AppointmentType
     AppointmentType findByName(String name);
     AppointmentType findOneById(Long id);
 
-    //@Modifying
-    //@Transactional
-   // @Query("update AppointmentType at set at.name = :name where c.id = :id")
-    //int updateAppointmentType(@Param("name") String name, @Param("id") Long id);
+    @Modifying
+    @Transactional
+    @Query("update AppointmentType at set at.name = :name where at.id = :id")
+    int updateAppointmentType(@Param("name") String name, @Param("id") Long id);
 }

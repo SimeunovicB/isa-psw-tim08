@@ -2,6 +2,7 @@ package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.FindRoomDTORequest;
 import TIM8.medicalcenter.dto.FindRoomDTOResponse;
+import TIM8.medicalcenter.dto.RoomDTO;
 import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.Room;
 import TIM8.medicalcenter.service.RoomService;
@@ -68,6 +69,7 @@ public class RoomController {
         return new ResponseEntity<>(res,HttpStatus.OK);
 
     }
+
     @RequestMapping(value = "/findAll",method = RequestMethod.GET)
     public ResponseEntity<?> findAllRooms() {
         List<Room> rooms = roomService.findAll();
@@ -78,7 +80,32 @@ public class RoomController {
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
+    @RequestMapping(value = "/getAdminRooms",method = RequestMethod.POST)
+    public ResponseEntity<?> getAdminRooms(@RequestBody Id id) {
+        List<Room> rooms = roomService.findAdminRooms(id.id);
+        List<FindRoomDTOResponse> response = new ArrayList<>();
+        for(Room r : rooms){
+            response.add(new FindRoomDTOResponse(r.getId(),r.getName(),r.getNumber(),null));
+        }
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseEntity<?> updateRoom(@RequestBody RoomDTO room) {
+        int a = roomService.updateRoom(room.getName(), room.getNumber(), room.getId());
+
+        return new ResponseEntity<>(a, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<?> createRoom(@RequestBody RoomDTO room) {
+        Room r = roomService.save(room);
+
+        return new ResponseEntity<>(r, HttpStatus.CREATED);
+    }
 
 
-
+    static class Id {
+        public Long id;
+    }
 }

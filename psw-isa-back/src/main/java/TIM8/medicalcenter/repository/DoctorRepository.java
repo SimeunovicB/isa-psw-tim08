@@ -10,5 +10,4 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
 
     Doctor findOneById(Long id);
     Doctor findOneByUsername(String username);
-
 }

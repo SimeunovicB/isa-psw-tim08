@@ -25,6 +25,21 @@ export class AppointmentTypeService {
     )
   }
 
+  update(name:any, id:any) {
+    return this.http.post(`${this.baseUrl}/update`,{
+      name: name,
+      id:id
+    }).pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(err.text);
+      })
+    )
+  }
+
   getAll() {
     return this.http.get(`${this.baseUrl}/getAll`)
       .pipe(

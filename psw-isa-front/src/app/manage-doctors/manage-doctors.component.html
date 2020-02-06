@@ -1,1 +1,35 @@
-<p>manage-doctors works!</p>
+<app-header></app-header>
+<div class="inputt">
+    <table>
+        <tr><input type="text" [(ngModel)]="imenovog"></tr>
+        <tr><input type="text" [(ngModel)]="prznovog"></tr>
+        <tr><input type="text" [(ngModel)]="adresanovog"></tr>
+        <tr><input type="text" [(ngModel)]="mailnovog"></tr>
+        <tr><button class="btn btn-success" (click)="onSubmit()">Dodaj doktora</button></tr>
+    </table>
+</div>
+
+<hr>
+<div class="tabela">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ime</th>
+                <th scope="col">Prezime</th>
+                <th scope="col">Obrisi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let doc of doctors; let i = index">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{doc.name}}</td>
+                    <td>{{doc.lastname}}</td>
+                    <td><button type="button" class="btn btn-danger"
+                            (click)="obrisi(doc.clinic)">Obrisi</button></td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

@@ -39,14 +39,11 @@ public class AppointmentTypeController {
         return new ResponseEntity<>(appointmentTypeDTOS,HttpStatus.OK);
     }
 
-    @PostMapping(consumes = "application/json", value = "/update")
-    public ResponseEntity<AppointmentTypeDTO> updateAppointmentType(@RequestBody AppointmentTypeDTO appType){
-        AppointmentType appointmentType = appointmentTypeService.findOneById(appType.getId());
-        if(appointmentType.getId() != null){
-            //appointmentTypeService.updateAppointmentType(appType.getName(),appType.getId());
-            appointmentType = appointmentTypeService.findOneById(appType.getId());
-            return new ResponseEntity<>(new AppointmentTypeDTO(appointmentType),HttpStatus.ACCEPTED);
-        }
-        return new ResponseEntity<>(new AppointmentTypeDTO(),HttpStatus.BAD_REQUEST);
+    @RequestMapping(consumes = "application/json", value = "/update", method=RequestMethod.POST)
+    public ResponseEntity<?> updateAppointmentType(@RequestBody AppointmentTypeDTO appType){
+        int a = appointmentTypeService.updateAppointmentType(appType.getName(), appType.getId());
+
+
+        return new ResponseEntity<>(a,HttpStatus.OK);
     }
 }
