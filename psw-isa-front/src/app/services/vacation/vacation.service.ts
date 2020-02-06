@@ -61,9 +61,10 @@ export class VacationService {
     );
   }
 
-  denyRequest(id) {
+  denyRequest(id:any, razlog:any) {
     return this.http.post("http://localhost:9090/api/vacation/decline", {
       id: id,
+      razlog: razlog
     })
     .pipe(
       map((response: Response) => {
