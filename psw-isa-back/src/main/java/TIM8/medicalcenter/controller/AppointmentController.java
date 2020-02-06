@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -97,7 +98,7 @@ public class AppointmentController {
         List<AppointmentDTO> apps = new ArrayList<>();
         List<PersonDTO> doctors = new ArrayList<>();
         for (Appointment a:appointments) {
-            apps.add(new AppointmentDTO(a));
+            apps.add(new AppointmentDTO(a.getDoctor(),a.getDate(),a.getType()));
         }
         List<String> names = new ArrayList<>();
         for (AppointmentDTO a:apps) {
@@ -110,13 +111,68 @@ public class AppointmentController {
 
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
+    @RequestMapping(consumes = "application/json",value="/makeApp",method = RequestMethod.POST)
+    public ResponseEntity<?> makeApp(@RequestBody Req request) {
+        List<ClinicDTO> clinics = new ArrayList<>();
+        if(request.date.equals("")&&request.type.equals("")){
+            return null;
+        }
+        SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd");
+        Date date1=new Date();
+        try {
+            date1 = formatter6.parse(request.date);
+        }
+        catch(Exception e) {
+            return null;
+        }
+        List<Appointment> appointments = appointmentService.findAppointments(request.type);
+        List<String> termins = new ArrayList<>();
+        for (Appointment a:appointments) {
+            String temp =a.getDate().toString().substring(0,10);
+            Date date2=new Date();
+            try {
+                date2 = formatter6.parse(temp);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            System.out.println(date2.toString()+" "+date1.toString()+" "+a.getDoctor().getId()+" "+request.id);
 
-    /**
-     * Metoda koja vraca sve preglede na kojima ima neki pacijent,odnosno one koji nisu predefinisani,
-     * za konkretnog doktora,koristi se za popunjavanje kalendara
-     * @param doctorId
-     * @return
-     */
+            if (date2.equals(date1) && a.getDoctor().getId()==request.id && a.getType().equals(request.type)
+                    && a.getPatient()==null)
+
+                termins.add(a.getDate().toString());
+
+        }
+        Collections.sort(termins);
+        if(termins.size()==0)
+            return  null;
+        String min = termins.get(0);
+        Long id = 0L;
+        for (Appointment a:appointments) {
+            String temp =a.getDate().toString().substring(0,10);
+            Date date2=new Date();
+            try {
+                date2 = formatter6.parse(temp);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            System.out.println(date2.toString()+" "+date1.toString()+" "+a.getDoctor().getId()+" "+request.id);
+            if (date2.equals(date1) && a.getDoctor().getId()==request.id && a.getType().equals(request.type)
+                    && a.getPatient()==null && a.getDate().toString().equals(min) )
+                        id = a.getId();
+
+        }
+        System.out.println(id+" "+request.patientId);
+        appointmentService.reserve(new PredefAppointmentDTORequest(request.patientId,id));
+        return null;
+    }
+
+    static class Req{
+        public int id;
+        public Long patientId;
+        public String type;
+        public String date;
+    }
     @RequestMapping(value="/getAppointmentsForDoctor",method = RequestMethod.GET)
     public ResponseEntity<?> getAppointmentsForDoctor(@RequestParam String doctorId){
         Long id = Long.parseLong(doctorId.substring(1));

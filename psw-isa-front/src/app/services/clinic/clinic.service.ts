@@ -47,7 +47,22 @@ export class ClinicService {
       })
     )
   }
-
+  makeApp(id:any, date:string, type:string,patientId:any) {
+    return this.http.post("http://localhost:9090/api/appointment/makeApp", {
+      id: id,
+      date: date,
+      type: type,
+      patientId:patientId
+  }).pipe(
+      map((response: any) => {
+        const data = response;
+        return data;
+      }),
+      catchError((err: any) => {
+        return throwError(JSON.parse(err.text));
+      })
+    )  
+}
   getDoctors(clinicname:string, date:string, type:string) {
     return this.http.get("http://localhost:9090/api/appointment/findClinic/doctors?clinicName="+clinicname+"&date="+date+"&type="+type)
     .pipe(

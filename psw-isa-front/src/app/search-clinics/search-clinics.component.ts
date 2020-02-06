@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { ClinicService } from '../services/clinic/clinic.service';
 import { NgForm } from '@angular/forms';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-search-clinics',
@@ -10,14 +12,23 @@ import { NgForm } from '@angular/forms';
 export class SearchClinicsComponent implements OnInit {
   model: any;
   tip = "";
+  helper: any;
+  userId : any;
   clinics = [];
   modelmem:any;
   tipmem = "";
   doctors = [];
+  times=[];
+  
+  
 
-  constructor(private clinicService: ClinicService) { }
+  constructor(private clinicService: ClinicService,
+    private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.helper = new JwtHelperService()
+    this.userId = this.helper.decodeToken(this.cookieService.get('token')).id;
+    
     this.findClinics("", "");
   }
 
@@ -43,7 +54,15 @@ export class SearchClinicsComponent implements OnInit {
       }
     )
   }
-
+  zakazi(id:any) {
+    console.log(id);
+    var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day ;
+    this.clinicService.makeApp(id, dat, this.tipmem,this.userId)
+    .subscribe(
+      (data) => {
+      }
+    )
+  }
   doktori(clinicname:string) {
     var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day ;
     this.clinicService.getDoctors(clinicname, dat, this.tipmem)
@@ -51,6 +70,7 @@ export class SearchClinicsComponent implements OnInit {
       (data) => {
         console.log(data);
         this.doctors = Object.assign([], (data));
+        
       }
     )
   }

@@ -16,7 +16,6 @@
     </div>
 </form>
 
-<hr>
 
 <table class="table">
     <thead>
@@ -42,6 +41,8 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Ime</th>
+            <th scope="col">Zakazi</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -49,7 +50,9 @@
             <tr>
                 <th scope="row">{{i+1}}</th>
                 <td>{{doctor.firstName}}</td>
+               <td><button type="button" class="btn btn-primary" (click) ='zakazi(doctor.id)'>Zapocni pregled</button></td>
             </tr>
         </ng-container>
     </tbody>
 </table>
+
