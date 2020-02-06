@@ -1,7 +1,6 @@
 <app-header></app-header>
 <div class="inputt">
-    <input type="text" [(ngModel)]="nazivnove"> <button class="btn btn-success" (click)="onSubmit()">Dodaj tip
-        pregleda</button></div>
+    <input type="text" [(ngModel)]="nazivnove"><input type="text" [(ngModel)]="brnove"> <button class="btn btn-success" (click)="onSubmit()">Dodaj salu</button></div>
 <hr>
 <div class="tabela">
     <table class="table">
@@ -13,11 +12,11 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let type of types; let i = index">
+            <ng-container *ngFor="let room of rooms; let i = index">
                 <tr>
                     <th scope="row">{{i+1}}</th>
-                    <td><input type="text" value={{type.name}}></td>
-                    <td><button type="button" class="btn btn-primary" (click)="izmeni(type.id)">Izmeni</button></td>
+                    <td><input type="text" [(ngModel)]="nazivi[i]" value="{{room.name}} {{room.number}}"></td>
+                    <td><button type="button" class="btn btn-primary" (click)="izmeni(room.id, nazivi[i])">Izmeni</button></td>
                 </tr>
             </ng-container>
         </tbody>

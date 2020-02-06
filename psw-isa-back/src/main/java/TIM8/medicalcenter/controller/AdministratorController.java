@@ -1,8 +1,6 @@
 package TIM8.medicalcenter.controller;
 
-import TIM8.medicalcenter.dto.AdministratorDTO;
-import TIM8.medicalcenter.dto.MakeAppointmentDTORequest;
-import TIM8.medicalcenter.dto.PersonDTO;
+import TIM8.medicalcenter.dto.*;
 import TIM8.medicalcenter.dto.response.AppointmentRequestDTOResponse;
 import TIM8.medicalcenter.exception.ResourceConflictException;
 import TIM8.medicalcenter.model.Appointment;
@@ -104,6 +102,27 @@ public class AdministratorController {
         //headers.setLocation(ucBuilder.path("/api/user/{userId}").buildAndExpand(person1.getId()).toUri());
         return new ResponseEntity<>(new AdministratorDTO(person1), HttpStatus.CREATED);
 
+    }
+
+    @RequestMapping(consumes = "application/json",value = "/createDoctor",method = RequestMethod.POST)
+    public ResponseEntity<?> createDoctor(@RequestBody CreateDoctorDTO doc) {
+        personService.saveDoctor(doc);
+
+        return new ResponseEntity<>(doc, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/getAdminDoctors",method = RequestMethod.POST)
+    public ResponseEntity<?> getAdminRooms(@RequestBody Id id) {
+        List<Doctor> doctors = personService.findAdminsDoctors(id.id);
+        List<DoctorDTO> response = new ArrayList<>();
+        for(Doctor d : doctors){
+            response.add(new DoctorDTO(d.getFirstName(),d.getLastName(),d.getId()));
+        }
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    }
+
+    static class Id {
+        public Long id;
     }
 
     /**

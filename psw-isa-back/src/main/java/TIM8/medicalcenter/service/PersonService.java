@@ -1,6 +1,7 @@
 package TIM8.medicalcenter.service;
 
 import TIM8.medicalcenter.dto.AdministratorDTO;
+import TIM8.medicalcenter.dto.CreateDoctorDTO;
 import TIM8.medicalcenter.model.security.Authority;
 import TIM8.medicalcenter.model.users.*;
 import TIM8.medicalcenter.repository.PersonRepository;
@@ -56,6 +57,7 @@ public class PersonService implements UserDetailsService {
     public List<Patient> findPatients() { return personRepository.findPatients();}
 
     public List<Doctor> findDoctors() { return personRepository.findDoctors();}
+    public List<Doctor> findAdminsDoctors(Long id) { return personRepository.findAdminsDoctors(id);}
 
     public List<Administrator> findAdmin(String mail) {return personRepository.findAdmin(mail);}
 
@@ -95,6 +97,24 @@ public class PersonService implements UserDetailsService {
         return personRepository.save(person);
 
     }
+
+    public Person saveDoctor(CreateDoctorDTO d){
+        Doctor doctor = new Doctor();
+        doctor.setFirstName(d.getFirstName());
+        doctor.setLastName(d.getLastName());
+        doctor.setUsername(d.getUsername());
+        doctor.setPassword(passwordEncoder.encode("123"));
+        doctor.setAddress(d.getAddress());
+        doctor.setClinic(clinicService.findOneById(d.getClinic_id()));
+        doctor.setStatus(d.getStatus());
+        List<Authority> auth =authorityService.findByname("ROLE_MEDICAL_STAFF");
+        doctor.setAuthorities(auth);
+        doctor.setEnabled(true);
+
+        return personRepository.save(doctor);
+
+    }
+
     public Person saveAdministrator(AdministratorDTO a, String status, String role){
         Administrator admin = new Administrator();
         admin.setFirstName(a.getFirstName());

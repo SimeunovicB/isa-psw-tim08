@@ -32,6 +32,8 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
     List<Patient> findPatients();
     @Query("SELECT p FROM Person p where p.class='D'")
     List<Doctor> findDoctors();
+    @Query("SELECT p FROM Person p where p.class='D' and p.clinic.id=:id")
+    List<Doctor> findAdminsDoctors(@Param("id") Long id);
     @Query("SELECT p FROM Person p where p.class='A' and p.username=?1")
     List<Administrator> findAdmin(String mail);
 

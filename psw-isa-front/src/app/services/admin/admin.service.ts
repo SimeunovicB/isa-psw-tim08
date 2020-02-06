@@ -22,13 +22,13 @@ export class AdminService {
     lastname: string,
     address: string,
     username: string,
-    clinic : string) {
+    clinic: string) {
     return this.http.post("http://localhost:9090/api/administrator/registerAdmin", {
       firstName: firstname,
       lastName: lastname,
       address: address,
       username: username,
-      clinic_id : clinic
+      clinic_id: clinic
     })
       .pipe(
         map((response: any) => {
@@ -45,7 +45,7 @@ export class AdminService {
     lastname: string,
     address: string,
     username: string,
-    ) {
+  ) {
     return this.http.post("http://localhost:9090/api/administrator/registerClinicCentreAdmin", {
       firstName: firstname,
       lastName: lastname,
@@ -61,5 +61,47 @@ export class AdminService {
           return throwError(JSON.parse(err.text));
         })
       )
+  }
+
+  createDoctor(
+    firstname: string,
+    lastname: string,
+    address: string,
+    username: string,
+    clinic_id: any
+  ) {
+    return this.http.post("http://localhost:9090/api/administrator/createDoctor", {
+      firstName: firstname,
+      lastName: lastname,
+      address: address,
+      password: "123",
+      username: username,
+      status: "PENDING",
+      clinic_id: clinic_id
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      )
+  }
+
+  getAdminsDoctors(id:any) {
+    return this.http.post("http://localhost:9090/api/administrator/getAdminDoctors", {
+      id:id
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
   }
 }
