@@ -63,11 +63,10 @@ public class AppointmentController {
         List<Appointment> appointments = appointmentService.findAppointments(type);
         List<AppointmentDTO> apps = new ArrayList<>();
         for (Appointment a:appointments) {
-            System.out.println(a.getDate().toString()+" "+appointments.size());
             String temp =a.getDate().toString().substring(0,10);
             Date date2=new Date();
             date2 = formatter6.parse(temp);
-            if (date2.equals(date1))
+            if (date2.equals(date1) && a.getPatient()==null)
                 apps.add(new AppointmentDTO(a.getDoctor(),a.getDate(),a.getType()));
         }
         List<String> names = new ArrayList<>();
@@ -95,8 +94,7 @@ public class AppointmentController {
     }
 
     @RequestMapping(value="/findClinic/doctors",method = RequestMethod.GET)
-    public ResponseEntity<?> findDoctors(@RequestParam String clinicName,@RequestParam String date, @RequestParam String type){
-        System.out.println(clinicName);
+    public ResponseEntity<?> findDoctors(@RequestParam String clinicName,@RequestParam String date, @RequestParam String type) throws ParseException {
         SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd");
         Date date1=new Date();
         try {
@@ -109,12 +107,16 @@ public class AppointmentController {
         List<AppointmentDTO> apps = new ArrayList<>();
         List<PersonDTO> doctors = new ArrayList<>();
         for (Appointment a:appointments) {
-            apps.add(new AppointmentDTO(a.getDoctor(),a.getDate(),a.getType()));
+            String temp =a.getDate().toString().substring(0,10);
+            Date date2=new Date();
+            date2 = formatter6.parse(temp);
+            if (date2.equals(date1) && a.getPatient()==null)
+                apps.add(new AppointmentDTO(a.getDoctor(),a.getDate(),a.getType()));
         }
         List<String> names = new ArrayList<>();
         for (AppointmentDTO a:apps) {
            // System.out.println(a.getDoctor().getClinic().getName());
-            if(names.contains(a.getDoctor().getFirstName()) /*|| !a.getDoctor().getClinic().getName().equals(clinicName)*/)
+            if(names.contains(a.getDoctor().getFirstName() ) || !a.getDoctor().getClinic().getName().equals(clinicName))
                 continue;
             names.add(a.getDoctor().getFirstName());
             doctors.add(new PersonDTO(a.getDoctor()));
