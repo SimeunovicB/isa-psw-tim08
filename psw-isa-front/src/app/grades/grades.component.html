@@ -1,0 +1,51 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Doktor</th>
+            <th scope="col">Ocena</th>
+            <th scope="col">Potvrdi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let doctor of doctors; let i = index">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{doctor.name}}</td>
+                <select (change)="changeSelectedAppType($event.target.value)">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                </select>
+                <td><button type="button" class="btn btn-primary" (click)="doktori(doctor.id,value)">Potvdri</button></td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table><table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Klinika</th>
+            <th scope="col">Ocena</th>
+            <th scope="col">Potvrdi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let clinic of clinics; let i = index">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{clinic.name}}</td>
+                <select (change)="changeSelectedClinic($event.target.value)">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                </select>
+                <td><button type="button" class="btn btn-primary" (click)="klinike(clinic.name,value)">Potvdri</button></td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
