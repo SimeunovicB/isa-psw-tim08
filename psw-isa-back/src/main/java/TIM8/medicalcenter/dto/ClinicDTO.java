@@ -20,7 +20,11 @@ public class ClinicDTO {
     public ClinicDTO(Clinic clinic) {
         this(clinic.getId(),clinic.getName(),clinic.getAddress(),clinic.getDescription());
     }
-
+    public ClinicDTO(Long id, String name) {
+        super();
+        this.id = id;
+        this.name = name;
+    }
     public ClinicDTO(Long id, String name, String address, String description) {
         super();
         this.id = id;

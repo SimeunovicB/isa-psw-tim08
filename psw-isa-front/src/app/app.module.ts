@@ -59,6 +59,7 @@ import { PredefAppointmentsComponent } from './predef-appointments/predef-appoin
 import { VacationRequestComponent } from './vacation-request/vacation-request.component';
 import { MapComponent } from './map/map.component';
 import { CreatePredefAppointmentComponent } from './create-predef-appointment/create-predef-appointment.component';
+import { GradesComponent } from './grades/grades.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -90,6 +91,7 @@ const appRoutes: Routes = [
   { path: 'radniKalendar', component: CalendarComponent}, //more
   { path : 'predefAppointments',component : PredefAppointmentsComponent}, //more
   { path : 'createPredefAppointment',component : CreatePredefAppointmentComponent},//more
+  {path : 'makeGrades',component:GradesComponent},
   { path: '**', component: PageNotFoundComponent },
 
 ];
@@ -138,6 +140,7 @@ const appRoutes: Routes = [
     PredefAppointmentsComponent,
     VacationRequestComponent,
     CreatePredefAppointmentComponent,
+    GradesComponent,
   ],
   imports: [ 
     BrowserModule,
