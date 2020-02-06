@@ -36,7 +36,7 @@ public class PersonController {
     @RequestMapping(consumes = "application/json",value="/getByEmail",method = RequestMethod.POST)
     public ResponseEntity<?> getByEmail(@RequestBody PersonDTO person) {
         Person personRet = personService.findOneByUsername(person.getUsername());
-        if (personRet == null)
+        if (personRet == null || personRet.getStatus().equals("DELETED"))
             return null;
         return new ResponseEntity<>(new PersonDTO(personRet), HttpStatus.OK);
 
@@ -54,7 +54,7 @@ public class PersonController {
     @RequestMapping(consumes = "application/json",value="/getDocByEmail",method = RequestMethod.POST)
     public ResponseEntity<?> getDocByEmail(@RequestBody PersonDTO person) {
         Doctor personRet = doctorService.findOneByUsername(person.getUsername());
-        if (personRet == null)
+        if (personRet == null || personRet.getStatus().equals("DELETED"))
             return null;
         return new ResponseEntity<>(new DoctorDTO(personRet.getFirstName(),personRet.getLastName(),personRet.getClinic().getId()), HttpStatus.OK);
 
@@ -65,7 +65,8 @@ public class PersonController {
         List<Doctor> doctors = personService.findDoctors();
         List<PersonDTO> response = new ArrayList<>();
         for(Doctor d : doctors){
-            response.add(new PersonDTO((Person) d));
+            if(!d.getStatus().equals("DELETED"))
+                response.add(new PersonDTO((Person) d));
         }
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }

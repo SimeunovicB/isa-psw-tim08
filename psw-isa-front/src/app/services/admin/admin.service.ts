@@ -104,4 +104,66 @@ export class AdminService {
         })
       );
   }
+
+  deleteDoctor(id:any) {
+    return this.http.post("http://localhost:9090/api/administrator/deleteDoctor", {
+      id:id
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
+  }
+
+  getDoctorGrades(id:any) {
+    return this.http.post("http://localhost:9090/api/administrator/getAdminDoctorsGrades", {
+      id:id
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
+  }
+
+  financialReport(beginDate:any, endDate:any, id:any) {
+    return this.http.post("http://localhost:9090/api/administrator/financialReport", {
+      beginDate:beginDate,
+      endDate:endDate,
+      id:id
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
+  }
+
+  averageClinicGrade(id:any) {
+    return this.http.post("http://localhost:9090/api/administrator/averageClinicGrade", {
+      id:id
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      );
+  }
 }

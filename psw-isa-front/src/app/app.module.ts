@@ -73,6 +73,7 @@ const appRoutes: Routes = [
   { path: 'managetypes', component: ManageAppointTypesComponent },
   { path: 'managedoctors', component: ManageDoctorsComponent },
   { path: 'managerooms', component: ManageRoomsComponent },
+  { path: 'businessreport', component: BusinessReportComponent },
   { path: 'mapa', component: MapComponent },
   { path: 'pendingvacationrequests', component: PendingVacationsComponent },
   { path: 'vacationrequest', component: VacationRequestComponent },

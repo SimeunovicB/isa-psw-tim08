@@ -6,6 +6,8 @@ import TIM8.medicalcenter.exception.ResourceConflictException;
 import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.AppointmentRequest;
 import TIM8.medicalcenter.model.Room;
+import TIM8.medicalcenter.model.grading.PatientClinicGrades;
+import TIM8.medicalcenter.model.grading.PatientDoctorGrades;
 import TIM8.medicalcenter.model.users.*;
 import TIM8.medicalcenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,12 @@ public class AdministratorController {
 
     @Autowired
     AppointmentRequestService appointmentRequestService;
+
+    @Autowired
+    PatientDoctorGradesService patientDoctorGradesService;
+
+    @Autowired
+    PatientClinicGradesService patientClinicGradesService;
 
     /**
      *
@@ -111,14 +119,111 @@ public class AdministratorController {
         return new ResponseEntity<>(doc, HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = "/averageClinicGrade",method = RequestMethod.POST)
+    public ResponseEntity<?> averageClinicGrade(@RequestBody Id id) {
+        List<PatientClinicGrades> grades = patientClinicGradesService.findClinicGrades(id.id);
+
+        double response = 0.0;
+
+        for(PatientClinicGrades grade : grades) {
+            response += grade.getGrade();
+        }
+
+        response = response/grades.size();
+
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/financialReport", method=RequestMethod.POST)
+    public ResponseEntity<?> financialReport(@RequestBody Dates dates) {
+        String dat1 = dates.beginDate;
+        String dat2 = dates.endDate;
+
+        int money = 0;
+
+        int year = Integer.parseInt(dat1.split("-")[0]);
+        int month = Integer.parseInt(dat1.split("-")[1]);
+        int day = Integer.parseInt(dat1.split("-")[2]);
+
+
+        List<Appointment> appointments = appointmentService.findAdminAppointments(dates.id);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month-1);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        Date d1 = cal.getTime();
+
+
+        year = Integer.parseInt(dat2.split("-")[0]);
+        month = Integer.parseInt(dat2.split("-")[1]);
+        day = Integer.parseInt(dat2.split("-")[2]);
+
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month-1);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        cal.set(Calendar.HOUR, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        Date d2 = cal.getTime();
+
+        for(Appointment a : appointments) {
+            if(d1.before(a.getDate()) && a.getDate().before(d2))
+                money += a.getPrice()*(100-a.getDiscount())/100;
+        }
+
+        return new ResponseEntity<>(money, HttpStatus.OK);
+    }
+
+    static class Dates {
+        public String beginDate;
+        public String endDate;
+        public Long id;
+    }
+
+    @RequestMapping(value = "/getAdminDoctorsGrades",method = RequestMethod.POST)
+    public ResponseEntity<?> getAdminDoctorsGrades(@RequestBody Id id) {
+        List<Doctor> doctors = personService.findAdminsDoctors(id.id);
+        List<Doctor> active = new ArrayList<>();
+        for(Doctor d : doctors){
+            if(!d.getStatus().equals("DELETED"))
+                active.add(d);
+        }
+
+        List<DoctorGradeDTO> response = new ArrayList<>();
+
+        for(Doctor d : active) {
+            List<PatientDoctorGrades> grades = patientDoctorGradesService.findDoctorGrades(d.getId());
+            double average = 0.0;
+            for(PatientDoctorGrades pdg : grades) {
+                average += pdg.getGrade();
+            }
+            average = average/grades.size();
+            response.add(new DoctorGradeDTO(d.getFirstName(), d.getLastName(), average));
+        }
+
+        return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    }
+
     @RequestMapping(value = "/getAdminDoctors",method = RequestMethod.POST)
-    public ResponseEntity<?> getAdminRooms(@RequestBody Id id) {
+    public ResponseEntity<?> getAdminDoctors(@RequestBody Id id) {
         List<Doctor> doctors = personService.findAdminsDoctors(id.id);
         List<DoctorDTO> response = new ArrayList<>();
         for(Doctor d : doctors){
-            response.add(new DoctorDTO(d.getFirstName(),d.getLastName(),d.getId()));
+            if(!d.getStatus().equals("DELETED"))
+                response.add(new DoctorDTO(d.getFirstName(),d.getLastName(),d.getId()));
         }
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/deleteDoctor",method = RequestMethod.POST)
+    public ResponseEntity<?> deleteDoctor(@RequestBody Id id) {
+        int a = personService.updatePersonStatus("DELETED", id.id);
+
+        return new ResponseEntity<>(a,HttpStatus.OK);
     }
 
     static class Id {

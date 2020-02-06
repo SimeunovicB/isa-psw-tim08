@@ -41,6 +41,9 @@ export class LoginComponent implements OnInit {
         }else if((userType === 'D' || userType === 'N' || userType === 'CCA' || userType === 'A') && status === 'PENDING'){
           console.log('dosao da rerutujem doktore i sestre')
           this.router.navigate(['/changePassword']);
+        }else if(status === "DELETED") {
+          alert('Vas nalog je obrisan!');
+          this.router.navigate(['/login']);
         }
         else{
           
