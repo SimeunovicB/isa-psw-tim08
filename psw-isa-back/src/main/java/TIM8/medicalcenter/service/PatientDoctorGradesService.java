@@ -13,5 +13,5 @@ public class PatientDoctorGradesService {
     private PatientDoctorGradesRepository patientDoctorGradesRepository;
 
     public List<PatientDoctorGrades> findDoctorGrades(Long id) { return patientDoctorGradesRepository.findDoctorGrades(id); }
-    public PatientDoctorGrades save(PatientDoctorGrades a) {  return appointmentRepository.save(a); }
+    public PatientDoctorGrades save(PatientDoctorGrades a) {  return patientDoctorGradesRepository.save(a); }
 }

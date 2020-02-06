@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class PatientClinicService {
     @Autowired
-    private PatientClinicGradesRepository appointmentRepository;
+    private PatientClinicGradesRepository patientClinicGradesRepository;
 
-    public PatientClinicGrades save(PatientClinicGrades a) {  return appointmentRepository.save(a); }
+    public PatientClinicGrades save(PatientClinicGrades a) {  return patientClinicGradesRepository.save(a); }
 
 }
