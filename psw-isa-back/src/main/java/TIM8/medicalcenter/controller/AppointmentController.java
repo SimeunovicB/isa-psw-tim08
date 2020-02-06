@@ -9,7 +9,7 @@ import TIM8.medicalcenter.model.grading.PatientDoctorGrades;
 import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
 import TIM8.medicalcenter.repository.PatientClinicGradesRepository;
-import TIM8.medicalcenter.repository.PatientDoctorGradesRopository;
+import TIM8.medicalcenter.repository.PatientDoctorGradesRepository;
 import TIM8.medicalcenter.service.AppointmentService;
 import TIM8.medicalcenter.service.ClinicService;
 import TIM8.medicalcenter.service.PersonService;
@@ -19,7 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class AppointmentController {
     @Autowired
     private PersonService personService;
     @Autowired
-    private PatientDoctorGradesRopository gradesDoctor;
+    private PatientDoctorGradesRepository gradesDoctor;
     @Autowired
     private PatientClinicGradesRepository gradesClinic;
 
