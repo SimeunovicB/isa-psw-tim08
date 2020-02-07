@@ -175,7 +175,11 @@ public class AppointmentController {
 
         }
         System.out.println(id+" "+request.patientId);
-        appointmentService.reserve(new PredefAppointmentDTORequest(request.patientId,id));
+        try {
+            appointmentService.reserve(new PredefAppointmentDTORequest(request.patientId, id));
+        }catch (Exception e){
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+        }
         return null;
     }
 
@@ -184,6 +188,7 @@ public class AppointmentController {
         public Long patientId;
         public String type;
         public String date;
+
     }
     static class grade{
         public Long doctorId;
