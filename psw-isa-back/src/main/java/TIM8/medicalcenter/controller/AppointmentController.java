@@ -13,6 +13,7 @@ import TIM8.medicalcenter.model.users.Patient;
 import TIM8.medicalcenter.repository.PatientClinicGradesRepository;
 import TIM8.medicalcenter.repository.PatientDoctorGradesRepository;
 import TIM8.medicalcenter.service.*;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -48,10 +49,19 @@ public class AppointmentController {
     @GetMapping(value="/findClinic")
     public ResponseEntity<?> findClinics(@RequestParam String date, @RequestParam String type) throws ParseException {
         List<ClinicDTO> clinics = new ArrayList<>();
+
+        List<PatientClinicGrades> ocene = gradesClinic.findAll();
         if(date.equals("")&&type.equals("")){
             List<Clinic> clinic = clinicService.findAll();
             for (Clinic c:clinic) {
-                clinics.add(new ClinicDTO(c));
+                double sum =0;
+                for(PatientClinicGrades p : ocene)
+                    if(c.getId()==p.getClinic().getId())
+                        sum+=p.getGrade();
+                System.out.println(sum+" "+ocene.size());
+                ClinicDTO clinic1 = new ClinicDTO(c);
+                clinic1.setAvg(sum/ocene.size());
+                clinics.add(clinic1);
             }
             return new ResponseEntity<>(clinics, HttpStatus.OK);
         }
@@ -65,6 +75,7 @@ public class AppointmentController {
         }
         List<Appointment> appointments = appointmentService.findAppointments(type);
         List<AppointmentDTO> apps = new ArrayList<>();
+
         for (Appointment a:appointments) {
             String temp =a.getDate().toString().substring(0,10);
             Date date2=new Date();
@@ -77,11 +88,20 @@ public class AppointmentController {
             System.out.println(a.getDoctor().getClinic().getName());
             if(names.contains(a.getDoctor().getClinic().getName()))
                 continue;
+            double sum =0;
+            for(PatientClinicGrades p : ocene)
+                if(a.getDoctor().getClinic().getId()==p.getClinic().getId())
+                     sum+=p.getGrade();
+            System.out.println(sum+" "+ocene.size());
+            ClinicDTO clinic = new ClinicDTO(a.getDoctor().getClinic());
+            clinic.setAvg(sum/ocene.size());
+
             names.add(a.getDoctor().getClinic().getName());
-            clinics.add(new ClinicDTO(a.getDoctor().getClinic()));
+            clinics.add(clinic);
         }
         return new ResponseEntity<>(clinics, HttpStatus.OK);
     }
+
     @RequestMapping(consumes = "application/json",value="/getAppointments",method = RequestMethod.GET)
     public ResponseEntity<?> getAppointments(){
         List<Appointment> apps = appointmentService.findAll();
@@ -107,6 +127,7 @@ public class AppointmentController {
             new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
         List<Appointment> appointments = appointmentService.findAppointments(type);
+        System.out.println(appointments.size());
         List<AppointmentDTO> apps = new ArrayList<>();
         List<PersonDTO> doctors = new ArrayList<>();
         for (Appointment a:appointments) {
@@ -116,9 +137,10 @@ public class AppointmentController {
             if (date2.equals(date1) && a.getPatient()==null)
                 apps.add(new AppointmentDTO(a.getDoctor(),a.getDate(),a.getType()));
         }
+        System.out.println(apps.size());
         List<String> names = new ArrayList<>();
         for (AppointmentDTO a:apps) {
-           // System.out.println(a.getDoctor().getClinic().getName());
+            System.out.println(a.getDoctor().getClinic().getName());
             if(names.contains(a.getDoctor().getFirstName() ) || !a.getDoctor().getClinic().getName().equals(clinicName))
                 continue;
             names.add(a.getDoctor().getFirstName());
@@ -127,6 +149,7 @@ public class AppointmentController {
 
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
+
     @RequestMapping(consumes = "application/json",value="/makeApp",method = RequestMethod.POST)
     public ResponseEntity<?> makeApp(@RequestBody Req request) {
         List<ClinicDTO> clinics = new ArrayList<>();
@@ -220,6 +243,7 @@ public class AppointmentController {
         a.setPatient((Patient)personService.findOneById(request.patientId));
         a.setClinic((Clinic) clinicService.findOneByName(request.clinicName));
         a.setGrade(request.value);
+        System.out.println(a.getGrade()+" "+a.getPatient().getId()+" "+a.getClinic().getId());
         gradesClinic.save(a);
         return new ResponseEntity<>( HttpStatus.OK);
 
@@ -228,6 +252,7 @@ public class AppointmentController {
     public ResponseEntity<?> doctorGrade(@RequestBody Req request) {
         List<Appointment> apps = appointmentService.findAll();
         List<DoctorDTO> appDto = new ArrayList<>();
+        List<PatientDoctorGrades> ocene = gradesDoctor.findAll();
         List<String> names = new ArrayList<>();
         for (Appointment a:apps) {
             if(a.getPatient()==null)
@@ -237,8 +262,16 @@ public class AppointmentController {
             AppointmentDTO ap = new AppointmentDTO(a);
             if(names.contains(ap.getDoctor().getFirstName()))
                 continue;
-            names.add(ap.getDoctor().getFirstName());
-            appDto.add(new DoctorDTO(ap.getDoctor().getFirstName(),ap.getDoctor().getLastName(),ap.getDoctor().getId(),ap.getDoctor().getClinic().getId()));
+            Boolean ocenjen=false;
+            for(PatientDoctorGrades p : ocene){
+                System.out.println(p.getDoctor().getId()+" "+a.getDoctor().getId() +""+p.getPatient().getId()+""+ request.patientId);
+                if(p.getDoctor().getId()== a.getDoctor().getId() && p.getPatient().getId()== request.patientId)
+                    ocenjen=true;
+            }
+            if(!ocenjen) {
+                names.add(ap.getDoctor().getFirstName());
+                appDto.add(new DoctorDTO(ap.getDoctor().getFirstName(), ap.getDoctor().getLastName(), ap.getDoctor().getId(), ap.getDoctor().getClinic().getId()));
+            }
         }
         return new ResponseEntity<>(appDto, HttpStatus.OK);
 
@@ -248,7 +281,7 @@ public class AppointmentController {
         List<Appointment> apps = appointmentService.findAll();
         List<ClinicDTO> appDto = new ArrayList<>();
         List<String> names = new ArrayList<>();
-
+        List<PatientClinicGrades> ocene = gradesClinic.findAll();
         for (Appointment a:apps) {
             if(a.getPatient()==null)
                 continue;
@@ -257,9 +290,18 @@ public class AppointmentController {
             AppointmentDTO ap = new AppointmentDTO(a);
             if(names.contains(ap.getDoctor().getClinic().getName()))
                 continue;
-            names.add(ap.getDoctor().getClinic().getName());
-            appDto.add(new ClinicDTO(ap.getDoctor().getClinic().getId(),ap.getDoctor().getClinic().getName()));
+            Boolean ocenjen=false;
+            for(PatientClinicGrades p : ocene){
+                System.out.println(p.getClinic().getId()+" "+a.getDoctor().getClinic().getId() +""+p.getPatient().getId()+""+ request.patientId);
+                if(p.getClinic().getId()== a.getDoctor().getClinic().getId() && p.getPatient().getId()== request.patientId)
+                    ocenjen=true;
+            }
+            if(!ocenjen) {
+                names.add(ap.getDoctor().getClinic().getName());
+                appDto.add(new ClinicDTO(ap.getDoctor().getClinic().getId(), ap.getDoctor().getClinic().getName()));
+            }
         }
+
         return new ResponseEntity<>(appDto, HttpStatus.OK);
 
     }

@@ -37,6 +37,8 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Ime</th>
+            <th scope="col">Adresa</th>
+            <th scope="col">Prosek</th>
             <th scope="col">Doktori</th>
         </tr>
     </thead>
@@ -45,6 +47,8 @@
             <tr>
                 <th scope="row">{{i+1}}</th>
                 <td>{{clinic.name}}</td>
+                <td>{{clinic.description}}</td>
+                <td>{{clinic.avg}}</td>
                 <td><button id="doctor{{i+1}}" type="button" class="btn btn-primary" (click)="doktori(clinic.name)">Doktori</button></td>
             </tr>
         </ng-container>

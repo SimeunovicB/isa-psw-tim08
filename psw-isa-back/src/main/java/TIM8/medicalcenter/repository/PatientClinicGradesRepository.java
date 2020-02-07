@@ -12,4 +12,7 @@ public interface PatientClinicGradesRepository extends JpaRepository<PatientClin
     @Query("SELECT pcg from PatientClinicGrades pcg where pcg.clinic.id=:id")
     List<PatientClinicGrades> findClinicGrades(@Param("id") Long id);
 
+
+    List<PatientClinicGrades> findAll();
+
 }

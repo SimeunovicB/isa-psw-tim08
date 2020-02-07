@@ -27,14 +27,15 @@ export class GradesComponent implements OnInit {
     this.findClinics();
     this.findDoctors();
   }
-  changeSelectedAppType(filterVal: any) {
+  onItemChange(value){
+    console.log(" Value is : ", value );
+    this.selectedClinic=value;
+ }
+  onDoctorChange(filterVal) {
     this.selectedType = filterVal;
     console.log(this.selectedType);
   }
-  changeSelectedClinic(filterVal: any) {
-    this.selectedClinic = filterVal;
-    console.log(this.selectedClinic);
-  }
+  
   doktori(doctorId:any,value:any) {
     console.log(value,doctorId);
     this.clinicService.makeGradeDoctor(doctorId, this.selectedType, this.userId)
@@ -45,7 +46,7 @@ export class GradesComponent implements OnInit {
     )
   }
   klinike(clinicname:String,value:any) {
-    console.log(value,clinicname);
+    console.log(this.selectedClinic,clinicname);
     this.clinicService.makeGradeClinic(clinicname, this.selectedClinic, this.userId)
     .subscribe(
       (data) => {
