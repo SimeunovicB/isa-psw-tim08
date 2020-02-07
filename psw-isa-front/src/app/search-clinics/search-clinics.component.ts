@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ClinicService } from '../services/clinic/clinic.service';
 import { NgForm } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AppointmentTypeService } from '../services/appointment-type/appointment-type.service';
 
 @Component({
   selector: 'app-search-clinics',
@@ -19,17 +20,28 @@ export class SearchClinicsComponent implements OnInit {
   tipmem = "";
   doctors = [];
   times=[];
+  currentType : any;
+  appointmentTypes : any;
   
   
 
   constructor(private clinicService: ClinicService,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private appTypeService : AppointmentTypeService) { }
 
   ngOnInit() {
     this.helper = new JwtHelperService()
     this.userId = this.helper.decodeToken(this.cookieService.get('token')).id;
+    this.appTypeService.getAll().subscribe(
+      (data: any) => {
+        this.appointmentTypes = data;
+      }, (error) => alert(error.text)
+    );
     
     this.findClinics("", "");
+  }
+  changeSelectedType(filterVal: any) {
+    this.currentType = filterVal;
   }
 
   onSubmit(form: NgForm) {
@@ -41,7 +53,7 @@ export class SearchClinicsComponent implements OnInit {
     }
     this.modelmem = this.model;
     this.tipmem = this.tip;
-    this.findClinics(dat, this.tip);
+    this.findClinics(dat, this.currentType);
   }
 
   findClinics(date:string, type:string) {
@@ -57,7 +69,7 @@ export class SearchClinicsComponent implements OnInit {
   zakazi(id:any) {
     console.log(id);
     var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day ;
-    this.clinicService.makeApp(id, dat, this.tipmem,this.userId)
+    this.clinicService.makeApp(id, dat, this.currentType,this.userId)
     .subscribe(
       (data) => {
         this.doctors=[];
@@ -65,8 +77,9 @@ export class SearchClinicsComponent implements OnInit {
     )
   }
   doktori(clinicname:string) {
+    console.log(clinicname);
     var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day ;
-    this.clinicService.getDoctors(clinicname, dat, this.tipmem)
+    this.clinicService.getDoctors(clinicname, dat, this.currentType)
     .subscribe(
       (data) => {
         console.log(data);

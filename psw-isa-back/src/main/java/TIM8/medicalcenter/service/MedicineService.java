@@ -16,6 +16,7 @@ public class MedicineService {
     public Medicine findOneByName(String name) {return medicineRepository.findByName(name);}
     public Medicine findOneById(Long id) {return medicineRepository.getOne(id);}
     public List<Medicine> findAll() { return medicineRepository.findAll();}
+
     public Medicine save(MedicineDTO medicineDTO) {
         Medicine m = new Medicine();
         m.setName(medicineDTO.getName());
