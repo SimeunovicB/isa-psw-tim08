@@ -11,6 +11,7 @@ public class ClinicDTO {
     private Long id;
     private String name;
     private String address;
+    private Double avg;
     private String description;
 
     public ClinicDTO() {

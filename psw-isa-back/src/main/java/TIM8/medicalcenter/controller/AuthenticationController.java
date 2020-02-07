@@ -66,7 +66,7 @@ public class AuthenticationController {
         if(person != null){
             throw new ResourceConflictException(person.getId(), "Username already exists");
         }
-        //System.out.println(patient);
+        System.out.println("AAAA");
         Person person1 = personService.save(patient,"PENDING","ROLE_USER");
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/user/{userId}").buildAndExpand(person1.getId()).toUri());
