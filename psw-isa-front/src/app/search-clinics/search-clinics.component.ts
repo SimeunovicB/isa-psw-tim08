@@ -60,6 +60,7 @@ export class SearchClinicsComponent implements OnInit {
     this.clinicService.makeApp(id, dat, this.tipmem,this.userId)
     .subscribe(
       (data) => {
+        this.doctors=[];
       }
     )
   }
