@@ -15,7 +15,7 @@ import { JwtHelperService } from '@auth0/angular-jwt'
 export class LoginComponent implements OnInit {
   email: string;
   password: string;
-  helper : any;
+  helper: any;
 
   constructor(private http: HttpClient,
     private router: Router,
@@ -27,31 +27,31 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.userService.postUser(this.email, this.password)
-    .subscribe(
-      (user: any) => {
-        this.helper = new JwtHelperService();
-        this.cookieService.set('loggedUser', JSON.stringify(user));
-       
+      .subscribe(
+        (user: any) => {
+          this.helper = new JwtHelperService();
+          this.cookieService.set('loggedUser', JSON.stringify(user));
 
-        let status = this.helper.decodeToken(this.cookieService.get('token')).status;
-        let userType = this.helper.decodeToken(this.cookieService.get('token')).type;
-        console.log(status + userType)
-        if(userType === "P" && status !== "ACTIVE"){
-          this.router.navigate(['/login']);
-        }else if((userType === 'D' || userType === 'N' || userType === 'CCA' || userType === 'A') && status === 'PENDING'){
-          console.log('dosao da rerutujem doktore i sestre')
-          this.router.navigate(['/changePassword']);
-        }else if(status === "DELETED") {
-          alert('Vas nalog je obrisan!');
-          this.router.navigate(['/login']);
-        }
-        else{
-          
-          this.router.navigate(['/']);
-        }
-        
-      }, (error) => alert(error.text)
-    );
+
+          let status = this.helper.decodeToken(this.cookieService.get('token')).status;
+          let userType = this.helper.decodeToken(this.cookieService.get('token')).type;
+          console.log(status + userType)
+          if (userType === "P" && status !== "ACTIVE") {
+            this.router.navigate(['/login']);
+          } else if ((userType === 'D' || userType === 'N' || userType === 'CCA' || userType === 'A') && status === 'PENDING') {
+            console.log('dosao da rerutujem doktore i sestre')
+            this.router.navigate(['/changePassword']);
+          } else if (status === "DELETED") {
+            alert('Vas nalog je obrisan!');
+            this.router.navigate(['/login']);
+          }
+          else {
+
+            this.router.navigate(['/']);
+          }
+
+        }, (error) => alert(error.text)
+      );
   }
 
 }

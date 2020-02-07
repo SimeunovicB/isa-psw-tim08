@@ -36,7 +36,7 @@ export class BusinessReportComponent implements OnInit {
 
   ngOnInit() {
     //this.fromDate = this.calendar.getToday();
-    this.fromDate = new NgbDate(2020,1,1);
+    this.fromDate = new NgbDate(2020, 1, 1);
     this.toDate = this.calendar.getToday();
     this.helper = new JwtHelperService()
     if (this.helper.decodeToken(this.cookieService.get('token')) == null)

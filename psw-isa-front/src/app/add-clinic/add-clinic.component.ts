@@ -13,14 +13,14 @@ export class AddClinicComponent implements OnInit {
   clinicDescription: string;
 
   constructor(
-    private clinicService : ClinicService,
-    private router : Router
+    private clinicService: ClinicService,
+    private router: Router
   ) { }
 
   ngOnInit() {
   }
-  addClinic(){
-    this.clinicService.addClinic(this.clinicName,this.clinicAddress,this.clinicDescription).subscribe(
+  addClinic() {
+    this.clinicService.addClinic(this.clinicName, this.clinicAddress, this.clinicDescription).subscribe(
       (clinic: any) => {
         this.router.navigate(['/']);
       }, (error) => alert(error.text)

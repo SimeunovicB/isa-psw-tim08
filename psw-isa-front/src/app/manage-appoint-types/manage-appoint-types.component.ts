@@ -41,14 +41,24 @@ export class ManageAppointTypesComponent implements OnInit {
   }
 
   izmeni(name: any, id: any) {
-    console.log(name,id);
+    console.log(name, id);
     this.appTService.update(name, id)
       .subscribe(
         (data) => {
           this.getAll();
-        },(error) => (console.log(error))
-          
-        
+        }, (error) => (console.log(error))
+
+
+      );
+  }
+
+  obrisi(id: any) {
+    console.log(id);
+    this.appTService.delete(id)
+      .subscribe(
+        (data) => {
+          this.getAll();
+        }, (error) => (console.log(error))
       );
   }
 }

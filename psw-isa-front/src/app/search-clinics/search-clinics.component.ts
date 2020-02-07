@@ -14,16 +14,14 @@ export class SearchClinicsComponent implements OnInit {
   model: any;
   tip = "";
   helper: any;
-  userId : any;
+  userId: any;
   clinics = [];
-  modelmem:any;
+  modelmem: any;
   tipmem = "";
   doctors = [];
   times=[];
   currentType : any;
   appointmentTypes : any;
-  
-  
 
   constructor(private clinicService: ClinicService,
     private cookieService: CookieService,
@@ -45,28 +43,28 @@ export class SearchClinicsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    var dat =""
+    var dat = ""
     try {
-      dat = "" + this.model.year + "-" + this.model.month + "-" + this.model.day ;      
+      dat = "" + this.model.year + "-" + this.model.month + "-" + this.model.day;
     } catch (error) {
-      console.log(dat);      
+      console.log(dat);
     }
     this.modelmem = this.model;
     this.tipmem = this.tip;
     this.findClinics(dat, this.tip);
   }
 
-  findClinics(date:string, type:string) {
-    console.log(date,type);
+  findClinics(date: string, type: string) {
+    console.log(date, type);
     this.clinicService.searchClinics(date, type)
-    .subscribe(
-      (data) => {
-        console.log(data);
-        this.clinics = Object.assign([], (data));
-      }
-    )
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.clinics = Object.assign([], (data));
+        }
+      )
   }
-  zakazi(id:any) {
+  zakazi(id: any) {
     console.log(id);
     var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day ;
     this.clinicService.makeApp(id, dat, this.tip,this.userId)

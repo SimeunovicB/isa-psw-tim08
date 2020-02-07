@@ -57,7 +57,7 @@ export class CalendarComponent implements OnInit {
   constructor(private modal: NgbModal,
     private appointmentService: AppointmentServiceService,
     private cookieService: CookieService,
-    private router : Router) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.helper = new JwtHelperService();
@@ -71,15 +71,15 @@ export class CalendarComponent implements OnInit {
             start: new Date(appointment.date),
             title: `${appointment.type} ${appointment.patientId}`,
             color: colors.red,
-            action : this.actions,
-            
-            
+            action: this.actions,
+
+
 
           }
         })
-        
 
-       
+
+
       })
 
 
@@ -200,7 +200,7 @@ export class CalendarComponent implements OnInit {
 
   handleEvent(patient: string, event: CalendarEvent): void {
     console.log(patient);
-    this.router.navigate([`/medicalExamination/${event.title.substring(event.title.length-1,event.title.length)}`]);
+    this.router.navigate([`/medicalExamination/${event.title.substring(event.title.length - 1, event.title.length)}`]);
 
 
   }

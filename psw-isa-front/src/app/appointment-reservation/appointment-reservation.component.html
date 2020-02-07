@@ -1,23 +1,23 @@
 <hr>
 
 <table class="table">
-        <thead>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Datum</th>
+            <th scope="col">Tip</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let user of appointments; let i = index">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Datum</th>
-                <th scope="col">Tip</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let user of appointments; let i = index">
-                <tr>
-                    <th scope="row">{{i+1}}</th>
-                    <td>{{user.date}}</td>
-                    <td>{{user.type}}</td>
-                    <td><button type="button" class="btn btn-primary" 
+                <th scope="row">{{i+1}}</th>
+                <td>{{user.date}}</td>
+                <td>{{user.type}}</td>
+                <td><button type="button" class="btn btn-primary"
                         onclick="document.location.href='profile';">Rezervisi</button></td>
-                </tr>
-            </ng-container>         
-        </tbody>
-    </table>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

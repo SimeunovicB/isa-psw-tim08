@@ -14,7 +14,7 @@
                     aria-label="Search"></td>
         </tr>
         <tr>
-            <td><button class="btn btn-primary" type="submit" >Pretraži</button></td>
+            <td><button class="btn btn-primary" type="submit">Pretraži</button></td>
         </tr>
     </table>
 </form>
@@ -39,8 +39,10 @@
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
                 <td>{{user.jmbg}}</td>
-                <td><button type="button" class="btn btn-primary" (click)="medicalRecord(user.id)">Zdravstveni karton</button></td>
-                <td><button type="button" class="btn btn-primary" (click)="startExamination(user.id)">Zapocni pregled</button></td>
+                <td><button type="button" class="btn btn-primary" (click)="medicalRecord(user.id)">Zdravstveni
+                        karton</button></td>
+                <td><button type="button" class="btn btn-primary" (click)="startExamination(user.id)">Zapocni
+                        pregled</button></td>
             </tr>
         </ng-container>
     </tbody>

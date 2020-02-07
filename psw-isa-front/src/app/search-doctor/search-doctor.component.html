@@ -10,11 +10,11 @@
                     placeholder="Prezime" aria-label="Search"></td>
         </tr>
         <tr>
-            <td><input class="form-control mr-sm-2" type="text" [(ngModel)]="ocena" name="ocena" 
-                placeholder="Prosecna ocena" aria-label="Search"></td>
+            <td><input class="form-control mr-sm-2" type="text" [(ngModel)]="ocena" name="ocena"
+                    placeholder="Prosecna ocena" aria-label="Search"></td>
         </tr>
         <tr>
-            <td><button class="btn btn-primary" type="submit" >Pretraži</button></td>
+            <td><button class="btn btn-primary" type="submit">Pretraži</button></td>
         </tr>
     </table>
 </form>
@@ -38,11 +38,11 @@
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
                 <td><select name="date" (change)="changeSelectedAppointment($event.target.value)">
-                    <ng-container *ngFor="let date of user.dates">
-                    <option value="{{date.appointmentId}}">{{date.date}}</option>
-                    </ng-container>
-                 </select></td>
-                <td><button type="button" class="btn btn-primary" (click) = 'zakazi()'>Zapocni pregled</button></td>
+                        <ng-container *ngFor="let date of user.dates">
+                            <option value="{{date.appointmentId}}">{{date.date}}</option>
+                        </ng-container>
+                    </select></td>
+                <td><button type="button" class="btn btn-primary" (click)='zakazi()'>Zapocni pregled</button></td>
             </tr>
         </ng-container>
     </tbody>

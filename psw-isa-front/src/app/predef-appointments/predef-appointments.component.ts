@@ -13,11 +13,11 @@ export class PredefAppointmentsComponent implements OnInit {
 
   predefAppointments = [];
   helper: any;
-  userId : any;
+  userId: any;
 
   constructor(private router: Router,
     private cookieService: CookieService,
-    private appointmentService : AppointmentServiceService) { }
+    private appointmentService: AppointmentServiceService) { }
 
   ngOnInit() {
     this.helper = new JwtHelperService()
@@ -34,8 +34,8 @@ export class PredefAppointmentsComponent implements OnInit {
         }
       )
   }
-  zakazi(appId : any){
-    this.appointmentService.reserve(appId,this.userId)
+  zakazi(appId: any) {
+    this.appointmentService.reserve(appId, this.userId)
       .subscribe(
         (data) => {
           console.log(data);

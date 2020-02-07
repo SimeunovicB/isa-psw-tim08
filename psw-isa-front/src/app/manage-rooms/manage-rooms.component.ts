@@ -87,12 +87,12 @@ export class ManageRoomsComponent implements OnInit {
       )
   }
 
-  obrisi(id:any){
+  obrisi(id: any) {
     console.log(id);
     this.adminService.deleteRoom(id)
       .subscribe(
         (data) => {
-          if(data===0){
+          if (data === 0) {
             alert('Ne moze se obrisati sala jer ima zakazanih pregleda u njoj!');
           }
           this.getRooms();

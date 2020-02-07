@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { PatientService } from 'src/app/services/patient/patient.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -15,10 +15,10 @@ import { Router } from '@angular/router';
 export class HomeDoctorComponent implements OnInit {
   //displayedColumns: string[] = ['ime', 'prezime', 'jmbg'];
   patients = [];
-  doctor : any;
+  doctor: any;
   userMail: string;
-  helper:any;
-  loggedUser:any;
+  helper: any;
+  loggedUser: any;
   //dataSource = new MatTableDataSource<Pacijent>(this.patients);
 
   //@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -29,7 +29,7 @@ export class HomeDoctorComponent implements OnInit {
     private router: Router) { }
 
 
-  
+
 
   ngOnInit() {
     this.helper = new JwtHelperService()

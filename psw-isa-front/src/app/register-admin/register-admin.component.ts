@@ -11,27 +11,27 @@ import { AdminService } from '../services/admin/admin.service';
 })
 export class RegisterAdminComponent implements OnInit {
 
-  firstName:string;
-  lastName : string;
-  username:string;
-  password : string;  
-  address :string;
-  clinic : any;
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  address: string;
+  clinic: any;
 
   constructor(private http: HttpClient,
     private router: Router,
-    private adminService : AdminService) { }
+    private adminService: AdminService) { }
 
   ngOnInit() {
   }
 
   addAdmin() {
-    this.adminService.registerAdmin(this.firstName,this.lastName,this.address,this.username,this.clinic)
-    .subscribe(
-      (user: any) => {
-        this.router.navigate(['/']);
-      }, (error) => alert(error.text)
-    )
+    this.adminService.registerAdmin(this.firstName, this.lastName, this.address, this.username, this.clinic)
+      .subscribe(
+        (user: any) => {
+          this.router.navigate(['/']);
+        }, (error) => alert(error.text)
+      )
   }
 
 }

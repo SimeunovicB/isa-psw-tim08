@@ -10,13 +10,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   templateUrl: './grades.component.html',
   styleUrls: ['./grades.component.css']
 })
-export class GradesComponent implements OnInit {  
+export class GradesComponent implements OnInit {
   helper: any;
-  userId : any;
+  userId: any;
   doctors = [];
-  clinics=[];
-  selectedType:any;
-  selectedClinic:any;
+  clinics = [];
+  selectedType: any;
+  selectedClinic: any;
 
   constructor(private clinicService: ClinicService,
     private cookieService: CookieService) { }
@@ -39,41 +39,42 @@ export class GradesComponent implements OnInit {
   doktori(doctorId:any,value:any) {
     console.log(value,doctorId);
     this.clinicService.makeGradeDoctor(doctorId, this.selectedType, this.userId)
-    .subscribe(
-      (data) => {
-        console.log(data);        
-      }
-    )
+      .subscribe(
+        (data) => {
+          console.log(data);
+        }
+      )
   }
+  
   klinike(clinicname:String,value:any) {
     console.log(this.selectedClinic,clinicname);
     this.clinicService.makeGradeClinic(clinicname, this.selectedClinic, this.userId)
-    .subscribe(
-      (data) => {
-        console.log(data);        
-      }
-    )
+      .subscribe(
+        (data) => {
+          console.log(data);
+        }
+      )
   }
-  
+
   findClinics() {
     console.log(this.userId);
     this.clinicService.clinicGrade(this.userId)
-    .subscribe(
-      (data) => {
-        console.log(data);
-        this.clinics = Object.assign([], (data));
-      }
-    )
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.clinics = Object.assign([], (data));
+        }
+      )
   }
   findDoctors() {
     console.log(this.userId);
     this.clinicService.doctorGrade(this.userId)
-    .subscribe(
-      (data) => {
-        console.log(data);
-        this.doctors = Object.assign([], (data));
-      }
-    )
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.doctors = Object.assign([], (data));
+        }
+      )
   }
 
 }

@@ -70,10 +70,10 @@ export class MapComponent implements AfterViewInit, OnInit {
           this.coordinates = new google.maps.LatLng(this.lat, this.lng);
 
           this.mapOptions.center = this.coordinates;
-          
+
           this.marker.setPosition(this.coordinates);
           this.marker.setMap(this.map);
-          
+
           this.mapInitializer();
         }
       )

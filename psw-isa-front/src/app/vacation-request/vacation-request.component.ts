@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -52,8 +52,8 @@ export class VacationRequestComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(""+this.fromDate.year+"-"+this.fromDate.month+"-"+this.fromDate.day);
-    this.vacationService.createRequest(""+this.fromDate.year+"-"+this.fromDate.month+"-"+this.fromDate.day, ""+this.toDate.year+"-"+this.toDate.month+"-"+this.toDate.day, this.loggedUser.id)
+    console.log("" + this.fromDate.year + "-" + this.fromDate.month + "-" + this.fromDate.day);
+    this.vacationService.createRequest("" + this.fromDate.year + "-" + this.fromDate.month + "-" + this.fromDate.day, "" + this.toDate.year + "-" + this.toDate.month + "-" + this.toDate.day, this.loggedUser.id)
       .subscribe(
         (data) => {
           console.log(data);
