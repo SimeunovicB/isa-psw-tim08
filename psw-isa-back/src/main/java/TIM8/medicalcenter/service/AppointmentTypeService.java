@@ -5,6 +5,8 @@ import TIM8.medicalcenter.model.AppointmentType;
 import TIM8.medicalcenter.repository.AppointmentTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,5 +26,17 @@ public class AppointmentTypeService {
         return appointmentTypeRepository.save(m);
     }
 
-    public int updateAppointmentType(String name, long id) { return appointmentTypeRepository.updateAppointmentType(name,id); }
+    /**
+     * Moze doci do slucaja u kom dva razlicita administratora zele da obrisu ili da izmene neki tip pregleda,i zbog toga je potrebno zatvoriti ovu funkcionalnost u transakciju
+     * @param name
+     * @param id
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public int updateAppointmentType(String name, long id) {
+        AppointmentType a = appointmentTypeRepository.findOneById(id);
+        a.setName(name);
+        appointmentTypeRepository.save(a);
+        return 1;
+    }
 }

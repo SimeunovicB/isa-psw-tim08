@@ -42,6 +42,12 @@ public class AppointmentService  {
         Doctor d = (Doctor) personRepository.findOneById(id);
         return appointmentRepository.findAllByDoctor(d);
     }
+
+    /**
+     * Mora se spreciti mogucnost da dva razilicita pacijenta rezervisu predefinisani pregled u isto vreme
+     * @param a
+     * @return
+     */
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Appointment reserve(PredefAppointmentDTORequest a){
         Appointment a1 = appointmentRepository.findOneById(a.getAppointmentId());
@@ -50,6 +56,13 @@ public class AppointmentService  {
         Appointment a2  = appointmentRepository.save(a1);
         return a2;
     }
+
+    /**
+     * Mora se enkapsulirati u transakciju zato sto je moguce da dva administratora odluce da u isto vreme naprave predefinisani pregled sa istim doktorom
+     * Takodje ovo moze dovesti do situacije da pacijent koji preuzima predefinisane preglede ne dobije neki predefinisan pregled - Unrepeatable Read nivo zakljucavanja 3
+     * @param dto
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void createPredef(CreatePredefDTO dto){
         Appointment a = new Appointment();
         Doctor d  = (Doctor) personRepository.findOneById(dto.getDoctorId());

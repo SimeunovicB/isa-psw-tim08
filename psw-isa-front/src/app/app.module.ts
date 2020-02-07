@@ -69,7 +69,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent }, //more
   { path: 'pending', component: PendingUsersComponent }, //more
   { path: 'patients', component: PatientsComponent }, //more
-  { path: 'searchDoctors', component:SearchDoctorComponent }, //
+  { path: 'searchDoctors', component:SearchDoctorComponent }, //more
   { path: 'changePassword', component: ChangePassword }, //more
   { path: 'editclinic', component: EditClinicComponent }, //
   { path: 'managetypes', component: ManageAppointTypesComponent }, //

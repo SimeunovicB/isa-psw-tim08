@@ -174,8 +174,6 @@ public class PersonService implements UserDetailsService {
         personRepository.save(user);
 
     }
-    @Transactional(readOnly = false)
-    public Person saveForTest(Person p) {return personRepository.save(p);}
 
 
 
