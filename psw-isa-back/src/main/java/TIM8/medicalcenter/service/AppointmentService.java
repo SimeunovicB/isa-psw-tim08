@@ -6,6 +6,7 @@ import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.Room;
 import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
+import TIM8.medicalcenter.model.users.Person;
 import TIM8.medicalcenter.repository.AppointmentRepository;
 import TIM8.medicalcenter.repository.AppointmentTypeRepository;
 import TIM8.medicalcenter.repository.PersonRepository;
@@ -88,7 +89,17 @@ public class AppointmentService  {
         Date d1 = cal.getTime();
         a.setDate(d1);
         appointmentRepository.save(a);
+    }
 
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void cancle(Person p,Long id){
+        Appointment a = appointmentRepository.findOneById(id);
+        if(p instanceof Patient){
+            a.setPatient(null);
+            appointmentRepository.save(a);
+        }else{
+            appointmentRepository.deleteAppointment(id);
+        }
     }
 }

@@ -4,6 +4,10 @@
 
 insert into clinic(name,address,description) values('clinic1','45.2471-19.8035','clinic desc');
 
+INSERT INTO authority (name) VALUES ('ROLE_USER');
+INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
+INSERT INTO authority (name) VALUES ('ROLE_MEDICAL_STAFF');
+
 --passwordi su 123
 insert into person(type,first_name,last_name,username,password,address,status,jmbg,enabled,version)
 values('P','Pera','Peric','pera.peric@gmail.com','$2y$10$6/ExZPzokaxKh91XVMiSNOm/gsVJe8YkkXL.Kj3jivRJpGzagVnia','dr ribara 1','ACTIVE','0203998800062',true,0);
@@ -26,6 +30,16 @@ values('A','Dragan','Draganovic','dragan.draganovic@gmail.com','$2y$10$6/ExZPzok
 insert into person(type,first_name,last_name,username,password,address,status,enabled)
 values('CCA','Nikola','Nikolic','nikola.nikolic@gmail.com','$2y$10$6/ExZPzokaxKh91XVMiSNOm/gsVJe8YkkXL.Kj3jivRJpGzagVnia','dr ribara 1','ACTIVE',true);
 
+INSERT INTO user_authority (user_id, authority_id) VALUES (1, 1);
+INSERT INTO user_authority (user_id, authority_id) VALUES (2, 3);
+INSERT INTO user_authority (user_id, authority_id) VALUES (3, 1);
+INSERT INTO user_authority (user_id, authority_id) VALUES (4, 1);
+INSERT INTO user_authority (user_id, authority_id) VALUES (5, 3);
+INSERT INTO user_authority (user_id, authority_id) VALUES (6, 2);
+INSERT INTO user_authority (user_id, authority_id) VALUES (7, 2);
+
+
+
 insert into clinic_patient(clinic_id,patient_id) values (1,1);
 insert into clinic_patient(clinic_id,patient_id) values (1,3);
 insert into clinic_patient(clinic_id,patient_id) values (1,4);
@@ -44,29 +58,23 @@ insert into appointment(date,discount,price,status,type,doctor_id,room_id,patien
 insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-02 14:00:00.000',12,0,'','Rutinski pregled',2,1,1);
 
 
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 15:00:00.000',12,123123,'','Rutinski pregled',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 16:00:00.000',12,123123,'','Rutinski pregled',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 17:00:00.000',12,123123,'','Rutinski pregled',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-02 15:00:00.000',12,123123,'','Rutinski pregled',2,1,3);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-02 16:00:00.000',12,123123,'','Rutinski pregled',2,1,3);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-02 17:00:00.000',12,123123,'','Rutinski pregled',2,1,3);
 insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 12:00:00.000',12,123123,'','Rutinski pregled',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 11:00:00.000',12,123123,'','Rutinski pregled',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 18:00:00.000',12,123123,'','Rutinski pregled',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 15:00:00.000',12,123123,'','Pedijatar',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-06-06 11:00:00.000',12,123123,'','Rutinski pregled',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-06-06 18:00:00.000',12,123123,'','Rutinski pregled',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-07 18:00:00.000',12,123123,'','Pedijatar',2,1,3);
 insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 16:00:00.000',12,123123,'','Pedijatar',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 19:00:00.000',12,123123,'','Pedijatar',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-07-07 19:00:00.000',12,123123,'','Pedijatar',2,1,3);
 
 
-INSERT INTO authority (name) VALUES ('ROLE_USER');
-INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
+
 
 insert into appointment_type (name) VALUES ('Rutinski pregled');
 insert into appointment_type (name) VALUES ('Pregledcina');
 insert into appointment_type (name) VALUES ('Operacija');
 
-INSERT INTO user_authority (user_id, authority_id) VALUES (1, 1);
-INSERT INTO user_authority (user_id, authority_id) VALUES (2, 1);
-INSERT INTO user_authority (user_id, authority_id) VALUES (3, 1);
-INSERT INTO user_authority (user_id, authority_id) VALUES (4, 2);
-INSERT INTO user_authority (user_id, authority_id) VALUES (5, 2);
 
 
 insert into diagnosis (name) values ('prehlada');

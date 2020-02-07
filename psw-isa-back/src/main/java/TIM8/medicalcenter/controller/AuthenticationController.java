@@ -3,6 +3,7 @@ package TIM8.medicalcenter.controller;
 import TIM8.medicalcenter.Security.Auth.JwtAuthenticationRequest;
 import TIM8.medicalcenter.Security.TokenUtils;
 import TIM8.medicalcenter.dto.PersonDTO;
+import TIM8.medicalcenter.dto.RegistrationDTO;
 import TIM8.medicalcenter.exception.ResourceConflictException;
 import TIM8.medicalcenter.model.users.Patient;
 import TIM8.medicalcenter.model.users.Person;
@@ -61,13 +62,13 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public ResponseEntity<?> addUser(@RequestBody Patient patient, UriComponentsBuilder ucBuilder){
-        Person person = personService.findOneByUsername(patient.getUsername());
+    public ResponseEntity<?> addUser(@RequestBody RegistrationDTO reguest, UriComponentsBuilder ucBuilder){
+        Person person = personService.findOneByUsername(reguest.getUsername());
         if(person != null){
             throw new ResourceConflictException(person.getId(), "Username already exists");
         }
-        System.out.println("AAAA");
-        Person person1 = personService.save(patient,"PENDING","ROLE_USER");
+        Person person1 = personService.save(reguest,"PENDING","ROLE_USER");
+
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/user/{userId}").buildAndExpand(person1.getId()).toUri());
         return new ResponseEntity<>(new PersonDTO(person1), HttpStatus.CREATED);

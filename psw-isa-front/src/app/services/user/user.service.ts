@@ -67,7 +67,7 @@ export class UserService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       )
   }

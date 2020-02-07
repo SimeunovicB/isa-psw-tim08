@@ -2,8 +2,11 @@ package TIM8.medicalcenter.service;
 
 import TIM8.medicalcenter.dto.AdministratorDTO;
 import TIM8.medicalcenter.dto.CreateDoctorDTO;
+import TIM8.medicalcenter.dto.RegistrationDTO;
+import TIM8.medicalcenter.model.MedicalRecord;
 import TIM8.medicalcenter.model.security.Authority;
 import TIM8.medicalcenter.model.users.*;
+import TIM8.medicalcenter.repository.MedicalRecordRepository;
 import TIM8.medicalcenter.repository.PersonRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,6 +46,8 @@ public class PersonService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private MedicalRecordRepository medicalRecordRepository;
 
     @Cacheable("persons")
     public List<Person> findAll() { return personRepository.findAll(); }
@@ -86,17 +91,30 @@ public class PersonService implements UserDetailsService {
             return person;
         }
     }
-    public Person save(Person person,String status,String role) {
-        person.setPassword(passwordEncoder.encode(person.getPassword()));
-        person.setEnabled(true);
+    public Person save(RegistrationDTO reg, String status, String role) {
+        Patient p = new Patient();
+        p.setFirstName(reg.getFirstName());
+        p.setLastName(reg.getLastName());
+        p.setUsername(reg.getUsername());
+        p.setAddress(reg.getAddress());
+        p.setJmbg(reg.getJmbg());
+        p.setPassword(passwordEncoder.encode(reg.getPassword()));
+        p.setEnabled(true);
+        MedicalRecord mr = new MedicalRecord();
+        medicalRecordRepository.save(mr);
+        p.setMedicalRecord(mr);
+
+
+
+
 
         if(status != null){
-            person.setStatus(status);
+            p.setStatus(status);
         }
         List<Authority> auth =authorityService.findByname(role);
-        person.setAuthorities(auth);
+        p.setAuthorities(auth);
 
-        return personRepository.save(person);
+        return personRepository.save(p);
 
     }
 
