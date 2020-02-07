@@ -9,6 +9,8 @@ import TIM8.medicalcenter.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -24,12 +26,25 @@ public class MedicalExaminationController {
     @Autowired
     RecipeService recipeService;
 
+    /**
+     * Funkcija kojom doktor unosi informacije o izvrsenom pregledu
+     * @param medicalExaminationDTO
+     * @return
+     */
+    @PreAuthorize("hasRole('MEDICAL_STAFF')")
     @RequestMapping(value = "/new",consumes = "application/json" ,method = RequestMethod.POST)
     public ResponseEntity<?> addNewReport(@RequestBody MedicalExaminationDTO medicalExaminationDTO){
         MedicalExaminationReport medicalExaminationReport = medicalExaminationReportService.createNew(medicalExaminationDTO);
         Recipe recipe = recipeService.createNew(medicalExaminationDTO);
         return new ResponseEntity<>(new MedicalExaminationDTO(medicalExaminationReport), HttpStatus.CREATED);
     }
+
+    /**
+     * Funkcija kojom pacijent moze da prezume sve preglede koji su nad njim izvrseni
+     * @param id
+     * @return
+     */
+    @PreAuthorize("hasRole('PATIENT')")
     @RequestMapping(value = "/getAll/{id}",method = RequestMethod.GET)
     public ResponseEntity<?> getAllForSiglePatient(@PathVariable Long id){
 

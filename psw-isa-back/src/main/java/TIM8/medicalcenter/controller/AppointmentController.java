@@ -14,19 +14,17 @@ import TIM8.medicalcenter.model.users.Person;
 import TIM8.medicalcenter.repository.PatientClinicGradesRepository;
 import TIM8.medicalcenter.repository.PatientDoctorGradesRepository;
 import TIM8.medicalcenter.service.*;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -49,6 +47,14 @@ public class AppointmentController {
     @Autowired
     private RoomService roomService;
 
+    /**
+     * Fukcija kojom pacijent vrsi pretragu svih klinika,da bi mogao da zakaze termin za pregled
+     * @param date
+     * @param type
+     * @return
+     * @throws ParseException
+     */
+    @PreAuthorize("hasRole('PATIENT')")
     @GetMapping(value="/findClinic")
     public ResponseEntity<?> findClinics(@RequestParam String date, @RequestParam String type) throws ParseException {
         List<ClinicDTO> clinics = new ArrayList<>();
@@ -116,9 +122,19 @@ public class AppointmentController {
             ap.setDoctor(null);
             appDto.add(ap);
         }
+        //TODO: Za koga je ovo i sta radi
         return new ResponseEntity<>(appDto, HttpStatus.OK);
     }
 
+    /**
+     * Pretraga doktora unitar odabrane klinike,koji imaju slobodan termin za odredjeni dan
+     * @param clinicName
+     * @param date
+     * @param type
+     * @return
+     * @throws ParseException
+     */
+    @PreAuthorize("hasRole('PATIENT')")
     @RequestMapping(value="/findClinic/doctors",method = RequestMethod.GET)
     public ResponseEntity<?> findDoctors(@RequestParam String clinicName,@RequestParam String date, @RequestParam String type) throws ParseException {
         SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd");
@@ -153,6 +169,12 @@ public class AppointmentController {
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
 
+    /**
+     * Fukcija kojom pacijent rezervise prvi slobodan termin za pregled odredjenog dana u odredjeno vreme
+     * @param request
+     * @return
+     */
+    @PreAuthorize("hasRole('PATAIENT')")
     @RequestMapping(consumes = "application/json",value="/makeApp",method = RequestMethod.POST)
     public ResponseEntity<?> makeApp(@RequestBody Req request) {
         List<ClinicDTO> clinics = new ArrayList<>();
@@ -225,6 +247,13 @@ public class AppointmentController {
         public Long patientId;
         public double value;
     }
+
+    /**
+     * Funkcija kojom pacijent ocenjuje doktora,ukoliko ga je vec ocenio prosla ocena se brise i upisuje se nova
+     * @param request
+     * @return
+     */
+    @PreAuthorize("hasRole('PATIENT')")
     @RequestMapping(consumes = "application/json",value="/makeGradeDoctor",method = RequestMethod.POST)
     public ResponseEntity<?> makeGradeDoctor(@RequestBody grade request) {
         PatientDoctorGrades a = new PatientDoctorGrades();
@@ -240,6 +269,13 @@ public class AppointmentController {
         public Long patientId;
         public double value;
     }
+
+    /**
+     * Funkcija kojom pacijent ocenjuje kliniku,ukoliko je vec ocenio prosla ocena se brise i upisuje se nova
+     * @param request
+     * @return
+     */
+    @PreAuthorize("hasRole('PATIENT')")
     @RequestMapping(consumes = "application/json",value="/makeGradeClinic",method = RequestMethod.POST)
     public ResponseEntity<?> makeGradeClinic(@RequestBody clinicGrade request) {
         PatientClinicGrades a = new PatientClinicGrades();
@@ -308,6 +344,13 @@ public class AppointmentController {
         return new ResponseEntity<>(appDto, HttpStatus.OK);
 
     }
+
+    /**
+     * Funkcija koja vraca sve preglede na kojima je doktor,i za koje ima upisan pacijent,koristi se za kalendar,valjda.
+     * @param doctorId
+     * @return
+     */
+    @PreAuthorize("hasRole('PATIENT')")
     @RequestMapping(value="/getAppointmentsForDoctor",method = RequestMethod.GET)
     public ResponseEntity<?> getAppointmentsForDoctor(@RequestParam String doctorId){
         Long id = Long.parseLong(doctorId.substring(1));
@@ -324,8 +367,9 @@ public class AppointmentController {
         return new ResponseEntity<>(appDto, HttpStatus.OK);
     }
     /**
-     * funkcija koja preuzima sve predefinisane preglede,odnosno preglede na kojima nema pacijenta
+     * funkcija koja preuzima sve predefinisane preglede,odnosno preglede na kojima nema pacijenta,koje pacijent moze da zakaze
      */
+    @PreAuthorize("hasRole('PATIENT')")
     @RequestMapping(value="/getIncomingAppointmnents",method = RequestMethod.GET)
     public ResponseEntity<?> getPredefAppointments() {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
@@ -365,6 +409,13 @@ public class AppointmentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * funkcija kojom doktor ili pacijent mogu da otkazu pregled,u slucaju pacijenta pacijent se brise iz pregleda i on
+     * postaje dostupan u slucaju da doktor brise prelged se brise iz baze
+     * @param request
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('MEDICAL_STAFF','PATIENT')")
     @RequestMapping(value = "/cancleAppointment",consumes = "application/json",method = RequestMethod.POST)
     public ResponseEntity<?> cancleAppointment(@RequestBody MedicalExaminationId request) {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
@@ -385,6 +436,7 @@ public class AppointmentController {
      * Funkcija koja doktoru ili pacijentu vraca preglede koji se jos nisu odrzali
      * @return
      */
+    @PreAuthorize("hasAnyRole('MEDICAL_STAFF','PATIENT')")
     @RequestMapping(value="/getPredefAppointment",method = RequestMethod.GET)
     public ResponseEntity<?> getIncomingAppointmeents() {
         List<Appointment> apps =  appointmentService.findAll();
@@ -396,12 +448,21 @@ public class AppointmentController {
         }
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
+
+    /**
+     * Funkcija kojom pacijent rezervise slobodan predefinisan pregled,ova funkcija je u servisu zasticena transakcijom
+     * @param request
+     * @return
+     */
+    @PreAuthorize("hasRole('PATIENT')")
     @PostMapping(consumes = "application/json",value = "/reservePredef")
     public ResponseEntity<?> reservePredefApp(@RequestBody PredefAppointmentDTORequest request){
         appointmentService.reserve(request);
         return new ResponseEntity<>(request,HttpStatus.ACCEPTED);
 
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE,value = "/createPredef",method = RequestMethod.POST)
     public ResponseEntity<?> createPredef(@RequestBody CreatePredefDTO req){
         appointmentService.createPredef(req);

@@ -95,7 +95,7 @@ const appRoutes: Routes = [
   { path : 'predefAppointments',component : PredefAppointmentsComponent}, //more
   { path : 'createPredefAppointment',component : CreatePredefAppointmentComponent},//more
   { path : 'makeGrades',component: GradesComponent},
-  { path : 'cancelAppointment',component :CancelAppointmentComponent},
+  { path : 'cancleAppointent',component : CancelAppointmentComponent},
   { path: '**', component: PageNotFoundComponent },
 
 ];

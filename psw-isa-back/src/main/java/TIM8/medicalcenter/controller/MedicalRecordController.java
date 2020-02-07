@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,20 +24,27 @@ public class MedicalRecordController {
     @Autowired
     PersonService personService;
 
+    /**
+     * Funkcija kojom doktor ili pacijent mogu da vide informacije o pacijentovom zdravstvenom kartonu
+     * @param id
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('PATIENT','MEDICAL_STAFF')")
     @RequestMapping(value="/getByPatientId",method = RequestMethod.GET)
     public ResponseEntity<?> getById(@RequestParam Long id){
         Patient personRet = (Patient)personService.findOneById(id);
         MedicalRecord  mr = personRet.getMedicalRecord();
-        if(mr == null){
-            //TODO: napraviti novi medical record ako ga pacijent nema
-
-        }
-
         MedicalRecordDTO md = new MedicalRecordDTO(mr,personRet);
         return new ResponseEntity<>(md,HttpStatus.OK);
 
     }
 
+    /**
+     * Funkcija kojom doktor menja podatke u pacijentovom zdravstvenom kartonu
+     * @param recordDTO
+     * @return
+     */
+    @PreAuthorize("hasRole('MEDICAL_STAFF')")
     @RequestMapping(consumes = "application/json",value = "/update",method = RequestMethod.POST)
     public ResponseEntity<?> update(@RequestBody MedicalRecordDTO recordDTO){
         medicalRecordService.updateMedicalRecord(recordDTO.getHeight(),recordDTO.getWeight(),recordDTO.getDiopter(), recordDTO.getAlergies(),recordDTO.getBloodType(),recordDTO.getId());

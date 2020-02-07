@@ -7,6 +7,7 @@ import TIM8.medicalcenter.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,12 @@ public class MedicineController {
     @Autowired
     private MedicineService medicineService;
 
+    /**
+     * Funkcija kojom administrator klinike dodaje nove lekove
+     * @param medicineDTO
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @RequestMapping(value = "/addMedicine",consumes = "application/json")
     public ResponseEntity<?> addMedicine(@RequestBody MedicineDTO medicineDTO){
         Medicine medicine = medicineService.findOneByName(medicineDTO.getName());
@@ -30,6 +37,11 @@ public class MedicineController {
         medicine = medicineService.save(medicineDTO);
         return new ResponseEntity<>(new MedicineDTO(medicine), HttpStatus.CREATED);
     }
+
+    /**
+     * Dobavljanje svih lekova dostupna svima zbog potreba frontenda
+     * @return
+     */
     @RequestMapping(value = "/getAll")
     public ResponseEntity<?> getAllMedicine() {
         List<Medicine> medicines = medicineService.findAll();

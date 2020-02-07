@@ -12,6 +12,7 @@ import TIM8.medicalcenter.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -29,7 +30,11 @@ public class PatientController {
     private AppointmentService appointmentService;
 
 
-   
+    /**
+     * Funkcija kojom administrator klinickog centra dobavlja sve pacijente,kojima treba potvrditi registraciju
+     * @return
+     */
+    @PreAuthorize("hasRole('CCADMIN')")
     @GetMapping
     public ResponseEntity<List<PatientDTO>> getPendingPatients() {
         List<Person> patientList = personService.findByType("P");
@@ -42,6 +47,11 @@ public class PatientController {
         return new ResponseEntity<>(patients,HttpStatus.OK);
     }
 
+    /**
+     * Funkcija kojom lekari i medicinske sestre preuzimaju sve pacijente
+     * @return
+     */
+    @PreAuthorize("hasRole('MEDICAL_STAFF')")
     @GetMapping(value = "/getAllPatients")
     public ResponseEntity<List<PatientDTO>> getAllPatients() {
         List<Person> patientList = personService.findByType("P");
@@ -53,6 +63,14 @@ public class PatientController {
         return new ResponseEntity<>(patients,HttpStatus.OK);
     }
 
+    /**
+     * Funkcija kojom se vrsi pretraga pacijenata po odabranim parametrima
+     * @param name
+     * @param lastname
+     * @param jmbg
+     * @return
+     */
+    @PreAuthorize("hasRole('MEDICAL_STAFF')")
     @RequestMapping(value="/findPatients",method = RequestMethod.GET)
     public ResponseEntity<?> findPatient(@RequestParam String name, @RequestParam String lastname,@RequestParam String jmbg){
         List<Patient> patientList = personService.findPatients();
@@ -66,6 +84,14 @@ public class PatientController {
         return new ResponseEntity<>(patients,HttpStatus.OK);
     }
 
+    /**
+     * Funckija kojom pacijenti mogu da vrse pretragu doktora
+     * @param name
+     * @param lastname
+     * @param ocena
+     * @return
+     */
+    @PreAuthorize("hasRole('PATIENT')")
     @RequestMapping(value="/findDoctors",method = RequestMethod.GET)
     public ResponseEntity<?> findDoctor(@RequestParam String name, @RequestParam String lastname,@RequestParam String ocena){
         List<Doctor> doctorList = personService.findDoctors();

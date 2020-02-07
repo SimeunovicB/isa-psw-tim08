@@ -9,6 +9,7 @@ import TIM8.medicalcenter.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,13 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
+    /**
+     * Funkcija kojom administrator nakon odabira pregleda za koji zeli da izvrsi pravljenje pregleda,dobija sve termine
+     * koji su slobodni za odabrani termin
+     * @param request
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/findRooms",method = RequestMethod.POST)
     public ResponseEntity<?> findRooms(@RequestBody FindRoomDTORequest request){
         List<Room> rooms = roomService.findByNameAndNumber(request.getName(),request.getNumber());
@@ -80,6 +88,12 @@ public class RoomController {
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Funkcija kojom administrator dobija sobe koje moze da menja
+     * @param id
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/getAdminRooms",method = RequestMethod.POST)
     public ResponseEntity<?> getAdminRooms(@RequestBody Id id) {
         List<Room> rooms = roomService.findAdminRooms(id.id);
@@ -90,6 +104,12 @@ public class RoomController {
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Funkcija kojom administrator vrsi menjanje sobe
+     * @param room
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseEntity<?> updateRoom(@RequestBody RoomDTO room) {
         int a = roomService.updateRoom(room.getName(), room.getNumber(), room.getId());
@@ -97,6 +117,12 @@ public class RoomController {
         return new ResponseEntity<>(a, HttpStatus.OK);
     }
 
+    /**
+     * Funkcija kojom administrator kreira novu sobu
+     * @param room
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<?> createRoom(@RequestBody RoomDTO room) {
         Room r = roomService.save(room);

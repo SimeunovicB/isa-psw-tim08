@@ -96,16 +96,5 @@ public class PersonController {
         public String newPassword;
     }
 
-    /*@PostMapping(consumes = "application/json",value = "/register")
-    public ResponseEntity<Patient> Register(@RequestBody Patient patient) {
-        if(personService.findOneByUsername(patient.getUsername())!=null)
-            return null;
-
-        patient.setStatus("PENDING");
-        personService.save(patient);
-        return new ResponseEntity<>(patient, HttpStatus.OK);
-
-    }*/
-
 
 }

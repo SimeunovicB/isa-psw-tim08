@@ -6,6 +6,7 @@ import TIM8.medicalcenter.service.DiagnosisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,12 @@ public class DiagnosisController {
     @Autowired
     private DiagnosisService diagnosisService;
 
+    /**
+     * Funkcija kojom administrator dodaje dijagnoze
+     * @param diagnosisDTO
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/addDiagnosis",consumes = "application/json")
     public ResponseEntity<?> addMedicine(@RequestBody DiagnosisDTO diagnosisDTO){
         Diagnosis diagnosis= diagnosisService.findOneByName(diagnosisDTO.getName());
@@ -28,6 +35,11 @@ public class DiagnosisController {
         diagnosis = diagnosisService.save(diagnosisDTO);
         return new ResponseEntity<>(new DiagnosisDTO(diagnosis), HttpStatus.CREATED);
     }
+
+    /**
+     * Funkcija kojom se dobavljaju sve dijagnoze,dostupna svima jer je potrebna na frontendu
+     * @return
+     */
     @RequestMapping(value = "/getAll")
     public ResponseEntity<?> getAllMedicine() {
         List<Diagnosis> diagnosises = diagnosisService.findAll();
