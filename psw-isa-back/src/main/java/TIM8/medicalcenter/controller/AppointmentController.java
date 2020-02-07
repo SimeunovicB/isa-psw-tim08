@@ -10,6 +10,7 @@ import TIM8.medicalcenter.model.grading.PatientClinicGrades;
 import TIM8.medicalcenter.model.grading.PatientDoctorGrades;
 import TIM8.medicalcenter.model.users.Doctor;
 import TIM8.medicalcenter.model.users.Patient;
+import TIM8.medicalcenter.model.users.Person;
 import TIM8.medicalcenter.repository.PatientClinicGradesRepository;
 import TIM8.medicalcenter.repository.PatientDoctorGradesRepository;
 import TIM8.medicalcenter.service.*;
@@ -18,6 +19,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -281,8 +284,67 @@ public class AppointmentController {
     /**
      * funkcija koja preuzima sve predefinisane preglede,odnosno preglede na kojima nema pacijenta
      */
+    @RequestMapping(value="/getIncomingAppointmnents",method = RequestMethod.GET)
+    public ResponseEntity<?> getPredefAppointments() {
+        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = currentUser.getName();
+        Person p = personService.findOneByUsername(username);
+        List<AppointmentDTO> response = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        Date d = cal.getTime();
+        String str = d.toString().substring(0,10);
+        if (p instanceof Patient) {
+            List<Appointment> apps = appointmentService.findAll();
+
+            for (Appointment a : apps) {
+                if (a.getPatient() != null) {
+
+                    if (a.getPatient().getId() == p.getId()) {
+                        response.add(new AppointmentDTO(a.getId(), a.getDoctor(), a.getDate(), a.getType(), null, a.getPrice(), a.getDiscount(), a.getRoom().getName()));
+                    }
+                }
+
+            }
+        } else {
+            List<Appointment> apps = appointmentService.findAll();
+
+            for (Appointment a : apps) {
+                if (a.getPatient() != null) {
+
+                    if (a.getDoctor().getId() == p.getId() && a.getPatient() != null) {
+                        response.add(new AppointmentDTO(a.getId(), a.getDoctor(), a.getDate(), a.getType(), null, a.getPrice(), a.getDiscount(), a.getRoom().getName()));
+                    }
+                }
+
+            }
+
+
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/cancleAppointment",consumes = "application/json",method = RequestMethod.POST)
+    public ResponseEntity<?> cancleAppointment(@RequestBody MedicalExaminationId request) {
+        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = currentUser.getName();
+        Person p = personService.findOneByUsername(username);
+        appointmentService.cancle(p,request.id);
+
+        return new ResponseEntity<>(null,HttpStatus.ACCEPTED);
+
+
+    }
+    static class MedicalExaminationId {
+        public Long id;
+    }
+
+
+    /**
+     * Funkcija koja doktoru ili pacijentu vraca preglede koji se jos nisu odrzali
+     * @return
+     */
     @RequestMapping(value="/getPredefAppointment",method = RequestMethod.GET)
-    public ResponseEntity<?> getPredefAppointments(){
+    public ResponseEntity<?> getIncomingAppointmeents() {
         List<Appointment> apps =  appointmentService.findAll();
         List<AppointmentDTO> response = new ArrayList<>();
         for(Appointment a : apps){

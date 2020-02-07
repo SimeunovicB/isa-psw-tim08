@@ -120,4 +120,31 @@ export class AppointmentServiceService {
       })
     );
   }
+  getIncomingAppointments() {
+    return this.http.get("http://localhost:9090/api/appointment/getIncomingAppointmnents")
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
+    }
+    cancle(appId : any) {
+      return this.http.post("http://localhost:9090/api/appointment/cancleAppointment",{
+          id : appId
+  
+      })
+        .pipe(
+          map((response: any) => {
+            const data = response
+            return data;
+          }),
+          catchError((err: any) => {
+            return throwError(err);
+          })
+        );
+    }
 }

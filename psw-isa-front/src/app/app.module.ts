@@ -60,6 +60,8 @@ import { VacationRequestComponent } from './vacation-request/vacation-request.co
 import { MapComponent } from './map/map.component';
 import { CreatePredefAppointmentComponent } from './create-predef-appointment/create-predef-appointment.component';
 import { GradesComponent } from './grades/grades.component';
+import { IncomingExaminationsComponent } from './incoming-examinations/incoming-examinations.component';
+import { CancelAppointmentComponent } from './cancel-appointment/cancel-appointment.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }, //more
@@ -93,6 +95,7 @@ const appRoutes: Routes = [
   { path : 'predefAppointments',component : PredefAppointmentsComponent}, //more
   { path : 'createPredefAppointment',component : CreatePredefAppointmentComponent},//more
   { path : 'makeGrades',component: GradesComponent},
+  { path : 'cancelAppointment',component :CancelAppointmentComponent},
   { path: '**', component: PageNotFoundComponent },
 
 ];
@@ -142,6 +145,8 @@ const appRoutes: Routes = [
     VacationRequestComponent,
     CreatePredefAppointmentComponent,
     GradesComponent,
+    IncomingExaminationsComponent,
+    CancelAppointmentComponent,
   ],
   imports: [ 
     BrowserModule,
