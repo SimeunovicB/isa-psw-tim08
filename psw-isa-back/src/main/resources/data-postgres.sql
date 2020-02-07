@@ -7,6 +7,7 @@ insert into clinic(name,address,description) values('clinic1','45.2471-19.8035',
 INSERT INTO authority (name) VALUES ('ROLE_USER');
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
 INSERT INTO authority (name) VALUES ('ROLE_MEDICAL_STAFF');
+INSERT INTO authority (name) values ('ROLE_CCADMIN');
 
 --passwordi su 123
 insert into person(type,first_name,last_name,username,password,address,status,jmbg,enabled,version)
@@ -36,7 +37,7 @@ INSERT INTO user_authority (user_id, authority_id) VALUES (3, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (4, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (5, 3);
 INSERT INTO user_authority (user_id, authority_id) VALUES (6, 2);
-INSERT INTO user_authority (user_id, authority_id) VALUES (7, 2);
+INSERT INTO user_authority (user_id, authority_id) VALUES (7, 4);
 
 
 
@@ -47,7 +48,7 @@ insert into clinic_patient(clinic_id,patient_id) values (1,4);
 insert into medical_record(height,weight,diopter,alergies,blood_type,patient_id) values (176,77,3.2,'polen mleko','O',1);
 
 insert into vacation(start_date,end_date,status,staff_id) values ('2020-06-01','2020-06-10','PENDING',2);
-insert into vacation(start_date,end_date,status,staff_id) values ('2020-07-01','2020-07-10','PENDING',3);
+insert into vacation(start_date,end_date,status,staff_id) values ('2020-07-01','2020-07-10','PENDING',5);
 
 insert into room (name,number, clinic_id) values ('Sala za pregled' ,1, 1);
 insert into room (name,number, clinic_id) values ('Sala za pregled', 2, 1);
