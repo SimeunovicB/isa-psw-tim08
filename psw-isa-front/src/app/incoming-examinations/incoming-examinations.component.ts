@@ -36,15 +36,22 @@ export class IncomingExaminationsComponent implements OnInit {
         }
       )
   }
-  otkazi(appId : any){
-    console.log(appId)
-    this.appointmentService.cancle(appId)
+  otkazi(app : any){
+    console.log(app)
+    let d = new Date();
+    let appDate = new Date(app.date);
+    if(appDate.getDay()>= d.getDay()){
+      this.appointmentService.cancle(app.appointmentId)
       .subscribe(
         (data) => {
           console.log(data);
           this.getIncomingAppointments();
         }
       )
+    }else {
+      alert('Ne mozete otkazati ovaj termin jer je previse blizu');
+    }
+    
 
   }
 
