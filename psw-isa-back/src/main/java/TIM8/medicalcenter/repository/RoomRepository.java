@@ -25,4 +25,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     @Transactional
     @Query("update Room r set r.name=:name, r.number=:number where r.id=:id")
     int updateRoom(@Param("name") String name, @Param("number") int number, @Param("id") Long id);
+
+    @Modifying
+    @Query("delete from Room r where r.id = ?1")
+    void deleteRoom(Long entityId);
 }

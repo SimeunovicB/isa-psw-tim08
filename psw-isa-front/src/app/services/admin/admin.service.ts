@@ -115,7 +115,7 @@ export class AdminService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       );
   }
@@ -133,6 +133,21 @@ export class AdminService {
           return throwError(JSON.parse(err.text));
         })
       );
+  }
+
+  deleteRoom(id: any) {
+    return this.http.post("http://localhost:9090/api/administrator/deleteRoom", {
+      id:id
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response;
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      )
   }
 
   financialReport(beginDate:any, endDate:any, id:any) {
