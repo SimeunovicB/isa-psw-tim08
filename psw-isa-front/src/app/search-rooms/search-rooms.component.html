@@ -18,7 +18,7 @@
                 <td>{{ar.patient}}</td>
                 <td>{{ar.date | date:'yyyy-MM-dd'}}</td>
                 <td>{{ar.type}}</td>
-                <td><button type="button" class="btn btn-primary"
+                <td><button type="button" id="termin{{i+1}}" class="btn btn-primary"
                         (click)="findAppointment(ar.id,ar.doctor,ar.patient,ar.date,ar.type)">Pronadji termin</button>
                 </td>
             </tr>
@@ -46,17 +46,17 @@
 <form *ngIf="!hidden" class="form-inline md-form mr-auto mb-4" (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="form-group">
         <div class="input-group">
-            <input type="text" [(ngModel)]="ime" name="ime" placeholder="Naziv sale" aria-label="Search">
-            <input type="text" [(ngModel)]="broj" name="broj" placeholder="Broj sale" aria-label="Search">
+            <input type="text" [(ngModel)]="ime" id="ime" name="ime" placeholder="Naziv sale" aria-label="Search">
+            <input type="text" [(ngModel)]="broj" id="broj" name="broj" placeholder="Broj sale" aria-label="Search">
             <div class="datum">
-                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" name="datum" [(ngModel)]="model"
+                <input class="form-control" id="date" placeholder="yyyy-mm-dd" name="dp" name="datum" [(ngModel)]="model"
                     ngbDatepicker #d="ngbDatepicker" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><img
                             src="https://image.flaticon.com/icons/png/512/42/42446.png"
                             style="width: 1.2rem; height: 1.2rem; cursor: pointer;" /></button></div>
             </div>
-            <button class="btn btn-primary" type="submit">Pretraži</button>
+            <button class="btn btn-primary" id="pretrazi" type="submit">Pretraži</button>
         </div>
     </div>
 </form>
@@ -66,7 +66,7 @@
                     {{room.number}}</span></strong></div>
         <div class="datumi" *ngFor="let date of room.dates">
             <span class="nazivsale">{{date | date:'short'}}</span>
-            <button class="btn btn-primary" (click)="zakazi(date,room.id)">Zakaži</button>
+            <button class="btn btn-primary" id="{{room.id}}" (click)="zakazi(date,room.id)">Zakaži</button>
         </div>
     </div>
 </span>

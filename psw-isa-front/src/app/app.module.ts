@@ -60,6 +60,8 @@ import { VacationRequestComponent } from './vacation-request/vacation-request.co
 import { MapComponent } from './map/map.component';
 import { CreatePredefAppointmentComponent } from './create-predef-appointment/create-predef-appointment.component';
 import { GradesComponent } from './grades/grades.component';
+import { IncomingExaminationsComponent } from './incoming-examinations/incoming-examinations.component';
+import { CancelAppointmentComponent } from './cancel-appointment/cancel-appointment.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }, //more
@@ -69,7 +71,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent }, //more
   { path: 'pending', component: PendingUsersComponent }, //more
   { path: 'patients', component: PatientsComponent }, //more
-  { path: 'searchDoctors', component: SearchDoctorComponent }, //
+  { path: 'searchDoctors', component:SearchDoctorComponent }, //more
   { path: 'changePassword', component: ChangePassword }, //more
   { path: 'editclinic', component: EditClinicComponent }, //
   { path: 'managetypes', component: ManageAppointTypesComponent }, //
@@ -93,8 +95,8 @@ const appRoutes: Routes = [
   { path: 'predefAppointments', component: PredefAppointmentsComponent }, //more
   { path: 'createPredefAppointment', component: CreatePredefAppointmentComponent },//more
   { path: 'makeGrades', component: GradesComponent },
-  { path: '**', component: PageNotFoundComponent },
-
+  { path: 'cancleAppointent', component: CancelAppointmentComponent},
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -142,6 +144,8 @@ const appRoutes: Routes = [
     VacationRequestComponent,
     CreatePredefAppointmentComponent,
     GradesComponent,
+    IncomingExaminationsComponent,
+    CancelAppointmentComponent,
   ],
   imports: [
     BrowserModule,

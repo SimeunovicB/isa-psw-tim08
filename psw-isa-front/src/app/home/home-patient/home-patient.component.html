@@ -1,17 +1,18 @@
 <ul class="nav nav-pills nav-fill">
-  <li class="nav-item">
-    <a class="nav-link" href="/searchclinics">Klinike</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/karton">Vas karton</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/pregledi">Pregledi</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/predefAppointments">Predefinisani pregledi</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/patientProfile">Licni podaci</a>
-  </li>
-</ul>
+    <li class="nav-item">
+      <a class="nav-link" href="/searchclinics">Klinike</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/medicalrecord/{{userId}}">Vas karton</a>
+    </li>
+    <!--<li class="nav-item">
+      <a class="nav-link" href="/pregledi">Pregledi</a>
+    </li>-->
+    <li class="nav-item">
+      <a class="nav-link" href="/predefAppointments">Predefinisani pregledi</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/profile">Licni podaci</a>
+    </li>
+  </ul>
+  <app-incoming-examinations></app-incoming-examinations>

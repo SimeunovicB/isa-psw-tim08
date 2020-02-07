@@ -50,6 +50,10 @@ public class Appointment {
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Patient patient;
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
     //endregion
 
     @Override

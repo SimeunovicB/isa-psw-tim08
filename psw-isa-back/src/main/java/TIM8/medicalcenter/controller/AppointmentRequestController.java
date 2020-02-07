@@ -7,6 +7,7 @@ import TIM8.medicalcenter.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,12 @@ public class AppointmentRequestController {
     @Autowired
     private EmailService emailService;
 
+    /**
+     * Funkcija kojom doktor pravi zahtev za pregled ili operaciju u toku pregleda
+     * @param request
+     * @return
+     */
+    @PreAuthorize("hasRole('MEDICAL_STAFF')")
     @RequestMapping(value = "/addAppointmentRequest",consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<?> addAppointmentType(@RequestBody AppointmentRequestDTORequest request){
         int year = Integer.parseInt(request.getDate().split("-")[0]);

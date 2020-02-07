@@ -3,15 +3,30 @@
     <div class="form-group">
         <div class="input-group">
             <div class="datum">
-                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" name="datum" [(ngModel)]="model"
+                <input class="form-control" placeholder="yyyy-mm-dd" id="date" name="dp" name="datum" [(ngModel)]="model"
                     ngbDatepicker #d="ngbDatepicker" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><img
                             src="https://image.flaticon.com/icons/png/512/42/42446.png"
                             style="width: 1.2rem; height: 1.2rem; cursor: pointer;" /></button></div>
             </div>
-            <input type="text" name="tip" [(ngModel)]="tip" placeholder="Tip" required>
-            <button class="btn btn-primary" type="submit">Pretraži klinike</button>
+
+<!--            <div class="form-group row">
+                <label for="medicine" class="col-sm-2 col-form-label">Tip</label>
+                <div class="col-md-5">
+                    <select name="repeatSelect" id="repeatSelect2" (change)="changeSelectedType($event.target.value)"
+                        class="form-control">
+                        <option value={{null}}></option>
+                        <option *ngFor="let type of appointmentTypes" value="{{type.name}}">
+                            {{type.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Pretraži klinike</button> -->
+            <input type="text" id="tip" name="tip" [(ngModel)]="tip" placeholder="Tip" required>
+            <button id="pretrazi" class="btn btn-primary" type="submit">Pretraži klinike</button>
+
         </div>
     </div>
 </form>
@@ -22,6 +37,8 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Ime</th>
+            <th scope="col">Adresa</th>
+            <th scope="col">Prosek</th>
             <th scope="col">Doktori</th>
         </tr>
     </thead>
@@ -30,7 +47,9 @@
             <tr>
                 <th scope="row">{{i+1}}</th>
                 <td>{{clinic.name}}</td>
-                <td><button type="button" class="btn btn-primary" (click)="doktori(clinic.name)">Doktori</button></td>
+                <td>{{clinic.description}}</td>
+                <td>{{clinic.avg}}</td>
+                <td><button id="doctor{{i+1}}" type="button" class="btn btn-primary" (click)="doktori(clinic.name)">Doktori</button></td>
             </tr>
         </ng-container>
     </tbody>
@@ -50,8 +69,7 @@
             <tr>
                 <th scope="row">{{i+1}}</th>
                 <td>{{doctor.firstName}}</td>
-                <td><button type="button" class="btn btn-primary" (click)='zakazi(doctor.id)'>Zapocni pregled</button>
-                </td>
+               <td><button type="button" id="zakazi{{i+1}}" class="btn btn-primary" (click) ='zakazi(doctor.id)'>Zapocni pregled</button></td>
             </tr>
         </ng-container>
     </tbody>

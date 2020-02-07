@@ -13,6 +13,7 @@ import TIM8.medicalcenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class AdministratorController {
      * @param id
      * @return
      */
+    @PreAuthorize("hasRole('CCADMIN')")
     @PostMapping(consumes = "application/json",value ="/approveRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusApproved(@PathVariable Long id) {
 
@@ -76,6 +78,8 @@ public class AdministratorController {
      * @param id
      * @return
      */
+
+    @PreAuthorize("hasRole('CCADMIN')")
     @PostMapping(consumes = "application/json",value = "/rejectRegistration/{id}")
     public ResponseEntity<PersonDTO> updateStatusRejected(@PathVariable Long id){
         Person person = personService.findOneById(id);
@@ -99,6 +103,7 @@ public class AdministratorController {
      * @param administratorDTO
      * @return
      */
+    @PreAuthorize("hasRole('CCADMIN')")
     @RequestMapping(consumes = "application/json",value = "/registerAdmin",method = RequestMethod.POST)
     public ResponseEntity<?> registerAdmin(@RequestBody AdministratorDTO administratorDTO){
         Administrator administrator1 = (Administrator) personService.findOneByUsername(administratorDTO.getUsername());
@@ -112,6 +117,7 @@ public class AdministratorController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(consumes = "application/json",value = "/createDoctor",method = RequestMethod.POST)
     public ResponseEntity<?> createDoctor(@RequestBody CreateDoctorDTO doc) {
         personService.saveDoctor(doc);
@@ -119,6 +125,7 @@ public class AdministratorController {
         return new ResponseEntity<>(doc, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/averageClinicGrade",method = RequestMethod.POST)
     public ResponseEntity<?> averageClinicGrade(@RequestBody Id id) {
         List<PatientClinicGrades> grades = patientClinicGradesService.findClinicGrades(id.id);
@@ -134,6 +141,7 @@ public class AdministratorController {
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/financialReport", method=RequestMethod.POST)
     public ResponseEntity<?> financialReport(@RequestBody Dates dates) {
         String dat1 = dates.beginDate;
@@ -184,6 +192,7 @@ public class AdministratorController {
         public Long id;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/getAdminDoctorsGrades",method = RequestMethod.POST)
     public ResponseEntity<?> getAdminDoctorsGrades(@RequestBody Id id) {
         List<Doctor> doctors = personService.findAdminsDoctors(id.id);
@@ -208,6 +217,7 @@ public class AdministratorController {
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/getAdminDoctors",method = RequestMethod.POST)
     public ResponseEntity<?> getAdminDoctors(@RequestBody Id id) {
         List<Doctor> doctors = personService.findAdminsDoctors(id.id);
@@ -219,6 +229,7 @@ public class AdministratorController {
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/deleteDoctor",method = RequestMethod.POST)
     public ResponseEntity<?> deleteDoctor(@RequestBody Id id) {
         List<Appointment> appointments = appointmentService.findAll();
@@ -243,6 +254,7 @@ public class AdministratorController {
         return new ResponseEntity<>(0, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/deleteRoom",method = RequestMethod.POST)
     public ResponseEntity<?> deleteRoom(@RequestBody Id id) {
         List<Appointment> appointments = appointmentService.findAll();
@@ -276,13 +288,14 @@ public class AdministratorController {
      * @param administratorDTO
      * @return
      */
+    @PreAuthorize("hasRole('CCADMIN')")
     @RequestMapping(consumes = "application/json",value = "/registerClinicCentreAdmin",method = RequestMethod.POST)
     public ResponseEntity<?> registerClinicCentreAdmin(@RequestBody AdministratorDTO administratorDTO){
         Person person= personService.findOneByUsername(administratorDTO.getUsername());
         if(person != null){
             throw new ResourceConflictException(administratorDTO.getId(), "Username already exists");
         }
-        ClinicsAdministrator person1 = (ClinicsAdministrator) personService.saveClinicCentreAdministrator(administratorDTO,"PENDING","ROLE_ADMIN");
+        ClinicsAdministrator person1 = (ClinicsAdministrator) personService.saveClinicCentreAdministrator(administratorDTO,"PENDING","ROLE_CCADMIN");
         return new ResponseEntity<>(new AdministratorDTO(person1), HttpStatus.CREATED);
 
     }
@@ -293,6 +306,7 @@ public class AdministratorController {
      * @param request
      * @return
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(consumes = "application/json",value ="/makeAppointment",method = RequestMethod.POST)
     public ResponseEntity<?> makeAppoitment(@RequestBody MakeAppointmentDTORequest request){
         Appointment a = new Appointment();
@@ -316,6 +330,7 @@ public class AdministratorController {
      * Funkcija koja adminu vraca sve zahteve za pregled ili operaciju koje je pre toga napravio doktor
      * @return
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/getAppointmentRequests",method = RequestMethod.GET)
     public ResponseEntity<?> getAppointmentRequests(){
         List<AppointmentRequest> requests = appointmentRequestService.findAll();

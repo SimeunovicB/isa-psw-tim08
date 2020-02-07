@@ -1,5 +1,6 @@
 package TIM8.medicalcenter.repository;
 
+import TIM8.medicalcenter.model.Appointment;
 import TIM8.medicalcenter.model.grading.PatientDoctorGrades;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,4 +12,6 @@ public interface PatientDoctorGradesRepository extends JpaRepository<PatientDoct
 
     @Query("SELECT pdg from PatientDoctorGrades pdg where pdg.doctor.id=:id")
     List<PatientDoctorGrades> findDoctorGrades(@Param("id") Long id);
+
+    List<PatientDoctorGrades> findAll();
 }

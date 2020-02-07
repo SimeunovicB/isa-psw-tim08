@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Doctor</th>
+            <th scope="col">Datum</th>
+            <th scope="col">Tip</th>
+            <th scope="col">Cena</th>
+            <th scope="col">Popust</th>
+            <th scope="col">Soba</th>
+            <th scope="col">Zakazi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let app of predefAppointments; let i = index">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{app.doctor.firstName}}</td>
+                <td>{{app.date | date : 'yyyy-MM-dd HH:MM:SS'}}</td>
+                <td>{{app.type}}</td>
+                <td>{{app.price}}</td>
+                <td>{{app.discount}}</td>
+                <td>{{app.room}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="otkazi(app)">Otkazi</button>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

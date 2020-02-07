@@ -7,6 +7,7 @@ import TIM8.medicalcenter.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -36,6 +37,12 @@ public class ClinicController {
         return new ResponseEntity<>(allClinics,HttpStatus.OK);
     }
 
+    /**
+     * Funkcija kojom administrator nabavlja svoju kliniku koju moze da menja
+     * @param id
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value="/getAdminsClinic")
     public ResponseEntity<ClinicDTO> getAdminsClinic(@RequestParam Long id) {
         Clinic c = clinicService.findOneById(id);
@@ -43,6 +50,12 @@ public class ClinicController {
         return new ResponseEntity<>(new ClinicDTO(c), HttpStatus.OK);
     }
 
+    /**
+     * Funkcija kojom administrator dodaje kliniku
+     * @param clinic
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value="/addClinic",consumes = "application/json",method = RequestMethod.POST)
     public ResponseEntity<?> addClinic(@RequestBody Clinic clinic){
         Clinic clinic1 = clinicService.findOneByName(clinic.getName());
@@ -53,6 +66,12 @@ public class ClinicController {
         return new ResponseEntity<>(new ClinicDTO(clinic), HttpStatus.CREATED);
     }
 
+    /**
+     * Funkcija kojom administrator menja kliniku
+     * @param clinic
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = "application/json", value = "/update")
     public ResponseEntity<ClinicDTO> updateClinic(@RequestBody ClinicDTO clinic){
         Clinic clinic1 = clinicService.findOneById(clinic.getId());

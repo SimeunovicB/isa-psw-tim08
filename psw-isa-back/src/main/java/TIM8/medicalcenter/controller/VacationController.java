@@ -3,13 +3,21 @@ package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.VacationRequestsDTO;
 import TIM8.medicalcenter.model.Vacation;
+import TIM8.medicalcenter.model.users.Administrator;
+import TIM8.medicalcenter.model.users.Doctor;
+import TIM8.medicalcenter.model.users.Nurse;
+import TIM8.medicalcenter.model.users.Person;
 import TIM8.medicalcenter.service.EmailService;
 import TIM8.medicalcenter.service.PersonService;
 import TIM8.medicalcenter.service.VacationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,17 +38,42 @@ public class VacationController {
     @Autowired
     private EmailService emailService;
 
+    /**
+     * Funkcija kojom administrator preuzima sve zahteve za godisnje odmore unitar njegove klinike
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value="/getPending")
     public ResponseEntity<?> getAllClinics() {
+        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = currentUser.getName();
+        Administrator p = (Administrator) personService.findOneByUsername(username);
+
         List<Vacation> pending = vacationService.findPending();
         List<VacationRequestsDTO> requests = new ArrayList<>();
 
         for(Vacation v : pending){
-            requests.add(new VacationRequestsDTO(v));
+            if(v.getStaff() instanceof Doctor){
+                if(p.getClinic().getId() == ((Doctor) v.getStaff()).getClinic().getId()){
+                    requests.add(new VacationRequestsDTO(v));
+                }
+            }
+            else{
+                if(p.getClinic().getId() == ((Nurse)v.getStaff()).getClinic().getId()){
+                    requests.add(new VacationRequestsDTO(v));
+                }
+            }
+
         }
         return new ResponseEntity<>(requests, HttpStatus.OK);
     }
 
+    /**
+     * Odobravanje zahteva za godisnjim odmorom
+     * @param id
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = "application/json", value = "/approve")
     public ResponseEntity<?> approveRequest(@RequestBody Id id) {
         Vacation v = vacationService.findOneById(id.id);
@@ -52,6 +85,12 @@ public class VacationController {
         return new ResponseEntity<>(new VacationRequestsDTO(), HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Odbijanje zahteva za godisnjim odmorom
+     * @param id
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = "application/json", value = "/decline")
     public ResponseEntity<?> declineRequest(@RequestBody Odbijanje id) {
         Vacation v = vacationService.findOneById(id.id);
@@ -74,6 +113,7 @@ public class VacationController {
         public String razlog;
     }
 
+    @PreAuthorize("hasRole('MEDICAL_STAFF')")
     @PostMapping(consumes = "application/json", value = "/create")
     public ResponseEntity<?> createRequest(@RequestBody VacationRequest vr) {
         String dat = vr.startDate;
