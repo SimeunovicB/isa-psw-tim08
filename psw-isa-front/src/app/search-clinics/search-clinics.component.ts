@@ -53,7 +53,7 @@ export class SearchClinicsComponent implements OnInit {
     }
     this.modelmem = this.model;
     this.tipmem = this.tip;
-    this.findClinics(dat, this.currentType);
+    this.findClinics(dat, this.tip);
   }
 
   findClinics(date:string, type:string) {
@@ -69,7 +69,7 @@ export class SearchClinicsComponent implements OnInit {
   zakazi(id:any) {
     console.log(id);
     var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day ;
-    this.clinicService.makeApp(id, dat, this.currentType,this.userId)
+    this.clinicService.makeApp(id, dat, this.tip,this.userId)
     .subscribe(
       (data) => {
         this.doctors=[];
@@ -79,7 +79,7 @@ export class SearchClinicsComponent implements OnInit {
   doktori(clinicname:string) {
     console.log(clinicname);
     var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day ;
-    this.clinicService.getDoctors(clinicname, dat, this.currentType)
+    this.clinicService.getDoctors(clinicname, dat, this.tip)
     .subscribe(
       (data) => {
         console.log(data);
