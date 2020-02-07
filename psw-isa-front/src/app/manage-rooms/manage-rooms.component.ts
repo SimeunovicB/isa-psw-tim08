@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../services/user/user.service';
+import { AdminService } from '../services/admin/admin.service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { RoomService } from '../services/room.service';
@@ -20,6 +21,7 @@ export class ManageRoomsComponent implements OnInit {
   loggedUser: any;
 
   constructor(private cookieService: CookieService,
+    private adminService: AdminService,
     private userService: UserService,
     private roomService: RoomService,
     private router: Router) { }
@@ -80,6 +82,19 @@ export class ManageRoomsComponent implements OnInit {
     this.roomService.create(this.nazivnove, this.brnove, this.loggedUser.clinic_id)
       .subscribe(
         (data) => {
+          this.getRooms();
+        }
+      )
+  }
+
+  obrisi(id:any){
+    console.log(id);
+    this.adminService.deleteRoom(id)
+      .subscribe(
+        (data) => {
+          if(data===0){
+            alert('Ne moze se obrisati sala jer ima zakazanih pregleda u njoj!');
+          }
           this.getRooms();
         }
       )

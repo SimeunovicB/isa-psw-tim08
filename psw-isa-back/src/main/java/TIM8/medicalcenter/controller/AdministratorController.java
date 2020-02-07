@@ -13,10 +13,12 @@ import TIM8.medicalcenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 
 @RestController
@@ -219,9 +221,50 @@ public class AdministratorController {
 
     @RequestMapping(value = "/deleteDoctor",method = RequestMethod.POST)
     public ResponseEntity<?> deleteDoctor(@RequestBody Id id) {
-        int a = personService.updatePersonStatus("DELETED", id.id);
+        List<Appointment> appointments = appointmentService.findAll();
+        Calendar cal = Calendar.getInstance();
+        Date d = cal.getTime();
 
-        return new ResponseEntity<>(a,HttpStatus.OK);
+        int deletable = 1;
+
+        for(Appointment app : appointments){
+            if(app.getDoctor().getId() == id.id && d.before(app.getDate())){
+                deletable=0;
+                break;
+            }
+        }
+        int a=0;
+        if(deletable==1) {
+            a = personService.updatePersonStatus("DELETED", id.id);
+
+            return new ResponseEntity<>(a, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(0, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/deleteRoom",method = RequestMethod.POST)
+    public ResponseEntity<?> deleteRoom(@RequestBody Id id) {
+        List<Appointment> appointments = appointmentService.findAll();
+        Calendar cal = Calendar.getInstance();
+        Date d = cal.getTime();
+
+        int deletable = 1;
+
+        for(Appointment app : appointments){
+            if(app.getRoom().getId() == id.id && d.before(app.getDate())){
+                deletable=0;
+                break;
+            }
+        }
+        int a=0;
+        if(deletable==1) {
+            roomService.deleteRoom(id.id);
+
+            return new ResponseEntity<>(1, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(0, HttpStatus.OK);
     }
 
     static class Id {

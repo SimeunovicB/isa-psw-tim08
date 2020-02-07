@@ -6,6 +6,7 @@ import TIM8.medicalcenter.repository.ClinicRepository;
 import TIM8.medicalcenter.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,10 @@ public class RoomService {
     public List<Room> findAll() {return roomRepository.findAll();}
     public List<Room> findAdminRooms(Long id) {return roomRepository.findAdminRooms(id);}
     public int updateRoom(String name, int number, Long id) {return roomRepository.updateRoom(name,number,id);}
+    //public void deleteRoom(Long id) {roomRepository.delete(roomRepository.findOneById(id));}
+
+    @Transactional
+    public void deleteRoom(Long id) {roomRepository.deleteRoom(id);}
 
     public Room save(RoomDTO roomDTO) {
         Room r = new Room();

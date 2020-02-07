@@ -44,7 +44,7 @@ insert into appointment(date,discount,price,status,type,doctor_id,room_id,patien
 insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-02 14:00:00.000',12,0,'','Pedijatar',2,1,1);
 
 --predefinisani
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-03-02 15:00:00.000',12,123123,'','Pedijatar',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 15:00:00.000',12,123123,'','Pedijatar',2,1);
 insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 16:00:00.000',12,123123,'','Pedijatar',2,1);
 insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 19:00:00.000',12,123123,'','Pedijatar',2,1);
 
