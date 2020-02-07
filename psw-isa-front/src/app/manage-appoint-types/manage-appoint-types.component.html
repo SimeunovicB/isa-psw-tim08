@@ -10,6 +10,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Naziv</th>
                 <th scope="col">Promeni</th>
+                <th scope="col">Obrisi</th>
             </tr>
         </thead>
         <tbody>
@@ -17,7 +18,9 @@
                 <tr>
                     <th scope="row">{{i+1}}</th>
                     <td><input type="text" [(ngModel)]="nazivi[i]" value={{type.name}}></td>
-                    <td><button type="button" class="btn btn-primary" (click)="izmeni(nazivi[i], type.id)">Izmeni</button></td>
+                    <td><button type="button" class="btn btn-primary"
+                            (click)="izmeni(nazivi[i], type.id)">Izmeni</button></td>
+                    <td><button type="button" class="btn btn-danger" (click)="obrisi(type.id)">Obrisi</button></td>
                 </tr>
             </ng-container>
         </tbody>

@@ -9,20 +9,20 @@ import { AppointmentServiceService } from '../services/appointment-service/appoi
   styleUrls: ['./search-rooms.component.css']
 })
 export class SearchRoomsComponent implements OnInit {
-  rooms : any;
-  appointmentRequests =  [];
+  rooms: any;
+  appointmentRequests = [];
   model: any;
   ime = "";
   broj: any;
-  appointment_request_id : any;
-  disp_doctor_id : any;
-  disp_patient_id : any;
-  disp_date : any;
-  disp_type : any;
-  hidden : any;
+  appointment_request_id: any;
+  disp_doctor_id: any;
+  disp_patient_id: any;
+  disp_date: any;
+  disp_type: any;
+  hidden: any;
 
   constructor(private roomService: RoomService,
-              private appointmentService : AppointmentServiceService) { }
+    private appointmentService: AppointmentServiceService) { }
 
   ngOnInit() {
     this.getAppointmentRequests();
@@ -35,7 +35,7 @@ export class SearchRoomsComponent implements OnInit {
     this.findRoom(this.ime, this.broj, dat);
   }
 
-  findRoom(ime: any, broj:any, dat:any) {
+  findRoom(ime: any, broj: any, dat: any) {
     this.roomService.searchRooms(ime, broj, dat)
       .subscribe(
         (data) => {
@@ -54,7 +54,7 @@ export class SearchRoomsComponent implements OnInit {
       }
     )
   }
-  findAppointment(id : any,doctor : any,patient : any,date: any,type : any){
+  findAppointment(id: any, doctor: any, patient: any, date: any, type: any) {
     console.log(id);
     this.appointment_request_id = id;
     this.disp_doctor_id = doctor;
@@ -67,21 +67,21 @@ export class SearchRoomsComponent implements OnInit {
 
   }
 
-  zakazi(date : any,room_id) {
+  zakazi(date: any, room_id) {
     this.appointmentService.makeNewAppointment(
       this.appointment_request_id,
       this.disp_doctor_id,
       this.disp_patient_id,
       room_id,
       date,
-      this.disp_type).subscribe(        
-      (data) => {
-        this.getAppointmentRequests();
-        this.hidden  = true;
-      }
-    )
-    
-    
+      this.disp_type).subscribe(
+        (data) => {
+          this.getAppointmentRequests();
+          this.hidden = true;
+        }
+      )
+
+
   }
 
 }

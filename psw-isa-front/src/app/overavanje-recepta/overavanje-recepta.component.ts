@@ -11,11 +11,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class OveravanjeReceptaComponent implements OnInit {
 
-  constructor(private recipeService : OveravanjeReceptaService,
-    private cookieService : CookieService) { }
-  recipes : any;
-  nurseId  : any;
-  helper : any;
+  constructor(private recipeService: OveravanjeReceptaService,
+    private cookieService: CookieService) { }
+  recipes: any;
+  nurseId: any;
+  helper: any;
 
   ngOnInit() {
     this.getAllPending();
@@ -30,8 +30,8 @@ export class OveravanjeReceptaComponent implements OnInit {
       }
     )
   }
-  approveRecipe(id : any){
-    this.recipeService.approveRecipe(id,this.nurseId).subscribe(
+  approveRecipe(id: any) {
+    this.recipeService.approveRecipe(id, this.nurseId).subscribe(
       (data) => {
         console.log('overio hehe');
         this.getAllPending();

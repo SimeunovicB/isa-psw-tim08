@@ -1,55 +1,60 @@
 <head>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-    
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    </head>
-    
-    <body>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <div class="main">
-    
-            
-    
-        <div class="container">
-    
-    <div class="middle">
-          <div id="login">
-    
-            <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    
-              <fieldset class="clearfix">
-    
-                <p ><span class="fa fa-user"></span><input type="text"  Placeholder="E-mail" id="email" [(ngModel)]="email" name="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-                <p><span class="fa fa-lock"></span><input type="password"  Placeholder="Password" id="password" [(ngModel)]="password" name="password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
-                
-                 <div>
-                    <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="/register">Registruj se</a></span>
-                        <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Log In"></span>
-                                </div>
-    
-              </fieldset>
-    <div class="clearfix"></div>
-            </form>
-    
+
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <div class="main">
+
+
+
+    <div class="container">
+
+      <div class="middle">
+        <div id="login">
+
+          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+            <fieldset class="clearfix">
+
+              <p><span class="fa fa-user"></span><input type="text" Placeholder="E-mail" id="email" [(ngModel)]="email"
+                  name="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+              <p><span class="fa fa-lock"></span><input type="password" Placeholder="Password" id="password"
+                  [(ngModel)]="password" name="password" required></p>
+              <!-- JS because of IE support; better: placeholder="Password" -->
+
+              <div>
+                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text"
+                    href="/register">Registruj se</a></span>
+                <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit"
+                    value="Log In"></span>
+              </div>
+
+            </fieldset>
             <div class="clearfix"></div>
-    
-          </div> <!-- end login -->
-          <div class="logo"><img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png" height="150" width="150">
-              
-              <div class="clearfix"></div>
-          </div>
-          
-          </div>
-    
+          </form>
+
+          <div class="clearfix"></div>
+
+        </div> <!-- end login -->
+        <div class="logo"><img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png"
+            height="150" width="150">
+
+          <div class="clearfix"></div>
         </div>
-    
+
+      </div>
+
     </div>
-    </body>
-    
+
+  </div>
+</body>

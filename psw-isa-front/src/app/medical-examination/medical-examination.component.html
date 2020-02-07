@@ -34,7 +34,7 @@
                 </select>
             </div>
         </div>
-        <div class="form-group row" >
+        <div class="form-group row">
             <div class="col-sm-2">
                 <button (click)="promeni()" class="btn btn-primary">Potvrdi</button>
             </div>
@@ -44,7 +44,8 @@
         <form class="form-group md-form mr-auto mb-4" (ngSubmit)="zakazi(f)" #f="ngForm">
             <div class="form-group">
                 <div class="input-group">
-                    <select name="repeatSelect" id="repeatSelect3" (change)="changeSelectedAppType($event.target.value)">
+                    <select name="repeatSelect" id="repeatSelect3"
+                        (change)="changeSelectedAppType($event.target.value)">
                         <option value={{null}}></option>
                         <option *ngFor="let appotype of appointmentTypes" value="{{appotype.name}}">
                             {{appotype.name}}
@@ -64,4 +65,3 @@
         </form>
     </div>
 </div>
-

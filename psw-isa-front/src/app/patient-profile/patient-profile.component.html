@@ -1,28 +1,30 @@
 <app-header></app-header>
 <div class="container">
-    <div class="card" style="width:400px">
-      <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png" alt="Card image" style="width:100%">
-    
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>Ime</td>
-            <td><input type="text" [(ngModel)]="ime"></td>
-          </tr>
-          <tr>
-            <td>Prezime</td>
-            <td><input type="text" [(ngModel)]="prezime"></td>
-          </tr>
-          <tr>
-            <td>Adresa</td>
-            <td><input type="text" [(ngModel)]="adresa"></td>
-          </tr>
-          <tr>
-            <td><a href="/changePassword" >Izmeni lozinku</a></td>
-            <td><button (click)="onSubmit()"  class="btn btn-primary">Sacuvaj izmene</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>    
-    </div>
+  <div class="card" style="width:400px">
+    <img class="card-img-top"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png"
+      alt="Card image" style="width:100%">
+
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Ime</td>
+          <td><input type="text" [(ngModel)]="ime"></td>
+        </tr>
+        <tr>
+          <td>Prezime</td>
+          <td><input type="text" [(ngModel)]="prezime"></td>
+        </tr>
+        <tr>
+          <td>Adresa</td>
+          <td><input type="text" [(ngModel)]="adresa"></td>
+        </tr>
+        <tr>
+          <td><a href="/changePassword">Izmeni lozinku</a></td>
+          <td><button (click)="onSubmit()" class="btn btn-primary">Sacuvaj izmene</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>

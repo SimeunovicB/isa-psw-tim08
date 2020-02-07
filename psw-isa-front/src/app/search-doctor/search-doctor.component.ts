@@ -15,20 +15,20 @@ export class SearchDoctorComponent implements OnInit {
   doctors = [];
   ime = "";
   prezime = "";
-  ocena=""
-  helper : any;
-  userId : any;
-  appointment : any;
+  ocena = ""
+  helper: any;
+  userId: any;
+  appointment: any;
   constructor(private router: Router,
     private activeRoute: ActivatedRoute,
     private patientService: PatientService,
-    private cookieService : CookieService,
-    private appointmentService : AppointmentServiceService) { }
+    private cookieService: CookieService,
+    private appointmentService: AppointmentServiceService) { }
 
   ngOnInit() {
     this.helper = new JwtHelperService()
     this.userId = this.helper.decodeToken(this.cookieService.get('token')).id;
-    
+
     this.patientService.searchDoctors("", "", "")
       .subscribe(
         (data) => {
@@ -53,12 +53,12 @@ export class SearchDoctorComponent implements OnInit {
     this.appointment = filterVal;
     console.log(this.appointment);
   }
-  zakazi(){
-    this.appointmentService.reserve(this.appointment,this.userId)
+  zakazi() {
+    this.appointmentService.reserve(this.appointment, this.userId)
       .subscribe(
         (data) => {
           console.log(data);
-          
+
         }
       )
 

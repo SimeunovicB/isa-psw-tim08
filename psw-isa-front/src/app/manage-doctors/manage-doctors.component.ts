@@ -66,12 +66,12 @@ export class ManageDoctorsComponent implements OnInit {
       )
   }
 
-  obrisi(id:any) {
+  obrisi(id: any) {
     this.adminService.deleteDoctor(id)
       .subscribe(
         (data) => {
           console.log(data);
-          if(data===0){
+          if (data === 0) {
             alert('Nije moguce obrisati doktora jer ima zakazane preglede!');
           }
           this.getDoctors();

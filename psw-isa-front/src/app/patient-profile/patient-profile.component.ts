@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Inject} from '@angular/core';
+import { Inject } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { UserService } from '../services/user/user.service';
@@ -31,7 +31,7 @@ export class PatientProfileComponent implements OnInit {
     this.userMail = this.helper.decodeToken(this.cookieService.get('token')).sub;
     this.getUser();
   }
- 
+
   getUser() {
     this.userService.getUserByMail(this.userMail)
       .subscribe(
@@ -53,5 +53,5 @@ export class PatientProfileComponent implements OnInit {
         }, (error) => alert(error.text)
       );
   }
-  
+
 }

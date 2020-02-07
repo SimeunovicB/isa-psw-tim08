@@ -17,7 +17,7 @@ export class ChangePassword implements OnInit {
   oldPassword: string;
   //loggedUser: any;
   //id: number;
-  userMail : any;
+  userMail: any;
   //helper : any;
 
   constructor(private router: Router,
@@ -31,14 +31,14 @@ export class ChangePassword implements OnInit {
   }
 
   promeni() {
-    if(this.password === this.password2){
+    if (this.password === this.password2) {
       this.userService.UpdateUserPassword(this.password, this.oldPassword)
-      .subscribe(
-        (user: any) => {
-          this.router.navigate(['/login']);
-          this.cookieService.set('loggedUser', '');
-        }, (error) => alert(error.text)
-      );
+        .subscribe(
+          (user: any) => {
+            this.router.navigate(['/login']);
+            this.cookieService.set('loggedUser', '');
+          }, (error) => alert(error.text)
+        );
     } else {
       alert('Morate uneti istu lozinku dva puta!');
     }

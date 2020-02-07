@@ -14,27 +14,27 @@ import { AppointmentServiceService } from '../services/appointment-service/appoi
 })
 export class CreatePredefAppointmentComponent implements OnInit {
 
-  
-  model : any;
-  rooms : any;
-  doctors : any;
-  appointmentTypes : any;
-  cena :     any;
-  popust : any;
 
-  currentRoom  : any;
-  currentDoctor : any;
-  currentType : any;
-  time : any;
+  model: any;
+  rooms: any;
+  doctors: any;
+  appointmentTypes: any;
+  cena: any;
+  popust: any;
+
+  currentRoom: any;
+  currentDoctor: any;
+  currentType: any;
+  time: any;
 
 
   constructor(private router: Router,
-    private appTypeService : AppointmentTypeService,
-    private appointmentService : AppointmentServiceService,
+    private appTypeService: AppointmentTypeService,
+    private appointmentService: AppointmentServiceService,
     private activatedRoute: ActivatedRoute,
-    private cookieService : CookieService,
-    private personService : UserService,
-    private roomService : RoomService) { }
+    private cookieService: CookieService,
+    private personService: UserService,
+    private roomService: RoomService) { }
 
   ngOnInit() {
     this.init();
@@ -75,14 +75,14 @@ export class CreatePredefAppointmentComponent implements OnInit {
   }
   napraviPregled() {
     var dat = "" + this.model.year + "-" + this.model.month + "-" + this.model.day + "-" + this.time;
-    this.appointmentService.createPredef(this.currentDoctor,this.currentRoom,this.currentType,this.cena,this.popust,dat).subscribe(
-      (data : any) => {
+    this.appointmentService.createPredef(this.currentDoctor, this.currentRoom, this.currentType, this.cena, this.popust, dat).subscribe(
+      (data: any) => {
         console.log(data)
       }, (error) => {
         alert(error.text);
       }
-    )  
-    
+    )
+
   }
 
 

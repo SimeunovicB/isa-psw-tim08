@@ -4,7 +4,7 @@
 }
 
 .input-group {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
@@ -41,12 +41,13 @@ button {
 }
 
 .spanic {
-    padding : 5px;
+    padding: 5px;
 }
+
 .detalji {
-    margin : 0px auto;
+    margin: 0px auto;
     text-align: center;
     font-size: large;
     font-weight: 600;
-    border : 1px solid #333333;
+    border: 1px solid #333333;
 }

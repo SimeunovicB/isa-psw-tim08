@@ -10,13 +10,13 @@ import { UserService } from '../services/user/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  firstName:string;
-  lastName : string;
-  email:string;
-  password : string; 
-  password2 : string; 
-  address :string;
-  jmbg : string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  password2: string;
+  address: string;
+  jmbg: string;
 
   constructor(private http: HttpClient,
     private router: Router,
@@ -24,15 +24,15 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   onSubmit(form: NgForm) {
     console.log(this.firstName)
-    this.userService.RegUser(this.firstName,this.lastName,this.address,this.jmbg, this.email, this.password)
-    .subscribe(
-      (user: any) => {
-        this.router.navigate(['/login']);
-      }, (error) => alert(error.text)
-    );
+    this.userService.RegUser(this.firstName, this.lastName, this.address, this.jmbg, this.email, this.password)
+      .subscribe(
+        (user: any) => {
+          this.router.navigate(['/login']);
+        }, (error) => alert(error.text)
+      );
   }
 
 }

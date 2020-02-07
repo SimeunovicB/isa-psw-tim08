@@ -28,7 +28,7 @@ export class SearchPatientsComponent implements OnInit {
         }
       )*/
 
-    this.findPatients("","","");
+    this.findPatients("", "", "");
 
   }
 
@@ -46,10 +46,10 @@ export class SearchPatientsComponent implements OnInit {
         }
       )
   }
-  medicalRecord(id : any){
+  medicalRecord(id: any) {
     this.router.navigate(['/medicalrecord/' + id]);
   }
-  startExamination(id : any){
+  startExamination(id: any) {
     this.router.navigate(['/medicalExamination/' + id]);
   }
 }

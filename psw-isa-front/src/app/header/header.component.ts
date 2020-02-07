@@ -11,9 +11,9 @@ import { UserService } from '../services/user/user.service';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private cookieService : CookieService,
-    private router : Router,
-    private userService : UserService
+    private cookieService: CookieService,
+    private router: Router,
+    private userService: UserService
 
   ) { }
 

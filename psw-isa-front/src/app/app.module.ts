@@ -29,8 +29,8 @@ import { HomeAdminComponent } from './home/home-admin/home-admin.component';
 import { PatientsComponent } from './patients/patients.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ChangePassword } from './change-password/change-password.component';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {TokenInterceptor} from '../Interceptors/TokenInterceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from '../Interceptors/TokenInterceptor';
 import { PendingVacationsComponent } from './pending-vacations/pending-vacations.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
 import { PatientProfileComponent } from './patient-profile/patient-profile.component';
@@ -69,7 +69,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent }, //more
   { path: 'pending', component: PendingUsersComponent }, //more
   { path: 'patients', component: PatientsComponent }, //more
-  { path: 'searchDoctors', component:SearchDoctorComponent }, //
+  { path: 'searchDoctors', component: SearchDoctorComponent }, //
   { path: 'changePassword', component: ChangePassword }, //more
   { path: 'editclinic', component: EditClinicComponent }, //
   { path: 'managetypes', component: ManageAppointTypesComponent }, //
@@ -79,7 +79,7 @@ const appRoutes: Routes = [
   { path: 'pendingvacationrequests', component: PendingVacationsComponent }, //
   { path: 'vacationrequest', component: VacationRequestComponent }, //
   { path: 'medicalrecord/:id', component: MedicalRecordComponent }, //more
-  { path: 'medicalExamination/:id',component : MedicalExaminationComponent }, //more
+  { path: 'medicalExamination/:id', component: MedicalExaminationComponent }, //more
   { path: 'appointmentReservation', component: AppointmentReservationComponent },
   { path: 'searchpatients', component: SearchPatientsComponent }, //
   { path: 'searchclinics', component: SearchClinicsComponent }, //pola
@@ -88,11 +88,11 @@ const appRoutes: Routes = [
   { path: 'dodajAdministratoraKlinike', component: RegisterAdminComponent }, //more
   { path: 'dodajAdministratoraKlinickogCentra', component: RegisterClinicCentreAdminComponent }, //more
   { path: 'dodavanjeUSifarnik', component: CodebookComponent }, //more
-  { path: 'overavanjeRecepta', component : OveravanjeReceptaComponent}, //ne treba
-  { path: 'radniKalendar', component: CalendarComponent}, //more
-  { path : 'predefAppointments',component : PredefAppointmentsComponent}, //more
-  { path : 'createPredefAppointment',component : CreatePredefAppointmentComponent},//more
-  { path : 'makeGrades',component: GradesComponent},
+  { path: 'overavanjeRecepta', component: OveravanjeReceptaComponent }, //ne treba
+  { path: 'radniKalendar', component: CalendarComponent }, //more
+  { path: 'predefAppointments', component: PredefAppointmentsComponent }, //more
+  { path: 'createPredefAppointment', component: CreatePredefAppointmentComponent },//more
+  { path: 'makeGrades', component: GradesComponent },
   { path: '**', component: PageNotFoundComponent },
 
 ];
@@ -143,12 +143,12 @@ const appRoutes: Routes = [
     CreatePredefAppointmentComponent,
     GradesComponent,
   ],
-  imports: [ 
+  imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    OwlDateTimeModule, 
+    OwlDateTimeModule,
     OwlNativeDateTimeModule,
     BrowserAnimationsModule,
     MatTableModule,
@@ -159,11 +159,11 @@ const appRoutes: Routes = [
 
   providers: [
     {
-    provide : HTTP_INTERCEPTORS,
-    useClass : TokenInterceptor,
-    multi :true
-  },
-  CookieService,],
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    CookieService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
