@@ -61,6 +61,8 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.helper = new JwtHelperService();
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.doctorId = this.helper.decodeToken(this.cookieService.get('token')).id;
     this.appointmentService.getByDoctorIdForCalendar(this.doctorId).subscribe(
       (data) => {

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user/user.service';
 import { MedicalRecordService } from '../services/medical-record/medical-record.service';
 import { MedicalExaminationService } from '../services/medical-examination/medical-examination.service';
+import { CookieService } from 'ngx-cookie-service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-medical-record',
@@ -22,13 +24,19 @@ export class MedicalRecordComponent implements OnInit {
   diopter: number;
   disabledp = true;
   medicalExaminations: any;
+  helper: any;
 
   constructor(private activatedRoute: ActivatedRoute,
+    private cookieService: CookieService,
+    private router: Router,
     private userService: UserService,
     private medicalRecordService: MedicalRecordService,
     private medicalExaminationService: MedicalExaminationService) { }
 
   ngOnInit() {
+    this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.id = this.activatedRoute.snapshot.url[1].path;
     this.getUser();
     this.getMedicalExaminations();

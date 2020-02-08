@@ -20,6 +20,9 @@ public class AppointmentTypeService {
         return appointmentTypeRepository.findOneById(id);
     }
     public List<AppointmentType> findAll() { return appointmentTypeRepository.findAll();}
+
+    @Transactional
+    public void deleteAppointmentType(Long id) {appointmentTypeRepository.deleteAppointmentType(id);}
     public AppointmentType save(AppointmentTypeDTO appointmentTypeDTO) {
         AppointmentType m = new AppointmentType();
         m.setName(appointmentTypeDTO.getName());

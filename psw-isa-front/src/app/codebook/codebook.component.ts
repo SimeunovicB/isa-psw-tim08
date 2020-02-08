@@ -14,6 +14,7 @@ import { DiagnosisService } from '../services/diagnosis/diagnosis.service';
 export class CodebookComponent implements OnInit {
   medicine: string;
   diagnosis: string;
+  helper: any;
 
   constructor(private router: Router,
     private cookieService: CookieService,
@@ -22,6 +23,9 @@ export class CodebookComponent implements OnInit {
     private diagnosisService: DiagnosisService) { }
 
   ngOnInit() {
+    this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
   }
   addMedicine() {
     if (this.medicine.trim() != '') {

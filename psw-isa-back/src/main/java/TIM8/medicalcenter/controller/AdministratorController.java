@@ -269,8 +269,12 @@ public class AdministratorController {
                 break;
             }
         }
-        int a=0;
+
         if(deletable==1) {
+            for(Appointment app : appointments){
+                if(app.getRoom().getId() == id.id)
+                    appointmentService.updateAppointmentRoom(id.id);
+            }
             roomService.deleteRoom(id.id);
 
             return new ResponseEntity<>(1, HttpStatus.OK);

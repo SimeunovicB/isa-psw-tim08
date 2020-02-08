@@ -4,6 +4,7 @@ import { ClinicService } from '../services/clinic/clinic.service';
 import { NgForm } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppointmentTypeService } from '../services/appointment-type/appointment-type.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-clinics',
@@ -24,11 +25,14 @@ export class SearchClinicsComponent implements OnInit {
   appointmentTypes : any;
 
   constructor(private clinicService: ClinicService,
+    private router: Router,
     private cookieService: CookieService,
     private appTypeService : AppointmentTypeService) { }
 
   ngOnInit() {
     this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.userId = this.helper.decodeToken(this.cookieService.get('token')).id;
     this.appTypeService.getAll().subscribe(
       (data: any) => {

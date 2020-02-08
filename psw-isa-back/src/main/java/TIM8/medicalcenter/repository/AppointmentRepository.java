@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment,Long>{
@@ -27,5 +26,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long>{
     @Transactional
     @Query("delete from Appointment a where a.id = ?1")
     void deleteAppointment(Long entityId);
+
+    @Modifying
+    @Transactional
+    @Query("update Appointment a set a.room = null where a.room.id = :id")
+    int updateAppointmentRoom(@Param("id") Long id);
 
 }

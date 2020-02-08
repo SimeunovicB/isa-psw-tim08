@@ -63,11 +63,11 @@ insert into appointment(date,discount,price,status,type,doctor_id,room_id,patien
 insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-02 16:00:00.000',12,123123,'','Rutinski pregled',2,1,3);
 insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-02 17:00:00.000',12,123123,'','Rutinski pregled',2,1,3);
 insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 12:00:00.000',12,123123,'','Rutinski pregled',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-06-06 11:00:00.000',12,123123,'','Rutinski pregled',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-06-06 18:00:00.000',12,123123,'','Rutinski pregled',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-07 18:00:00.000',12,123123,'','Pedijatar',2,1,3);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-02 16:00:00.000',12,123123,'','Pedijatar',2,1);
-insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-07-07 19:00:00.000',12,123123,'','Pedijatar',2,1,3);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-06 11:00:00.000',12,123123,'','Rutinski pregled',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-06 18:00:00.000',12,123123,'','Rutinski pregled',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-06 18:00:00.000',12,123123,'','Operacija',2,1,3);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id) values ('2020-02-08 16:00:00.000',12,123123,'','Operacija',2,1);
+insert into appointment(date,discount,price,status,type,doctor_id,room_id,patient_id) values ('2020-02-06 19:00:00.000',12,123123,'','Operacija',2,1,3);
 
 
 

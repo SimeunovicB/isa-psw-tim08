@@ -6,6 +6,7 @@ import { RoomService } from '../services/room.service';
 import { UserService } from '../services/user/user.service';
 import { AnimationMetadataType } from '@angular/animations';
 import { AppointmentServiceService } from '../services/appointment-service/appointment-service.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-create-predef-appointment',
@@ -21,6 +22,7 @@ export class CreatePredefAppointmentComponent implements OnInit {
   appointmentTypes: any;
   cena: any;
   popust: any;
+  helper: any;
 
   currentRoom: any;
   currentDoctor: any;
@@ -37,6 +39,9 @@ export class CreatePredefAppointmentComponent implements OnInit {
     private roomService: RoomService) { }
 
   ngOnInit() {
+    this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.init();
   }
 
