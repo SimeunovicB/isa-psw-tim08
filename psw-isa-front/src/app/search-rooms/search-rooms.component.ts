@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { RoomService } from '../services/room.service';
 import { NgForm } from '@angular/forms';
 import { AppointmentServiceService } from '../services/appointment-service/appointment-service.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-search-rooms',
@@ -14,6 +17,7 @@ export class SearchRoomsComponent implements OnInit {
   model: any;
   ime = "";
   broj: any;
+  helper: any;
   appointment_request_id: any;
   disp_doctor_id: any;
   disp_patient_id: any;
@@ -22,9 +26,14 @@ export class SearchRoomsComponent implements OnInit {
   hidden: any;
 
   constructor(private roomService: RoomService,
+    private cookieService: CookieService,
+    private router: Router,
     private appointmentService: AppointmentServiceService) { }
 
   ngOnInit() {
+    this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.getAppointmentRequests();
     this.hidden = true;
   }

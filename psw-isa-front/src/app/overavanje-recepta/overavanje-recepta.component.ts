@@ -3,6 +3,7 @@ import { OveravanjeReceptaService } from '../services/overavanjeRecepta/overavan
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-overavanje-recepta',
@@ -12,7 +13,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class OveravanjeReceptaComponent implements OnInit {
 
   constructor(private recipeService: OveravanjeReceptaService,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private router: Router) { }
   recipes: any;
   nurseId: any;
   helper: any;
@@ -20,6 +22,8 @@ export class OveravanjeReceptaComponent implements OnInit {
   ngOnInit() {
     this.getAllPending();
     this.helper = new JwtHelperService();
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.nurseId = this.helper.decodeToken(this.cookieService.get('token')).id;
   }
   getAllPending() {

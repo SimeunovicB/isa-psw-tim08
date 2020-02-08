@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentTypeService } from '../services/appointment-type/appointment-type.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-appoint-types',
@@ -10,10 +13,16 @@ export class ManageAppointTypesComponent implements OnInit {
   nazivnovog = "";
   types = [];
   nazivi = [];
+  helper: any;
 
-  constructor(private appTService: AppointmentTypeService) { }
+  constructor(private cookieService: CookieService,
+    private router: Router,
+    private appTService: AppointmentTypeService) { }
 
   ngOnInit() {
+    this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.getAll();
   }
 
@@ -57,7 +66,11 @@ export class ManageAppointTypesComponent implements OnInit {
     this.appTService.delete(id)
       .subscribe(
         (data) => {
-          this.getAll();
+          if (data === 0) {
+            alert('Ne mozete obrisati tip jer postoji neodrzan pregled sa tim tipom!')
+          } else {
+            this.getAll();
+          }
         }, (error) => (console.log(error))
       );
   }

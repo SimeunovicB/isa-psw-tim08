@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ClinicService } from '../services/clinic/clinic.service';
 import { NgForm } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,10 +20,13 @@ export class GradesComponent implements OnInit {
   selectedClinic: any;
 
   constructor(private clinicService: ClinicService,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private router: Router) { }
 
   ngOnInit() {
     this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.userId = this.helper.decodeToken(this.cookieService.get('token')).id;
     this.findClinics();
     this.findDoctors();

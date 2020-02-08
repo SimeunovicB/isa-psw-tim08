@@ -40,6 +40,8 @@ export class MedicalExaminationComponent implements OnInit {
   ngOnInit() {
     this.patientId = this.activatedRoute.snapshot.url[1].path;
     this.helper = new JwtHelperService();
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.doctorId = this.helper.decodeToken(this.cookieService.get('token')).id;
     this.init();
     this.getTypes();

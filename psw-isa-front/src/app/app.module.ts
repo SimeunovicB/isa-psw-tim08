@@ -82,7 +82,7 @@ const appRoutes: Routes = [
   { path: 'vacationrequest', component: VacationRequestComponent }, //
   { path: 'medicalrecord/:id', component: MedicalRecordComponent }, //more
   { path: 'medicalExamination/:id', component: MedicalExaminationComponent }, //more
-  { path: 'appointmentReservation', component: AppointmentReservationComponent },
+  { path: 'appointmentReservation', component: AppointmentReservationComponent }, //PRAZNA
   { path: 'searchpatients', component: SearchPatientsComponent }, //
   { path: 'searchclinics', component: SearchClinicsComponent }, //pola
   { path: 'searchrooms', component: SearchRoomsComponent }, //

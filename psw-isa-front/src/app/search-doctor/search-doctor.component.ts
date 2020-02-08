@@ -27,6 +27,8 @@ export class SearchDoctorComponent implements OnInit {
 
   ngOnInit() {
     this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.userId = this.helper.decodeToken(this.cookieService.get('token')).id;
 
     this.patientService.searchDoctors("", "", "")

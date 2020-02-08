@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VacationService } from '../services/vacation/vacation.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pending-vacations',
@@ -12,10 +15,16 @@ export class PendingVacationsComponent implements OnInit {
   idzabrisanje: any;
   brisanje = false;
   razlog: any;
+  helper: any;
 
-  constructor(private vacationService: VacationService) { }
+  constructor(private cookieService: CookieService,
+    private router: Router,
+    private vacationService: VacationService) { }
 
   ngOnInit() {
+    this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
     this.getRequests();
   }
 

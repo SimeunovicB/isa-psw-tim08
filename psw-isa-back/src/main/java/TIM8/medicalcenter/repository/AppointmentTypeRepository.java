@@ -19,4 +19,8 @@ public interface AppointmentTypeRepository extends JpaRepository<AppointmentType
     @Transactional
     @Query("update AppointmentType at set at.name = :name where at.id = :id")
     int updateAppointmentType(@Param("name") String name, @Param("id") Long id);
+
+    @Modifying
+    @Query("delete from AppointmentType at where at.id = ?1")
+    void deleteAppointmentType(Long entityId);
 }

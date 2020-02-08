@@ -18,16 +18,16 @@ export class ChangePassword implements OnInit {
   //loggedUser: any;
   //id: number;
   userMail: any;
-  //helper : any;
+  helper : any;
 
   constructor(private router: Router,
     private cookieService: CookieService,
     private userService: UserService) { }
 
   ngOnInit() {
-    /*this.helper = new JwtHelperService();
-    this.userMail = this.helper.decodeToken(this.cookieService.get('token')).sub;
-    this.getUser();*/
+    this.helper = new JwtHelperService()
+    if (this.helper.decodeToken(this.cookieService.get('token')) == null)
+      this.router.navigate(['/login']);
   }
 
   promeni() {
