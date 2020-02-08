@@ -1,0 +1,12 @@
+.asd{
+    margin-left:auto;
+    margin-right: auto;
+    width: 300px;
+    margin-top: 15px;
+}
+.table {
+    margin: 5em auto;
+    max-width: 1000px;
+    border: 2px solid #333333;
+    box-shadow: 2px 2px 2px #444444;
+}

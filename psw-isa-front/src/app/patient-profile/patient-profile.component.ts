@@ -50,6 +50,7 @@ export class PatientProfileComponent implements OnInit {
       .subscribe(
         (user: any) => {
           this.router.navigate(['/profile']);
+          alert('Uspesno izmenjeni podaci')
         }, (error) => alert(error.text)
       );
   }
