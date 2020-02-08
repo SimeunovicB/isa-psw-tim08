@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import {environment} from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class MedicalRecordService {
 
   constructor(private http : HttpClient) { }
 
-  baseUrl = 'http://localhost:9090' + '/api/medicalRecord'
+  baseUrl = `${environment.baseUrl}` + '/api/medicalRecord'
 
   updateMedicalRecord(
     id : number,

@@ -7,6 +7,7 @@ import { throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt'
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import {environment} from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class UserService {
   ) { }
 
   postUser(email: string, password: string) {
-    return this.http.post("http://localhost:9090/auth/login", {
+    return this.http.post(`${environment.baseUrl}/auth/login`, {
       username: email,
       password: password
     })
@@ -40,7 +41,7 @@ export class UserService {
         }),
         catchError((err: any) => {
           console.log(err)
-          return throwError(JSON.parse(err.text))
+          return throwError(err)
         })
       )
   }
@@ -51,7 +52,7 @@ export class UserService {
     jmbg: string,
     email: string,
     password: string) {
-    return this.http.post("http://localhost:9090/auth/register", {
+    return this.http.post(`${environment.baseUrl}/auth/register`, {
       firstName: firstname,
       lastName: lastname,
       address: address,
@@ -61,8 +62,6 @@ export class UserService {
     })
       .pipe(
         map((response: any) => {
-          //console.log(response);
-          //this.cookieService.set('loggedUser', JSON.stringify(response.json()));
           const data = response
           return data;
         }),
@@ -74,7 +73,7 @@ export class UserService {
   UpdateUserPassword(
     newPassword: string,
     oldPassword: string) {
-    return this.http.post("http://localhost:9090/api/person/changePassword", {
+    return this.http.post(`${environment.baseUrl}/api/person/changePassword`, {
       newPassword: newPassword,
       oldPassword: oldPassword
     })
@@ -84,7 +83,7 @@ export class UserService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       )
   }
@@ -93,7 +92,7 @@ export class UserService {
     lastname: string,
     address: string,
     id: number) {
-    return this.http.post("http://localhost:9090/api/person/update", {
+    return this.http.post(`${environment.baseUrl}/api/person/update`, {
       firstName: firstname,
       lastName: lastname,
       address: address,
@@ -105,26 +104,26 @@ export class UserService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       )
   }
 
   getPending() {
-    return this.http.get("http://localhost:9090/api/patient")
+    return this.http.get(`${environment.baseUrl}/api/patient`)
       .pipe(
         map((response: any) => {
           const data = response
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       );
   }
 
   getUserByMail(email: string) {
-    return this.http.post("http://localhost:9090/api/person/getByEmail", {
+    return this.http.post(`${environment.baseUrl}/api/person/getByEmail`, {
       username: email
     })
       .pipe(
@@ -133,26 +132,26 @@ export class UserService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       );
   }
 
   getAdminByMail(email: string) {
-    return this.http.get("http://localhost:9090/api/person/getAdminByEmail?mail="+email)
+    return this.http.get(`${environment.baseUrl}/api/person/getAdminByEmail?mail=`+email)
       .pipe(
         map((response: any) => {
           const data = response
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       );
   }
 
   getDocByMail(email: string) {
-    return this.http.post("http://localhost:9090/api/person/getDocByEmail", {
+    return this.http.post(`${environment.baseUrl}/api/person/getDocByEmail`, {
       username: email
     })
       .pipe(
@@ -161,13 +160,13 @@ export class UserService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       );
   }
 
   getMedicalRecordInfo(id: Number) {
-    return this.http.get("http://localhost:9090/api/medicalRecord/getByPatientId?id=" + id)
+    return this.http.get(`${environment.baseUrl}/api/medicalRecord/getByPatientId?id=` + id)
       .pipe(
         map((response: any) => {
           console.log(response)
@@ -175,13 +174,13 @@ export class UserService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       );
   }
 
   acceptUser(id) {
-    return this.http.post("http://localhost:9090/api/administrator/approveRegistration/" + id, {
+    return this.http.post(`${environment.baseUrl}/api/administrator/approveRegistration/` + id, {
       id: id,
     })
       .pipe(
@@ -196,7 +195,7 @@ export class UserService {
   }
 
   denyUser(id) {
-    return this.http.post("http://localhost:9090/api/administrator/rejectRegistration/" + id, {
+    return this.http.post(`${environment.baseUrl}/api/administrator/rejectRegistration/` + id, {
       id: id,
     })
       .pipe(
@@ -210,7 +209,7 @@ export class UserService {
       );
   }
   findDoctors() {
-    return this.http.get("http://localhost:9090/api/person/getAllDoctors")
+    return this.http.get(`${environment.baseUrl}/api/person/getAllDoctors`)
       .pipe(
         map((response: any) => {
           console.log(response)
@@ -218,7 +217,7 @@ export class UserService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       );
   }
