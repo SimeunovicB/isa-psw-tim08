@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentTypeService {
-  baseUrl = 'http://localhost:9090' + '/api/appointmenttype'
+  baseUrl = `${environment.baseUrl}` + '/api/appointmenttype'
 
   constructor(private http: HttpClient) { }
 
-  addType(type :String) {
-    return this.http.post(`${this.baseUrl}/addAppointmentType`,{
+  addType(type: String) {
+    return this.http.post(`${this.baseUrl}/addAppointmentType`, {
       name: type
     }).pipe(
       map((response: any) => {
@@ -25,10 +26,10 @@ export class AppointmentTypeService {
     )
   }
 
-  update(name:any, id:any) {
-    return this.http.post(`${this.baseUrl}/update`,{
+  update(name: any, id: any) {
+    return this.http.post(`${this.baseUrl}/update`, {
       name: name,
-      id:id
+      id: id
     }).pipe(
       map((response: any) => {
         const data = response;
@@ -40,9 +41,9 @@ export class AppointmentTypeService {
     )
   }
 
-  delete(id:any) {
-    return this.http.post(`${this.baseUrl}/delete`,{
-      id:id
+  delete(id: any) {
+    return this.http.post(`${this.baseUrl}/delete`, {
+      id: id
     }).pipe(
       map((response: any) => {
         const data = response;

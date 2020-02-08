@@ -27,7 +27,7 @@ public class AppointmentRequestController {
     private EmailService emailService;
 
     /**
-     * Funkcija kojom doktor pravi zahtev za pregled ili operaciju u toku pregleda
+     * Funkcija kojom doktor pravi zahtev za pregled ili operaciju u toku pregleda,i pacijent
      * @param request
      * @return
      */

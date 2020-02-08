@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import {HttpClient} from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import {environment} from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class OveravanjeReceptaService {
         return data;
       }),
       catchError((err: any) => {
-        return throwError(JSON.parse(err.text));
+        return throwError(err);
       })
     )
   }
@@ -36,7 +37,7 @@ export class OveravanjeReceptaService {
           return data;
         }),
         catchError((err: any) => {
-          return throwError(JSON.parse(err.text));
+          return throwError(err);
         })
       )
   }

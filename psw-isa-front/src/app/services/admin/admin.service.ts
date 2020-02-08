@@ -7,6 +7,8 @@ import { throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt'
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment'
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,7 @@ export class AdminService {
     address: string,
     username: string,
     clinic: string) {
-    return this.http.post("http://localhost:9090/api/administrator/registerAdmin", {
+    return this.http.post(`${environment.baseUrl}/api/administrator/registerAdmin`, {
       firstName: firstname,
       lastName: lastname,
       address: address,
@@ -46,7 +48,7 @@ export class AdminService {
     address: string,
     username: string,
   ) {
-    return this.http.post("http://localhost:9090/api/administrator/registerClinicCentreAdmin", {
+    return this.http.post(`${environment.baseUrl}/api/administrator/registerClinicCentreAdmin`, {
       firstName: firstname,
       lastName: lastname,
       address: address,
@@ -70,7 +72,7 @@ export class AdminService {
     username: string,
     clinic_id: any
   ) {
-    return this.http.post("http://localhost:9090/api/administrator/createDoctor", {
+    return this.http.post(`${environment.baseUrl}/api/administrator/createDoctor`, {
       firstName: firstname,
       lastName: lastname,
       address: address,
@@ -91,7 +93,7 @@ export class AdminService {
   }
 
   getAdminsDoctors(id:any) {
-    return this.http.post("http://localhost:9090/api/administrator/getAdminDoctors", {
+    return this.http.post(`${environment.baseUrl}/api/administrator/getAdminDoctors`, {
       id:id
     })
       .pipe(
@@ -106,7 +108,7 @@ export class AdminService {
   }
 
   deleteDoctor(id:any) {
-    return this.http.post("http://localhost:9090/api/administrator/deleteDoctor", {
+    return this.http.post(`${environment.baseUrl}/api/administrator/deleteDoctor`, {
       id:id
     })
       .pipe(
@@ -121,7 +123,7 @@ export class AdminService {
   }
 
   getDoctorGrades(id:any) {
-    return this.http.post("http://localhost:9090/api/administrator/getAdminDoctorsGrades", {
+    return this.http.post(`${environment.baseUrl}/api/administrator/getAdminDoctorsGrades`, {
       id:id
     })
       .pipe(
@@ -136,7 +138,7 @@ export class AdminService {
   }
 
   deleteRoom(id: any) {
-    return this.http.post("http://localhost:9090/api/administrator/deleteRoom", {
+    return this.http.post(`${environment.baseUrl}/api/administrator/deleteRoom`, {
       id:id
     })
       .pipe(
@@ -151,7 +153,7 @@ export class AdminService {
   }
 
   financialReport(beginDate:any, endDate:any, id:any) {
-    return this.http.post("http://localhost:9090/api/administrator/financialReport", {
+    return this.http.post(`${environment.baseUrl}/api/administrator/financialReport`, {
       beginDate:beginDate,
       endDate:endDate,
       id:id
@@ -168,7 +170,7 @@ export class AdminService {
   }
 
   averageClinicGrade(id:any) {
-    return this.http.post("http://localhost:9090/api/administrator/averageClinicGrade", {
+    return this.http.post(`${environment.baseUrl}/api/administrator/averageClinicGrade`, {
       id:id
     })
       .pipe(

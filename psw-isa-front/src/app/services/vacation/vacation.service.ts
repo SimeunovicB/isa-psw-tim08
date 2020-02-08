@@ -6,6 +6,7 @@ import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import {environment} from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class VacationService {
     private router: Router) { }
 
   getPending() {
-    return this.http.get("http://localhost:9090/api/vacation/getPending")
+    return this.http.get(`${environment.baseUrl}/api/vacation/getPending`)
     .pipe(
       map((response: any) => {
         const data = response;
@@ -30,7 +31,7 @@ export class VacationService {
   }
 
   createRequest(startDate:any, endDate:any, id:any) {
-    return this.http.post("http://localhost:9090/api/vacation/create", {
+    return this.http.post(`${environment.baseUrl}/api/vacation/create`, {
       startDate: startDate,
       endDate: endDate,
       id: id
@@ -47,7 +48,7 @@ export class VacationService {
   }
 
   acceptRequest(id) {
-    return this.http.post("http://localhost:9090/api/vacation/approve", {
+    return this.http.post(`${environment.baseUrl}/api/vacation/approve`, {
       id: id,
     })
     .pipe(
@@ -55,24 +56,24 @@ export class VacationService {
         const data = response;
         return data;
       }),
-      catchError((err: Response) => {
-        return throwError(JSON.parse(err.text()));
+      catchError((err: any) => {
+        return throwError(err);
       })
     );
   }
 
   denyRequest(id:any, razlog:any) {
-    return this.http.post("http://localhost:9090/api/vacation/decline", {
+    return this.http.post(`${environment.baseUrl}/api/vacation/decline`, {
       id: id,
       razlog: razlog
     })
     .pipe(
-      map((response: Response) => {
+      map((response: any) => {
         const data = response;
         return data;
       }),
-      catchError((err: Response) => {
-        return throwError(JSON.parse(err.text()));
+      catchError((err: any) => {
+        return throwError(err);
       })
     );
   }

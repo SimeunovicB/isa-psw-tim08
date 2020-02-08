@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoomService } from '../services/room.service';
+import { RoomService } from '../services/room/room.service';
 import { NgForm } from '@angular/forms';
 import { AppointmentServiceService } from '../services/appointment-service/appointment-service.service';
 

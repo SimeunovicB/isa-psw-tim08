@@ -4,6 +4,7 @@ import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment'
 
 
 @Injectable({
@@ -16,46 +17,45 @@ export class AppointmentServiceService {
     private router: Router) { }
 
   getAppointmentRequests() {
-    return this.http.get("http://localhost:9090/api/administrator/getAppointmentRequests")
-    .pipe(
-      map((response: any) => {
-        const data = response;
-        return data;
-      }),
-      catchError((err: any) => {
-        return throwError(JSON.parse(err.text));
-      })
-    )
+    return this.http.get(`${environment.baseUrl}/api/administrator/getAppointmentRequests`)
+      .pipe(
+        map((response: any) => {
+          const data = response;
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      )
   }
-  getByDoctorIdForCalendar(doctorId : string) {
-    console.log("http://localhost:9090/api/appointment/getAppointmentsForDoctor?doctorId=a" + doctorId)
-    return this.http.get("http://localhost:9090/api/appointment/getAppointmentsForDoctor?doctorId=a" + doctorId)
-    .pipe(
-      map((response: any) => {
-        const data = response;
-        return data;
-      }),
-      catchError((err: any) => {
-        return throwError(JSON.parse(err.text));
-      })
-    )
+  getByDoctorIdForCalendar(doctorId: string) {
+    return this.http.get(`${environment.baseUrl}/api/appointment/getAppointmentsForDoctor?doctorId=a` + doctorId)
+      .pipe(
+        map((response: any) => {
+          const data = response;
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(JSON.parse(err.text));
+        })
+      )
   }
 
   makeNewAppointment(
-      appointmentRequestId : any,
-      doctor : any,
-      patient : any,
-      room : any,
-      date : any,
-      type : any,
-    ) {
-    return this.http.post("http://localhost:9090/api/administrator/makeAppointment", {
-      appointmentRequestId : appointmentRequestId,
-      doctor : doctor,
-      patient : patient,
-      room : room,
-      date : date,
-      type : type,
+    appointmentRequestId: any,
+    doctor: any,
+    patient: any,
+    room: any,
+    date: any,
+    type: any,
+  ) {
+    return this.http.post(`${environment.baseUrl}/api/administrator/makeAppointment`, {
+      appointmentRequestId: appointmentRequestId,
+      doctor: doctor,
+      patient: patient,
+      room: room,
+      date: date,
+      type: type,
     })
       .pipe(
         map((response: any) => {
@@ -68,7 +68,7 @@ export class AppointmentServiceService {
       )
   }
   getPredefAppointment() {
-    return this.http.get("http://localhost:9090/api/appointment/getPredefAppointment")
+    return this.http.get(`${environment.baseUrl}/api/appointment/getPredefAppointment`)
       .pipe(
         map((response: any) => {
           const data = response
@@ -79,10 +79,10 @@ export class AppointmentServiceService {
         })
       );
   }
-  reserve(appId : any,currentUserId :any) {
-    return this.http.post("http://localhost:9090/api/appointment/reservePredef",{
-        patientId : currentUserId,
-        appointmentId : appId
+  reserve(appId: any, currentUserId: any) {
+    return this.http.post(`${environment.baseUrl}/api/appointment/reservePredef`, {
+      patientId: currentUserId,
+      appointmentId: appId
 
     })
       .pipe(
@@ -95,33 +95,21 @@ export class AppointmentServiceService {
         })
       );
   }
-  createPredef(currentDoctor : any,
-    currentRoom : any,
-    currentType : any,
-    cena : any,
-    popust :any,
-    dat :any){
-    return this.http.post("http://localhost:9090/api/appointment/createPredef",{
-      doctorId :currentDoctor,
-      roomId : currentRoom,
-      typeId : currentType,
-      cena : cena,
-      popust : popust,
-      dat : dat 
-      
+  createPredef(currentDoctor: any,
+    currentRoom: any,
+    currentType: any,
+    cena: any,
+    popust: any,
+    dat: any) {
+    return this.http.post(`${environment.baseUrl}/api/appointment/createPredef`, {
+      doctorId: currentDoctor,
+      roomId: currentRoom,
+      typeId: currentType,
+      cena: cena,
+      popust: popust,
+      dat: dat
+
     })
-    .pipe(
-      map((response: any) => {
-        const data = response
-        return data;
-      }),
-      catchError((err: any) => {
-        return throwError(err);
-      })
-    );
-  }
-  getIncomingAppointments() {
-    return this.http.get("http://localhost:9090/api/appointment/getIncomingAppointmnents")
       .pipe(
         map((response: any) => {
           const data = response
@@ -131,20 +119,32 @@ export class AppointmentServiceService {
           return throwError(err);
         })
       );
-    }
-    cancle(appId : any) {
-      return this.http.post("http://localhost:9090/api/appointment/cancleAppointment",{
-          id : appId
-  
-      })
-        .pipe(
-          map((response: any) => {
-            const data = response
-            return data;
-          }),
-          catchError((err: any) => {
-            return throwError(err);
-          })
-        );
-    }
+  }
+  getIncomingAppointments() {
+    return this.http.get(`${environment.baseUrl}/api/appointment/getIncomingAppointmnents`)
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
+  }
+  cancle(appId: any) {
+    return this.http.post(`${environment.baseUrl}/api/appointment/cancleAppointment`, {
+      id: appId
+
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
+  }
 }

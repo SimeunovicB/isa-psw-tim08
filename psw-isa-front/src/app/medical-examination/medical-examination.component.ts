@@ -6,7 +6,7 @@ import { MedicalExaminationService } from '../services/medical-examination/medic
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 import { AppointmentTypeService } from '../services/appointment-type/appointment-type.service';
-import { AppointmentRequestService } from '../services/appointment-request.service';
+import { AppointmentRequestService } from '../services/appointment-reqest/appointment-request.service';
 
 
 @Component({
