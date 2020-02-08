@@ -17,6 +17,7 @@ public class ClinicService {
     ClinicRepository clinicRepository;
 
     @Cacheable("clinics")
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<Clinic> findAll() {
         return clinicRepository.findAll();
     }
@@ -25,6 +26,7 @@ public class ClinicService {
         return clinicRepository.findOneById(id);
     }
     @Cacheable("clinics")
+
     public Clinic findOneByName(String name){return clinicRepository.findOneByName(name); }
     public Clinic save(Clinic c) {return clinicRepository.save(c);}
 
