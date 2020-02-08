@@ -23,7 +23,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
-import { AppointmentServiceService } from '../services/appointment-service/appointment-service.service';
+import { AppointmentServiceService } from '../services/appointment-service.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';

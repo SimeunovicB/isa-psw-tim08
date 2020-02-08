@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
-import { AppointmentServiceService } from '../services/appointment-service/appointment-service.service';
+import { AppointmentServiceService } from '../services/appointment-service.service';
 
 @Component({
   selector: 'app-search-doctor',

@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { RoomService } from '../services/room/room.service';
 import { UserService } from '../services/user/user.service';
 import { AnimationMetadataType } from '@angular/animations';
-import { AppointmentServiceService } from '../services/appointment-service/appointment-service.service';
+import { AppointmentServiceService } from '../services/appointment-service.service';
 
 @Component({
   selector: 'app-create-predef-appointment',
