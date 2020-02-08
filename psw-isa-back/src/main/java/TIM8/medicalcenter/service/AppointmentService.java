@@ -93,7 +93,6 @@ public class AppointmentService  {
     }
 
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void cancle(Person p,Long id){
         Appointment a = appointmentRepository.findOneById(id);
         if(p instanceof Patient){

@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppointmentTypeService } from '../services/appointment-type/appointment-type.service';
 import { Router } from '@angular/router';
+import { AppointmentRequestService } from '../services/appointment-request.service';
 
 @Component({
   selector: 'app-search-clinics',
@@ -26,6 +27,7 @@ export class SearchClinicsComponent implements OnInit {
 
   constructor(private clinicService: ClinicService,
     private router: Router,
+    private appointement:AppointmentRequestService,
     private cookieService: CookieService,
     private appTypeService : AppointmentTypeService) { }
 
@@ -71,7 +73,7 @@ export class SearchClinicsComponent implements OnInit {
   zakazi(id: any) {
     console.log(id);
     var dat = "" + this.modelmem.year + "-" + this.modelmem.month + "-" + this.modelmem.day ;
-    this.clinicService.makeApp(id, dat, this.tip,this.userId)
+    this.appointement.addRequest(id,this.userId, dat, this.tip)
     .subscribe(
       (data) => {
         this.doctors=[];

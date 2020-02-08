@@ -16,6 +16,7 @@ export class AppointmentRequestService {
     date: any,
     type: string
     ) {
+      console.log(doctor,patient,date,type);
     return this.http.post("http://localhost:9090/api/appointmentrequest/addAppointmentRequest", {
       doctor: doctor,
       patient: patient,
