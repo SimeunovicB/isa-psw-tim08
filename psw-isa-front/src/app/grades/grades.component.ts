@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ClinicService } from '../services/clinic/clinic.service';
-import { NgForm } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 
@@ -50,7 +49,7 @@ export class GradesComponent implements OnInit {
       )
   }
   
-  klinike(clinicname:String,value:any) {
+  klinike(clinicname:any,value:any) {
     console.log(this.selectedClinic,clinicname);
     this.clinicService.makeGradeClinic(clinicname, this.selectedClinic, this.userId)
       .subscribe(

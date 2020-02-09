@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { PatientService } from 'src/app/services/patient/patient.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/services/user/user.service';

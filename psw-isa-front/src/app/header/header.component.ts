@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user/user.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-header',

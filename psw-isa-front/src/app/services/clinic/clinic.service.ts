@@ -48,7 +48,7 @@ export class ClinicService {
       })
     )
   }
-  makeGradeClinic(clinicName:String,value:any,patientId:any){
+  makeGradeClinic(clinicName:any,value:any,patientId:any){
     return this.http.post(`${environment.baseUrl}/api/appointment/makeGradeClinic`, {
       clinicName:clinicName,
       value:value,

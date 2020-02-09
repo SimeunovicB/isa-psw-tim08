@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Geo } from '../../model/geo'
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../services/user/user.service';
 import { Router } from '@angular/router';

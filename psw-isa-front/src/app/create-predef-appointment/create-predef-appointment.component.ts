@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppointmentTypeService } from '../services/appointment-type/appointment-type.service';
 import { CookieService } from 'ngx-cookie-service';
-import { RoomService } from '../services/room.service';
+import { RoomService } from '../services/room/room.service';
 import { UserService } from '../services/user/user.service';
-import { AnimationMetadataType } from '@angular/animations';
 import { AppointmentServiceService } from '../services/appointment-service/appointment-service.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 

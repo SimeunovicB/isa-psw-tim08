@@ -12,7 +12,7 @@ export class AppointmentTypeService {
 
   constructor(private http: HttpClient) { }
 
-  addType(type :String) {
+  addType(type :any) {
     return this.http.post(`${this.baseUrl}/addAppointmentType`,{
       name: type
     }).pipe(

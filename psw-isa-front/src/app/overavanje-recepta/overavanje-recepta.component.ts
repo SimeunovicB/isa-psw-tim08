@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OveravanjeReceptaService } from '../services/overavanjeRecepta/overavanje-recepta.service';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
