@@ -174,7 +174,7 @@ public class AppointmentController {
      * @param request
      * @return
      */
-    @PreAuthorize("hasRole('PATAIENT')")
+    @PreAuthorize("hasRole('PATIENT')")
     @RequestMapping(consumes = "application/json",value="/makeApp",method = RequestMethod.POST)
     public ResponseEntity<?> makeApp(@RequestBody Req request) {
         List<ClinicDTO> clinics = new ArrayList<>();

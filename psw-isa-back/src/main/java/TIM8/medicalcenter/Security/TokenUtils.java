@@ -24,6 +24,10 @@ public class TokenUtils {
     @Value("300000")
     private int EXPIRES_IN;
 
+    public String getAUTH_HEADER() {
+        return AUTH_HEADER;
+    }
+
     @Value("Authorization")
     private String AUTH_HEADER;
 
@@ -144,16 +148,22 @@ public class TokenUtils {
 
     // Funkcija za preuzimanje JWT tokena iz zahteva
     public String getToken(HttpServletRequest request) {
+        System.out.println("Evo tokena: "+request.getHeader("AUTH_HEADER"));
         String authHeader = getAuthHeaderFromHeader(request);
-
+        System.out.println("Evo tokena sad: "+authHeader);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            System.out.println("obradio token: "+ authHeader.substring(7));
             return authHeader.substring(7);
         }
 
         return null;
     }
     public String getAuthHeaderFromHeader(HttpServletRequest request) {
-        return request.getHeader(AUTH_HEADER);
+        if(request.getHeader(AUTH_HEADER)!=null){
+            return request.getHeader(AUTH_HEADER);
+        }
+        else
+            return request.getHeader("AUTH_HEADER");
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
