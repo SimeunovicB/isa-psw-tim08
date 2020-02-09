@@ -3,15 +3,23 @@
 <div class="inputt">
     <table class="unos">
         <caption>Unos tipa pregleda</caption>
-        <tr>
-            <td>Naziv i broj:</td>
-            <td><input type="text" [(ngModel)]="nazivnovog"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td> <button class="btn btn-success" (click)="onSubmit()">Dodaj tip
-                    pregleda</button></td>
-        </tr>
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Naziv i broj:</td>
+                <td><input type="text" [(ngModel)]="nazivnovog"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td> <button class="btn btn-success" (click)="onSubmit()">Dodaj tip
+                        pregleda</button></td>
+            </tr>
+        </tbody>
     </table>
 </div>
 <hr>
