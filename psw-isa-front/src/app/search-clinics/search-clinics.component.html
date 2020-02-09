@@ -3,8 +3,8 @@
     <div class="form-group">
         <div class="input-group">
             <div class="datum">
-                <input class="form-control" placeholder="yyyy-mm-dd" id="date" name="dp" name="datum" [(ngModel)]="model"
-                    ngbDatepicker #d="ngbDatepicker" required>
+                <input class="form-control" placeholder="yyyy-mm-dd" id="date" name="dp" name="datum"
+                    [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><img
                             src="../../assets/images/calendar.png" alt="calendar"
@@ -38,14 +38,17 @@
                 <td>{{clinic.name}}</td>
                 <td>{{clinic.description}}</td>
                 <td>{{clinic.avg}}</td>
-                <td><button id="doctor{{i+1}}" type="button" class="btn btn-primary" (click)="doktori(clinic.name)">Doktori</button></td>
+                <td><button id="doctor{{i+1}}" type="button" class="btn btn-primary"
+                        (click)="doktori(clinic.name)">Doktori</button></td>
             </tr>
         </ng-container>
     </tbody>
 </table>
-<li class="nav-item">
-    <a class="nav-link" align='center' href="/searchDoctors/">Pretrazi doktore</a>
-  </li>
+<ul>
+    <li class="nav-item">
+        <a class="nav-link" align='center' href="/searchDoctors/">Pretrazi doktore</a>
+    </li>
+</ul>
 <table class="table">
     <caption>Zakazi pregled</caption>
     <thead>
@@ -60,7 +63,8 @@
             <tr>
                 <th scope="row">{{i+1}}</th>
                 <td>{{doctor.firstName}}</td>
-               <td><button type="button" id="zakazi{{i+1}}" class="btn btn-primary" (click) ='zakazi(doctor.id)'>Zapocni pregled</button></td>
+                <td><button type="button" id="zakazi{{i+1}}" class="btn btn-primary" (click)='zakazi(doctor.id)'>Zapocni
+                        pregled</button></td>
             </tr>
         </ng-container>
     </tbody>
