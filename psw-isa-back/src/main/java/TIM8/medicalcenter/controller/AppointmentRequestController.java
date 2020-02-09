@@ -31,7 +31,7 @@ public class AppointmentRequestController {
      * @param request
      * @return
      */
-    @PreAuthorize("hasRole('MEDICAL_STAFF')")
+    @PreAuthorize("hasAnyRole('MEDICAL_STAFF','PATIENT')")
     @RequestMapping(value = "/addAppointmentRequest",consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<?> addAppointmentType(@RequestBody AppointmentRequestDTORequest request){
         int year = Integer.parseInt(request.getDate().split("-")[0]);

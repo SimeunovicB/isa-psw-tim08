@@ -1,5 +1,7 @@
 <app-header></app-header>
-<form class="form-inline md-form mr-auto mb-4" (ngSubmit)="onSubmit(f)" #f="ngForm">
+<h1 align='center'>Pretrazi doktore</h1>
+<div class="asd">
+<form class="form-inline md-form mr-auto mb-4 dsa" (ngSubmit)="onSubmit(f)" #f="ngForm">
     <table>
         <caption>Pretraga doktora</caption>
         <thead style="display: none;">
@@ -18,16 +20,12 @@
                         placeholder="Prezime" aria-label="Search"></td>
             </tr>
             <tr>
-                <td><input class="form-control mr-sm-2" type="text" [(ngModel)]="ocena" name="ocena"
-                        placeholder="Prosecna ocena" aria-label="Search"></td>
-            </tr>
-            <tr>
                 <td><button class="btn btn-primary" type="submit">Pretraži</button></td>
             </tr>
-        </tbody>
+        </tbody>       
     </table>
 </form>
-
+</div>
 <hr>
 
 <table class="table">

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import {environment} from '../../../environments/environment'
 
 
 
@@ -10,7 +11,7 @@ import { throwError } from 'rxjs';
 })
 export class MedicineService {
 
-  baseUrl = 'http://localhost:9090' + '/api/medicine'
+  baseUrl = `${environment.baseUrl}` + '/api/medicine'
 
   constructor(private http: HttpClient) { }
 

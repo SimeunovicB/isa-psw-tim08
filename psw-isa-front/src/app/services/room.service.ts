@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import {environment} from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class RoomService {
   constructor(private http: HttpClient) { }
 
   searchRooms(name: string, number: any, date: any) {
-    return this.http.post("http://localhost:9090/api/room/findRooms", {
+    return this.http.post(`${environment.baseUrl}/api/room/findRooms`, {
       name: name,
       number: number,
       date: date
@@ -28,7 +29,7 @@ export class RoomService {
   }
 
   findAll() {
-    return this.http.get("http://localhost:9090/api/room/findAll")
+    return this.http.get(`${environment.baseUrl}/api/room/findAll`)
       .pipe(
         map((response: any) => {
           const data = response;
@@ -41,7 +42,7 @@ export class RoomService {
   }
 
   getAdminRooms(id: any) {
-    return this.http.post("http://localhost:9090/api/room/getAdminRooms", {
+    return this.http.post(`${environment.baseUrl}/api/room/getAdminRooms`, {
       id: id
     })
       .pipe(
@@ -71,7 +72,7 @@ export class RoomService {
   }
 
   update(name: any, number: any, id: any) {
-    return this.http.post("http://localhost:9090/api/room/update", {
+    return this.http.post(`${environment.baseUrl}/api/room/update`, {
       name:name,
       number:number,
       id:id
@@ -88,7 +89,7 @@ export class RoomService {
   }
 
   create(name: any, number: any, id: any) {
-    return this.http.post("http://localhost:9090/api/room/create", {
+    return this.http.post(`${environment.baseUrl}/api/room/create`, {
       name:name,
       number:number,
       id:id
