@@ -1,7 +1,6 @@
 package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.MedicineDTO;
-import TIM8.medicalcenter.exception.ResourceConflictException;
 import TIM8.medicalcenter.model.Medicine;
 import TIM8.medicalcenter.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class MedicineController {
      * @param medicineDTO
      * @return
      */
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @PreAuthorize("hasRole('CCADMIN')")
     @RequestMapping(value = "/addMedicine",consumes = "application/json")
     public ResponseEntity<?> addMedicine(@RequestBody MedicineDTO medicineDTO){
         Medicine medicine = medicineService.findOneByName(medicineDTO.getName());

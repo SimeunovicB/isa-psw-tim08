@@ -25,7 +25,7 @@ public class DiagnosisController {
      * @param diagnosisDTO
      * @return
      */
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CCADMIN')")
     @RequestMapping(value = "/addDiagnosis",consumes = "application/json")
     public ResponseEntity<?> addMedicine(@RequestBody DiagnosisDTO diagnosisDTO){
         Diagnosis diagnosis= diagnosisService.findOneByName(diagnosisDTO.getName());

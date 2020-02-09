@@ -39,15 +39,14 @@
                 <td><input type="text" [(ngModel)]="bloodType" [disabled]="disabledp"></td>
             </tr>
             <tr>
-                <td><button (click)="izmeni()">Izmeni</button></td>
-                <td><button (click)="sacuvaj()">Sacuvaj izmene</button></td>
+                <td><button class="btn btn-primary" (click)="izmeni()">Izmeni</button></td>
+                <td><button class="btn btn-primary" (click)="sacuvaj()">Sacuvaj izmene</button></td>
             </tr>
         </tbody>
     </table>
 </div>
 <hr>
 <div class="treci">
-    Izvestaji o pregledima:
     <table class="table">
         <caption>Izvestaji o pregledima</caption>
         <thead>

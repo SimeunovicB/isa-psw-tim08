@@ -45,6 +45,7 @@ export class GradesComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
+          this.findDoctors();
         }
       )
   }
@@ -55,6 +56,7 @@ export class GradesComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
+          this.findClinics();
         }
       )
   }
