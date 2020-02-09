@@ -56,6 +56,21 @@ export class RoomService {
       )
   }
 
+  firstDate(id: any) {
+    return this.http.post("http://localhost:9090/api/room/firstDate", {
+      id: id
+    })
+      .pipe(
+        map((response: any) => {
+          const data = response;
+          return data;
+        }),
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      )
+  }
+
   update(name: any, number: any, id: any) {
     return this.http.post(`${environment.baseUrl}/api/room/update`, {
       name:name,

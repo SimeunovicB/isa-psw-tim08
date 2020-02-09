@@ -86,7 +86,7 @@ public class EmailService {
                     "\nTip: "+appointmentRequest.getAppointment_type());
             javaMailSender.send(mail);
 
-            System.out.println("Email poslat!");
+            System.out.println("\n\n\\nEmail poslat!\n\n\n");
         }
     }
 
@@ -106,7 +106,7 @@ public class EmailService {
                     "vas zahtev za godisnji odmor je odbijen. Razlog: "+razlog);
         javaMailSender.send(mail);
 
-        System.out.println("Email poslat!");
+        System.out.println("\n\n\nEmail poslat!\n\n\n");
     }
 
 }

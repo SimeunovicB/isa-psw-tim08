@@ -1,0 +1,26 @@
+.inputt {
+    margin-top: 10px;
+}
+
+.unos {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border: 2px solid #333333;
+    max-width: 800px;
+    box-shadow: 2px 2px 2px #444444;
+}
+
+.sale {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    margin-top: 10px;
+    border: 2px solid #333333;
+    max-width: 800px;
+    box-shadow: 2px 2px 2px #444444;
+}
+
+tr {
+    padding-top: 15px;
+}

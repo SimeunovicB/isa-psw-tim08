@@ -1,5 +1,6 @@
 <app-header></app-header>
 <table class="table">
+    <caption>Pretraga sala</caption>
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -42,6 +43,7 @@
     </p>
 </div>
 <div>
+    <h1 class="first-class" align="center" *ngIf="pretraga">Pretraga sala</h1>
 </div>
 <form *ngIf="!hidden" class="form-inline md-form mr-auto mb-4" (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="form-group">
@@ -53,7 +55,7 @@
                     ngbDatepicker #d="ngbDatepicker" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><img
-                            src="../../assets/images/calendar.png"
+                            src="../../assets/images/calendar.png" alt="calendar"
                             style="width: 1.2rem; height: 1.2rem; cursor: pointer;" /></button></div>
             </div>
             <button class="btn btn-primary" id="pretrazi" type="submit">Pretraži</button>
@@ -62,7 +64,7 @@
 </form>
 <span *ngIf="!hidden">
     <div class="sobe" *ngFor="let room of rooms">
-        <div class="naziv"><strong><span class="nazivsale">{{room.name}}</span><span class="nazivsale">
+        <div class="naziv"><strong><span class="nazivsale" (click)="firstDate(room.id)">{{room.name}}</span><span class="nazivsale" (click)="firstDate(room.id)">
                     {{room.number}}</span></strong></div>
         <div class="datumi" *ngFor="let date of room.dates">
             <span class="nazivsale">{{date | date:'short'}}</span>

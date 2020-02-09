@@ -57,7 +57,7 @@ export class VacationRequestComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
-          this.loggedUser = Object.assign([], (data));
+          alert('Zahtev za godisnji odmor uspesno poslat!');
         }
       )
   }
