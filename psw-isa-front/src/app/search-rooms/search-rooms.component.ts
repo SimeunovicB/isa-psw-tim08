@@ -5,7 +5,7 @@ import { AppointmentServiceService } from '../services/appointment-service/appoi
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-search-rooms',

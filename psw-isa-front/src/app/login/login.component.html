@@ -26,12 +26,13 @@
           <form (ngSubmit)="onSubmit(f)" #f="ngForm">
 
             <fieldset class="clearfix">
+              <legend></legend>
 
               <p><span class="fa fa-user"></span><input type="text" Placeholder="E-mail" id="email" [(ngModel)]="email"
-                  name="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                  name="Username" required></p> 
               <p><span class="fa fa-lock"></span><input type="password" Placeholder="Password" id="password"
                   [(ngModel)]="password" name="password" required></p>
-              <!-- JS because of IE support; better: placeholder="Password" -->
+              
 
               <div>
                 <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text"
@@ -47,7 +48,7 @@
 
           <div class="clearfix"></div>
 
-        </div> <!-- end login -->
+        </div> 
         <div class="logo"><img src="../../assets/images/logo.png" alt="logo"
             height="150" width="150">
 
