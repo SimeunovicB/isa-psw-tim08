@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
-import { HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -165,7 +163,7 @@ export class UserService {
       );
   }
 
-  getMedicalRecordInfo(id: Number) {
+  getMedicalRecordInfo(id: number) {
     return this.http.get(`${environment.baseUrl}/api/medicalRecord/getByPatientId?id=` + id)
       .pipe(
         map((response: any) => {

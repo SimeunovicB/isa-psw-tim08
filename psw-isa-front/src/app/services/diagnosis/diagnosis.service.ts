@@ -13,7 +13,7 @@ export class DiagnosisService {
 
   constructor(private http : HttpClient) { }
   
-  addDiagnosis(diagnosis:String) {
+  addDiagnosis(diagnosis:any) {
     return this.http.post(`${this.baseUrl}/addDiagnosis`,{
       name: diagnosis
     }).pipe(

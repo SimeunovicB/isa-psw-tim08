@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Inject } from '@angular/core';
-
 import { Router } from '@angular/router';
 import { UserService } from '../services/user/user.service';
 import { CookieService } from 'ngx-cookie-service';

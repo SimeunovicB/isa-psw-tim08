@@ -1,5 +1,5 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';

@@ -4,7 +4,7 @@ import { UserService } from '../services/user/user.service';
 import { AdminService } from '../services/admin/admin.service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { RoomService } from '../services/room.service';
+import { RoomService } from '../services/room/room.service';
 
 @Component({
   selector: 'app-manage-rooms',

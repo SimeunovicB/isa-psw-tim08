@@ -15,7 +15,7 @@ export class MedicineService {
 
   constructor(private http: HttpClient) { }
 
-  addMedicine(medicine :String) {
+  addMedicine(medicine :any) {
     return this.http.post(`${this.baseUrl}/addMedicine`,{
       name: medicine
     }).pipe(

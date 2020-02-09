@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppointmentTypeService } from '../services/appointment-type/appointment-type.service';
 import { Router } from '@angular/router';
-import { AppointmentRequestService } from '../services/appointment-request.service';
+import { AppointmentRequestService } from '../services/appointment-request/appointment-request.service';
 
 @Component({
   selector: 'app-search-clinics',
