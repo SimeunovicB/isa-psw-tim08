@@ -58,6 +58,7 @@ export class VacationRequestComponent implements OnInit {
         (data) => {
           console.log(data);
           alert('Zahtev za godisnji odmor uspesno poslat!');
+          this.router.navigate(['/']);
         }
       )
   }

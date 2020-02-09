@@ -33,7 +33,7 @@ public class Patient extends Person {
     Set<MedicalExaminationReport> medicalExaminationReports = new HashSet<>();
 
     @JsonBackReference
-    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     Set<Appointment> appointments = new HashSet<>();
 
     @JsonBackReference

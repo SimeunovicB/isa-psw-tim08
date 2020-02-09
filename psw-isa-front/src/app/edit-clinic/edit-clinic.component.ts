@@ -132,8 +132,8 @@ export class EditClinicComponent implements AfterViewInit, OnInit {
   }
 
   eventHandler() {
-    this.lat = parseFloat(this.adresa.split('-')[0]);
-    this.lng = parseFloat(this.adresa.split('-')[1]);
+    //this.lat = parseFloat(this.adresa.split('-')[0]);
+    //this.lng = parseFloat(this.adresa.split('-')[1]);
     console.log(this.lat, this.lng);
     this.coordinates = new google.maps.LatLng(this.lat, this.lng);
 

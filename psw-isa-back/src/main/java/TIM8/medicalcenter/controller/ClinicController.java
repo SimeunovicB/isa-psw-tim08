@@ -1,6 +1,7 @@
 package TIM8.medicalcenter.controller;
 
 import TIM8.medicalcenter.dto.ClinicDTO;
+import TIM8.medicalcenter.dto.NewClinicDTO;
 import TIM8.medicalcenter.exception.ResourceConflictException;
 import TIM8.medicalcenter.model.Clinic;
 import TIM8.medicalcenter.service.ClinicService;
@@ -55,15 +56,19 @@ public class ClinicController {
      * @param clinic
      * @return
      */
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CCADMIN')")
     @RequestMapping(value="/addClinic",consumes = "application/json",method = RequestMethod.POST)
-    public ResponseEntity<?> addClinic(@RequestBody Clinic clinic){
+    public ResponseEntity<?> addClinic(@RequestBody NewClinicDTO clinic){
         Clinic clinic1 = clinicService.findOneByName(clinic.getName());
         if(clinic1 != null){
             throw new ResourceConflictException(clinic1.getId(), "Clinic already exists");
         }
-        clinicService.save(clinic);
-        return new ResponseEntity<>(new ClinicDTO(clinic), HttpStatus.CREATED);
+        Clinic c = new Clinic();
+        c.setName(clinic.getName());
+        c.setAddress(clinic.getAddress());
+        c.setDescription(clinic.getDescription());
+        clinicService.save(c);
+        return new ResponseEntity<>(new ClinicDTO(c), HttpStatus.CREATED);
     }
 
     /**

@@ -61,8 +61,8 @@ export class SearchRoomsComponent implements OnInit {
   firstDate(id:any) {
     this.roomService.firstDate(id)
       .subscribe(
-        (data:NgbDate) => {
-          alert('Prvi slobodan datum je ' + data);
+        (data:any) => {
+          alert('Prvi slobodan datum je ' + data.datum);
         }
       )
   }

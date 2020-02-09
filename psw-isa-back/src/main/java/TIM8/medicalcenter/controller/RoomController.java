@@ -53,18 +53,20 @@ public class RoomController {
                 dd.setHours(8+i);
                 dd.setMinutes(0);
                 dd.setSeconds(0);
-                int ddy = dd.getYear();
-                int ddm = dd.getMonth();
-                int ddd = dd.getDay();
-                int ddh = dd.getHours();
+                //int ddy = dd.getYear();
+                //int ddm = dd.getMonth();
+                //int ddd = dd.getDay();
+                //int ddh = dd.getHours();
                 int flag = 0;
                 Set<Appointment> appointments1 = r.getAppointments();
                 for(Appointment a : appointments1){
-                    int ay = a.getDate().getYear();
-                    int am = a.getDate().getMonth();
-                    int ad = a.getDate().getDay();
-                    int ah = a.getDate().getHours();
-                    if(ay == ddy && am == ddm && ad == ddd && ah == ddh){
+                    String s = a.getDate().toString();
+                    int ay = Integer.parseInt(s.split("-")[0]);
+                    int am = Integer.parseInt(s.split("-")[1]);
+                    String bb = s.split("-")[2].substring(0,2);
+                    int ad = Integer.parseInt(s.split("-")[2].substring(0,2));
+                    int ah = Integer.parseInt(s.split(" ")[1].substring(0,2));
+                    if(ay == year && am == month && ad == day && ah == 8+i){
                         flag = 1;
                     }
                 }
@@ -135,26 +137,55 @@ public class RoomController {
     public ResponseEntity<?> firstDate(@RequestBody Id id) {
         Room r = roomService.findOneById(id.id);
 
+        int add = 1;
+
         Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, add);
         Boolean b = true;
         Date d = cal.getTime();
+        d.setMinutes(0);
+        d.setSeconds(0);
 
         while(b) {
             for (int i = 0; i < 10; i++) {
                 d.setHours(8+i);
+                boolean nasao = false;
                 for (Appointment app : r.getAppointments()) {
-                    if(app.getDate().getYear() == d.getYear() && app.getDate().getMonth() == d.getMonth() && app.getDate().getDay() == d.getDay() && app.getDate().getHours() == 8+i){
-                        b=false;
+                    String s = d.toString();
+                    int ay = d.getYear()+1900;
+                    int am = d.getMonth()+1;
+                    int ad = Integer.parseInt(s.split(" ")[2]);
+
+                    String s2 = app.getDate().toString();
+                    int ay2 = Integer.parseInt(s2.split("-")[0]);
+                    int am2 = Integer.parseInt(s2.split("-")[1]);
+                    String bb2 = s2.split("-")[2].substring(0,2);
+                    int ad2 = Integer.parseInt(s2.split("-")[2].substring(0,2));
+                    int ah2 = Integer.parseInt(s2.split(" ")[1].substring(0,2));
+                    if(ay == ay2 && am == am2 && ad == ad2 && ah2 == 8+i){
+                        nasao = true;
                         break;
                     }
                 }
+                if(!nasao) {
+                    b = false;
+                    break;
+                }
             }
-
-            int a = d.getDay();
-            a++;
+            if(b==false)
+                break;
+            Calendar cal2 = Calendar.getInstance();
+            cal2.add(Calendar.DATE, ++add);
+            d = cal2.getTime();
         }
+        Povratna p = new Povratna();
+        p.datum = d.toString();
 
-        return new ResponseEntity<>(d, HttpStatus.OK);
+        return new ResponseEntity<>(p, HttpStatus.OK);
+    }
+
+    static class Povratna {
+        public String datum;
     }
 
 

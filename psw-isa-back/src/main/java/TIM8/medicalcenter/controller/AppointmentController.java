@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -369,7 +371,7 @@ public class AppointmentController {
     /**
      * funkcija koja preuzima sve predefinisane preglede,odnosno preglede na kojima nema pacijenta,koje pacijent moze da zakaze
      */
-    @PreAuthorize("hasRole('PATIENT')")
+    @PreAuthorize("hasAnyRole('PATIENT','MEDICAL_STAFF')")
     @RequestMapping(value="/getIncomingAppointmnents",method = RequestMethod.GET)
     public ResponseEntity<?> getPredefAppointments() {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
@@ -468,16 +470,17 @@ public class AppointmentController {
         appointmentService.createPredef(req);
         return new ResponseEntity<>(null,HttpStatus.OK);
     }
-    //@Scheduled(cron="0 0 0 1/1 * ? *")
-    //@Scheduled(fixedRate = 1000)
+
+    @Scheduled(cron="0 0 0 * * *")
     public void generateAppointments() {
         List<AppointmentRequest> requests = appointmentRequestService.findAll();
         List<Room> rooms = roomService.findAll();
-        List<Appointment> appointments = appointmentService.findAll();
+
 
         for(AppointmentRequest ar : requests) {
+            List<Appointment> appointments = appointmentService.findAll();
             int flag = 0;
-            Date date = Calendar.getInstance().getTime();
+            LocalDateTime date = LocalDateTime.now();
 
             Appointment a = new Appointment();
             Doctor d = (Doctor) personService.findOneById(ar.getDoctor_id());
@@ -501,25 +504,31 @@ public class AppointmentController {
                 Calendar cal = Calendar.getInstance();
                 for(Appointment appointment : r.getAppointments()) {
                     int calYears = date.getYear();
-                    int calMonths = date.getMonth();
-                    int calDays = date.getDay();
+                    int calMonths = date.getMonthValue();
+                    int calDays = date.getDayOfMonth();
 
-                    int appYears = appointment.getDate().getYear();
-                    int appMonths = appointment.getDate().getMonth();
-                    int appDays = appointment.getDate().getDay();
-                    if(cal.getTime().getYear() == appointment.getDate().getYear() && cal.getTime().getMonth() == appointment.getDate().getMonth() && cal.getTime().getYear() == appointment.getDate().getDay()){
+                    String s = appointment.getDate().toString();
+                    String year = s.substring(0,4);
+                    String months = s.substring(5,7);
+                    String day = s.substring(8,10);
+                    String hours = s.substring(11,13);
+                    int appYears = Integer.parseInt(year);
+                    int appMonths = Integer.parseInt(months);
+                    int appDays = Integer.parseInt(day);
+                    int hour = Integer.parseInt(hours);
+                    if(calYears == appYears && calMonths == appMonths && calDays == appDays){
 
-                        free_hours.remove(appointment.getDate().getHours());
+                        free_hours.remove(hour);
                     }
                 }
                 for(int i=8;i<17;i++){
                     if(free_hours.contains(i)){
                         a.setRoom(r);
                         Calendar cal2 = Calendar.getInstance();
-                        cal.set(date.getYear(),date.getMonth(),date.getDay(),i,0,0);
+                        cal2.set(date.getYear(),date.getMonthValue()-1,date.getDayOfMonth(),i,0,0);
                         flag = 1;
+                        a.setDate(cal2.getTime());
                         Appointment a1 = appointmentService.save(a);
-
                         appointmentRequestService.delete(ar.getId());
                         break;
 

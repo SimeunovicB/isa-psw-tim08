@@ -30,7 +30,7 @@ public class Doctor extends Person {
     private Clinic clinic;
 
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     Set<Appointment> appointments = new HashSet<>();
 
     @JsonBackReference

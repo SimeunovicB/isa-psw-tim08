@@ -94,14 +94,9 @@ insert into recipe(medicine,patient_id) values ('penicilin',1);
 insert into recipe(medicine,patient_id) values ('penicilin',1);
 
 insert into appointment_request(doctor_id,patient_id,date,appointment_type) values (2,1,'2020-07-01','pregled');
-insert into appointment_request(doctor_id,patient_id,date,appointment_type) values (2,4,'2020-07-01','operacija');
-insert into appointment_request(doctor_id,patient_id,date,appointment_type) values (2,3,'2020-07-01','operacija');
-insert into appointment_request(doctor_id,patient_id,date,appointment_type) values (2,4,'2020-07-01','pregled');
 
-insert into patient_clinic_grades(patient_id, clinic_id,grade) values (1,1,5);
 insert into patient_clinic_grades(patient_id, clinic_id,grade) values (3,1,3);
 insert into patient_clinic_grades(patient_id, clinic_id,grade) values (4,1,4);
 
-insert into patient_doctor_grades(patient_id, doctor_id,grade) values (1,2,5);
 insert into patient_doctor_grades(patient_id, doctor_id,grade) values (3,2,2);
 insert into patient_doctor_grades(patient_id, doctor_id,grade) values (4,2,3);
