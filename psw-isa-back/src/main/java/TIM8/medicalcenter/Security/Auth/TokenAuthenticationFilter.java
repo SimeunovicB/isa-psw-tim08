@@ -25,6 +25,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+
         System.out.println("DO_FILTER_INTERNAL Proverava token: " + tokenUtils.getToken(request));
         String username;
         String authToken = tokenUtils.getToken(request);
