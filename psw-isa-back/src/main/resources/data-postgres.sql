@@ -2,7 +2,7 @@
 
 -- noinspection SqlDialectInspectionForFile
 
-insert into clinic(name,address,description) values('clinic1','45.2471-19.8035','clinic desc');
+insert into clinic(name,address,description) values('clinic1','45.2471-19.8035-Novi Sad','clinic desc');
 
 INSERT INTO authority (name) VALUES ('ROLE_USER');
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');

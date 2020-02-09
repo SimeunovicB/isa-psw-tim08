@@ -1,10 +1,12 @@
 <app-header></app-header>
 <div class="ocena">
-    Prosecna ocena klinike je {{grade}}.
+    <span class="procena">Prosecna ocena klinike je <u>{{grade | number:'1.2-2'}}</u>.</span>
 </div>
-
+<hr>
+<h2 align="center">Doktori</h2>
 <div class="tabela">
-    <table class="table">
+    <table class="doktori">
+        <caption>Prikaz doktora</caption>
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -19,13 +21,14 @@
                     <td>{{i+1}}</td>
                     <td>{{doc.firstName}}</td>
                     <td>{{doc.lastName}}</td>
-                    <td>{{doc.avGrade}}</td>
+                    <td>{{doc.avGrade | number:'1.2-2'}}</td>
                 </tr>
             </ng-container>
         </tbody>
     </table>
 </div>
-
+<hr>
+<h2 align="center">Zarada u periodu</h2>
 <div class="content">
     <form class="form-inline" (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="form-group hidden">
@@ -48,7 +51,7 @@
                     [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><img
-                            src="../../assets/images/calendar.png"
+                            src="../../assets/images/calendar.png" alt="calendar"
                             style="width: 1.2rem; height: 1.2rem; cursor: pointer;" /></button>
                 </div>
             </div>
@@ -59,15 +62,15 @@
                     [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><img
-                            src="../../assets/images/calendar.png"
+                            src="../../assets/images/calendar.png" alt="calendar"
                             style="width: 1.2rem; height: 1.2rem; cursor: pointer;" /></button>
                 </div>
             </div>
         </div>
-        <button type="submit">Posalji zahtev</button>
+        <button type="submit" class="btn btn-primary posalji">Posalji zahtev</button>
     </form>
 </div>
 
 <div class="pare" *ngIf="poslato">
-    Klinika je zaradila {{pare}} u tom periodu.
+    <span class="procena">Klinika je zaradila <u>{{pare}}</u> u tom periodu.</span>
 </div>

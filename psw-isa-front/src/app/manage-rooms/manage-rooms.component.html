@@ -1,10 +1,27 @@
 <app-header></app-header>
+<h2 align="center">Dodavanje sale</h2>
 <div class="inputt">
-    <input type="text" [(ngModel)]="nazivnove"><input type="text" [(ngModel)]="brnove"> <button class="btn btn-success"
-        (click)="onSubmit()">Dodaj salu</button></div>
+    <table class="unos">
+        <caption>Dodavanje sale</caption>
+        <tr>
+            <td>Naziv:</td>
+            <td><input type="text" [(ngModel)]="nazivnove"></td>
+        </tr>
+        <tr>
+            <td>Broj:</td>
+            <td><input type="text" [(ngModel)]="brnove"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button class="btn btn-success" (click)="onSubmit()">Dodaj salu</button></td>
+        </tr>
+    </table>
+</div>
 <hr>
+<h2 align="center">Sale</h2>
 <div class="tabela">
-    <table class="table">
+    <table class="sale">
+        <caption>Prikaz sala</caption>
         <thead>
             <tr>
                 <th scope="col">#</th>

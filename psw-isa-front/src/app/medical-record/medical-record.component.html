@@ -1,8 +1,7 @@
 <app-header></app-header>
 <div class="prvi">
     <div class="slika">
-        <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png" height="150"
-            width="150">
+        <img src="../../assets/images/logo.png" alt="logo" height="150" width="150">
     </div>
     <div class="podaci">
         Ime: {{firstName}}<br>Prezime: {{lastName}}<br>JMBG: {{jmbg}}
@@ -11,36 +10,46 @@
 <hr>
 <div class="drugi">
     <table>
-        <tr>
-            <td>Visina:</td>
-            <td><input type="text" [(ngModel)]="height" [disabled]="disabledp"></td>
-        </tr>
-        <tr>
-            <td>Tezina:</td>
-            <td><input type="text" [(ngModel)]="weight" [disabled]="disabledp"></td>
-        </tr>
-        <tr>
-            <td>Alergije:</td>
-            <td><input type="text" [(ngModel)]="alergies" [disabled]="disabledp"></td>
-        </tr>
-        <tr>
-            <td>Dioptrija:</td>
-            <td><input type="text" [(ngModel)]="diopter" [disabled]="disabledp"></td>
-        </tr>
-        <tr>
-            <td>Krvna grupa:</td>
-            <td><input type="text" [(ngModel)]="bloodType" [disabled]="disabledp"></td>
-        </tr>
-        <tr>
-            <td><button (click)="izmeni()">Izmeni</button></td>
-            <td><button (click)="sacuvaj()">Sacuvaj izmene</button></td>
-        </tr>
+        <caption>Zdravstveni karton</caption>
+        <thead style="display: none;">
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Visina:</td>
+                <td><input type="text" [(ngModel)]="height" [disabled]="disabledp"></td>
+            </tr>
+            <tr>
+                <td>Tezina:</td>
+                <td><input type="text" [(ngModel)]="weight" [disabled]="disabledp"></td>
+            </tr>
+            <tr>
+                <td>Alergije:</td>
+                <td><input type="text" [(ngModel)]="alergies" [disabled]="disabledp"></td>
+            </tr>
+            <tr>
+                <td>Dioptrija:</td>
+                <td><input type="text" [(ngModel)]="diopter" [disabled]="disabledp"></td>
+            </tr>
+            <tr>
+                <td>Krvna grupa:</td>
+                <td><input type="text" [(ngModel)]="bloodType" [disabled]="disabledp"></td>
+            </tr>
+            <tr>
+                <td><button (click)="izmeni()">Izmeni</button></td>
+                <td><button (click)="sacuvaj()">Sacuvaj izmene</button></td>
+            </tr>
+        </tbody>
     </table>
 </div>
 <hr>
 <div class="treci">
     Izvestaji o pregledima:
     <table class="table">
+        <caption>Izvestaji o pregledima</caption>
         <thead>
             <tr>
                 <th scope="col">#</th>

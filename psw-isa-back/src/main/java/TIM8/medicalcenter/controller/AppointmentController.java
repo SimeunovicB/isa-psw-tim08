@@ -350,7 +350,7 @@ public class AppointmentController {
      * @param doctorId
      * @return
      */
-    @PreAuthorize("hasRole('PATIENT')")
+    @PreAuthorize("hasRole('MEDICAL_STAFF')")
     @RequestMapping(value="/getAppointmentsForDoctor",method = RequestMethod.GET)
     public ResponseEntity<?> getAppointmentsForDoctor(@RequestParam String doctorId){
         Long id = Long.parseLong(doctorId.substring(1));

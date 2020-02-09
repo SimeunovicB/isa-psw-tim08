@@ -18,6 +18,8 @@ export class EditClinicComponent implements AfterViewInit, OnInit {
   clinic: any;
   helper: any;
   userMail: any;
+  memlat = "";
+  memlng = "";
 
   title = 'angular-gmap';
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
@@ -40,7 +42,7 @@ export class EditClinicComponent implements AfterViewInit, OnInit {
 
   mapOptions: google.maps.MapOptions = {
     center: this.coordinates,
-    zoom: 10,
+    zoom: 12,
   };
 
   marker = new google.maps.Marker({
@@ -80,8 +82,12 @@ export class EditClinicComponent implements AfterViewInit, OnInit {
           this.adresa = this.clinic.address;
           this.opis = this.clinic.description;
 
+          this.memlat = this.adresa.split('-')[0];
+          this.memlng = this.adresa.split('-')[1];
+
           this.lat = parseFloat(this.adresa.split('-')[0]);
           this.lng = parseFloat(this.adresa.split('-')[1]);
+          this.adresa = this.adresa.split('-')[2];
           console.log(this.lat, this.lng);
           this.coordinates = new google.maps.LatLng(this.lat, this.lng);
 
@@ -116,10 +122,11 @@ export class EditClinicComponent implements AfterViewInit, OnInit {
   }
 
   onSubmit() {
-    this.clinicService.updateClinic(this.ime, this.adresa, this.opis, this.clinic.id)
+    console.log(''+this.lat+'-'+this.lng+'-'+this.adresa);
+    this.clinicService.updateClinic(this.ime, ''+this.memlat+'-'+this.memlng+'-'+this.adresa, this.opis, this.clinic.id)
       .subscribe(
         (user: any) => {
-          //this.router.navigate(['/profile']);
+          this.getClinic(this.loggedadmin.clinic_id);
         }, (error) => alert(error.text)
       );
   }

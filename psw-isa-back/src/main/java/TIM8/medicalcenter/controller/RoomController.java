@@ -72,7 +72,7 @@ public class RoomController {
                     appointments.add(dd);
                 }
             }
-            res.add(new FindRoomDTOResponse(r.getId(), r.getName(),r.getNumber(),appointments));
+            res.add(new FindRoomDTOResponse(r.getId(), r.getName(), r.getNumber(),appointments));
         }
         return new ResponseEntity<>(res,HttpStatus.OK);
 
@@ -128,6 +128,33 @@ public class RoomController {
         Room r = roomService.save(room);
 
         return new ResponseEntity<>(r, HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping(value = "/firstDate", method = RequestMethod.POST)
+    public ResponseEntity<?> firstDate(@RequestBody Id id) {
+        Room r = roomService.findOneById(id.id);
+
+        Calendar cal = Calendar.getInstance();
+        Boolean b = true;
+        Date d = cal.getTime();
+
+        while(b) {
+            for (int i = 0; i < 10; i++) {
+                d.setHours(8+i);
+                for (Appointment app : r.getAppointments()) {
+                    if(app.getDate().getYear() == d.getYear() && app.getDate().getMonth() == d.getMonth() && app.getDate().getDay() == d.getDay() && app.getDate().getHours() == 8+i){
+                        b=false;
+                        break;
+                    }
+                }
+            }
+
+            int a = d.getDay();
+            a++;
+        }
+
+        return new ResponseEntity<>(d, HttpStatus.OK);
     }
 
 

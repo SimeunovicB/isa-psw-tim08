@@ -1,10 +1,24 @@
 <app-header></app-header>
+<h2 align="center">Dodavanje novog tipa pregleda</h2>
 <div class="inputt">
-    <input type="text" [(ngModel)]="nazivnovog"> <button class="btn btn-success" (click)="onSubmit()">Dodaj tip
-        pregleda</button></div>
+    <table class="unos">
+        <caption>Unos tipa pregleda</caption>
+        <tr>
+            <td>Naziv i broj:</td>
+            <td><input type="text" [(ngModel)]="nazivnovog"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td> <button class="btn btn-success" (click)="onSubmit()">Dodaj tip
+                    pregleda</button></td>
+        </tr>
+    </table>
+</div>
 <hr>
+<h2 align="center">Tipovi pregleda</h2>
 <div class="tabela">
-    <table class="table">
+    <table class="tipovi">
+        <caption>Tipovi pregleda</caption>
         <thead>
             <tr>
                 <th scope="col">#</th>

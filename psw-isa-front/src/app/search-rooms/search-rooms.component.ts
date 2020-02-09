@@ -5,6 +5,7 @@ import { AppointmentServiceService } from '../services/appointment-service/appoi
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-search-rooms',
@@ -24,8 +25,10 @@ export class SearchRoomsComponent implements OnInit {
   disp_date: any;
   disp_type: any;
   hidden: any;
+  pretraga=false;
 
   constructor(private roomService: RoomService,
+    private formatter: NgbDateParserFormatter,
     private cookieService: CookieService,
     private router: Router,
     private appointmentService: AppointmentServiceService) { }
@@ -55,6 +58,15 @@ export class SearchRoomsComponent implements OnInit {
       )
   }
 
+  firstDate(id:any) {
+    this.roomService.firstDate(id)
+      .subscribe(
+        (data:NgbDate) => {
+          alert('Prvi slobodan datum je ' + data);
+        }
+      )
+  }
+
   getAppointmentRequests() {
     this.appointmentService.getAppointmentRequests().subscribe(
       (data) => {
@@ -71,6 +83,7 @@ export class SearchRoomsComponent implements OnInit {
     this.disp_date = date;
     this.disp_type = type;
     this.hidden = false;
+    this.pretraga = true;
     this.model = date;
 
 

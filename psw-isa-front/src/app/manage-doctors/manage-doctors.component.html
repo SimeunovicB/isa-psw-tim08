@@ -1,17 +1,43 @@
 <app-header></app-header>
-<div class="inputt">
-    <table>
-        <tr><input type="text" [(ngModel)]="imenovog"></tr>
-        <tr><input type="text" [(ngModel)]="prznovog"></tr>
-        <tr><input type="text" [(ngModel)]="adresanovog"></tr>
-        <tr><input type="text" [(ngModel)]="mailnovog"></tr>
-        <tr><button class="btn btn-success" (click)="onSubmit()">Dodaj doktora</button></tr>
-    </table>
-</div>
+<h2 align="center">Dodavanje novog doktora</h2>
+<table class="unos">
+    <caption>Unos doktora</caption>
+    <thead style="display:none;">
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Ime:</td>
+            <td><input type="text" [(ngModel)]="imenovog"></td>
+        </tr>
+        <tr>
+            <td>Prezime:</td>
+            <td><input type="text" [(ngModel)]="prznovog"></td>
+        </tr>
+        <tr>
+            <td>Adresa:</td>
+            <td><input type="text" [(ngModel)]="adresanovog"></td>
+        </tr>
+        <tr>
+            <td>Mail:</td>
+            <td><input type="text" [(ngModel)]="mailnovog"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button class="btn btn-success" (click)="onSubmit()">Dodaj doktora</button></td>
+        </tr>
+    </tbody>
+</table>
+
 
 <hr>
+<h2 align="center">Doktori</h2>
 <div class="tabela">
-    <table class="table">
+    <table class="doktori">
+        <caption>Pregled doktora</caption>
         <thead>
             <tr>
                 <th scope="col">#</th>
