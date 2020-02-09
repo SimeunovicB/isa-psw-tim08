@@ -1212,7 +1212,7 @@
   
   <target name="compile.module.medicalcenter.production" description="Compile module medicalcenter; production classes">
     <mkdir dir="${medicalcenter.output.dir}"/>
-    <javac destdir="${medicalcenter.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.medicalcenter}/javac">
+    <javac srcdir="psw-isa-back/src/main/java" destdir="${medicalcenter.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.medicalcenter}/javac">
       <compilerarg line="${compiler.args.medicalcenter}"/>
       <bootclasspath refid="medicalcenter.module.bootclasspath"/>
       <classpath refid="medicalcenter.module.production.classpath"/>
@@ -1221,11 +1221,11 @@
     </javac>
     
     <copy todir="${medicalcenter.output.dir}">
-      <fileset dir="${module.medicalcenter.basedir}/src/main/java">
+      <fileset dir="${module.medicalcenter.basedir}/psw-isa-back/src/main/java">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
       </fileset>
-      <fileset dir="${module.medicalcenter.basedir}/src/main/resources">
+      <fileset dir="${module.medicalcenter.basedir}/psw-isa-back/src/main/resources">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
       </fileset>
@@ -1234,7 +1234,7 @@
   
   <target name="compile.module.medicalcenter.tests" depends="compile.module.medicalcenter.production" description="compile module medicalcenter; test classes" unless="skip.tests">
     <mkdir dir="${medicalcenter.testoutput.dir}"/>
-    <javac destdir="${medicalcenter.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.medicalcenter}/javac">
+    <javac srcdir="psw-isa-back/src/main/java" destdir="${medicalcenter.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.medicalcenter}/javac">
       <compilerarg line="${compiler.args.medicalcenter}"/>
       <bootclasspath refid="medicalcenter.module.bootclasspath"/>
       <classpath refid="medicalcenter.module.classpath"/>
@@ -1243,7 +1243,7 @@
     </javac>
     
     <copy todir="${medicalcenter.testoutput.dir}">
-      <fileset dir="${module.medicalcenter.basedir}/src/test/java">
+      <fileset dir="${module.medicalcenter.basedir}/psw-isa-back/src/test/java">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
       </fileset>
